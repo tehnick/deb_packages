@@ -1,0 +1,37 @@
+This package was debianized by Boris Pek <tehnick-8@mail.ru>
+Fri, 30 Apr 2010 00:03:32 +0400
+
+It was downloaded from http://www.kde-look.org/content/show.php/?content=98925
+ Homepage: http://www.kde-look.org/content/show.php/Customizable+Weather+Plasmoid?content=98925
+
+Upstream Author:
+ Georg Hennig <georg.hennig@web.de>
+
+Files:
+ *
+Copyright:
+ Copyright 2009-2010 Georg Hennig <georg.hennig@web.de>
+License:
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the
+ Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License can be found in `/usr/share/common-licenses/GPL-3'.
+
+The Debian packaging is:
+ Copyright 2010 Boris Pek <tehnick-8@mail.ru>
+License:
+ GPL or later, see `/usr/share/common-licenses/GPL'
+

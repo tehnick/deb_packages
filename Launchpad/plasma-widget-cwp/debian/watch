@@ -1,0 +1,2 @@
+version=3
+http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/ .*kde-plasmoid-cwp_(.+)\.orig\.tar\.gz debian uupdate
