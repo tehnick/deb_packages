@@ -1,0 +1,93 @@
+#!/bin/sh
+
+export NEW_VER="1.3.2"
+export SFX="-1"
+
+export OLD_VER="1.3.1"
+export OLD_SFX="-1"
+
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+cd "$HOME/WorkDir/Devel/CWP/Debian/"
+
+echo " "
+echo "http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/"
+echo " "
+echo "On opensuse.org now available such versions:"
+curl 'http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/' | grep 'kde-plasmoid-cwp_' | grep '.orig.tar.gz' | sed -e "s/^.*kde-plasmoid-cwp_\(.*\).orig.tar.gz.*$/\1/"
+echo " "
+
+if !([ -e "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz" ]); then
+  wget -4 "http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz"
+fi
+
+if !([ -e "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz" ]); then
+  echo "File kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz is not found.";
+  exit 0;
+fi
+
+if !([ -d "plasma-widget-cwp-${OLD_VER}" ]); then
+  echo "Directory plasma-widget-cwp-${OLD_VER} is not found.";
+  exit 0;
+fi
+
+if ([ -e "plasma-widget-cwp_${NEW_VER}${SFX}.debian.tar.gz" ]); then
+  echo "File plasma-widget-cwp_${NEW_VER}${SFX}.debian.tar.gz is found.";
+  echo "Upgrading is not required.";
+  exit 0;
+fi
+
+echo "Updating is started."
+
+rm -r "plasma-widget-cwp-${NEW_VER}"
+tar xzf "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz"
+mv "cwp-${NEW_VER}" "plasma-widget-cwp-${NEW_VER}"
+tar -czf "plasma-widget-cwp_${NEW_VER}.orig.tar.gz" "plasma-widget-cwp-${NEW_VER}"
+cp -fr "plasma-widget-cwp-${OLD_VER}/debian" "plasma-widget-cwp-${NEW_VER}/debian"
+
+
+diff -NaurEBbwp "plasma-widget-cwp-${OLD_VER}" "plasma-widget-cwp-${NEW_VER}" > plasma-widget-cwp_${OLD_VER}:${NEW_VER}.diff
+
+
+cd "plasma-widget-cwp-${NEW_VER}"
+echo " "
+echo "Uscan:"
+uscan --report-status
+echo " "
+dch -b -v "${NEW_VER}${SFX}" "Update to stable release ${NEW_VER}."
+kwrite debian/changelog
+debuild -S -sa
+cd ..
+
+
+case "${1}" in
+        test)
+    mkdir -p TEST
+    rm -r ./TEST/*
+    cp -r "plasma-widget-cwp-${NEW_VER}" ./TEST/
+    cp -f "plasma-widget-cwp_${NEW_VER}.orig.tar.gz" ./TEST/
+
+    cd ./TEST/"plasma-widget-cwp-${NEW_VER}"
+    dpkg-buildpackage -rfakeroot
+    cd ..
+
+    export LINTIAN_LOG_FILE=../"psi-plus-${NEW_VER}.lintian.log"
+    echo " "
+    echo "Now running lintian:"
+    lintian -ivI plasma-widget-cwp_${NEW_VER}${SFX}_i386.changes > ${LINTIAN_LOG_FILE}
+    cat ${LINTIAN_LOG_FILE}
+    echo "Finished running lintian."
+    echo " "
+    kwrite ${LINTIAN_LOG_FILE}
+    cd ..
+        ;;
+esac
+
+
+kwrite "plasma-widget-cwp-${NEW_VER}/debian/changelog"
+
+dput -f mentors plasma-widget-cwp_${NEW_VER}${SFX}_source.changes
+
+echo "Update finished successfully"
+
