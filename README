@@ -4,3 +4,7 @@ Related links:
 	http://qa.debian.org/developer.php?login=tehnick-8@mail.ru
 	https://launchpad.net/~tehnick/+related-software
 	http://tehnick-8.narod.ru/
+
+Notes:
+	git clone git://github.com/tehnick/deb_packages.git
+	ln -sf ../../exclude .git/info/exclude
