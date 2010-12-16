@@ -124,7 +124,7 @@ case "${1}" in
     dpkg-buildpackage -rfakeroot
     cd ..
 
-    export LINTIAN_LOG_FILE=../"psi-plus-${NEW_VER}.lintian.log"
+    export LINTIAN_LOG_FILE=../"plasma-widget-cwp-${NEW_VER_FULL}.lintian.log"
     echo " "
     echo "Now running lintian:"
     lintian -ivI plasma-widget-cwp_${NEW_VER_FULL}_i386.changes > ${LINTIAN_LOG_FILE}
