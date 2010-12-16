@@ -58,14 +58,18 @@ fi
 
 echo "Updating is started."
 
+
 rm -rf debian "psi-plus-${UBUNTU_VER}"
+rm -rf "scripts__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
+rm -rf "debian__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
 
 tar xjf "psi-plus_${UBUNTU_VER}.orig.tar.bz2"
 tar xzf "psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
+
 # move unneccessary scripts
-mv debian/scripts "scripts__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
+mv -f debian/scripts "scripts__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
 # rename directory
-mv debian "debian__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
+mv -f debian "debian__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
 
 
 export DEBIAN_DIFF="psi-plus.debian.${UBUNTU_VER}${UBUNTU_SFX}.diff"
