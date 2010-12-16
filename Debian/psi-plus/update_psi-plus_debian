@@ -1,0 +1,94 @@
+#!/bin/sh
+
+export UBUNTU_VER="0.15~svn3385"
+export UBUNTU_PR="-0ubuntu1"
+
+export NEW_VER="${UBUNTU_VER}"
+export PR="-1"
+
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+cd "${HOME}/WorkDir/Devel/Psi+/Debian/"
+
+echo " "
+echo "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/"
+echo " "
+echo "Uploaders: Boris Pek <tehnick-8@mail.ru>"
+echo " "
+echo "On Launchpad now available such versions:"
+curl 'http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/' | grep 'psi-plus_' | grep '.orig.tar.bz2' | sed -e "s/^.*psi-plus_\(.*\).orig.tar.bz2.*$/\1/"
+echo " "
+
+if !([ -e "psi-plus_${UBUNTU_VER}.orig.tar.bz2" ]); then
+  wget -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}.orig.tar.bz2"
+fi
+
+if !([ -e "psi-plus_${UBUNTU_VER}.orig.tar.bz2" ]); then
+  echo "File psi-plus_${UBUNTU_VER}.orig.tar.bz2 is not found.";
+  exit 0;
+fi
+
+if !([ -e "psi-plus_${UBUNTU_VER}${UBUNTU_PR}.debian.tar.gz" ]); then
+  wget -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}${UBUNTU_PR}.debian.tar.gz"
+fi
+
+if !([ -e "psi-plus_${UBUNTU_VER}${UBUNTU_PR}.debian.tar.gz" ]); then
+  echo "File psi-plus_${UBUNTU_VER}${UBUNTU_PR}.debian.tar.gz is not found.";
+  exit 0;
+fi
+
+
+if ([ -e "psi-plus_${NEW_VER}${PR}.debian.tar.gz" ]); then
+  echo "File psi-plus_${NEW_VER}${PR}.debian.tar.gz is found.";
+  echo "Upgrading is not required.";
+  exit 0;
+fi
+
+echo "Updating is started."
+
+rm -r debian "psi-plus-${UBUNTU_VER}"
+
+tar xjf "psi-plus_${UBUNTU_VER}.orig.tar.bz2"
+tar xzf "psi-plus_${UBUNTU_VER}${UBUNTU_PR}.debian.tar.gz"
+mv debian "psi-plus-${NEW_VER}/"
+
+cd "psi-plus-${NEW_VER}"
+
+# move unneccessary scripts
+mv debian/scripts ../"scripts__psi-plus-${NEW_VER}"
+
+# experimental unstable
+dch -b --force-distribution --distribution "experimental" -v "${NEW_VER}${PR}" \
+  "Upload to Debian"
+kwrite debian/changelog
+debuild -S -sa
+
+cd ..
+mkdir -p TEMP
+rm -r ./TEMP/*
+cp -r "psi-plus-${NEW_VER}" ./TEMP/
+cp -f "psi-plus_${NEW_VER}.orig.tar.bz2" ./TEMP/
+
+cd "./TEMP/psi-plus-${NEW_VER}"
+dpkg-buildpackage -rfakeroot
+
+
+export LINTIAN_LOG_FILE=../"psi-plus-${NEW_VER}.lintian.log"
+cd ..
+echo " "
+echo "Now running lintian:"
+lintian -ivI psi-plus_*.changes > ${LINTIAN_LOG_FILE}
+cat ${LINTIAN_LOG_FILE}
+echo "Finished running lintian."
+echo " "
+kwrite ${LINTIAN_LOG_FILE}
+
+
+cd ..
+kwrite "psi-plus-${NEW_VER}/debian/changelog"
+
+dput -f mentors psi-plus_${NEW_VER}${PR}_source.changes
+
+echo "Update finished successfully"
+

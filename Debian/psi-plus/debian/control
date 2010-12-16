@@ -1,0 +1,90 @@
+Source: psi-plus
+Section: net
+Priority: optional
+Maintainer: Ivan Borzenkov <ivan1986@list.ru>
+Uploaders: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: debhelper (>= 7.0.50~), libqtwebkit-dev | libqt4-dev (>=4.5.2), libqca2-dev (>= 2.0.0), libxss-dev,
+ libaspell-dev, zlib1g-dev, libsm-dev, quilt, qconf
+Standards-Version: 3.9.1
+Homepage: http://psi-dev.googlecode.com/
+
+Package: psi-plus
+Architecture: any
+Conflicts: psi
+Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
+Replaces: psi
+Description: jabber client using Qt
+ Psi+ is a fork of free instant messaging Psi
+ It has some features that Psi does not have
+
+Package: psi-plus-webkit
+Architecture: any
+Conflicts: psi
+Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
+Replaces: psi
+Description: jabber client using Qt webkit
+ Psi+ is a fork of free instant messaging Psi
+ It has some features that Psi does not have
+ .
+ This package contains webkit version
+
+Package: psi-plus-common
+Architecture: all
+Recommends: sox, libqca2-plugin-ossl, psi-plus-plugins, psi-plus-icons, psi-plus-skins
+Conflicts: psi-translations, psi-plus (<< 0.15~svn3057)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: libqca2-plugin-gnupg, xdg-utils
+Replaces: psi, psi-plus (<< 0.15~svn3057)
+Description: common files for psi plus
+ Common files for psi+ and psi+webkit
+
+Package: psi-plus-plugins
+Architecture: any
+Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
+Description: plugins for Psi+
+ Psi+ Plugins
+
+Package: psi-plus-content-download
+Architecture: any
+Conflicts: psi-plus-plugins (<< 0.15~svn3047)
+Replaces: psi-plus-plugins (<< 0.15~svn3047)
+Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
+Description: Content download plugins for Psi+
+ Download content frompsi-plus site
+ all content in packages - this only for fanatics of RMS
+ normal peoples - install psi-plus-icons and other
+
+Package: psi-plus-skins
+Architecture: any
+Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
+Conflicts: psi-plus-plugins (<< 0.15~svn3047)
+Replaces: psi-plus-plugins (<< 0.15~svn3047)
+Description: skins for Psi+
+ Psi+ skins from psi+ svn and skin plugin
+
+Package: psi-plus-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: psi-plus (=${binary:Version}), ${misc:Depends}
+Description: Debug symbols for Psi+
+ Psi+ is a fork of free instant messaging Psi
+ It has some features that Psi does not have
+
+Package: psi-plus-webkit-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: psi-plus-webkit (=${binary:Version}), ${misc:Depends}
+Description: Debug symbols for Psi+ Webkit version
+ Psi+ is a fork of free instant messaging Psi
+ It has some features that Psi does not have
+
+Package: psi-plus-plugins-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: psi-plus-plugins (=${binary:Version}), ${misc:Depends}
+Description: Debug symbols for Psi+ plugins
+ Psi+ is a fork of free instant messaging Psi
+ It has some features that Psi does not have
