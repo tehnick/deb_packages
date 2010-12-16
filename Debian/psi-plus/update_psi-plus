@@ -58,7 +58,7 @@ fi
 
 echo "Updating is started."
 
-rm -r debian "psi-plus-${UBUNTU_VER}"
+rm -rf debian "psi-plus-${UBUNTU_VER}"
 
 tar xjf "psi-plus_${UBUNTU_VER}.orig.tar.bz2"
 tar xzf "psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
@@ -73,7 +73,7 @@ diff -NaurEBbwp "debian__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}" "../debian" > "${D
 kwrite "${DEBIAN_DIFF}"
 
 
-cp -fr "../debian" "plasma-widget-cwp-${NEW_VER}/debian"
+cp -fr "../debian" "psi-plus-${NEW_VER}/debian"
 
 
 cd "psi-plus-${NEW_VER}"
