@@ -55,8 +55,8 @@ Description: Content download plugins for Psi+
  normal peoples - install psi-plus-icons and other
 
 Package: psi-plus-skins
-Architecture: any
-Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
+Architecture: all
+Depends: psi-plus-common, psi-plus-plugins, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: psi-plus-plugins (<< 0.15~svn3047)
 Replaces: psi-plus-plugins (<< 0.15~svn3047)
 Description: skins for Psi+

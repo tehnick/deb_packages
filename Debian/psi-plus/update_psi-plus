@@ -128,5 +128,7 @@ kwrite "psi-plus-${NEW_VER}/debian/changelog"
 
 dput -f mentors psi-plus_${NEW_VER_FULL}_source.changes
 
+cp -fr "psi-plus-${NEW_VER}/debian" ../
+
 echo "Update finished successfully"
 
