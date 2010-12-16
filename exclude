@@ -4,6 +4,10 @@
 # exclude patterns (uncomment them if you want to use them):
 # *.[oa]
 # *~
+#
+# ln -sf ../../exclude .git/info/exclude
 
 Debian/plasma-widget-cwp/TEMP/
 Launchpad/plasma-widget-cwp/TEMP/
+
+Debian/psi-plus/TEMP/
