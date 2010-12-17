@@ -1,13 +1,13 @@
 psi-plus (0.15~svn3410-1) experimental; urgency=low
 
-  * New upstream release (Closes: #598944)
+  * New upstream release (Closes: #598944, #588669)
   * Fixed lintian remarks:
     I: duplicate-long-description
     I: debian-watch-file-is-missing
     I: extended-description-is-probably-too-short
     I: conflicts-with-version psi-plus (<< 0.15~svn3057)
 
- -- Boris Pek <tehnick-8@mail.ru>  Fri, 17 Dec 2010 22:03:32 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Fri, 17 Dec 2010 23:45:15 +0200
 
 psi-plus (0.15~svn3396-0ubuntu1) natty; urgency=low
 
