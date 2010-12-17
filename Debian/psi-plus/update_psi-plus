@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export UBUNTU_VER="0.15~svn3399"
+export UBUNTU_VER="0.15~svn3410"
 export UBUNTU_SFX="-0ubuntu1"
 
 export NEW_VER="${UBUNTU_VER}"
@@ -81,6 +81,10 @@ cp -fr "../debian" "psi-plus-${NEW_VER}/debian"
 
 
 cd "psi-plus-${NEW_VER}"
+echo " "
+echo "Uscan:"
+uscan --report-status
+echo " "
 
 # unstable experimental
 dch -b --force-distribution --distribution "experimental" -v "${NEW_VER_FULL}" \
@@ -123,7 +127,6 @@ case "${1}" in
 esac
 
 
-cd ..
 kwrite "psi-plus-${NEW_VER}/debian/changelog"
 
 dput -f mentors psi-plus_${NEW_VER_FULL}_source.changes

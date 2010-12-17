@@ -1,13 +1,19 @@
-psi-plus (0.15~svn3399-0ubuntu1) natty; urgency=low
+psi-plus (0.15~svn3410-1) experimental; urgency=low
 
-  * New upstream release
+  * New upstream release (Closes: #598944)
+  * Fixed lintian remarks:
+    I: duplicate-long-description
+    I: debian-watch-file-is-missing
+    I: extended-description-is-probably-too-short
+    I: conflicts-with-version psi-plus (<< 0.15~svn3057)
 
- -- Ivan Borzenkov <ivan1986@list.ru>  Thu, 16 Dec 2010 14:29:47 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Fri, 17 Dec 2010 22:03:32 +0200
 
 psi-plus (0.15~svn3396-0ubuntu1) natty; urgency=low
 
   * New upstream release
   * Close old Launchpad bugs (LP: #653802, #664020)
+  * stop build when errors on apply patches
 
  -- Ivan Borzenkov <ivan1986@list.ru>  Thu, 16 Dec 2010 03:01:10 +0300
 
@@ -219,7 +225,7 @@ psi-plus (0.13.r802-1) unstable; urgency=low
 
   * New upstream release
   * add conflict with psi and psi-translations (Closes: Bug#538746)
-  * fix errors on description - thanks to "Artur R. Czechowski" 
+  * fix errors on description - thanks to "Artur R. Czechowski"
         <arturcz@hell.pl> (Closes: Bug#538749, Bug#538719)
 
  -- Ivan Borzenkov <ivan1986@list.ru>  Tue, 28 Jul 2009 22:44:40 +0400

@@ -17,7 +17,7 @@ plugs = $(notdir $(wildcard $(CURDIR)/src/plugins/generic/*plugin ) )
 	dh $@
 
 override_dh_auto_configure:
-	- QUILT_PC=.pc_psi quilt push -a --quiltrc /dev/null
+	QUILT_PC=.pc_psi quilt push -a --quiltrc /dev/null
 	$(QCONF)
 	./configure --prefix=/usr $(CONF)
 
