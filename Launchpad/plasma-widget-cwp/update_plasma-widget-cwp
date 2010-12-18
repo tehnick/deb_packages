@@ -1,152 +1,190 @@
 #!/bin/sh
 
-export NEW_VER="1.3.2"
+
+############################# Some options ##############################################
+export PACKAGE="plasma-widget-cwp"
+
+# Uncomment if necessary:
+#export SFX="-1ppa1"
 export SFX="-1ppa1"
-export UBUNTU_SFX="~natty1"
 
-export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages/Launchpad/plasma-widget-cwp/"
+############################# General part of script body ###############################
+export MAIN_DIST="natty"
+export UBUNTU_SFX="~${MAIN_DIST}1"
 
-cd "${MAIN_DIR}"
-mkdir -p TEMP
-cd ./TEMP
+if [ -z "${SFX}" ]; then
+    export SFX="-0ppa1"
+fi
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
+export TEMP_DIR="${PKG_DIR}/TEMP"
+export TEST_DIR="${TEMP_DIR}/TEST"
+
+mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
+
+
+############################# Specific part of script body ##############################
+export OLD_VER_FULL=$(head -n 1 ../debian/changelog | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*-\(-[0-9]ppa[0-9]\).*$/\1/")
+
+export VER_LIST=$(curl 'http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/' 2>&1 | grep 'kde-plasmoid-cwp_' | grep '.orig.tar.gz' | sed -e "s/^.*kde-plasmoid-cwp_\(.*\).orig.tar.gz.*$/\1/")
+export NEW_VER=$(echo ${VER_LIST} | sed -e "s/^.* \(.*\)$/\1/")
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 echo " "
 echo "http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/"
 echo " "
 echo "On opensuse.org now available such versions:"
-curl 'http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/' | grep 'kde-plasmoid-cwp_' | grep '.orig.tar.gz' | sed -e "s/^.*kde-plasmoid-cwp_\(.*\).orig.tar.gz.*$/\1/"
+echo ${VER_LIST}
 echo " "
 
-export OLD_VER_FULL=$(head -n 1 ../debian/changelog | sed -e "s/.* (\(.*\)) .*/\1/")
-export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
-
+echo "OLD_VER = ${OLD_VER}"
+echo "NEW_VER = ${NEW_VER}"
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 echo " "
 
-if [ -z "${OLD_VER_FULL}" ]; then
-  echo "OLD_VER_FULL is empty!";
-  exit 0;
+if [ -z "${NEW_VER}" ]; then
+    echo "NEW_VER is empty!";
+    exit 0;
+elif [ -z "${OLD_VER_FULL}" ]; then
+    echo "OLD_VER_FULL is empty!";
+    exit 0;
 elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
-  echo "Upgrading is not required.";
-  exit 0;
+    echo "Upgrading is not required.";
+    exit 0;
+elif !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+    if !([ "${SFX}" = "-0ppa1" ]); then
+        echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
+        exit 0;
+    fi
 fi
 
 if !([ -e "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz" ]); then
-  wget -4 "http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz"
+    wget -4 "http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz"
+    rm -r "plasma-widget-cwp-${NEW_VER}"
+    tar xzf "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz"
+    mv "cwp-${NEW_VER}" "plasma-widget-cwp-${NEW_VER}"
+    tar -czf "plasma-widget-cwp_${NEW_VER}.orig.tar.gz" "plasma-widget-cwp-${NEW_VER}"
 fi
 
-if !([ -e "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz" ]); then
-  echo "File kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz is not found.";
-  exit 0;
-fi
 
-if ([ -e "plasma-widget-cwp_${NEW_VER_FULL}.debian.tar.gz" ]); then
-  echo "File plasma-widget-cwp_${NEW_VER_FULL}.debian.tar.gz is found.";
-  echo "Upgrading is not required.";
-  exit 0;
+############################# General part of script body ###############################
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.gz is not found.";
+    exit 0;
 fi
 
 echo "Updating is started."
 
-rm -r "plasma-widget-cwp-${NEW_VER}"
-tar xzf "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz"
-mv "cwp-${NEW_VER}" "plasma-widget-cwp-${NEW_VER}"
-tar -czf "plasma-widget-cwp_${NEW_VER}.orig.tar.gz" "plasma-widget-cwp-${NEW_VER}"
-cp -fr "../debian" "plasma-widget-cwp-${NEW_VER}/debian"
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
-rm -f plasma-widget-cwp_${NEW_VER}-*
+rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
-cd "plasma-widget-cwp-${NEW_VER}"
+tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+# If you want to build package on your system uncomment this:
+# dch -v "$NEW_VER-mybuild1" "Minor update."
+# dpkg-buildpackage -rfakeroot
+
+# Note: I am using gnupg-agent for comfortable work
+
+# Full list of Ubuntu releases:
+# hardy intrepid jaunty karmic lucid maverick natty
+# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
 
 # begin update for basic releases
-dch -b --force-distribution --distribution "natty" -v "${NEW_VER}${SFX}${UBUNTU_SFX}" \
-  "Update to stable release ${NEW_VER}."
-## "Update to stable release ${NEW_VER}."
-## "Some fixes in deb package."
-kwrite debian/changelog
-debuild -S -sa
+export DIST="${MAIN_DIST}"
+if [ "${SFX}" = "-0ppa1" ]; then
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Update to stable release ${NEW_VER}."
+    kwrite debian/changelog
+    debuild -S -sa
+else
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Some fixes in package."
+    kwrite debian/changelog
+    # debuild -S -sd
+    debuild -S -sa
+fi
 # end update for basic releases
 
-# Full list: hardy intrepid jaunty karmic lucid maverick natty
-# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
 # begin update for other releases
-cp debian/changelog ../changelog # copy basic changelog
+cp -f debian/changelog ../changelog # copy basic changelog
 
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "maverick" -v "${NEW_VER}${SFX}~maverick1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
-
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "lucid" -v "${NEW_VER}${SFX}~lucid1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
-
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "karmic" -v "${NEW_VER}${SFX}~karmic1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
+for DIST in maverick lucid karmic ; do
+    cp -f ../changelog debian/changelog
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Automated backport upload; no source changes."
+    debuild -S -sd
+done
 
 mv debian/source ../ # make dirty hack
-
+export DIST=jaunty
 cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "jaunty" -v "${NEW_VER}${SFX}~jaunty1" \
+dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
   "Automated backport upload; no source changes."
 debuild -S -sd
-
 mv ../source debian/ # rollback dirty hack
 
 mv ../changelog debian/changelog # rollback basic changelog
 # end update for other releases
 
-cd ..
-
 
 case "${1}" in
-        fast)
+        test)
 
     echo " "
-    echo "Fast upload (without tests)."
+    echo "Now will be tests."
     echo " "
 
-        ;;
-        *)
+    rm -rf "${TEST_DIR}"
+    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
 
-    mkdir -p TEST
-    rm -r ./TEST/*
-    cp -r "plasma-widget-cwp-${NEW_VER}" ./TEST/
-    cp -f "plasma-widget-cwp_${NEW_VER}.orig.tar.gz" ./TEST/
+    cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
 
-    cd ./TEST/"plasma-widget-cwp-${NEW_VER}"
-    dpkg-buildpackage -rfakeroot
-    cd ..
+    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
+    cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
+    echo " "
+    echo "Start building packages..."
+    dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE}
+    echo "Finished building packages."
+    echo " "
 
-    export LINTIAN_LOG_FILE=../"plasma-widget-cwp-${NEW_VER_FULL}.lintian.log"
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
+    cd "${TEST_DIR}"
     echo " "
     echo "Now running lintian:"
-    lintian -ivI plasma-widget-cwp_${NEW_VER_FULL}_i386.changes > ${LINTIAN_LOG_FILE}
-    cat ${LINTIAN_LOG_FILE}
+    lintian -ivI ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    cat ${LINTIAN_LOG_FILE} | grep "E: "
+    cat ${LINTIAN_LOG_FILE} | grep "W: "
     echo "Finished running lintian."
     echo " "
     kwrite ${LINTIAN_LOG_FILE}
-    cd ..
+
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 
         ;;
 esac
 
 
-kwrite "plasma-widget-cwp-${NEW_VER}/debian/changelog"
+kwrite debian/changelog
 
-dput -f ubuntu plasma-widget-cwp_${NEW_VER}${SFX}${UBUNTU_SFX}_source.changes
-dput -f ubuntu plasma-widget-cwp_${NEW_VER}${SFX}~maverick1_source.changes
-dput -f ubuntu plasma-widget-cwp_${NEW_VER}${SFX}~lucid1_source.changes
-dput -f ubuntu plasma-widget-cwp_${NEW_VER}${SFX}~karmic1_source.changes
-dput -f ubuntu plasma-widget-cwp_${NEW_VER}${SFX}~jaunty1_source.changes
 
-cp -fr "plasma-widget-cwp-${NEW_VER}/debian" ../
+cd "${TEMP_DIR}"
+cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
+
+for DIST in natty maverick lucid karmic jaunty ; do
+    dput -f ubuntu ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
+done
 
 echo "Update finished successfully"
 
