@@ -1,0 +1,23 @@
+freedcpp-example-theme (20091202-4) lucid; urgency=low
+
+  * Some fixes in deb package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Thu, 01 Apr 2010 23:13:43 +0400
+
+freedcpp-example-theme (20091202-3) karmic; urgency=low
+
+  * Some fixes in deb package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 18 Jan 2010 00:24:50 +0300
+
+freedcpp-example-theme (20091202-2) karmic; urgency=low
+
+  * Some fixes in deb package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 18 Jan 2010 00:12:39 +0300
+
+freedcpp-example-theme (20091202-1) karmic; urgency=low
+
+  * Package was added to launchpad.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 17 Jan 2010 23:56:18 +0300
