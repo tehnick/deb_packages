@@ -1,0 +1,17 @@
+Source: freedcpp-mediapack
+Section: net
+Priority: optional
+Maintainer: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: debhelper (>= 6), cdbs (>= 0.4.27)
+Homepage: http://code.google.com/p/freedcpp/
+Standards-Version: 3.9.1
+
+Package: freedcpp-mediapack
+Architecture: all
+Depends: freedcpp | freedcpp-unstable, ${misc:Depends}
+Description: Media pack for FreeDC++
+ Package contains collection of emoticons and sounds.
+ .
+ Files were obtained from:
+ http://code.google.com/p/freedcpp/downloads/list
+ http://freedcpp.googlecode.com/files/mediapack.0.0.3.tar.bz2

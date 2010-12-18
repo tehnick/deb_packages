@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+
+DEB_INSTALL_CHANGELOGS_freedcpp-mediapack := changelog.txt
+
+install/freedcpp-mediapack::
+	cp -rf emoticons $(CURDIR)/debian/freedcpp-mediapack/usr/share/freedcpp/
+	cp -rf sounds $(CURDIR)/debian/freedcpp-mediapack/usr/share/freedcpp/
