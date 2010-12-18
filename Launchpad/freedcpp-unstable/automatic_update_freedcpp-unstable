@@ -112,7 +112,7 @@ case "${1}" in
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
-    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
     echo " "
     echo "Start building packages..."
     dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE}
@@ -136,7 +136,7 @@ case "${1}" in
 esac
 
 # begin update for other releases
-cp debian/changelog ../changelog # copy basic changelog
+cp -f debian/changelog ../changelog # copy basic changelog
 
 for DIST in maverick lucid karmic ; do
     cp -f ../changelog debian/changelog
