@@ -3,7 +3,7 @@
 # Options
 export PACKAGE="freedcpp-unstable"
 export MAIN_DIST="natty"
-export SFX="-0ppa3"
+export SFX="-0ppa4"
 
 export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
@@ -88,12 +88,14 @@ export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "Minor update."
+    debuild -S -sa
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
+    debuild -S -sd
 fi
-debuild -S -sa
+
 # end update for basic releases
 
 case "${1}" in
