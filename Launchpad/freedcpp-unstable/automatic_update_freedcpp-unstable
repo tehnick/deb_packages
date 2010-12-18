@@ -52,22 +52,29 @@ elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
     exit 0;
 fi
 
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    # Begin local updating
+    export SVN_DIR="${HOME}/WorkDir/Devel/FreeDC++/freedcpp_trunk/"
+    svn update "${SVN_DIR}"
+    svn export "${SVN_DIR}" "freedcpp-unstable-${NEW_VER}"
+    # End local updating
+    # Or you can use:
+    # svn export http://freedcpp.googlecode.com/svn/trunk/ "freedcpp-unstable-$NEW_VER/"
+    tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
+fi
+
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.gz is not found.";
+    exit 0;
+fi
 
 echo "Updating is started."
 
 export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
-rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}"*
+rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
-# Begin local updating
-export SVN_DIR="${HOME}/WorkDir/Devel/FreeDC++/freedcpp_trunk/"
-svn update "${SVN_DIR}"
-svn export "${SVN_DIR}" "freedcpp-unstable-${NEW_VER}"
-# End local updating
-# Or you can use:
-# svn export http://freedcpp.googlecode.com/svn/trunk/ "freedcpp-unstable-$NEW_VER/"
-
-tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
+tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
 
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
 
