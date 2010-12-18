@@ -91,6 +91,7 @@ if [ "${SFX}" = "-0ppa1" ]; then
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
+    kwrite debian/changelog
 fi
 debuild -S -sa
 # end update for basic releases
