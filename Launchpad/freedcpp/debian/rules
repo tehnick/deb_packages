@@ -11,6 +11,7 @@ cleanbuilddir/freedcpp::
 	rm -rf build freedcpp
 
 install/freedcpp::
+	mv License.txt License.txt.orig
 	scons install release=1
 	cp Changelog.txt changelog
 	gzip -9fc changelog > $(CURDIR)/debian/$(PKG_NAME)/usr/share/doc/$(PKG_NAME)/changelog.gz

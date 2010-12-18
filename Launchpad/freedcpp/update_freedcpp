@@ -1,39 +1,61 @@
 #!/bin/sh
 
-export OLD_VER="0.0.3"
+# Options
 export NEW_VER="0.0.4"
-export PR="-0ppa1"
+export SFX="-0ppa3"
+
+export PACKAGE="freedcpp"
+export MAIN_DIST="natty"
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
+export TEMP_DIR="${PKG_DIR}/TEMP"
+export TEST_DIR="${TEMP_DIR}/TEST"
 
 
-export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+# Script body
+mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
 
-cd "${HOME}/WorkDir/FreeDC++/Launchpad/"
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export UBUNTU_SFX="~${MAIN_DIST}1"
+export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
 
-# apt-get source freedcpp
+echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+echo " "
 
-if [ ${NEW_VER} != ${OLD_VER} ]; then
-  svn export "http://freedcpp.googlecode.com/svn/tags/freedcpp-${NEW_VER}/" "freedcpp-${NEW_VER}/"
-  tar -czf "freedcpp_${NEW_VER}.orig.tar.gz" "freedcpp-${NEW_VER}"
-else
-  rm freedcpp_${NEW_VER}-*
-fi
-
-if !([ -e "freedcpp_${NEW_VER}.orig.tar.gz" ]); then
-  echo "File freedcpp_${NEW_VER}.orig.tar.gz is not found.";
+if [ -z "${OLD_VER_FULL}" ]; then
+  echo "OLD_VER_FULL is empty!";
+  exit 0;
+elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+  echo "Upgrading is not required.";
   exit 0;
 fi
 
-if !([ -e "freedcpp_${OLD_VER}.orig.tar.gz" ]); then
-  echo "File freedcpp_${OLD_VER}.orig.tar.gz is not found.";
-  exit 0;
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    echo "Start exporting from SVN..."
+    export EXPORT_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.export.log"
+    svn export "http://freedcpp.googlecode.com/svn/tags/freedcpp-${NEW_VER}/" "freedcpp-${NEW_VER}/"  > ${EXPORT_LOG_FILE}
+    echo "Finished download from SVN."
+    tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
+fi
+
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.gz is not found.";
+    exit 0;
 fi
 
 echo "Updating is started."
 
-mv "freedcpp-${OLD_VER}/debian" "freedcpp-${NEW_VER}/debian"
-rm -r "freedcpp-${OLD_VER}" freedcpp_${OLD_VER}*
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
-cd "freedcpp-${NEW_VER}"
+rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
+
+tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 
 # If you want to build package on your system uncomment this:
 # dch -v "$NEW_VER-mybuild1" "Minor update."
@@ -41,55 +63,94 @@ cd "freedcpp-${NEW_VER}"
 
 # Note: I am using gnupg-agent for comfortable work
 
+# Full list of Ubuntu releases:
+# hardy intrepid jaunty karmic lucid maverick natty
+# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
+
 # begin update for basic releases
-dch -b --force-distribution --distribution "natty" -v "${NEW_VER}${PR}~natty1" \
-  "Update to stable release ${NEW_VER}."
-## "Update to stable release ${NEW_VER}."
-## "Some fixes in deb package."
-kwrite debian/changelog
-debuild -S -sa
+export DIST="${MAIN_DIST}"
+if [ "${SFX}" = "-0ppa1" ]; then
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Update to stable release ${NEW_VER}."
+    kwrite debian/changelog
+    debuild -S -sa
+else
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Some fixes in package."
+    kwrite debian/changelog
+    debuild -S -sd
+fi
+
 # end update for basic releases
 
-# Full list: hardy intrepid jaunty karmic lucid maverick natty
-# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
+case "${1}" in
+        test)
+
+    echo " "
+    echo "Now will be tests."
+    echo " "
+
+    rm -rf "${TEST_DIR}"
+    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
+
+    cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
+
+    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
+    cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
+    echo " "
+    echo "Start building packages..."
+    dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE}
+    echo "Finished building packages."
+    echo " "
+
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
+    cd "${TEST_DIR}"
+    echo " "
+    echo "Now running lintian:"
+    lintian -ivI ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    cat ${LINTIAN_LOG_FILE} | grep "E: "
+    cat ${LINTIAN_LOG_FILE} | grep "W: "
+    echo "Finished running lintian."
+    echo " "
+    kwrite ${LINTIAN_LOG_FILE}
+
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+        ;;
+esac
+
 # begin update for other releases
-cp debian/changelog ../changelog # copy basic changelog
+cp -f debian/changelog ../changelog # copy basic changelog
 
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "maverick" -v "${NEW_VER}${PR}~maverick1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
-
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "lucid" -v "${NEW_VER}${PR}~lucid1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
-
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "karmic" -v "${NEW_VER}${PR}~karmic1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
+for DIST in maverick lucid karmic ; do
+    cp -f ../changelog debian/changelog
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Automated backport upload; no source changes."
+    debuild -S -sd
+done
 
 mv debian/source ../ # make dirty hack
-
+export DIST=jaunty
 cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "jaunty" -v "${NEW_VER}${PR}~jaunty1" \
+dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
   "Automated backport upload; no source changes."
 debuild -S -sd
-
 mv ../source debian/ # rollback dirty hack
 
 mv ../changelog debian/changelog # rollback basic changelog
 # end update for other releases
 
+
 kwrite debian/changelog
 
-cd ..
-dput -f ubuntu freedcpp_${NEW_VER}${PR}~natty1_source.changes
-dput -f ubuntu freedcpp_${NEW_VER}${PR}~maverick1_source.changes
-dput -f ubuntu freedcpp_${NEW_VER}${PR}~lucid1_source.changes
-dput -f ubuntu freedcpp_${NEW_VER}${PR}~karmic1_source.changes
-dput -f ubuntu freedcpp_${NEW_VER}${PR}~jaunty1_source.changes
+
+cd "${TEMP_DIR}"
+cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
+
+for DIST in natty maverick lucid karmic jaunty ; do
+    dput -f ubuntu ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
+done
 
 echo "Update finished successfully"
 

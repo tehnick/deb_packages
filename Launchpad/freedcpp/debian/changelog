@@ -1,3 +1,15 @@
+freedcpp (0.0.4-0ppa3~natty1) natty; urgency=low
+
+  * Some fixes in package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 18 Dec 2010 20:52:02 +0200
+
+freedcpp (0.0.4-0ppa2~natty1) natty; urgency=low
+
+  * Some fixes in package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 18 Dec 2010 20:17:09 +0200
+
 freedcpp (0.0.4-0ppa1~natty1) natty; urgency=low
 
   * Update to stable release 0.0.4.
