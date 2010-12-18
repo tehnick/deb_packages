@@ -6,7 +6,6 @@ export PACKAGE="plasma-widget-cwp"
 
 # Uncomment if necessary:
 #export SFX="-1ppa1"
-export SFX="-1ppa1"
 
 
 ############################# General part of script body ###############################
@@ -27,9 +26,9 @@ mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
 
 
 ############################# Specific part of script body ##############################
-export OLD_VER_FULL=$(head -n 1 ../debian/changelog | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
-export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*-\(-[0-9]ppa[0-9]\).*$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 
 export VER_LIST=$(curl 'http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/' 2>&1 | grep 'kde-plasmoid-cwp_' | grep '.orig.tar.gz' | sed -e "s/^.*kde-plasmoid-cwp_\(.*\).orig.tar.gz.*$/\1/")
 export NEW_VER=$(echo ${VER_LIST} | sed -e "s/^.* \(.*\)$/\1/")
@@ -57,10 +56,18 @@ elif [ -z "${OLD_VER_FULL}" ]; then
 elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
     echo "Upgrading is not required.";
     exit 0;
-elif !([ "${NEW_VER}" = "${OLD_VER}" ]); then
-    if !([ "${SFX}" = "-0ppa1" ]); then
-        echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
-        exit 0;
+else
+    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+        if !([ "${SFX}" = "-0ppa1" ]); then
+            echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-0ppa1" ]); then
+            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
     fi
 fi
 
