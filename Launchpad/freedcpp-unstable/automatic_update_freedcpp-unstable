@@ -3,7 +3,7 @@
 # Options
 export PACKAGE="freedcpp-unstable"
 export MAIN_DIST="natty"
-export SFX="-0ppa4"
+export SFX="-0ppa6"
 
 export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
@@ -93,7 +93,8 @@ else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
-    debuild -S -sd
+    # debuild -S -sd
+    debuild -S -sa
 fi
 
 # end update for basic releases

@@ -1,0 +1,2 @@
+version=3
+http://ppa.launchpad.net/tehnick/tehnick/ubuntu/pool/main/f/freedcpp-unstable/ .*freedcpp-unstable_(.+)\.orig\.tar\.bz2 debian uupdate
