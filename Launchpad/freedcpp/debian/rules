@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+
+PKG_NAME = freedcpp
+
+build/freedcpp::
+	scons release=1 PREFIX=/usr FAKE_ROOT=$(CURDIR)/debian/freedcpp
+
+cleanbuilddir/freedcpp::
+	rm -rf build freedcpp
+
+install/freedcpp::
+	scons install release=1
+	cp Changelog.txt changelog
+	gzip -9fc changelog > $(CURDIR)/debian/$(PKG_NAME)/usr/share/doc/$(PKG_NAME)/changelog.gz
+	gzip -9fc ./debian/freedcpp.1 > $(CURDIR)/debian/$(PKG_NAME)/usr/share/man/man1/freedcpp.1.gz
