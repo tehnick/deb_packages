@@ -1,51 +1,77 @@
 #!/bin/sh
 
-export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+# Options
+export PACKAGE="freedcpp-unstable"
+export MAIN_DIST="natty"
+export SFX="-0ppa3"
 
-cd "${HOME}/WorkDir/Devel/FreeDC++/Launchpad/"
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
-# apt-get source freedcpp-unstable
+export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
+export TEMP_DIR="${PKG_DIR}/TEMP"
+export TEST_DIR="${TEMP_DIR}/TEST"
 
-if !([ -e freedcpp-unstable_*.orig.tar.gz ]); then
-  echo "File freedcpp-unstable_*.orig.tar.gz is not found.";
-  exit 0;
-fi
 
-export OLD_VER=$(ls freedcpp-unstable_*.orig.tar.gz | sed -e "s/^freedcpp-unstable_\(.*\).orig.tar.gz$/\1/")
+# Script body
+mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
+
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-0ppa.*$/\1/")
 export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
+
 export LAST_REVISION=$(svn log http://freedcpp.googlecode.com/svn/trunk/ -r HEAD --quiet |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
 
 echo "Number of old  revision: ${OLD_REVISION}"
 echo "Number of last revision: ${LAST_REVISION}"
 
-if [ -z ${LAST_REVISION} ]; then
-  echo "Error: number of last revision is empty!";
-  exit 0;
-elif [ ${LAST_REVISION} = ${OLD_REVISION} ]; then
-  echo "Upgrading is not required.";
-  exit 0;
+export CUR_VER=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | grep "GUI_VERSION_STRING " | sed -e "s/^.*GUI_VERSION_STRING \"\(.*\+\)\"$/\1/")
+export BUILD_STRING=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | grep "GUI_VERSION_BUILD_STRING " | sed -e "s/^.*GUI_VERSION_BUILD_STRING \"\(.*\+\)\"$/\1/")
+export NEW_VER="${CUR_VER}.${BUILD_STRING}~svn${LAST_REVISION}"
+export UBUNTU_SFX="~${MAIN_DIST}1"
+export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
+
+
+echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+
+
+if [ -z "${OLD_VER_FULL}" ]; then
+    echo "OLD_VER_FULL is empty!";
+    exit 0;
+elif [ -z ${CUR_VER} ]; then
+    echo "CUR_VER is empty!";
+    exit 0;
+elif [ -z ${BUILD_STRING} ]; then
+    echo "BUILD_STRING is empty!";
+    exit 0;
+elif [ -z ${LAST_REVISION} ]; then
+    echo "LAST_REVISION is empty!";
+    exit 0;
+elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+    echo "Upgrading is not required.";
+    exit 0;
 fi
+
 
 echo "Updating is started."
 
-export CUR_VER=$(svn cat "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" | grep "GUI_VERSION_STRING " | sed -e "s/^.*GUI_VERSION_STRING \"\(.*\+\)\"$/\1/")
-export BUILD_STRING=$(svn cat "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" | grep "GUI_VERSION_BUILD_STRING " | sed -e "s/^.*GUI_VERSION_BUILD_STRING \"\(.*\+\)\"$/\1/")
-export NEW_VER="${CUR_VER}.${BUILD_STRING}~svn${LAST_REVISION}"
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
-echo "OLD_VER = ${OLD_VER}"
-echo "NEW_VER = ${NEW_VER}"
+rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}"*
 
-# begin local updating
-svn update ../freedcpp_trunk/
-svn export ../freedcpp_trunk/ "freedcpp-unstable-${NEW_VER}"
-# end local updating
+# Begin local updating
+export SVN_DIR="${HOME}/WorkDir/Devel/FreeDC++/freedcpp_trunk/"
+svn update "${SVN_DIR}"
+svn export "${SVN_DIR}" "freedcpp-unstable-${NEW_VER}"
+# End local updating
+# Or you can use:
 # svn export http://freedcpp.googlecode.com/svn/trunk/ "freedcpp-unstable-$NEW_VER/"
-tar -czf "freedcpp-unstable_$NEW_VER.orig.tar.gz" "freedcpp-unstable-${NEW_VER}"
 
-mv "freedcpp-unstable-${OLD_VER}/debian" "freedcpp-unstable-${NEW_VER}/"
-rm -r "freedcpp-unstable-${OLD_VER}" freedcpp-unstable_${OLD_VER}*
+tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
 
-cd "freedcpp-unstable-${NEW_VER}"
+cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 
 # If you want to build package on your system uncomment this:
 # dch -v "$NEW_VER-mybuild1" "Minor update."
@@ -53,50 +79,86 @@ cd "freedcpp-unstable-${NEW_VER}"
 
 # Note: I am using gnupg-agent for comfortable work
 
+# Full list of Ubuntu releases:
+# hardy intrepid jaunty karmic lucid maverick natty
+# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
+
 # begin update for basic releases
-dch -b --force-distribution --distribution "natty" -v "${NEW_VER}-0ppa1~natty1" \
-  "Minor update."
+export DIST="${MAIN_DIST}"
+if [ "${SFX}" = "-0ppa1" ]; then
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Minor update."
+else
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Some fixes in package."
+fi
 debuild -S -sa
 # end update for basic releases
 
-# Full list: hardy intrepid jaunty karmic lucid maverick natty
-# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
+case "${1}" in
+        test)
+
+    echo " "
+    echo "Now will be tests."
+    echo " "
+
+    rm -rf "${TEST_DIR}"
+    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
+
+    cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
+
+    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    echo " "
+    echo "Start building packages..."
+    dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE}
+    echo "Finished building packages."
+    echo " "
+
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
+    cd "${TEST_DIR}"
+    echo " "
+    echo "Now running lintian:"
+    lintian -ivI ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    cat ${LINTIAN_LOG_FILE} | grep "E: "
+    cat ${LINTIAN_LOG_FILE} | grep "W: "
+    echo "Finished running lintian."
+    echo " "
+    kwrite ${LINTIAN_LOG_FILE}
+
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+        ;;
+esac
+
 # begin update for other releases
 cp debian/changelog ../changelog # copy basic changelog
 
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "maverick" -v "${NEW_VER}-0ppa1~maverick1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
-
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "lucid" -v "${NEW_VER}-0ppa1~lucid1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
-
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "karmic" -v "${NEW_VER}-0ppa1~karmic1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
+for DIST in maverick lucid karmic ; do
+    cp -f ../changelog debian/changelog
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Automated backport upload; no source changes."
+    debuild -S -sd
+done
 
 mv debian/source ../ # make dirty hack
-
+export DIST=jaunty
 cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "jaunty" -v "${NEW_VER}-0ppa1~jaunty1" \
+dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
   "Automated backport upload; no source changes."
 debuild -S -sd
-
 mv ../source debian/ # rollback dirty hack
 
 mv ../changelog debian/changelog # rollback basic changelog
 # end update for other releases
 
-cd ..
-dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~natty1_source.changes
-dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~maverick1_source.changes
-dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~lucid1_source.changes
-dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~karmic1_source.changes
-dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~jaunty1_source.changes
+cd "${TEMP_DIR}"
+cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
+
+for DIST in natty maverick lucid karmic jaunty ; do
+    dput -f ubuntu ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
+done
 
 echo "Update finished successfully"
 
