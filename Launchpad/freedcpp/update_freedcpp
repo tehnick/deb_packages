@@ -10,6 +10,7 @@ export NEW_VER="0.0.4"
 #export SFX="-0ppa1"
 export SFX="-0ppa4"
 
+
 ############################# General part of script body ###############################
 export MAIN_DIST="natty"
 export UBUNTU_SFX="~${MAIN_DIST}1"
