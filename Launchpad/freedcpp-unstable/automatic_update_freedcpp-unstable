@@ -1,0 +1,102 @@
+#!/bin/sh
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+cd "${HOME}/WorkDir/Devel/FreeDC++/Launchpad/"
+
+# apt-get source freedcpp-unstable
+
+if !([ -e freedcpp-unstable_*.orig.tar.gz ]); then
+  echo "File freedcpp-unstable_*.orig.tar.gz is not found.";
+  exit 0;
+fi
+
+export OLD_VER=$(ls freedcpp-unstable_*.orig.tar.gz | sed -e "s/^freedcpp-unstable_\(.*\).orig.tar.gz$/\1/")
+export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
+export LAST_REVISION=$(svn log http://freedcpp.googlecode.com/svn/trunk/ -r HEAD --quiet |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
+
+echo "Number of old  revision: ${OLD_REVISION}"
+echo "Number of last revision: ${LAST_REVISION}"
+
+if [ -z ${LAST_REVISION} ]; then
+  echo "Error: number of last revision is empty!";
+  exit 0;
+elif [ ${LAST_REVISION} = ${OLD_REVISION} ]; then
+  echo "Upgrading is not required.";
+  exit 0;
+fi
+
+echo "Updating is started."
+
+export CUR_VER=$(svn cat "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" | grep "GUI_VERSION_STRING " | sed -e "s/^.*GUI_VERSION_STRING \"\(.*\+\)\"$/\1/")
+export BUILD_STRING=$(svn cat "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" | grep "GUI_VERSION_BUILD_STRING " | sed -e "s/^.*GUI_VERSION_BUILD_STRING \"\(.*\+\)\"$/\1/")
+export NEW_VER="${CUR_VER}.${BUILD_STRING}~svn${LAST_REVISION}"
+
+echo "OLD_VER = ${OLD_VER}"
+echo "NEW_VER = ${NEW_VER}"
+
+# begin local updating
+svn update ../freedcpp_trunk/
+svn export ../freedcpp_trunk/ "freedcpp-unstable-${NEW_VER}"
+# end local updating
+# svn export http://freedcpp.googlecode.com/svn/trunk/ "freedcpp-unstable-$NEW_VER/"
+tar -czf "freedcpp-unstable_$NEW_VER.orig.tar.gz" "freedcpp-unstable-${NEW_VER}"
+
+mv "freedcpp-unstable-${OLD_VER}/debian" "freedcpp-unstable-${NEW_VER}/"
+rm -r "freedcpp-unstable-${OLD_VER}" freedcpp-unstable_${OLD_VER}*
+
+cd "freedcpp-unstable-${NEW_VER}"
+
+# If you want to build package on your system uncomment this:
+# dch -v "$NEW_VER-mybuild1" "Minor update."
+# dpkg-buildpackage -rfakeroot
+
+# Note: I am using gnupg-agent for comfortable work
+
+# begin update for basic releases
+dch -b --force-distribution --distribution "natty" -v "${NEW_VER}-0ppa1~natty1" \
+  "Minor update."
+debuild -S -sa
+# end update for basic releases
+
+# Full list: hardy intrepid jaunty karmic lucid maverick natty
+# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
+# begin update for other releases
+cp debian/changelog ../changelog # copy basic changelog
+
+cp -f ../changelog debian/changelog
+dch -b --force-distribution --distribution "maverick" -v "${NEW_VER}-0ppa1~maverick1" \
+  "Automated backport upload; no source changes."
+debuild -S -sd
+
+cp -f ../changelog debian/changelog
+dch -b --force-distribution --distribution "lucid" -v "${NEW_VER}-0ppa1~lucid1" \
+  "Automated backport upload; no source changes."
+debuild -S -sd
+
+cp -f ../changelog debian/changelog
+dch -b --force-distribution --distribution "karmic" -v "${NEW_VER}-0ppa1~karmic1" \
+  "Automated backport upload; no source changes."
+debuild -S -sd
+
+mv debian/source ../ # make dirty hack
+
+cp -f ../changelog debian/changelog
+dch -b --force-distribution --distribution "jaunty" -v "${NEW_VER}-0ppa1~jaunty1" \
+  "Automated backport upload; no source changes."
+debuild -S -sd
+
+mv ../source debian/ # rollback dirty hack
+
+mv ../changelog debian/changelog # rollback basic changelog
+# end update for other releases
+
+cd ..
+dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~natty1_source.changes
+dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~maverick1_source.changes
+dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~lucid1_source.changes
+dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~karmic1_source.changes
+dput -f ubuntu freedcpp-unstable_${NEW_VER}-0ppa1~jaunty1_source.changes
+
+echo "Update finished successfully"
+
