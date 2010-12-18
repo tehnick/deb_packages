@@ -1,0 +1,21 @@
+psi-plus-icons (0.15~svn3381-0ubuntu1) natty; urgency=low
+
+  * New upstream release
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Sun, 12 Dec 2010 19:15:37 +0300
+
+psi-plus-icons (0.15~svn3111-0ubuntu1) natty; urgency=low
+
+  * New upstream release
+  * update build scripts
+    - fix compiled icons
+    - fix change to natty
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Wed, 20 Oct 2010 09:43:19 +0400
+
+psi-plus-icons (0.15~svn3073-0ubuntu1) natty; urgency=low
+
+  * New source package for icons
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Fri, 15 Oct 2010 00:10:56 +0400
+

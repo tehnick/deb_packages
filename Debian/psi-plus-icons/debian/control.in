@@ -1,0 +1,18 @@
+Source: psi-plus-icons
+Section: net
+Priority: optional
+Maintainer: Ivan Borzenkov <ivan1986@list.ru>
+Uploaders: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.9.1
+Homepage: http://psi-dev.googlecode.com/
+
+Package: psi-plus-icons
+Architecture: all
+Depends: psi-plus-common, ${misc:Depends}
+Recommends: #PARTS#
+Conflicts: psi-plus (<< 0.15~svn2289)
+Replaces: psi-plus (<< 0.15~svn2289)
+Description: icons for Psi+
+ Psi+ icons from psi+ svn
+
