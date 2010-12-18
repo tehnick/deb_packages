@@ -2,7 +2,7 @@
 
 # Options
 export NEW_VER="0.0.4"
-export SFX="-0ppa3"
+export SFX="-0ppa4"
 
 export PACKAGE="freedcpp"
 export MAIN_DIST="natty"
@@ -78,7 +78,8 @@ else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
-    debuild -S -sd
+    # debuild -S -sd
+    debuild -S -sa
 fi
 
 # end update for basic releases
