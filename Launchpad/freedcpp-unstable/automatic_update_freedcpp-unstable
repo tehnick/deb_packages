@@ -1,9 +1,20 @@
 #!/bin/sh
 
-# Options
+
+############################# Some options ##############################################
 export PACKAGE="freedcpp-unstable"
+
+# Uncomment if necessary:
+#export SFX="-0ppa6"
+
+
+############################# General part of script body ###############################
 export MAIN_DIST="natty"
-export SFX="-0ppa6"
+export UBUNTU_SFX="~${MAIN_DIST}1"
+
+if [ -z "${SFX}" ]; then
+    export SFX="-0ppa1"
+fi
 
 export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
@@ -11,12 +22,13 @@ export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
 export TEMP_DIR="${PKG_DIR}/TEMP"
 export TEST_DIR="${TEMP_DIR}/TEST"
 
-
-# Script body
 mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
 
+
+############################# Specific part of script body ##############################
 export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-0ppa.*$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
 
 export LAST_REVISION=$(svn log http://freedcpp.googlecode.com/svn/trunk/ -r HEAD --quiet |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
@@ -27,7 +39,6 @@ echo "Number of last revision: ${LAST_REVISION}"
 export CUR_VER=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | grep "GUI_VERSION_STRING " | sed -e "s/^.*GUI_VERSION_STRING \"\(.*\+\)\"$/\1/")
 export BUILD_STRING=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | grep "GUI_VERSION_BUILD_STRING " | sed -e "s/^.*GUI_VERSION_BUILD_STRING \"\(.*\+\)\"$/\1/")
 export NEW_VER="${CUR_VER}.${BUILD_STRING}~svn${LAST_REVISION}"
-export UBUNTU_SFX="~${MAIN_DIST}1"
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
 
 
@@ -50,6 +61,19 @@ elif [ -z ${LAST_REVISION} ]; then
 elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
     echo "Upgrading is not required.";
     exit 0;
+else
+    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+        if !([ "${SFX}" = "-0ppa1" ]); then
+            echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-0ppa1" ]); then
+            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
+    fi
 fi
 
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
@@ -63,6 +87,8 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
     tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
 fi
 
+
+############################# General part of script body ###############################
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
     echo "File ${PACKAGE}_${NEW_VER}.orig.tar.gz is not found.";
     exit 0;
@@ -75,7 +101,6 @@ export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
 tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
-
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
 
 cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
@@ -94,7 +119,8 @@ cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "Minor update."
+        "Update to stable release ${NEW_VER}."
+    kwrite debian/changelog
     debuild -S -sa
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
@@ -103,8 +129,29 @@ else
     # debuild -S -sd
     debuild -S -sa
 fi
-
 # end update for basic releases
+
+# begin update for other releases
+cp -f debian/changelog ../changelog # copy basic changelog
+
+for DIST in maverick lucid karmic ; do
+    cp -f ../changelog debian/changelog
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+        "Automated backport upload; no source changes."
+    debuild -S -sd
+done
+
+mv debian/source ../ # make dirty hack
+export DIST=jaunty
+cp -f ../changelog debian/changelog
+dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+  "Automated backport upload; no source changes."
+debuild -S -sd
+mv ../source debian/ # rollback dirty hack
+
+mv ../changelog debian/changelog # rollback basic changelog
+# end update for other releases
+
 
 case "${1}" in
         test)
@@ -143,26 +190,9 @@ case "${1}" in
         ;;
 esac
 
-# begin update for other releases
-cp -f debian/changelog ../changelog # copy basic changelog
 
-for DIST in maverick lucid karmic ; do
-    cp -f ../changelog debian/changelog
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "Automated backport upload; no source changes."
-    debuild -S -sd
-done
+kwrite debian/changelog
 
-mv debian/source ../ # make dirty hack
-export DIST=jaunty
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
-mv ../source debian/ # rollback dirty hack
-
-mv ../changelog debian/changelog # rollback basic changelog
-# end update for other releases
 
 cd "${TEMP_DIR}"
 cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
