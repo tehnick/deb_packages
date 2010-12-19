@@ -1,97 +1,144 @@
 #!/bin/sh
 
-export UBUNTU_VER="0.15~svn3410"
-export UBUNTU_SFX="-0ubuntu1"
 
-export NEW_VER="${UBUNTU_VER}"
-export SFX="-1"
+############################# Some options ##############################################
+export PACKAGE="psi-plus"
+
+# Uncomment if necessary:
+#export SFX="-1"
 
 
-export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+############################# General part of script body ###############################
+# experimental unstable
+export MAIN_DIST="unstable"
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages/Debian/psi-plus/"
+if [ -z "${SFX}" ]; then
+    export SFX="-1"
+fi
 
-cd "${MAIN_DIR}"
-mkdir -p TEMP
-cd ./TEMP
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
+export TEMP_DIR="${PKG_DIR}/TEMP"
+export TEST_DIR="${TEMP_DIR}/TEST"
+
+mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
+
+
+############################# Specific part of script body ##############################
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+
+export VER_LIST=$(curl 'http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/' 2>&1 | grep 'psi-plus_' | grep '.orig.tar.bz2' | sed -e "s/^.*psi-plus_\(.*\).orig.tar.bz2.*$/\1/")
+export NEW_VER=$(echo ${VER_LIST} | sed -e "s/^.* \(.*\)$/\1/")
+export NEW_VER_FULL=${NEW_VER}${SFX}
 
 echo " "
 echo "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/"
 echo " "
-echo "Uploaders: Boris Pek <tehnick-8@mail.ru>"
-echo " "
 echo "On Launchpad now available such versions:"
-curl 'http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/' | grep 'psi-plus_' | grep '.orig.tar.bz2' | sed -e "s/^.*psi-plus_\(.*\).orig.tar.bz2.*$/\1/"
+echo ${VER_LIST}
 echo " "
 
-export OLD_VER_FULL=$(head -n 1 ../debian/changelog | sed -e "s/.* (\(.*\)) .*/\1/")
-export NEW_VER_FULL=${NEW_VER}${SFX}
-
+echo "OLD_VER = ${OLD_VER}"
+echo "NEW_VER = ${NEW_VER}"
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 echo " "
 
-if !([ -e "psi-plus_${UBUNTU_VER}.orig.tar.bz2" ]); then
-  wget -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}.orig.tar.bz2"
+export UBUNTU_VER="${NEW_VER}"
+export UBUNTU_SFX="-0ubuntu1"
+
+if [ -z "${NEW_VER}" ]; then
+    echo "NEW_VER is empty!";
+    exit 0;
+elif [ -z "${OLD_VER_FULL}" ]; then
+    echo "OLD_VER_FULL is empty!";
+    exit 0;
+elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+    echo "Upgrading is not required.";
+    exit 0;
+else
+    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+        if !([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
+    fi
 fi
 
-if !([ -e "psi-plus_${UBUNTU_VER}.orig.tar.bz2" ]); then
-  echo "File psi-plus_${UBUNTU_VER}.orig.tar.bz2 is not found.";
+if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then
+    wget -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}.orig.tar.bz2"
+fi
+
+if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then
+    echo "File ${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2 is not found.";
+    exit 0;
+fi
+
+if !([ -e "${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz" ]); then
+    wget -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
+    rm -rf debian "${PACKAGE}-${UBUNTU_VER}"
+    rm -rf "scripts__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
+    rm -rf "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
+    tar xzf "${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
+    mv -f debian/scripts "scripts__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
+    mv -f debian "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
+fi
+
+if !([ -e "${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz" ]); then
+  echo "File ${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz is not found.";
   exit 0;
 fi
 
-if !([ -e "psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz" ]); then
-  wget -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
-fi
-
-if !([ -e "psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz" ]); then
-  echo "File psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz is not found.";
-  exit 0;
-fi
-
-
-if ([ -e "psi-plus_${NEW_VER_FULL}.debian.tar.gz" ]); then
-  echo "File psi-plus_${NEW_VER_FULL}.debian.tar.gz is found.";
-  echo "Upgrading is not required.";
-  exit 0;
-fi
-
-echo "Updating is started."
-
-
-rm -rf debian "psi-plus-${UBUNTU_VER}"
-rm -rf "scripts__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
-rm -rf "debian__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
-
-tar xjf "psi-plus_${UBUNTU_VER}.orig.tar.bz2"
-tar xzf "psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
-
-# move unneccessary scripts
-mv -f debian/scripts "scripts__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
-# rename directory
-mv -f debian "debian__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}"
-
-
-export DEBIAN_DIFF="psi-plus.debian.${UBUNTU_VER}${UBUNTU_SFX}.diff"
-diff -NaurEBbwp "debian__psi-plus-${UBUNTU_VER}${UBUNTU_SFX}" "../debian" > "${DEBIAN_DIFF}"
+export DEBIAN_DIFF="${PACKAGE}.debian.${UBUNTU_VER}${UBUNTU_SFX}.diff"
+diff -ur "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}" "${PKG_DIR}/debian" > "${DEBIAN_DIFF}"
 kwrite "${DEBIAN_DIFF}"
 
 
-cp -fr "../debian" "psi-plus-${NEW_VER}/debian"
+if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then
+    echo "File ${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2 is not found.";
+    exit 0;
+fi
 
 
-cd "psi-plus-${NEW_VER}"
+############################# General part of script body ###############################
+echo "Updating is started."
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
+
+tar xjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
 echo " "
 echo "Uscan:"
 uscan --report-status
 echo " "
 
-# unstable experimental
-dch -b --force-distribution --distribution "experimental" -v "${NEW_VER_FULL}" \
-  "Upload to Debian"
-kwrite debian/changelog
-debuild -S -sa
-cd ..
+export DIST="${MAIN_DIST}"
+if [ "${SFX}" = "-1" ]; then
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
+        "Update to stable release ${NEW_VER}."
+    kwrite debian/changelog
+    debuild -S -sa
+else
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
+        "Some fixes in package."
+    kwrite debian/changelog
+    # debuild -S -sd
+    debuild -S -sa
+fi
 
 
 case "${1}" in
@@ -104,34 +151,48 @@ case "${1}" in
         ;;
         *)
 
-    mkdir -p TEST
-    rm -r ./TEST/*
-    cp -r "psi-plus-${NEW_VER}" ./TEST/
-    cp -f "psi-plus_${NEW_VER}.orig.tar.bz2" ./TEST/
+    echo " "
+    echo "Now will be tests."
+    echo " "
 
-    cd "./TEST/psi-plus-${NEW_VER}"
-    dpkg-buildpackage -rfakeroot
-    cd ..
+    rm -rf "${TEST_DIR}"
+    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
 
-    export LINTIAN_LOG_FILE=../"psi-plus-${NEW_VER_FULL}.lintian.log"
+    cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${TEST_DIR}/"
+
+    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
+    cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
+    echo " "
+    echo "Start building packages..."
+    dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE}
+    echo "Finished building packages."
+    echo " "
+
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
+    cd "${TEST_DIR}"
     echo " "
     echo "Now running lintian:"
-    lintian -ivI psi-plus_${NEW_VER_FULL}_i386.changes > ${LINTIAN_LOG_FILE}
-    cat ${LINTIAN_LOG_FILE}
+    lintian -ivI ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    cat ${LINTIAN_LOG_FILE} | grep "E: "
+    cat ${LINTIAN_LOG_FILE} | grep "W: "
     echo "Finished running lintian."
     echo " "
     kwrite ${LINTIAN_LOG_FILE}
-    cd ..
+
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 
         ;;
 esac
 
 
-kwrite "psi-plus-${NEW_VER}/debian/changelog"
+kwrite debian/changelog
 
-dput -f mentors psi-plus_${NEW_VER_FULL}_source.changes
 
-cp -fr "psi-plus-${NEW_VER}/debian" ../
+cd "${TEMP_DIR}"
+cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
+
+dput -f mentors ${PACKAGE}_${NEW_VER_FULL}_source.changes
 
 echo "Update finished successfully"
 
