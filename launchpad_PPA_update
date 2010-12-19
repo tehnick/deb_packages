@@ -1,0 +1,22 @@
+#!/bin/sh
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PACKAGE="eiskaltdcpp-unstable"
+echo "Begin ${PACKAGE}"
+"${MAIN_DIR}/Launchpad/${PACKAGE}/automatic_update_${PACKAGE}"
+echo "End ${PACKAGE}"
+echo " "
+
+export PACKAGE="q4wine-unstable"
+echo "Begin ${PACKAGE}"
+"${HOME}/WorkDir/Devel/Q4Wine/Launchpad/automatic_update_q4wine"
+echo "End ${PACKAGE}"
+echo " "
+
+export PACKAGE="freedcpp-unstable"
+echo "Begin ${PACKAGE}"
+"${MAIN_DIR}/Launchpad/${PACKAGE}/automatic_update_${PACKAGE}"
+echo "End ${PACKAGE}"
+echo " "
+
