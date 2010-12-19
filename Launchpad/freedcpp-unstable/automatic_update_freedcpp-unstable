@@ -190,9 +190,6 @@ case "${1}" in
 esac
 
 
-kwrite debian/changelog
-
-
 cd "${TEMP_DIR}"
 cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
 
