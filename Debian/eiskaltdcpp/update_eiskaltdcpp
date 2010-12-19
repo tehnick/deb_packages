@@ -1,0 +1,54 @@
+#!/bin/sh
+
+export NEW_VER="2.1.1"
+export PR="-2"
+
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+cd "${HOME}/WorkDir/EiskaltDC++/Debian/"
+
+if !([ -e eiskaltdcpp_${NEW_VER}.orig.tar.gz ]); then
+  echo "File eiskaltdcpp_${NEW_VER}.orig.tar.gz is not found.";
+  exit 0;
+fi
+
+echo "Updating is started."
+
+cd "eiskaltdcpp-${NEW_VER}"
+echo " "
+echo "Uscan:"
+uscan --report-status
+echo " "
+dch -b -v "${NEW_VER}${PR}" "Update to stable release ${NEW_VER}."
+kwrite debian/changelog
+debuild -S -sa
+
+cd ..
+mkdir -p TEMP
+rm -r ./TEMP/*
+cp -r "eiskaltdcpp-${NEW_VER}" ./TEMP/
+cp -f "eiskaltdcpp_${NEW_VER}.orig.tar.gz" ./TEMP/
+
+cd "./TEMP/eiskaltdcpp-${NEW_VER}"
+dpkg-buildpackage -rfakeroot
+
+
+export LINTIAN_LOG_FILE=../"eiskaltdcpp-${NEW_VER}.lintian.log"
+cd ..
+echo " "
+echo "Now running lintian:"
+lintian -ivI eiskaltdcpp_*.changes > ${LINTIAN_LOG_FILE}
+cat ${LINTIAN_LOG_FILE}
+echo "Finished running lintian."
+echo " "
+kwrite ${LINTIAN_LOG_FILE}
+
+
+cd ..
+kwrite "eiskaltdcpp-${NEW_VER}/debian/changelog"
+
+dput -f mentors eiskaltdcpp_${NEW_VER}${PR}_source.changes
+
+echo "Update finished successfully"
+
