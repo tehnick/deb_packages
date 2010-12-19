@@ -1,0 +1,25 @@
+Source: eiskaltdcpp-geoip
+Section: net
+Priority: optional
+Maintainer: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: debhelper (>= 6), cdbs (>= 0.4.27)
+Homepage: http://www.maxmind.com/app/geoip_country
+Standards-Version: 3.9.1
+
+Package: eiskaltdcpp-geoip
+Architecture: all
+Depends: ${misc:Depends}
+Description: Geo IP Database for EiskaltDC++
+ GeoLite Country is similar to the GeoIP Country database, but is slightly
+ less accurate. Should you require greater accuracy, GeoIP Country is a
+ drop-in replacement for GeoLite Country. We also offer a free geolocation
+ database on a city level.
+ .
+ We are unable to offer direct support for GeoLite users. Please visit GeoIP
+ Support Center for available documentation and MaxMind Forum if you encounter
+ problems.
+ .
+ Under the license agreement, all advertising materials and documentation
+ mentioning features or use of this database must display the following
+ acknowledgment: "This product includes GeoLite data created by MaxMind,
+ available from http://www.maxmind.com/."

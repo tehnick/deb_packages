@@ -1,0 +1,21 @@
+This package was debianized by Boris Pek <tehnick-8@mail.ru>
+Mon, 20 Dec 2010 01:10:51 +0200
+
+It was downloaded from http://www.maxmind.com/app/geoip_country
+ Homepage: http://www.maxmind.com/app/geoip_country
+
+Upstream Authors:
+ .
+
+Files:
+ *
+Copyright:
+ .
+License:
+ .
+
+The Debian packaging is:
+ Copyright 2010 Boris Pek <tehnick-8@mail.ru>
+License:
+ GPL or later, see `/usr/share/common-licenses/GPL'
+
