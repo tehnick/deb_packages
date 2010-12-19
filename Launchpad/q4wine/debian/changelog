@@ -1,0 +1,50 @@
+q4wine (0.120-0ppa1~maverick1) maverick; urgency=low
+
+  * Update to stable release 0.120.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 02 Oct 2010 00:49:22 +0300
+
+q4wine (0.119-r1-0ppa1~maverick1) maverick; urgency=low
+
+  * Update to bug fix release 0.119-r1.
+  * Updated file debian/copyright.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Thu, 19 Aug 2010 16:48:32 +0300
+
+q4wine (0.119-0ppa1~maverick1) maverick; urgency=low
+
+  * Update to stable release 0.119.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 11 Aug 2010 22:20:10 +0300
+
+q4wine (0.118-3ppa1~maverick1) maverick; urgency=low
+
+  * Package on Launchpad was sync with package in Debian.
+  * Changelog was cleaned.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 26 May 2010 20:21:41 +0400
+
+q4wine (0.118-3) unstable; urgency=low
+
+  * Fixed `Depends' in debian/control.
+    (wine for amd64, hurd-i386, i386, kfreebsd-i386, powerpc and sparc
+    is now available only in experimental branch of Debian)
+  * Fixed `Build-Depends' for hurd-i386 in debian/control.
+    (wine for hurd-i386 is now available in experimental branch of Debian)
+  * Removed xdg-utils dependency from debian/control.
+    (It's unnecessary in Q4Wine since version 0.118)
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 26 May 2010 15:16:23 +0400
+
+q4wine (0.118-2) unstable; urgency=low
+
+  * Added kfreebsd-i386 and kfreebsd-amd64 specific dependencies
+    to debian/control.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Thu, 13 May 2010 22:45:50 +0400
+
+q4wine (0.118-1) unstable; urgency=low
+
+  * Initial release (closes: #550148).
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 25 Apr 2010 02:06:31 +0400

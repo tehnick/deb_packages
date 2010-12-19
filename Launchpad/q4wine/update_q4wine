@@ -1,0 +1,74 @@
+#!/bin/sh
+
+export NEW_VER="0.120"
+export PR="-0ppa1"
+
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+cd "${HOME}/WorkDir/Q4Wine/Launchpad/"
+
+# apt-get source q4wine
+
+if !([ -e q4wine_*.orig.tar.gz ]); then
+  echo "File q4wine_*.orig.tar.gz is not found.";
+  exit 0;
+fi
+
+echo "Updating is started."
+
+rm q4wine_${NEW_VER}-*
+
+cd "q4wine-${NEW_VER}"
+
+# If you want to build package on your system uncomment this:
+# dch -v "$NEW_VER-mybuild1" "Minor update."
+# dpkg-buildpackage -rfakeroot
+
+# Note: I am using gnupg-agent for comfortable work
+
+# begin update for basic releases
+dch -b --force-distribution --distribution "maverick" -v "${NEW_VER}${PR}~maverick1" \
+  "Update to stable release ${NEW_VER}."
+## "Update to stable release ${NEW_VER}."
+## "Some fixes in deb package."
+kwrite debian/changelog
+debuild -S -sa
+# end update for basic releases
+
+# Full list: hardy intrepid jaunty karmic lucid maverick
+# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
+# begin update for other releases
+cp debian/changelog ../changelog # copy basic changelog
+
+dch -b --force-distribution --distribution "lucid" -v "${NEW_VER}${PR}~lucid1" \
+  "Automated backport upload; no source changes."
+debuild -S -sd
+
+cp -f ../changelog debian/changelog
+dch -b --force-distribution --distribution "karmic" -v "${NEW_VER}${PR}~karmic1" \
+  "Automated backport upload; no source changes."
+debuild -S -sd
+
+mv debian/source ../ # make dirty hack
+
+cp -f ../changelog debian/changelog
+dch -b --force-distribution --distribution "jaunty" -v "${NEW_VER}${PR}~jaunty1" \
+  "Automated backport upload; no source changes."
+debuild -S -sd
+
+mv ../source debian/ # rollback dirty hack
+
+mv ../changelog debian/changelog # rollback basic changelog
+# end update for other releases
+
+kwrite debian/changelog
+
+cd ..
+dput -f ubuntu q4wine_${NEW_VER}${PR}~maverick1_source.changes
+dput -f ubuntu q4wine_${NEW_VER}${PR}~lucid1_source.changes
+dput -f ubuntu q4wine_${NEW_VER}${PR}~karmic1_source.changes
+dput -f ubuntu q4wine_${NEW_VER}${PR}~jaunty1_source.changes
+
+echo "Update finished successfully"
+
