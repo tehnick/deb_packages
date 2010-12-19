@@ -1,0 +1,60 @@
+q4wine (0.120-2) unstable; urgency=low
+
+  * Upload to unstable branch.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 21 Nov 2010 02:26:21 +0200
+
+q4wine (0.120-1) experimental; urgency=low
+
+  * Update to stable release 0.120.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 03 Oct 2010 16:42:29 +0300
+
+q4wine (0.119-r1-1) experimental; urgency=low
+
+  * Update to bug fix release 0.119-r1.
+  * Updated file debian/copyright.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Thu, 19 Aug 2010 17:30:37 +0300
+
+q4wine (0.119-1) experimental; urgency=low
+
+  * Update to stable release 0.119.
+  * Fixed file debian/rules.
+    (parallel=<n> from DEB_BUILD_OPTIONS is now using)
+  * Fixed file debian/copyright.
+    (lintian warning `copyright-with-old-dh-make-debian-copyright' is fixed)
+  * Added debian/watch file.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Thu, 12 Aug 2010 00:05:43 +0300
+
+q4wine (0.118-4) unstable; urgency=low
+
+  * Fixed `Depends' and `Build-Depends' in debian/control.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Fri, 28 May 2010 02:58:02 +0400
+
+q4wine (0.118-3) unstable; urgency=low
+
+  * Fixed `Depends' in debian/control.
+    (wine for amd64, hurd-i386, i386, kfreebsd-i386, powerpc and sparc
+    is now available only in experimental branch of Debian)
+  * Fixed `Build-Depends' for hurd-i386 in debian/control.
+    (wine for hurd-i386 is now available in experimental branch of Debian)
+  * Removed xdg-utils dependency from debian/control.
+    (It's unnecessary in Q4Wine since version 0.118)
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 26 May 2010 15:16:23 +0400
+
+q4wine (0.118-2) unstable; urgency=low
+
+  * Added kfreebsd-i386 and kfreebsd-amd64 specific dependencies
+    to debian/control.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Thu, 13 May 2010 22:45:50 +0400
+
+q4wine (0.118-1) unstable; urgency=low
+
+  * Initial release (closes: #550148).
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 25 Apr 2010 02:06:31 +0400

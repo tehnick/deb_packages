@@ -1,0 +1,54 @@
+#!/bin/sh
+
+export NEW_VER="0.120"
+export PR="-2"
+
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+cd "${HOME}/WorkDir/Q4Wine/Debian/"
+
+if !([ -e q4wine_*.orig.tar.gz ]); then
+  echo "File q4wine_*.orig.tar.gz is not found.";
+  exit 0;
+fi
+
+echo "Updating is started."
+
+cd "q4wine-${NEW_VER}"
+echo " "
+echo "Uscan:"
+uscan --report-status
+echo " "
+dch -b -v "${NEW_VER}${PR}" "Update to stable release ${NEW_VER}."
+kwrite debian/changelog
+debuild -S -sa
+
+cd ..
+mkdir -p TEMP
+rm -r ./TEMP/*
+cp -r "q4wine-${NEW_VER}" ./TEMP/
+cp -f "q4wine_${NEW_VER}.orig.tar.gz" ./TEMP/
+
+cd "./TEMP/q4wine-${NEW_VER}"
+dpkg-buildpackage -rfakeroot
+
+cd ..
+echo " "
+echo "Now running lintian:"
+lintian -ivI q4wine_*_i386.changes
+echo "Finished running lintian."
+echo " "
+echo "Now unpacking package:"
+dpkg -x q4wine_*_i386.deb q4wine
+dpkg -e q4wine_*_i386.deb q4wine/DEBIAN
+echo "Finished unpacking package:"
+echo " "
+
+cd ..
+kwrite "q4wine-${NEW_VER}/debian/changelog"
+
+dput -f mentors q4wine_${NEW_VER}${PR}_source.changes
+
+echo "Update finished successfully"
+
