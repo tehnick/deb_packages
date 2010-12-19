@@ -119,8 +119,7 @@ cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "Update to stable release ${NEW_VER}."
-    kwrite debian/changelog
+        "Minor update."
     debuild -S -sa
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
