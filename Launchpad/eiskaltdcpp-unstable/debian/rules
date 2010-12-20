@@ -72,15 +72,15 @@ binary-arch: build install
 	dh_installdocs -a
 	dh_installman -a
 	dh_link -a
-	dh_strip -Nlibeiskaltdcpp2.1.x-unstable -Neiskaltdcpp-qt-unstable -Neiskaltdcpp-gtk-unstable
-	dh_strip -plibeiskaltdcpp2.1.x-unstable --dbg-package=libeiskaltdcpp2.1.x-unstable-dbg
+	dh_strip -Nlibeiskaltdcpp2.2-unstable -Neiskaltdcpp-qt-unstable -Neiskaltdcpp-gtk-unstable
+	dh_strip -plibeiskaltdcpp2.2-unstable --dbg-package=libeiskaltdcpp2.2-unstable-dbg
 	dh_strip -peiskaltdcpp-qt-unstable --dbg-package=eiskaltdcpp-qt-unstable-dbg
 	dh_strip -peiskaltdcpp-gtk-unstable --dbg-package=eiskaltdcpp-gtk-unstable-dbg
 	dh_compress -a
 	dh_fixperms -a
-	dh_makeshlibs -plibeiskaltdcpp2.1.x-unstable
+	dh_makeshlibs -plibeiskaltdcpp2.2-unstable
 	dh_installdeb -a
-	dh_shlibdeps -a -ldebian/libeiskaltdcpp2.1.x-unstable/usr/lib
+	dh_shlibdeps -a -ldebian/libeiskaltdcpp2.2-unstable/usr/lib
 	dh_installdebconf -a
 	dh_gencontrol -a
 	dh_md5sums -a

@@ -1,3 +1,9 @@
+eiskaltdcpp-unstable (2.2.0-20101220-230035-a7bcfd1-0ppa1~natty1) natty; urgency=low
+
+  * Minor update.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 20 Dec 2010 23:01:08 +0200
+
 eiskaltdcpp-unstable (2.1.2-20101220-005852-44be21d-0ppa1~natty1) natty; urgency=low
 
   * Minor update.
