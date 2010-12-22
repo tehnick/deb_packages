@@ -14,7 +14,7 @@ Architecture: any
 Conflicts: psi
 Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
 Replaces: psi
-Description: Psi+ (basic version)
+Description: Qt-based jabber client (basic version)
  This package contains basic version of Psi+.
  .
  Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
@@ -50,7 +50,7 @@ Architecture: any
 Conflicts: psi
 Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
 Replaces: psi
-Description: Psi+ (WebKit version)
+Description: Qt-based jabber client (WebKit version)
  This package contains WebKit version of Psi+.
  .
  Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the

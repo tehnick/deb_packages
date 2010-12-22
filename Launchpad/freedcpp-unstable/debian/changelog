@@ -1,3 +1,9 @@
+freedcpp-unstable (0.0.4.3~svn187-0ppa1~natty1) natty; urgency=low
+
+  * Minor update.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 22 Dec 2010 19:33:16 +0200
+
 freedcpp-unstable (0.0.4.1~svn185-0ppa6~natty1) natty; urgency=low
 
   * Some fixes in package.

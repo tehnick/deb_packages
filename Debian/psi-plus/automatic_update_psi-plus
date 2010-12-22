@@ -129,12 +129,12 @@ echo " "
 export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
-        "Update to stable release ${NEW_VER}."
+        "New upstream release"                                          # Specific code
     kwrite debian/changelog
     debuild -S -sa
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
-        "Some fixes in package."
+        "Some fixes in package"                                         # Specific code
     kwrite debian/changelog
     # debuild -S -sd
     debuild -S -sa
@@ -193,6 +193,11 @@ cd "${TEMP_DIR}"
 cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
 
 dput -f mentors ${PACKAGE}_${NEW_VER_FULL}_source.changes
+
+# Specific code
+export DIFF_OUT="${PACKAGE}.debian.${NEW_VER_FULL}.out.diff"
+diff -ur "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}" "${PACKAGE}-${NEW_VER}/debian" > "${DIFF_OUT}"
+# Specific code
 
 echo "Update finished successfully"
 
