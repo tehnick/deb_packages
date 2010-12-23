@@ -90,7 +90,7 @@ fi
 
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
     tar xzf "${LAST_SRC}".tar.gz
-    mv "negativ-eiskaltdcpp-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
+    mv "brezerk-q4wine-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
     tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
 fi
 
