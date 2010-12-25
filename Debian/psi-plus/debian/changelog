@@ -1,9 +1,9 @@
-psi-plus (0.15~svn3428-1) unstable; urgency=low
+psi-plus (0.15~svn3447-1) experimental; urgency=low
 
   * New upstream release
   * Fixed short descriptions for psi-plus and psi-plus-webkit packages
 
- -- Boris Pek <tehnick-8@mail.ru>  Wed, 22 Dec 2010 21:09:43 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 25 Dec 2010 13:46:52 +0200
 
 psi-plus (0.15~svn3410-1) experimental; urgency=low
 

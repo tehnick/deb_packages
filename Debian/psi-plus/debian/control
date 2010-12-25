@@ -32,7 +32,7 @@ Section: debug
 Priority: extra
 Architecture: any
 Depends: psi-plus (=${binary:Version}), ${misc:Depends}
-Description: Psi+ (basic version) [debug symbols]
+Description: Qt-based jabber client (basic version) [debug symbols]
  This package contains the debugging symbols for basic version of Psi+.
  .
  Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
@@ -68,7 +68,7 @@ Section: debug
 Priority: extra
 Architecture: any
 Depends: psi-plus-webkit (=${binary:Version}), ${misc:Depends}
-Description: Psi+ (WebKit version) [debug symbols]
+Description: Qt-based jabber client (WebKit version) [debug symbols]
  This package contains the debugging symbols for WebKit version of Psi+.
  .
  Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the

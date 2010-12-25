@@ -1,3 +1,9 @@
+q4wine-unstable (0.120-20101225-131137-88a0f8d-0ppa1~natty1) natty; urgency=low
+
+  * Minor update.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 25 Dec 2010 13:11:51 +0200
+
 q4wine-unstable (0.120-20101223-194736-119d45a-0ppa1~natty1) natty; urgency=low
 
   * Minor update.

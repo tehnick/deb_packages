@@ -10,7 +10,7 @@ export PACKAGE="psi-plus"
 
 ############################# General part of script body ###############################
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 if [ -z "${SFX}" ]; then
     export SFX="-1"
