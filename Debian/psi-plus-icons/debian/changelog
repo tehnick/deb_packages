@@ -1,8 +1,12 @@
-psi-plus-icons (0.15~svn3381-0ubuntu1) natty; urgency=low
+psi-plus-icons (0.15~svn3420-1) experimental; urgency=low
 
   * New upstream release
+  * Fixed lintian remarks:
+    I: debian-watch-file-is-missing
+    I: extended-description-is-probably-too-short
+    I: conflicts-with-version psi-plus (<< 0.15~svn2289)
 
- -- Ivan Borzenkov <ivan1986@list.ru>  Sun, 12 Dec 2010 19:15:37 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 25 Dec 2010 16:31:02 +0200
 
 psi-plus-icons (0.15~svn3111-0ubuntu1) natty; urgency=low
 

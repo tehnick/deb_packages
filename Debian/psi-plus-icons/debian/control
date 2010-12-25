@@ -11,71 +11,144 @@ Package: psi-plus-icons
 Architecture: all
 Depends: psi-plus-common, ${misc:Depends}
 Recommends: psi-plus-icons-activities, psi-plus-icons-affiliations, psi-plus-icons-clients, psi-plus-icons-emoticons, psi-plus-icons-moods, psi-plus-icons-roster, psi-plus-icons-system
-Conflicts: psi-plus (<< 0.15~svn2289)
+Breaks: psi-plus (<< 0.15~svn2289)
 Replaces: psi-plus (<< 0.15~svn2289)
 Description: icons for Psi+
- Psi+ icons from psi+ svn
+ This package contains icons for Psi+.
+ .
+ Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
+ Jabber power users. Psi+ is a development branch of Psi IM Jabber client by
+ psi-dev@conference.jabber.ru team.
+ .
+ Project Purpose: collection, refinement and writing new patches for transfer
+ them to Psi upstream developers.
+ .
+ Full list of features you can found at:
+ http://psi-plus.com/wiki/doku.php/en:features
 
 Package: psi-plus-icons-activities
 Architecture: all
 Depends: psi-plus-common, ${misc:Depends}
-Conflicts: psi-plus (<< 0.15~svn2289)
+Breaks: psi-plus (<< 0.15~svn2289)
 Replaces: psi-plus (<< 0.15~svn2289)
 Description: activities icons for Psi+
- Psi+ activities icons from psi+ svn
- separate from icons
+ This package contains activities icons for Psi+.
+ .
+ Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
+ Jabber power users. Psi+ is a development branch of Psi IM Jabber client by
+ psi-dev@conference.jabber.ru team.
+ .
+ Project Purpose: collection, refinement and writing new patches for transfer
+ them to Psi upstream developers.
+ .
+ Full list of features you can found at:
+ http://psi-plus.com/wiki/doku.php/en:features
 
 Package: psi-plus-icons-affiliations
 Architecture: all
 Depends: psi-plus-common, ${misc:Depends}
-Conflicts: psi-plus (<< 0.15~svn2289)
+Breaks: psi-plus (<< 0.15~svn2289)
 Replaces: psi-plus (<< 0.15~svn2289)
 Description: affiliations icons for Psi+
- Psi+ affiliations icons from psi+ svn
- separate from icons
+ This package contains affiliations icons for Psi+.
+ .
+ Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
+ Jabber power users. Psi+ is a development branch of Psi IM Jabber client by
+ psi-dev@conference.jabber.ru team.
+ .
+ Project Purpose: collection, refinement and writing new patches for transfer
+ them to Psi upstream developers.
+ .
+ Full list of features you can found at:
+ http://psi-plus.com/wiki/doku.php/en:features
 
 Package: psi-plus-icons-clients
 Architecture: all
 Depends: psi-plus-common, ${misc:Depends}
-Conflicts: psi-plus (<< 0.15~svn2289)
+Breaks: psi-plus (<< 0.15~svn2289)
 Replaces: psi-plus (<< 0.15~svn2289)
 Description: clients icons for Psi+
- Psi+ clients icons from psi+ svn
- separate from icons
+ This package contains clients icons for Psi+.
+ .
+ Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
+ Jabber power users. Psi+ is a development branch of Psi IM Jabber client by
+ psi-dev@conference.jabber.ru team.
+ .
+ Project Purpose: collection, refinement and writing new patches for transfer
+ them to Psi upstream developers.
+ .
+ Full list of features you can found at:
+ http://psi-plus.com/wiki/doku.php/en:features
 
 Package: psi-plus-icons-emoticons
 Architecture: all
 Depends: psi-plus-common, ${misc:Depends}
-Conflicts: psi-plus (<< 0.15~svn2289)
+Breaks: psi-plus (<< 0.15~svn2289)
 Replaces: psi-plus (<< 0.15~svn2289)
 Description: emoticons icons for Psi+
- Psi+ emoticons icons from psi+ svn
- separate from icons
+ This package contains emoticons icons for Psi+.
+ .
+ Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
+ Jabber power users. Psi+ is a development branch of Psi IM Jabber client by
+ psi-dev@conference.jabber.ru team.
+ .
+ Project Purpose: collection, refinement and writing new patches for transfer
+ them to Psi upstream developers.
+ .
+ Full list of features you can found at:
+ http://psi-plus.com/wiki/doku.php/en:features
 
 Package: psi-plus-icons-moods
 Architecture: all
 Depends: psi-plus-common, ${misc:Depends}
-Conflicts: psi-plus (<< 0.15~svn2289)
+Breaks: psi-plus (<< 0.15~svn2289)
 Replaces: psi-plus (<< 0.15~svn2289)
 Description: moods icons for Psi+
- Psi+ moods icons from psi+ svn
- separate from icons
+ This package contains moods icons for Psi+.
+ .
+ Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
+ Jabber power users. Psi+ is a development branch of Psi IM Jabber client by
+ psi-dev@conference.jabber.ru team.
+ .
+ Project Purpose: collection, refinement and writing new patches for transfer
+ them to Psi upstream developers.
+ .
+ Full list of features you can found at:
+ http://psi-plus.com/wiki/doku.php/en:features
 
 Package: psi-plus-icons-roster
 Architecture: all
 Depends: psi-plus-common, ${misc:Depends}
-Conflicts: psi-plus (<< 0.15~svn2289)
+Breaks: psi-plus (<< 0.15~svn2289)
 Replaces: psi-plus (<< 0.15~svn2289)
 Description: roster icons for Psi+
- Psi+ roster icons from psi+ svn
- separate from icons
+ This package contains roster icons for Psi+.
+ .
+ Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
+ Jabber power users. Psi+ is a development branch of Psi IM Jabber client by
+ psi-dev@conference.jabber.ru team.
+ .
+ Project Purpose: collection, refinement and writing new patches for transfer
+ them to Psi upstream developers.
+ .
+ Full list of features you can found at:
+ http://psi-plus.com/wiki/doku.php/en:features
 
 Package: psi-plus-icons-system
 Architecture: all
 Depends: psi-plus-common, ${misc:Depends}
-Conflicts: psi-plus (<< 0.15~svn2289)
+Breaks: psi-plus (<< 0.15~svn2289)
 Replaces: psi-plus (<< 0.15~svn2289)
 Description: system icons for Psi+
- Psi+ system icons from psi+ svn
- separate from icons
+ This package contains system icons for Psi+.
+ .
+ Psi is a cross-platform powerful Jabber client (Qt, C++) designed for the
+ Jabber power users. Psi+ is a development branch of Psi IM Jabber client by
+ psi-dev@conference.jabber.ru team.
+ .
+ Project Purpose: collection, refinement and writing new patches for transfer
+ them to Psi upstream developers.
+ .
+ Full list of features you can found at:
+ http://psi-plus.com/wiki/doku.php/en:features
 
