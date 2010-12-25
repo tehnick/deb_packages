@@ -5,7 +5,7 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 echo "MAIN_DIR = ${MAIN_DIR}"
 echo " "
 
-for PACKAGE in plasma-widget-cwp psi-plus ; do
+for PACKAGE in plasma-widget-cwp psi-plus psi-plus-icons ; do
     echo "Begin ${PACKAGE}"
     "${MAIN_DIR}/Debian/${PACKAGE}/automatic_update_${PACKAGE}"
     echo "End ${PACKAGE}"
