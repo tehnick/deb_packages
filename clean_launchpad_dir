@@ -1,0 +1,14 @@
+#!/bin/sh
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+echo "MAIN_DIR = ${MAIN_DIR}"
+echo " "
+
+for PACKAGE in eiskaltdcpp-unstable q4wine-unstable freedcpp-unstable ; do
+    echo "Begin ${PACKAGE}"
+    rm -rf "${MAIN_DIR}/Launchpad/${PACKAGE}/TEMP/"*
+    echo "End ${PACKAGE}"
+    echo " "
+done
+
