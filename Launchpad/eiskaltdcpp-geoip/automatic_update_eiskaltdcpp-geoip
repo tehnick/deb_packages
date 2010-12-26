@@ -152,13 +152,13 @@ for DIST in maverick lucid karmic ; do
     debuild -S -sd
 done
 
-#mv debian/source ../ # make dirty hack                                     # Specific code
+mv debian/source ../ # make dirty hack
 export DIST=jaunty
 cp -f ../changelog debian/changelog
 dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
   "Automated backport upload; no source changes."
 debuild -S -sd
-#mv ../source debian/ # rollback dirty hack                                 # Specific code
+mv ../source debian/ # rollback dirty hack
 
 mv ../changelog debian/changelog # rollback basic changelog
 # end update for other releases
