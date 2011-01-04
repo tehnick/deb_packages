@@ -37,7 +37,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 echo " "
 echo "http://code.google.com/p/freedcpp/downloads/list"
 echo " "
-echo "On sourceforge.net now available such versions:"
+echo "On code.google.com now available such versions:"
 echo ${VER_LIST}
 echo " "
 
