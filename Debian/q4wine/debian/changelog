@@ -1,3 +1,9 @@
+q4wine (0.120-r1-1) unstable; urgency=low
+
+  * Update to stable release 0.120-r1.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 09 Jan 2011 00:25:06 +0200
+
 q4wine (0.120-2) unstable; urgency=low
 
   * Upload to unstable branch.
