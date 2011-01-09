@@ -18,6 +18,7 @@ Depends: ${misc:Depends},
  eiskaltdcpp-emoticons-unstable,
  eiskaltdcpp-scripts-unstable,
  eiskaltdcpp-sounds-unstable
+Suggests: eiskaltdcpp-geoip
 Replaces: eiskaltdcpp
 Conflicts: eiskaltdcpp
 Description: EiskaltDC++ meta-package
@@ -157,7 +158,8 @@ Breaks: eiskaltdcpp (<< 2.1.0)
 Suggests: php5-cli,
  eiskaltdcpp-emoticons-unstable,
  eiskaltdcpp-scripts-unstable,
- eiskaltdcpp-sounds-unstable
+ eiskaltdcpp-sounds-unstable,
+ eiskaltdcpp-geoip
 Description: data files for EiskaltDC++ Qt
  This package contains the data files for EiskaltDC++ Qt.
  .
@@ -214,7 +216,8 @@ Conflicts: eiskaltdcpp-gtk-data
 Suggests: php5-cli,
  eiskaltdcpp-emoticons-unstable,
  eiskaltdcpp-scripts-unstable,
- eiskaltdcpp-sounds-unstable
+ eiskaltdcpp-sounds-unstable,
+ eiskaltdcpp-geoip
 Description: data files for EiskaltDC++ Gtk
  This package contains the data files for EiskaltDC++ Gtk.
  .
