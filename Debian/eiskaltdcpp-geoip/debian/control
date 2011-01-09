@@ -1,0 +1,21 @@
+Source: eiskaltdcpp-geoip
+Section: net
+Priority: optional
+Maintainer: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: debhelper (>= 6), cdbs (>= 0.4.27)
+Homepage: http://www.maxmind.com/
+Standards-Version: 3.9.1
+
+Package: eiskaltdcpp-geoip
+Architecture: all
+Depends: ${misc:Depends}
+Description: Geo IP Database for EiskaltDC++
+ This package contains the Geo IP database for EiskaltDC++.
+ .
+ EiskaltDC++ is a cross-platform program that uses the Direct Connect
+ and ADC protocol. It is compatible with other DC clients, such as the original
+ DC from Neomodus, DC++ and derivatives. EiskaltDC++ also interoperates with
+ all common DC hub software.
+ .
+ This product includes GeoLite data created by MaxMind, available from
+ http://maxmind.com/
