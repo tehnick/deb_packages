@@ -130,7 +130,7 @@ cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "GeoIP database was updated."
+        "GeoIP database was updated."                                       # Specific code
     kwrite debian/changelog
     debuild -S -sa
 else

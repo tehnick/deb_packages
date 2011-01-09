@@ -122,7 +122,7 @@ echo " "
 export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
-        "Update to stable release ${NEW_VER}."
+        "GeoIP database was updated."                                       # Specific code
     kwrite debian/changelog
     debuild -S -sa
 else
