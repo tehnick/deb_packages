@@ -4,8 +4,8 @@
 ############################# Some options ##############################################
 export PACKAGE="eiskaltdcpp-geoip"
 
-# Uncomment if necessary:
 export NEW_VER="20110114"
+# Uncomment if necessary:
 export SFX="-0ppa1"
 
 
