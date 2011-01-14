@@ -8,9 +8,16 @@ Standards-Version: 3.9.1
 
 Package: eiskaltdcpp-geoip
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends},
+ unzip, curl,
+ eiskaltdcpp-qt | eiskaltdcpp-gtk |
+ eiskaltdcpp-qt-unstable | eiskaltdcpp-gtk-unstable
 Description: Geo IP Database for EiskaltDC++
- This package contains the Geo IP database for EiskaltDC++.
+ This is empty package, but it contains post-install script for updating the
+ Geo IP database for EiskaltDC++.
+ .
+ Database in text format (GeoIPCountryWhois.csv) will be downloaded from
+ official site if it's required.
  .
  EiskaltDC++ is a cross-platform program that uses the Direct Connect
  and ADC protocol. It is compatible with other DC clients, such as the original
