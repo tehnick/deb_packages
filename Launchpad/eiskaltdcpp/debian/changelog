@@ -1,3 +1,16 @@
+eiskaltdcpp (2.2.0-0ppa1~natty1) natty; urgency=low
+
+  * Update to stable release 2.2.0.
+  * Package rules were updated:
+    - eiskaltdcpp-geoip package was added
+    - eiskaltdcpp-daemon package was added
+    - eiskaltdcpp-daemon-dbg package was added
+    - libeiskaltdcpp2.1.x package was renamed to libeiskaltdcpp2.2
+    - libeiskaltdcpp2.1.x-dbg package was renamed to libeiskaltdcpp2.2-dbg
+  * debian/copyright file was updated
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 16 Jan 2011 23:31:37 +0200
+
 eiskaltdcpp (2.1.1-1ppa1~natty1) natty; urgency=low
 
   * Package on Launchpad was sync with package in Debian.

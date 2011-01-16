@@ -19,7 +19,7 @@ Depends: ${misc:Depends},
  eiskaltdcpp-emoticons-unstable,
  eiskaltdcpp-scripts-unstable,
  eiskaltdcpp-sounds-unstable
-Suggests: eiskaltdcpp-geoip
+Suggests: eiskaltdcpp-geoip-unstable
 Replaces: eiskaltdcpp
 Conflicts: eiskaltdcpp
 Description: EiskaltDC++ meta-package
@@ -120,8 +120,12 @@ Description: Geo IP Database for EiskaltDC++
 Package: libeiskaltdcpp2.2-unstable
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: libdcpp2.0.x, libdcpp2.1.x, libeiskaltdcpp2.1.x, libeiskaltdcpp2.1.x-unstable
-Conflicts: libdcpp2.0.x, libdcpp2.1.x, libeiskaltdcpp2.1.x, libeiskaltdcpp2.1.x-unstable
+Replaces: libdcpp2.0.x, libdcpp2.1.x,
+ libeiskaltdcpp2.1.x, libeiskaltdcpp2.2,
+ libeiskaltdcpp2.1.x-unstable
+Conflicts: libdcpp2.0.x, libdcpp2.1.x,
+ libeiskaltdcpp2.1.x, libeiskaltdcpp2.2,
+ libeiskaltdcpp2.1.x-unstable
 Description: DC++ kernel library from EiskaltDC++
  This package installs only DC++ kernel library which required EiskaltDC++.
  .
@@ -138,8 +142,10 @@ Priority: extra
 Architecture: any
 Depends: ${misc:Depends},
  libeiskaltdcpp2.2-unstable (= ${binary:Version})
-Replaces: libeiskaltdcpp2.1.x-dbg, libeiskaltdcpp2.1.x-unstable-dbg
-Conflicts: libeiskaltdcpp2.1.x-dbg, libeiskaltdcpp2.1.x-unstable-dbg
+Replaces: libeiskaltdcpp2.1.x-dbg, libeiskaltdcpp2.2-dbg,
+ libeiskaltdcpp2.1.x-unstable-dbg
+Conflicts: libeiskaltdcpp2.1.x-dbg, libeiskaltdcpp2.2-dbg,
+ libeiskaltdcpp2.1.x-unstable-dbg
 Description: DC++ kernel from EiskaltDC++ (debug symbols)
  This package contains the debugging symbols for EiskaltDC++ kernel library.
  .
@@ -180,7 +186,7 @@ Suggests: php5-cli,
  eiskaltdcpp-emoticons-unstable,
  eiskaltdcpp-scripts-unstable,
  eiskaltdcpp-sounds-unstable,
- eiskaltdcpp-geoip
+ eiskaltdcpp-geoip-unstable
 Description: data files for EiskaltDC++ Qt
  This package contains the data files for EiskaltDC++ Qt.
  .
@@ -238,7 +244,7 @@ Suggests: php5-cli,
  eiskaltdcpp-emoticons-unstable,
  eiskaltdcpp-scripts-unstable,
  eiskaltdcpp-sounds-unstable,
- eiskaltdcpp-geoip
+ eiskaltdcpp-geoip-unstable
 Description: data files for EiskaltDC++ Gtk
  This package contains the data files for EiskaltDC++ Gtk.
  .

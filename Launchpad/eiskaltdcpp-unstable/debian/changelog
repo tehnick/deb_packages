@@ -1,8 +1,8 @@
-eiskaltdcpp-unstable (2.2.1-20110116-205223-5165d97-0ppa1~natty1) natty; urgency=low
+eiskaltdcpp-unstable (2.2.1-20110116-231500-5165d97-0ppa1~natty1) natty; urgency=low
 
   * Minor update.
 
- -- Boris Pek <tehnick-8@mail.ru>  Sun, 16 Jan 2011 20:52:48 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 16 Jan 2011 23:15:34 +0200
 
 eiskaltdcpp-unstable (2.2.0-20110112-021022-68f37c8-0ppa1~natty1) natty; urgency=low
 
