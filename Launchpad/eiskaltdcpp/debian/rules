@@ -55,9 +55,9 @@ install: build
 	dh_prep
 	dh_installdirs
 	cd $(BUILDDIR) && $(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
-	mkdir -p $(CURDIR)/debian/$(eiskaltdcpp-geoip)/usr/share/eiskaltdcpp/
-	cp -f $(CURDIR)/debian/update_geoip $(CURDIR)/debian/$(eiskaltdcpp-geoip)/usr/share/eiskaltdcpp/
-	chmod uog=rwx $(CURDIR)/debian/$(eiskaltdcpp-geoip)/usr/share/eiskaltdcpp/update_geoip
+	mkdir -p $(CURDIR)/debian/eiskaltdcpp-geoip/usr/share/eiskaltdcpp/
+	cp -f $(CURDIR)/debian/update_geoip $(CURDIR)/debian/eiskaltdcpp-geoip/usr/share/eiskaltdcpp/
+	chmod uog=rwx $(CURDIR)/debian/eiskaltdcpp-geoip/usr/share/eiskaltdcpp/update_geoip
 binary-indep: build install
 	dh_testdir -i
 	dh_testroot -i

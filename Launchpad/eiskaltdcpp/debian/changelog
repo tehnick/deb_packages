@@ -1,3 +1,15 @@
+eiskaltdcpp (2.2.0-0ppa3~natty1) natty; urgency=low
+
+  * Some fixes in package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 17 Jan 2011 01:23:40 +0200
+
+eiskaltdcpp (2.2.0-0ppa2~natty1) natty; urgency=low
+
+  * Some fixes in package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 17 Jan 2011 01:05:20 +0200
+
 eiskaltdcpp (2.2.0-0ppa1~natty1) natty; urgency=low
 
   * Update to stable release 2.2.0.
