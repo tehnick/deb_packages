@@ -78,46 +78,47 @@ cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 # hardy intrepid jaunty karmic lucid maverick natty
 # But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
 
-# begin update for basic releases
-export DIST="${MAIN_DIST}"
-if [ "${SFX}" = "-0ppa1" ]; then
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "Package was updated."                                       # Specific code
-    kwrite debian/changelog
-    debuild -S -sa
-else
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "Some fixes in package."
-    kwrite debian/changelog
-    # debuild -S -sd
-    debuild -S -sa
-fi
-# end update for basic releases
-
-# begin update for other releases
-cp -f debian/changelog ../changelog # copy basic changelog
-
-for DIST in maverick lucid karmic ; do
-    cp -f ../changelog debian/changelog
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "Automated backport upload; no source changes."
-    debuild -S -sd
-done
-
-mv debian/source ../ # make dirty hack
-export DIST=jaunty
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
-mv ../source debian/ # rollback dirty hack
-
-mv ../changelog debian/changelog # rollback basic changelog
-# end update for other releases
+# # begin update for basic releases
+# export DIST="${MAIN_DIST}"
+# if [ "${SFX}" = "-0ppa1" ]; then
+#     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+#         "Package was updated."                                       # Specific code
+#     kwrite debian/changelog
+#     debuild -S -sa
+# else
+#     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+#         "Some fixes in package."
+#     kwrite debian/changelog
+#     # debuild -S -sd
+#     debuild -S -sa
+# fi
+# # end update for basic releases
+# 
+# # begin update for other releases
+# cp -f debian/changelog ../changelog # copy basic changelog
+# 
+# for DIST in maverick lucid karmic ; do
+#     cp -f ../changelog debian/changelog
+#     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+#         "Automated backport upload; no source changes."
+#     debuild -S -sd
+# done
+# 
+# mv debian/source ../ # make dirty hack
+# export DIST=jaunty
+# cp -f ../changelog debian/changelog
+# dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+#   "Automated backport upload; no source changes."
+# debuild -S -sd
+# mv ../source debian/ # rollback dirty hack
+# 
+# mv ../changelog debian/changelog # rollback basic changelog
+# # end update for other releases
 
 
 case "${1}" in
-        test)
+        *)
+#         test)
 
     echo " "
     echo "Now will be tests."
@@ -153,16 +154,17 @@ case "${1}" in
         ;;
 esac
 
+echo "exit 0"
+exit 0
 
-kwrite debian/changelog
-
-
-cd "${TEMP_DIR}"
-cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
-
-for DIST in natty maverick lucid karmic jaunty ; do
-    dput -f ubuntu ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
-done
-
-echo "Update finished successfully"
+# kwrite debian/changelog
+# 
+# cd "${TEMP_DIR}"
+# cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
+# 
+# for DIST in natty maverick lucid karmic jaunty ; do
+#     dput -f ubuntu ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
+# done
+# 
+# echo "Update finished successfully"
 

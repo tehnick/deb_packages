@@ -8,7 +8,10 @@ Standards-Version: 3.9.1
 
 Package: eiskaltdcpp-geoip
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends},
+ unzip, curl,
+ eiskaltdcpp-qt | eiskaltdcpp-gtk |
+ eiskaltdcpp-qt-unstable | eiskaltdcpp-gtk-unstable
 Description: Geo IP Database for EiskaltDC++
  This is empty package, but it contains post-install script for updating the
  Geo IP database for EiskaltDC++.
