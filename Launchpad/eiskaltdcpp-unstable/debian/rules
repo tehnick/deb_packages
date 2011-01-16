@@ -18,9 +18,12 @@ CMAKEOPTS = -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DWITH_SOUNDS=ON \
             -DUSE_QT=ON \
             -DUSE_ASPELL=ON -DFREE_SPACE_BAR_C=ON -DUSE_JS=ON \
+            -DUSE_QT_SQLITE=OFF \
             -DUSE_GTK=ON \
             -DUSE_LIBGNOME2=OFF -DUSE_LIBNOTIFY=ON \
             -DCREATE_MO=ON -DUPDATE_PO=OFF \
+            -DNO_UI_DAEMON=ON \
+            -DXMLRPC_DAEMON=OFF \
             ..
 
 # This option is for daily builds of the EiskaltDC++ packages on Launchpad
@@ -72,10 +75,11 @@ binary-arch: build install
 	dh_installdocs -a
 	dh_installman -a
 	dh_link -a
-	dh_strip -Nlibeiskaltdcpp2.2-unstable -Neiskaltdcpp-qt-unstable -Neiskaltdcpp-gtk-unstable
+	dh_strip -Nlibeiskaltdcpp2.2-unstable -Neiskaltdcpp-qt-unstable -Neiskaltdcpp-gtk-unstable -Neiskaltdcpp-daemon-unstable
 	dh_strip -plibeiskaltdcpp2.2-unstable --dbg-package=libeiskaltdcpp2.2-unstable-dbg
 	dh_strip -peiskaltdcpp-qt-unstable --dbg-package=eiskaltdcpp-qt-unstable-dbg
 	dh_strip -peiskaltdcpp-gtk-unstable --dbg-package=eiskaltdcpp-gtk-unstable-dbg
+	dh_strip -peiskaltdcpp-daemon-unstable --dbg-package=eiskaltdcpp-daemon-unstable-dbg
 	dh_compress -a
 	dh_fixperms -a
 	dh_makeshlibs -plibeiskaltdcpp2.2-unstable

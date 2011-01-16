@@ -15,6 +15,7 @@ Architecture: all
 Depends: ${misc:Depends},
  eiskaltdcpp-qt-unstable (>= ${binary:Version}),
  eiskaltdcpp-gtk-unstable (>= ${binary:Version}),
+ eiskaltdcpp-daemon-unstable (>= ${binary:Version}),
  eiskaltdcpp-emoticons-unstable,
  eiskaltdcpp-scripts-unstable,
  eiskaltdcpp-sounds-unstable
@@ -239,6 +240,41 @@ Replaces: eiskaltdcpp-gtk-dbg
 Conflicts: eiskaltdcpp-gtk-dbg
 Description: EiskaltDC++ GUI on Gtk (debug symbols)
  This package contains the debugging symbols for EiskaltDC++ Gtk.
+ .
+ EiskaltDC++ is a cross-platform program that uses the Direct Connect
+ and ADC protocol. It is compatible with other DC clients, such as the original
+ DC from Neomodus, DC++ and derivatives. EiskaltDC++ also interoperates with
+ all common DC hub software.
+ .
+ (This is daily builds of the EiskaltDC++ packages)
+
+Package: eiskaltdcpp-daemon-unstable
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libeiskaltdcpp2.2-unstable (= ${binary:Version})
+Replaces: eiskaltdcpp-daemon
+Conflicts: eiskaltdcpp-daemon
+Description: EiskaltDC++ daemon
+ This package installs only EiskaltDC++ daemon (without any GUI).
+ .
+ EiskaltDC++ is a cross-platform program that uses the Direct Connect
+ and ADC protocol. It is compatible with other DC clients, such as the original
+ DC from Neomodus, DC++ and derivatives. EiskaltDC++ also interoperates with
+ all common DC hub software.
+ .
+ (This is daily builds of the EiskaltDC++ packages)
+
+Package: eiskaltdcpp-daemon-unstable-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: ${misc:Depends},
+ eiskaltdcpp-daemon-unstable (= ${binary:Version}),
+ libeiskaltdcpp2.2-unstable-dbg (= ${binary:Version})
+Replaces: eiskaltdcpp-daemon-dbg
+Conflicts: eiskaltdcpp-daemon-dbg
+Description: EiskaltDC++ daemon (debug symbols)
+ This package contains the debugging symbols for EiskaltDC++ daemon.
  .
  EiskaltDC++ is a cross-platform program that uses the Direct Connect
  and ADC protocol. It is compatible with other DC clients, such as the original
