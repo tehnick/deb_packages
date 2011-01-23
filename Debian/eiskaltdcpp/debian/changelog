@@ -1,3 +1,10 @@
+eiskaltdcpp (2.2.0-2) unstable; urgency=low
+
+  * Small fixes in file debian/rules
+    (it affects only to eiskaltdcpp-geoip package)
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 23 Jan 2011 21:27:15 +0200
+
 eiskaltdcpp (2.2.0-1) unstable; urgency=low
 
   * Update to stable release 2.2.0.

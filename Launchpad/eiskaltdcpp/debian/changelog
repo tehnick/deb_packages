@@ -1,16 +1,18 @@
-eiskaltdcpp (2.2.0-0ppa3~natty1) natty; urgency=low
+eiskaltdcpp (2.2.0-2ppa1~natty1) natty; urgency=low
 
-  * Some fixes in package.
+  * Package on Launchpad was sync with package in Debian.
+  * Changelog was cleaned.
 
- -- Boris Pek <tehnick-8@mail.ru>  Mon, 17 Jan 2011 01:23:40 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 23 Jan 2011 21:35:45 +0200
 
-eiskaltdcpp (2.2.0-0ppa2~natty1) natty; urgency=low
+eiskaltdcpp (2.2.0-2) unstable; urgency=low
 
-  * Some fixes in package.
+  * Small fixes in file debian/rules
+    (it affects only to eiskaltdcpp-geoip package)
 
- -- Boris Pek <tehnick-8@mail.ru>  Mon, 17 Jan 2011 01:05:20 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 23 Jan 2011 21:27:15 +0200
 
-eiskaltdcpp (2.2.0-0ppa1~natty1) natty; urgency=low
+eiskaltdcpp (2.2.0-1) unstable; urgency=low
 
   * Update to stable release 2.2.0.
   * Package rules were updated:
@@ -21,14 +23,14 @@ eiskaltdcpp (2.2.0-0ppa1~natty1) natty; urgency=low
     - libeiskaltdcpp2.1.x-dbg package was renamed to libeiskaltdcpp2.2-dbg
   * debian/copyright file was updated
 
- -- Boris Pek <tehnick-8@mail.ru>  Sun, 16 Jan 2011 23:31:37 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 17 Jan 2011 01:20:04 +0200
 
-eiskaltdcpp (2.1.1-1ppa1~natty1) natty; urgency=low
+eiskaltdcpp (2.1.1-2) experimental; urgency=low
 
-  * Package on Launchpad was sync with package in Debian.
-  * Changelog was cleaned.
+  * UPnP was temporary switched off because of sponsor's remark.
+    (also see http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=444392)
 
- -- Boris Pek <tehnick-8@mail.ru>  Mon, 22 Nov 2010 02:26:45 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 11 Dec 2010 17:11:21 +0200
 
 eiskaltdcpp (2.1.1-1) experimental; urgency=low
 
