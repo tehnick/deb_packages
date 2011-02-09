@@ -1,15 +1,25 @@
-q4wine (0.120-r1-0ppa1~natty1) natty; urgency=low
-
-  * Update to stable release 0.120-r1.
-
- -- Boris Pek <tehnick-8@mail.ru>  Sun, 09 Jan 2011 00:14:56 +0200
-
-q4wine (0.120-2ppa1~natty1) natty; urgency=low
+q4wine (0.120-r1-2ppa1~natty1) natty; urgency=low
 
   * Package on Launchpad was sync with package in Debian.
   * Changelog was cleaned.
 
- -- Boris Pek <tehnick-8@mail.ru>  Sat, 25 Dec 2010 22:08:43 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 09 Feb 2011 23:10:45 +0200
+
+q4wine (0.120-r1-2) unstable; urgency=low
+
+  * Edited debian/rules to fix libq4wine-core.so destination
+    from /usr/lib64/q4wine/ to /usr/lib/q4wine/ (Closes: #612027)
+  * Added debian/patches/
+    - possible fix for Debian GNU/kFreeBSD
+    - possible fix for Debian GNU/Hurd
+
+ -- Boris Pek <tehnick-8@mail.ru>  Tue, 08 Feb 2011 22:06:45 +0200
+
+q4wine (0.120-r1-1) unstable; urgency=low
+
+  * Update to stable release 0.120-r1.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 09 Jan 2011 00:25:06 +0200
 
 q4wine (0.120-2) unstable; urgency=low
 
