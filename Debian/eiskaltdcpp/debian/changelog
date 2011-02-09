@@ -1,3 +1,12 @@
+eiskaltdcpp (2.2.0-3) unstable; urgency=low
+
+  * Package rules were updated:
+    - eiskaltdcpp-geoip package was removed because of sponsor's remark
+    - eiskaltdcpp-scripts package was updated
+  * File debian/copyright was updated
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 09 Feb 2011 21:34:35 +0200
+
 eiskaltdcpp (2.2.0-2) unstable; urgency=low
 
   * Small fixes in file debian/rules
