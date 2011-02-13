@@ -1,9 +1,19 @@
-eiskaltdcpp (2.2.0-2ppa1~natty1) natty; urgency=low
+eiskaltdcpp (2.2.0-3ppa1~natty1) natty; urgency=low
 
   * Package on Launchpad was sync with package in Debian.
   * Changelog was cleaned.
+  * UPnP was switched on in packages on Launchpad.
 
- -- Boris Pek <tehnick-8@mail.ru>  Sun, 23 Jan 2011 21:35:45 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 13 Feb 2011 12:23:45 +0200
+
+eiskaltdcpp (2.2.0-3) unstable; urgency=low
+
+  * Package rules were updated:
+    - eiskaltdcpp-geoip package was removed because of sponsor's remark
+    - eiskaltdcpp-scripts package was updated
+  * File debian/copyright was updated
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 09 Feb 2011 21:34:35 +0200
 
 eiskaltdcpp (2.2.0-2) unstable; urgency=low
 
