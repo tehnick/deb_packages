@@ -7,6 +7,9 @@ export PACKAGE="eiskaltdcpp-unstable"
 # Uncomment if necessary:
 #export SFX="-0ppa6"
 
+# Available branches: master, 2.2.x
+export BRANCH=master
+
 
 ############################# General part of script body ###############################
 export MAIN_DIST="natty"
@@ -31,7 +34,7 @@ export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-0ppa.*$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\{6,6\}-\(.*\)$/\1/")
 
-export LAST_SRC_INFO=$(curl -v http://nodeload.github.com/negativ/eiskaltdcpp/tarball/master 2>&1)
+export LAST_SRC_INFO=$(curl -v http://nodeload.github.com/negativ/eiskaltdcpp/tarball/${BRANCH} 2>&1)
 export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Location: ' | sed -e "s/.*\(negativ-eiskaltdcpp.*\).tar.gz.*/\1/")
 export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^negativ-eiskaltdcpp.*-[0-9]\+-g\(.*\)$/\1/")
 
@@ -40,7 +43,7 @@ echo "Old  commit ID: ${OLD_COMMIT}"
 echo "Last commit ID: ${LAST_COMMIT}"
 
 
-export CUR_VER=$(curl "https://github.com/negativ/eiskaltdcpp/raw/master/CMakeLists.txt" 2>&1 | grep "set (VERSION " | sed -e "s/^.*VERSION \"\(.*\+\)\")$/\1/")
+export CUR_VER=$(curl "https://github.com/negativ/eiskaltdcpp/raw/${BRANCH}/CMakeLists.txt" 2>&1 | grep "set (VERSION " | sed -e "s/^.*VERSION \"\(.*\+\)\")$/\1/")
 export DATE=$(date "+%Y%m%d-%H%M%S")
 export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
@@ -74,11 +77,11 @@ else
 fi
 
 if !([ -e "${LAST_SRC}.tar.gz" ]); then
-    rm -f master*
-    # wget http://github.com/negativ/eiskaltdcpp/tarball/master
-    wget http://nodeload.github.com/negativ/eiskaltdcpp/tarball/master
+    rm -f ${BRANCH}*
+    # wget http://github.com/negativ/eiskaltdcpp/tarball/${BRANCH}
+    wget http://nodeload.github.com/negativ/eiskaltdcpp/tarball/${BRANCH}
     rm -f negativ-eiskaltdcpp-*.tar.gz*
-    mv master "${LAST_SRC}.tar.gz"
+    mv ${BRANCH} "${LAST_SRC}.tar.gz"
 fi
 
 if !([ -e "${LAST_SRC}.tar.gz" ]); then
