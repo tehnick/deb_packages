@@ -6,7 +6,7 @@ q4wine (0.120-r1-2) unstable; urgency=low
     - possible fix for Debian GNU/kFreeBSD
     - possible fix for Debian GNU/Hurd
 
- -- Boris Pek <tehnick-8@mail.ru>  Tue, 08 Feb 2011 22:06:45 +0200
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 14 Feb 2011 23:34:32 +0200
 
 q4wine (0.120-r1-1) unstable; urgency=low
 
