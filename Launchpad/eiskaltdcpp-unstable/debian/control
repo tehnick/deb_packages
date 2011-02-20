@@ -138,6 +138,7 @@ Description: DC++ kernel from EiskaltDC++ (debug symbols)
 Package: eiskaltdcpp-qt-unstable
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
+ libqt4-sql-sqlite,
  libeiskaltdcpp2.2-unstable (= ${binary:Version}),
  eiskaltdcpp-qt-data-unstable (= ${source:Version}),
  eiskaltdcpp-common-unstable
