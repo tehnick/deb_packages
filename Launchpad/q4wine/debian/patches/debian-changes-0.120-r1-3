@@ -1,19 +1,21 @@
-Description: Upstream changes introduced in version 0.120-r1-2
+Description: Upstream changes introduced in version 0.120-r1-3
  This patch has been created by dpkg-source during the package build.
  Here's the last changelog entry, hopefully it gives details on why
  those changes were made:
  .
- q4wine (0.120-r1-2) unstable; urgency=low
+ q4wine (0.120-r1-3) unstable; urgency=low
  .
-   * Edited debian/rules to fix libq4wine-core.so destination
-     from /usr/lib64/q4wine/ to /usr/lib/q4wine/ (Closes: #612027)
-   * Added debian/patches/
-     - possible fix for Debian GNU/kFreeBSD
-     - possible fix for Debian GNU/Hurd
+   * Updated debian/patches/
+     - added fix for cmake option SKIP_RPATH (it makes program unusable)
+     - updated fix for Debian GNU/kFreeBSD
+   * Edited debian/control:
+     - section with long description was updated
+     - section with dependencies of binary package was updated:
+       + Debian users need to have wine-bin or wine-bin-unstable
+       + Ubuntu users need to have wine1.0 or wine1.2
  .
  The person named in the Author field signed this changelog entry.
 Author: Boris Pek <tehnick-8@mail.ru>
-Bug-Debian: http://bugs.debian.org/612027
 
 ---
 The information above should follow the Patch Tagging Guidelines, please
@@ -28,6 +30,39 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
+--- q4wine-0.120-r1.orig/src/CMakeLists.txt
++++ q4wine-0.120-r1/src/CMakeLists.txt
+@@ -107,16 +107,6 @@ IF (${CMAKE_SYSTEM_NAME} MATCHES Darwin)
+     ADD_DEFINITIONS(-Wall -g -DKERNEL)
+ ENDIF (${CMAKE_SYSTEM_NAME} MATCHES Darwin)
+ 
+-IF (NOT DEFINED SKIP_RPATH)
+-    IF (${CMAKE_HOST_SYSTEM_PROCESSOR} MATCHES x86_64)
+-        SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib64/q4wine")
+-    ELSE (${CMAKE_HOST_SYSTEM_PROCESSOR} MATCHES x86_64)
+-        SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib/q4wine")
+-    ENDIF (${CMAKE_HOST_SYSTEM_PROCESSOR} MATCHES x86_64)
+-ELSE (NOT DEFINED SKIP_RPATH)
+-    MESSAGE(STATUS "NOTE: Skip for RPATH build!")
+-ENDIF (NOT DEFINED SKIP_RPATH)
+-
+ IF( NOT DESKTOP_ENTRY_PATH )
+     SET( DESKTOP_ENTRY_PATH ${CMAKE_INSTALL_PREFIX}/share/applications )
+ ENDIF( NOT DESKTOP_ENTRY_PATH )
+@@ -134,6 +124,13 @@ IF( NOT LIBS_ENTRY_PATH )
+     ENDIF (${CMAKE_HOST_SYSTEM_PROCESSOR} MATCHES x86_64)
+ ENDIF( NOT LIBS_ENTRY_PATH )
+ 
++IF (NOT DEFINED SKIP_RPATH)
++    SET(CMAKE_INSTALL_RPATH "${LIBS_ENTRY_PATH}")
++ELSE (NOT DEFINED SKIP_RPATH)
++    MESSAGE(STATUS "NOTE: Skip for RPATH build!")
++    SET(CMAKE_SKIP_BUILD_RPATH  TRUE)
++ENDIF (NOT DEFINED SKIP_RPATH)
++
+ IF( NOT LINGUAS )
+     SET ( LINGUAS en_us ru_ru uk_ua pt_br es_es it_it cs_cz )
+ ENDIF( NOT LINGUAS )
 --- q4wine-0.120-r1.orig/src/q4wine-gui/wizard.cpp
 +++ q4wine-0.120-r1/src/q4wine-gui/wizard.cpp
 @@ -174,6 +174,11 @@ Wizard::Wizard(int WizardType, QString v
@@ -63,7 +98,7 @@ Last-Update: <YYYY-MM-DD>
          if (fileInfo.fileName().contains(QRegExp("^cdrom")) or fileInfo.fileName().contains(QRegExp("^sr")) or fileInfo.fileName().contains(QRegExp("^dvd"))){
 -#endif
 -#ifdef _OS_FREEBSD_
-+#elif _OS_FREEBSD_
++#elif defined(_OS_FREEBSD_)
              if (fileInfo.fileName().contains(QRegExp("^cdrom")) or fileInfo.fileName().contains(QRegExp("^cd")) or fileInfo.fileName().contains(QRegExp("^acd")) or fileInfo.fileName().contains(QRegExp("^dvd"))){
 +#else
 +            if (fileInfo.fileName().contains(QRegExp("^cdrom")) or fileInfo.fileName().contains(QRegExp("^sr")) or fileInfo.fileName().contains(QRegExp("^dvd"))){
