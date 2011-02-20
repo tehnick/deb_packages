@@ -8,7 +8,7 @@ Standards-Version: 3.9.1
 
 Package: q4wine-unstable
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-sql-sqlite, sqlite3 (>=3.5.6), icoutils (>=0.26.0), wget, sudo, wine [amd64 i386] | wine-unstable [amd64 i386] | wine1.0 [amd64 i386] | wine1.2 [amd64 i386]
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-sql-sqlite, sqlite3 (>=3.5.6), icoutils (>=0.26.0), wget, sudo, wine-bin [amd64 i386] | wine-bin-unstable [amd64 i386] | wine1.0 [amd64 i386] | wine1.2 [amd64 i386]
 Suggests: fuseiso [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64]
 Replaces: q4wine
 Conflicts: q4wine
@@ -21,11 +21,10 @@ Description: Qt4 GUI for wine (W.I.N.E)
   - Can easy work with different wine versions at same time;
   - Easy creating, deleting and managing prefixes (WINEPREFIX);
   - Easy controlling for wine process;
-  - Easy installer wizard for wine applications; (Not yet. Wait for v. 0.120)
-  - autostart icons support;
+  - Easy installer wizard for wine applications;
+  - Autostart icons support;
   - Easy cd-image use;
-  - FuseISO\Embedded FuseISO mount profiles;
   - You can extract icons from PE files (.exe .dll);
   - Easy backup and restore for managed prefixes.
   - Winetriks support.
-  - and more...
+  - And more...
