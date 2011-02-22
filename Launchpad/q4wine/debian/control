@@ -8,7 +8,7 @@ Standards-Version: 3.9.1
 
 Package: q4wine
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-sql-sqlite, sqlite3 (>=3.5.6), icoutils (>=0.26.0), wget, sudo, wine-bin [amd64 i386] | wine-bin-unstable [amd64 i386] | wine1.0 [amd64 i386] | wine1.2 [amd64 i386]
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-sql-sqlite, sqlite3 (>=3.5.6), icoutils (>=0.26.0), wget, sudo, wine-bin [amd64 i386] | wine-bin-unstable [amd64 i386] | wine [amd64 i386] | wine1.0 [amd64 i386] | wine1.2 [amd64 i386] | wine1.3 [amd64 i386]
 Suggests: fuseiso [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64]
 Replaces: q4wine-unstable
 Conflicts: q4wine-unstable

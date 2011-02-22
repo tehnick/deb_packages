@@ -5,7 +5,7 @@
 export PACKAGE="q4wine"
 
 # Uncomment if necessary:
-export SFX="-3ppa1"
+export SFX="-3ppa2"
 
 
 ############################# General part of script body ###############################

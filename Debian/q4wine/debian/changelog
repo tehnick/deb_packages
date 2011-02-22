@@ -1,3 +1,14 @@
+q4wine (0.120-r1-4) unstable; urgency=low
+
+  * Updated debian/patches/
+    - additional fix for Debian GNU/Hurd
+  * Edited debian/control:
+    - section with dependencies of binary package was updated:
+      + Ubuntu users now need to have wine, wine1.0, wine1.2 or wine1.3
+        (Closes: #614357)
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 21 Feb 2011 21:51:45 +0200
+
 q4wine (0.120-r1-3) unstable; urgency=low
 
   * Updated debian/patches/

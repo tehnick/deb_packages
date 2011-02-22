@@ -1,3 +1,12 @@
+q4wine (0.120-r1-3ppa2~natty1) natty; urgency=low
+
+  * Edited debian/control:
+    - section with dependencies of binary package was updated:
+      + Ubuntu users now need to have wine, wine1.0, wine1.2 or wine1.3
+        (Closes: #614357)
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 21 Feb 2011 22:30:33 +0200
+
 q4wine (0.120-r1-3ppa1~natty1) natty; urgency=low
 
   * Package on Launchpad was sync with package in Debian.
