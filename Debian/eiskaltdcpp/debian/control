@@ -124,6 +124,7 @@ Description: DC++ kernel from EiskaltDC++ (debug symbols)
 Package: eiskaltdcpp-qt
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
+ libqt4-sql-sqlite,
  libeiskaltdcpp2.2 (= ${binary:Version}),
  eiskaltdcpp-qt-data (= ${source:Version}),
  eiskaltdcpp-common

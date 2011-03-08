@@ -1,3 +1,9 @@
+eiskaltdcpp (2.2.1-0ppa1~natty1) natty; urgency=low
+
+  * Update to stable release 2.2.1.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Tue, 08 Mar 2011 20:31:35 +0200
+
 eiskaltdcpp (2.2.0-3ppa2~natty1) natty; urgency=low
 
   * Fix in debian/eiskaltdcpp-scripts.files
