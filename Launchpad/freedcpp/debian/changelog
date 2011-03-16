@@ -1,3 +1,9 @@
+freedcpp (0.0.5-0ppa1~natty1) natty; urgency=low
+
+  * Update to stable release 0.0.5.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 16 Mar 2011 21:23:25 +0200
+
 freedcpp (0.0.4-0ppa4~natty1) natty; urgency=low
 
   * Some fixes in package.

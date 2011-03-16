@@ -75,7 +75,7 @@ else
 fi
 
 if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then
-    wget -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}.orig.tar.bz2"
+    wget -c -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}.orig.tar.bz2"
 fi
 
 if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then
@@ -84,7 +84,7 @@ if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then
 fi
 
 if !([ -e "${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz" ]); then
-    wget -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
+    wget -c -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
     rm -rf debian "${PACKAGE}-${UBUNTU_VER}"
     rm -rf "scripts__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
     rm -rf "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"

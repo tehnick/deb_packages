@@ -4,11 +4,10 @@
 ############################# Some options ##############################################
 export PACKAGE="freedcpp"
 
-export NEW_VER="0.0.4"
+export NEW_VER="0.0.5"
 
 # Uncomment if necessary:
-#export SFX="-0ppa1"
-export SFX="-0ppa4"
+#export SFX="-0ppa4"
 
 
 ############################# General part of script body ###############################

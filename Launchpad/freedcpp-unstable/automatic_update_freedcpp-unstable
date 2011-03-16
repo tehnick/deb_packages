@@ -31,7 +31,8 @@ export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-0ppa.*$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
 
-export LAST_REVISION=$(svn log http://freedcpp.googlecode.com/svn/trunk/ -r HEAD --quiet |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
+#export LAST_REVISION=$(svn log http://freedcpp.googlecode.com/svn/trunk/ -r HEAD --quiet |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
+export LAST_REVISION=$(svn log http://freedcpp.googlecode.com/svn/trunk/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
 
 echo "Number of old  revision: ${OLD_REVISION}"
 echo "Number of last revision: ${LAST_REVISION}"

@@ -4,7 +4,7 @@
 
 QMAKE=qmake-qt4
 QCONF=qt-qconf
-CONF=--enable-plugins --disable-bundled-qca --debug --no-separate-debug-info
+CONF=--enable-plugins --enable-whiteboarding --disable-bundled-qca --debug --no-separate-debug-info
 #MAKEOPT=-j4
 
 # This has to be exported to make some magic below work.
