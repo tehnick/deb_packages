@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 7), cmake (>= 2.6.0), po-debconf, autotools-dev, fa
  libboost-dev,
  libbz2-dev, zlib1g-dev, pkg-config, libssl-dev, libaspell-dev
 Homepage: http://code.google.com/p/eiskaltdc/
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 
 Package: eiskaltdcpp
 Architecture: all

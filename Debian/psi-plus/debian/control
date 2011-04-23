@@ -1,19 +1,16 @@
 Source: psi-plus
 Section: net
 Priority: optional
-Maintainer: Ivan Borzenkov <ivan1986@list.ru>
-Uploaders: Boris Pek <tehnick-8@mail.ru>
+Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 7.0.50~),
  quilt, qconf, libqtwebkit-dev | libqt4-dev (>=4.5.2),
  libqca2-dev (>= 2.0.0), libxss-dev, libaspell-dev, zlib1g-dev, libsm-dev
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 Homepage: http://psi-dev.googlecode.com/
 
 Package: psi-plus
 Architecture: any
-Conflicts: psi
 Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
-Replaces: psi
 Description: Qt-based jabber client (basic version)
  This package contains basic version of Psi+.
  .
@@ -47,9 +44,7 @@ Description: Qt-based jabber client (basic version) [debug symbols]
 
 Package: psi-plus-webkit
 Architecture: any
-Conflicts: psi
 Depends: psi-plus-common, ${shlibs:Depends}, ${misc:Depends}
-Replaces: psi
 Description: Qt-based jabber client (WebKit version)
  This package contains WebKit version of Psi+.
  .
@@ -84,7 +79,6 @@ Description: Qt-based jabber client (WebKit version) [debug symbols]
 Package: psi-plus-common
 Architecture: all
 Recommends: sox, libqca2-plugin-ossl, psi-plus-plugins, psi-plus-icons, psi-plus-skins
-Conflicts: psi-translations
 Breaks: psi-plus (<< 0.15~svn3057)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: libqca2-plugin-gnupg, xdg-utils

@@ -81,11 +81,19 @@ fi
 if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then
     echo "File ${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2 is not found.";
     exit 0;
+else
+    rm -rf "${PACKAGE}-${UBUNTU_VER}"
+    tar xjf "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2"
+    #mkdir -p "trash__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
+    #mv -f "${PACKAGE}-${UBUNTU_VER}/configure.exe" "trash__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}/"
+    rm -f "${PACKAGE}-${UBUNTU_VER}/configure.exe"
+    rm -f "${PACKAGE}-${UBUNTU_VER}/img.jpg"
+    tar -cjf "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" "${PACKAGE}-${UBUNTU_VER}"
 fi
 
 if !([ -e "${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz" ]); then
     wget -c -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
-    rm -rf debian "${PACKAGE}-${UBUNTU_VER}"
+    rm -rf debian
     rm -rf "scripts__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
     rm -rf "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
     tar xzf "${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
@@ -118,6 +126,11 @@ rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
 tar xjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2"                            # Specific code
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
+    diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
+             "${TEMP_DIR}/${PACKAGE}_${OLD_VER_FULL}:${NEW_VER_FULL}.diff"
+fi
 
 cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 

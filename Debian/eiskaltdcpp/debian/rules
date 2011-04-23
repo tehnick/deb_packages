@@ -12,7 +12,7 @@ BUILDDIR = builddir
 
 CMAKEOPTS = -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DCMAKE_INSTALL_PREFIX=/usr \
-            -DUSE_MINIUPNP=ON -DLOCAL_MINIUPNP=ON \
+            -DUSE_MINIUPNP=ON -DLOCAL_MINIUPNP=OFF \
             -DLUA_SCRIPT=ON -DWITH_LUASCRIPTS=ON \
             -DPERL_REGEX=ON \
             -DWITH_SOUNDS=ON \

@@ -8,6 +8,7 @@ export PACKAGE="eiskaltdcpp-unstable"
 #export SFX="-0ppa6"
 
 # Available branches: master, 2.2.x
+#export BRANCH=2.2.x
 export BRANCH=master
 
 
@@ -43,7 +44,7 @@ echo "Old  commit ID: ${OLD_COMMIT}"
 echo "Last commit ID: ${LAST_COMMIT}"
 
 
-export CUR_VER=$(curl "https://github.com/negativ/eiskaltdcpp/raw/${BRANCH}/CMakeLists.txt" 2>&1 | grep "set (VERSION " | sed -e "s/^.*VERSION \"\(.*\+\)\")$/\1/")
+export CUR_VER=$(curl -k "https://github.com/negativ/eiskaltdcpp/raw/${BRANCH}/CMakeLists.txt" 2>&1 | grep "set (VERSION " | sed -e "s/^.*VERSION \"\(.*\+\)\")$/\1/")
 export DATE=$(date "+%Y%m%d-%H%M%S")
 export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
@@ -110,6 +111,11 @@ rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
 tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
+    diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
+             "${TEMP_DIR}/${PACKAGE}_${OLD_VER_FULL}:${NEW_VER_FULL}.diff"
+fi
 
 cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 

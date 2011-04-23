@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Ivan Borzenkov <ivan1986@list.ru>
 Uploaders: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 7.0.50~)
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 Homepage: http://psi-dev.googlecode.com/
 
 Package: psi-plus-icons

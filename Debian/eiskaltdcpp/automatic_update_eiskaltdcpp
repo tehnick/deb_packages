@@ -5,7 +5,7 @@
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-#export SFX="-3"
+export SFX="-2"
 
 
 ############################# General part of script body ###############################
@@ -93,6 +93,11 @@ rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
 tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
+    diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
+             "${TEMP_DIR}/${PACKAGE}_${OLD_VER_FULL}:${NEW_VER_FULL}.diff"
+fi
 
 cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 

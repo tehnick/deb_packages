@@ -1,3 +1,19 @@
+psi-plus (0.15~svn3775-0ubuntu1) natty; urgency=low
+
+  * New upstream release
+  * rename psi to psi-plus (9996 upstream patch)
+    - add psi2psi-plus.patch for reverting if need
+    - remove conflict whis psi
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Tue, 29 Mar 2011 12:32:44 +0400
+
+psi-plus (0.15~svn3753-0ubuntu1) natty; urgency=low
+
+  * New upstream release
+  * add --enable-whiteboarding
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Sat, 05 Mar 2011 03:00:40 +0300
+
 psi-plus (0.15~svn3447-1) experimental; urgency=low
 
   * New upstream release

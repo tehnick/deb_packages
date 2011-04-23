@@ -4,13 +4,13 @@ Priority: optional
 Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 6.0.4), cdbs (>= 0.4.27), scons (>= 0.96), libbz2-dev, libgtk2.0-dev, libglade2-dev, libssl-dev, pkg-config, libgnome2-dev, libnotify-dev, libboost-dev
 Homepage: http://code.google.com/p/freedcpp/
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 
 Package: freedcpp
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: freedcpp-unstable
-Conflicts: freedcpp-unstable
+Replaces: freedcpp-unstable, linuxdcpp
+Conflicts: freedcpp-unstable, linuxdcpp
 Description: FreeDC++ is DC++ client based on LinuxDC++ source code
  FreeDC++ is a program for UNIX-like systems that uses the Direct Connect
  and ADC protocol. It is compatible with other DC clients, such as the original

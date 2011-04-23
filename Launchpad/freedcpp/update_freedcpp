@@ -29,6 +29,7 @@ mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
 
 ############################# Specific part of script body ##############################
 export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
 
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
@@ -66,6 +67,11 @@ rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
 tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
+    diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
+             "${TEMP_DIR}/${PACKAGE}_${OLD_VER_FULL}:${NEW_VER_FULL}.diff"
+fi
 
 cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 

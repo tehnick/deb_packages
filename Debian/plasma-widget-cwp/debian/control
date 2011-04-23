@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 7), cmake (>= 2.6.0), autotools-dev, fakeroot, kdelibs5-dev (>=4.2)
 Homepage: http://kde-look.org/content/show.php/Customizable+Weather+Plasmoid+(CWP)?content=98925
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 
 Package: plasma-widget-cwp
 Architecture: any

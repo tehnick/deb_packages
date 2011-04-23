@@ -27,22 +27,22 @@ override_dh_auto_build:
 
 override_dh_auto_install:
 	$(MAKE) INSTALL_ROOT=$(CURDIR)/debian/psi-plus install
-	rm -f $(CURDIR)/debian/psi-plus/usr/bin/psi.debug #remove static debug file
+	rm -f $(CURDIR)/debian/psi-plus/usr/bin/psi-plus.debug #remove static debug file
 	#Making the same, but using webkit
 	$(MAKE) clean
 	./configure --prefix=/usr $(CONF) --enable-webkit
 	$(MAKE) $(MAKEOPT)
 	$(MAKE) INSTALL_ROOT=$(CURDIR)/debian/psi-plus-webkit install
-	rm $(CURDIR)/debian/psi-plus-webkit/usr/bin/psi
-	rm $(CURDIR)/debian/psi-plus-webkit/usr/share/applications/psi.desktop
-	cp $(CURDIR)/src/psi $(CURDIR)/debian/psi-plus-webkit/usr/bin/psi-webkit
-	cp $(CURDIR)/debian/psi-webkit.desktop $(CURDIR)/debian/psi-plus-webkit/usr/share/applications/
-	rm -f $(CURDIR)/debian/psi-plus-webkit/usr/bin/psi.debug #remove static debug file
+	rm $(CURDIR)/debian/psi-plus-webkit/usr/bin/psi-plus
+	rm $(CURDIR)/debian/psi-plus-webkit/usr/share/applications/psi-plus.desktop
+	cp $(CURDIR)/src/psi-plus $(CURDIR)/debian/psi-plus-webkit/usr/bin/psi-plus-webkit
+	cp $(CURDIR)/debian/psi-plus-webkit.desktop $(CURDIR)/debian/psi-plus-webkit/usr/share/applications/
+	rm -f $(CURDIR)/debian/psi-plus-webkit/usr/bin/psi-plus.debug #remove static debug file
 	#Deleting temporary files
-	rm -f $(CURDIR)/debian/psi-plus/usr/share/psi/COPYING
-	rm -f $(CURDIR)/debian/psi-plus/usr/share/psi/README
-	rm -f $(CURDIR)/debian/psi-plus-webkit/usr/share/psi/COPYING
-	rm -f $(CURDIR)/debian/psi-plus-webkit/usr/share/psi/README
+	rm -f $(CURDIR)/debian/psi-plus/usr/share/psi-plus/COPYING
+	rm -f $(CURDIR)/debian/psi-plus/usr/share/psi-plus/README
+	rm -f $(CURDIR)/debian/psi-plus-webkit/usr/share/psi-plus/COPYING
+	rm -f $(CURDIR)/debian/psi-plus-webkit/usr/share/psi-plus/README
 
 override_dh_install:
 	dh_install
@@ -60,7 +60,7 @@ override_dh_auto_clean:
 	[ ! -f Makefile ] || $(MAKE) distclean
 	rm -f config.sub config.guess configure
 
-	rm -f psi src/psi src/config.h
+	rm -f psi-plus src/psi-plus src/config.h
 	rm -f Makefile src/Makefile libpsi/psiwidgets/Makefile
 	rm -f conf.pri extra.pri conf.log
 	rm -f src/.qmake.internal.cache
