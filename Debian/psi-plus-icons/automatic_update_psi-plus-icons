@@ -121,7 +121,7 @@ cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
 
 if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
     diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
-             "${TEMP_DIR}/${PACKAGE}_${OLD_VER_FULL}:${NEW_VER_FULL}.diff"
+             "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
 fi
 
 cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"

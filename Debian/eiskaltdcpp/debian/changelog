@@ -1,3 +1,12 @@
+eiskaltdcpp (2.2.2-1) unstable; urgency=low
+
+  * Update to stable release 2.2.2.
+  * Added dependence from libminiupnpc library (linked dynamically)
+    now it is used instead local copy of miniupnpc (was linked statically).
+  * Added dependence from libidn11 library (new program requirement).
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 25 Apr 2011 00:44:55 +0300
+
 eiskaltdcpp (2.2.1-1) unstable; urgency=low
 
   * Update to stable release 2.2.1.

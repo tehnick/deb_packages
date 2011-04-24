@@ -90,16 +90,16 @@ if !([ -e "${LAST_SRC}.tar.gz" ]); then
     exit 0;
 fi
 
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     tar xzf "${LAST_SRC}".tar.gz
     mv "negativ-eiskaltdcpp-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
-    tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
 
 ############################# General part of script body ###############################
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
-    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.gz is not found.";
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.bz2 is not found.";
     exit 0;
 fi
 
@@ -109,12 +109,12 @@ export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
 rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
-tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+tar xjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
 
 if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
     diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
-             "${TEMP_DIR}/${PACKAGE}_${OLD_VER_FULL}:${NEW_VER_FULL}.diff"
+             "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
 fi
 
 cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
@@ -169,7 +169,7 @@ case "${1}" in
     mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
 
     cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
-    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
     cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
