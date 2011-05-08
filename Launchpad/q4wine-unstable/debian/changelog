@@ -1,3 +1,15 @@
+q4wine-unstable (0.121-20110508-001915-403b391-0ppa1~oneiric1) oneiric; urgency=low
+
+  * Minor update.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 08 May 2011 00:19:26 +0300
+
+q4wine-unstable (0.121-20110507-235534-cdf335b-0ppa1~natty1) natty; urgency=low
+
+  * Minor update.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 07 May 2011 23:56:06 +0300
+
 q4wine-unstable (0.120-20110313-024448-2ff6738-0ppa1~natty1) natty; urgency=low
 
   * Minor update.

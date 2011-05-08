@@ -13,7 +13,7 @@ export BRANCH=master
 
 
 ############################# General part of script body ###############################
-export MAIN_DIST="natty"
+export MAIN_DIST="oneiric"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
 if [ -z "${SFX}" ]; then
@@ -126,7 +126,7 @@ cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
 # Note: I am using gnupg-agent for comfortable work
 
 # Full list of Ubuntu releases:
-# hardy intrepid jaunty karmic lucid maverick natty
+# hardy intrepid jaunty karmic lucid maverick natty oneiric
 # But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
 
 # begin update for basic releases
@@ -147,7 +147,7 @@ fi
 # begin update for other releases
 cp -f debian/changelog ../changelog # copy basic changelog
 
-for DIST in maverick lucid karmic ; do
+for DIST in natty maverick lucid karmic ; do
     cp -f ../changelog debian/changelog
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "Automated backport upload; no source changes."
@@ -199,7 +199,7 @@ esac
 cd "${TEMP_DIR}"
 cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
 
-for DIST in natty maverick lucid karmic ; do
+for DIST in oneiric natty maverick lucid karmic ; do
     dput -f ubuntu ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
 done
 
