@@ -1,3 +1,9 @@
+q4wine-unstable (0.121-20110509-221035-f3c6c89-0ppa1~oneiric1) oneiric; urgency=low
+
+  * Minor update.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 09 May 2011 22:11:02 +0300
+
 q4wine-unstable (0.121-20110508-001915-403b391-0ppa1~oneiric1) oneiric; urgency=low
 
   * Minor update.

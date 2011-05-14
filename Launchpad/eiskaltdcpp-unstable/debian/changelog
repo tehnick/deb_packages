@@ -1,8 +1,14 @@
-eiskaltdcpp-unstable (2.2.3-20110508-215540-5041a2f-0ppa1~oneiric1) oneiric; urgency=low
+eiskaltdcpp-unstable (2.2.3-20110510-193727-3557647-0ppa1~oneiric1) oneiric; urgency=low
 
   * Minor update.
 
- -- Boris Pek <tehnick-8@mail.ru>  Sun, 08 May 2011 21:56:00 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Tue, 10 May 2011 19:40:00 +0300
+
+eiskaltdcpp-unstable (2.2.3-20110509-222331-5041a2f-0ppa1~oneiric1) oneiric; urgency=low
+
+  * Minor update.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 09 May 2011 22:23:43 +0300
 
 eiskaltdcpp-unstable (2.2.3-20110429-010535-1ee6d26-0ppa1~natty1) natty; urgency=low
 
