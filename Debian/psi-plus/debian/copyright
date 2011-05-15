@@ -30,6 +30,81 @@ Upstream Authors:
   Kevin Smith <kismith@psi-im.org>,
   Justin Karneges <infiniti@affinix.com>
 
+
+Files:
+  *
+  admin/*
+  certs/*
+  plugins/*
+  sound/*
+Sources:
+  git://github.com/psi-im/psi.git
+Copyright:
+  Copyright 2001-2008  Justin Karneges <justin@affinix.com>
+  Copyright 2001-2008  Remko Troncon
+
+  Copyright 2003-2007  Michail Pishchagin
+  Copyright 2006-2008  Martin Hostettler
+  Copyright 2006-2007  Kevin Smith
+  Copyright 2006-2008  Joonas Govenius
+  Copyright 2003  The Internet Society
+  Copyright 2005  Jeremie Miller
+  Copyright 2007  Maciek Niedzielski
+  Copyright 2008  Armando Jagucki
+License:
+  GPL-2 or later
+  .
+  On Debian systems, the complete text of the GNU General
+  Public License can be found in `/usr/share/common-licenses/GPL-2'.
+
+
+AutoUpdater:
+  Copyright 2008  Remko Troncon
+
+Certificates:
+  Copyright 2003  Justin Karneges <justin@affinix.com>
+  Copyright 2008  Remko Troncon
+
+plugins:
+  Copyright 1992-2000 Trolltech AS. All rights reserved
+  Copyright 2006  Kevin Smith
+  Copyright 2005 by SilverSoft.Net
+  Copyright 2006-2008  Maciej Niedzielski
+
+tools:
+  Copyright 2001-2008  Justin Karneges <justin@affinix.com>
+  Copyright 2003-2007  Michail Pishchagin
+  Copyright 2003-2004 Juan F. Codagnone <juam@users.sourceforge.net>
+  Copyright 2003-2007  Eric Smith
+  Copyright 2005 Remko Troncon
+  Copyright 2006 Cestonaro Thilo
+  Copyright 2003 Tarkvara Design Inc.
+  Copyright 2008 Rion
+  Copyright 2003 Nullsoft, Inc.
+  Copyright 1998 Gilles Vollant
+  Copyright 2005, 2008 James Chaldecott
+  Copyright 2005, 2008 Maciej Niedzielski
+
+third-party:
+  Copyright 1999-2007 The Botan Project. All rights reserved.
+  Copyright 2004-2007  Brad Hards <bradh@frogmouth.net>
+  Copyright 2003-2008  Justin Karneges <justin@affinix.com>
+  Copyright 1999, 2000, 2002 Aladdin Enterprises.  All rights reserved.
+  Copyright 2003  Robert W. Brewer <rbrewer at op.net>
+  Copyright 1999, 2000 Tom Tromey
+  Copyright 2000 Red Hat, Inc.
+
+libjingle:
+  Copyright 2001  Simon MORLAT simon.morlat@linphone.org
+  Copyright 2005 Remko Troncon
+
+
+patches:
+  Vladimir Shelukhin, <vladimir.shelukhin@gmail.com>,
+  Maksim Maj <maksim.maj@gmail.com>,
+
+
+
 Files:
   iris/*
   iris/src/xmpp/*
@@ -184,83 +259,76 @@ License:
      misrepresented as being the original software.
   3. This notice may not be removed or altered from any source distribution.
 
-
-
-psi source:
-  Copyright 2001-2008  Justin Karneges <justin@affinix.com>
-  Copyright 2003-2007  Michail Pishchagin
-  Copyright 2001-2008  Remko Troncon
-  Copyright 2006-2008  Martin Hostettler
-  Copyright 2006-2007  Kevin Smith
-  Copyright 2006-2008  Joonas Govenius
-  Copyright 2003  The Internet Society
-  Copyright 2005  Jeremie Miller
-  Copyright 2007  Maciek Niedzielski
-  Copyright 2008  Armando Jagucki
-
-AutoUpdater:
-  Copyright 2008  Remko Troncon
-
-Certificates:
-  Copyright 2003  Justin Karneges <justin@affinix.com>
-  Copyright 2008  Remko Troncon
-
-plugins:
-  Copyright 1992-2000 Trolltech AS. All rights reserved
-  Copyright 2006  Kevin Smith
-  Copyright 2005 by SilverSoft.Net
-  Copyright 2006-2008  Maciej Niedzielski
-
-tools:
-  Copyright 2001-2008  Justin Karneges <justin@affinix.com>
-  Copyright 2003-2007  Michail Pishchagin
-  Copyright 2003-2004 Juan F. Codagnone <juam@users.sourceforge.net>
-  Copyright 2003-2007  Eric Smith
-  Copyright 2005 Remko Troncon
-  Copyright 2006 Cestonaro Thilo
-  Copyright 2003 Tarkvara Design Inc.
-  Copyright 2008 Rion
-  Copyright 2003 Nullsoft, Inc.
-  Copyright 1998 Gilles Vollant
-  Copyright 2005, 2008 James Chaldecott
-  Copyright 2005, 2008 Maciej Niedzielski
-
-third-party:
-  Copyright 1999-2007 The Botan Project. All rights reserved.
-  Copyright 2004-2007  Brad Hards <bradh@frogmouth.net>
-  Copyright 2003-2008  Justin Karneges <justin@affinix.com>
-  Copyright 1999, 2000, 2002 Aladdin Enterprises.  All rights reserved.
-  Copyright 2003  Robert W. Brewer <rbrewer at op.net>
-  Copyright 1999, 2000 Tom Tromey
-  Copyright 2000 Red Hat, Inc.
-
-libjingle:
-  Copyright 2001  Simon MORLAT simon.morlat@linphone.org
-  Copyright 2005 Remko Troncon
-
-
-patches:
-  Vladimir Shelukhin, <vladimir.shelukhin@gmail.com>,
-  Maksim Maj <maksim.maj@gmail.com>,
-
+Files:
+  changelog*
+  certs/rootcert.xml
+  lang/ru/*
+  patches/*
+  plugins/generic/attentionplugin/*
+  plugins/generic/extendedoptionsplugin/*
+  plugins/generic/qipxstatusesplugin/*
+  plugins/generic/autoreplyplugin/*
+  plugins/generic/gmailserviceplugin/*
+  plugins/generic/screenshotplugin/*
+  plugins/generic/birthdayreminderplugin/*
+  plugins/generic/gomokugameplugin/*
+  plugins/generic/skinsplugin/*
+  plugins/generic/captchaformsplugin/*
+  plugins/generic/historykeeperplugin/*
+  plugins/generic/stopspamplugin/*
+  plugins/generic/chessplugin/*
+  plugins/generic/icqdieplugin/*
+  plugins/generic/storagenotesplugin/*
+  plugins/generic/cleanerplugin/*
+  plugins/generic/imageplugin/*
+  plugins/generic/translateplugin/*
+  plugins/generic/clientswitcherplugin/*
+  plugins/generic/jabberdiskplugin/*
+  plugins/generic/videostatusplugin/*
+  plugins/generic/conferenceloggerplugin/*
+  plugins/generic/juickplugin/*
+  plugins/generic/watcherplugin/*
+  plugins/generic/contentdownloaderplugin/*
+  plugins/generic/pepchangenotifyplugin/*
+  plugins/generic/extendedmenuplugin/*
+  plugins/generic/pstoplugin/*
+  scripts/*
+  skins/*
+  sound/attention.wav
+  sound/chess_finish.wav
+  sound/chess_start.wav
+  sound/pepnotify.wav
+  sound/watcher.wav
+  sound/chess_error.wav
+  sound/chess_move.wav
+  sound/email.wav
+  sound/reminder.wav
+  themes/*
+Sources:
+  http://psi-dev.googlecode.com/svn/trunk/
+Copyright:
+  Copyright 2009-2010  Rion (Sergey Ilinyh)
+  Copyright 2009-2010  Khryukin Evgeny
+  Copyright 2009-2010  Virnik
+  Copyright 2006-2007  Maciej Niedzielski
+  Copyright 2009-2010  Kravtsov Nikolai
+  Copyright 2011       Romanov Ivan aka taurus <drizt@land.ru>
+  Copyright 2003       Justin Karneges <justin@affinix.com>
+  Copyright 2010       senu
+  Copyright 2008       Ustyugov Roman <qtdevel@gmail.com>
+  Copyright 2010       Michail Pishchagin
+  Copyright 2010       Dmitriy.trt
+  Copyright 2008       Armando Jagucki
+  Copyright 2010       Vitaly Tonkacheyev
+  Copyright 2009       Ivan Borzenkov <ivan1986@list.ru>
+  Copyright 2010       KukuRuzo
+  Copyright 2011       Aleksey Andreev
 License:
+  GPL-2 or later
+  .
+  On Debian systems, the complete text of the GNU General
+  Public License can be found in `/usr/share/common-licenses/GPL-2'.
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
-
-    You should have received a copy of the GNU Library General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA  02110-1301 USA
-
-On Debian systems, the complete text of the GNU General Public License
-version 2 can be found in `/usr/share/common-licenses/GPL-2'.
 
 As a special exception, Justin Karneges gives permission to link
 this program with the Qt Library (commercial or non-commercial edition),
