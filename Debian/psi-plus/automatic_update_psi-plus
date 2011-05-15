@@ -29,32 +29,30 @@ mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
 export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
 
-export VER_LIST=$(curl 'http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/' 2>&1 | grep 'psi-plus_' | grep '.orig.tar.bz2' | sed -e "s/^.*psi-plus_\(.*\).orig.tar.bz2.*$/\1/")
-export NEW_VER=$(echo ${VER_LIST} | sed -e "s/^.* \(.*\)$/\1/")
-export NEW_VER_FULL=${NEW_VER}${SFX}
+export LAST_REVISION=$(svn log http://psi-dev.googlecode.com/svn/trunk/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
 
-echo " "
-echo "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/"
-echo " "
-echo "On Launchpad now available such versions:"
-echo ${VER_LIST}
-echo " "
+echo "Number of old  revision: ${OLD_REVISION}"
+echo "Number of last revision: ${LAST_REVISION}"
 
-echo "OLD_VER = ${OLD_VER}"
-echo "NEW_VER = ${NEW_VER}"
+export CUR_VER="0.15"
+export NEW_VER="${CUR_VER}~svn${LAST_REVISION}"
+export NEW_VER_FULL="${NEW_VER}${SFX}"
+
+
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
-echo " "
 
-export UBUNTU_VER="${NEW_VER}"
-export UBUNTU_SFX="-0ubuntu1"
 
-if [ -z "${NEW_VER}" ]; then
-    echo "NEW_VER is empty!";
-    exit 0;
-elif [ -z "${OLD_VER_FULL}" ]; then
+if [ -z "${OLD_VER_FULL}" ]; then
     echo "OLD_VER_FULL is empty!";
+    exit 0;
+elif [ -z ${CUR_VER} ]; then
+    echo "CUR_VER is empty!";
+    exit 0;
+elif [ -z ${LAST_REVISION} ]; then
+    echo "LAST_REVISION is empty!";
     exit 0;
 elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
     echo "Upgrading is not required.";
@@ -74,42 +72,84 @@ else
     fi
 fi
 
-if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then
-    wget -c -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}.orig.tar.bz2"
+
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    export PSI_DIR="${HOME}/WorkDir/Devel/Psi+"
+
+    # Update local copies of git and svn repositories
+    for GIT_DIR in psi iris libpsi; do
+        echo "Updating ${PSI_DIR}/${GIT_DIR}"
+        cd "${PSI_DIR}/${GIT_DIR}"
+        git pull
+    done
+    echo "Updating ${PSI_DIR}/psi+"
+    svn update "${PSI_DIR}/psi+"
+
+    # Prepare directories
+    rm -rf "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    mkdir -p "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+    # Copy and mix files to a sources tree
+    GIT_DIR=psi
+    echo "Exporting ${PSI_DIR}/${GIT_DIR}"
+    cd "${PSI_DIR}/${GIT_DIR}"
+    git archive --format=tar HEAD |
+        ( cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" ; tar xf - )
+
+    GIT_DIR=iris
+    echo "Exporting ${PSI_DIR}/${GIT_DIR}"
+    cd "${PSI_DIR}/${GIT_DIR}"
+    mkdir -p "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${GIT_DIR}"
+    git archive --format=tar HEAD |
+            ( cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${GIT_DIR}" ; tar xf - )
+
+    GIT_DIR=libpsi
+    echo "Exporting ${PSI_DIR}/${GIT_DIR}"
+    cd "${PSI_DIR}/${GIT_DIR}"
+    mkdir -p "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${GIT_DIR}"
+    git archive --format=tar HEAD |
+        ( cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${GIT_DIR}" ; tar xf - )
+
+    SVN_DIR=psi+
+    echo "Exporting ${PSI_DIR}/${SVN_DIR}"
+    cd "${PSI_DIR}/${SVN_DIR}"
+    cp -f copying*   "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/"
+    cp -f changelog* "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/"
+    for SUB_DIR in certs lang patches scripts skins sound themes; do
+        echo "SUB_DIR = ${SUB_DIR}"
+        svn export --force "${PSI_DIR}/${SVN_DIR}/${SUB_DIR}" \
+                           "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${SUB_DIR}"
+    done
+    SUB_DIR=plugins
+    echo "SUB_DIR = ${SUB_DIR}"
+    svn export --force "${PSI_DIR}/${SVN_DIR}/${SUB_DIR}" \
+                       "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/src/${SUB_DIR}"
+    cp -f iconsets/system/default/psiplus/* \
+          "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/iconsets/system/default/"
+    cp -f iconsets/roster/default/* \
+          "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/iconsets/roster/default/"
+
+    # Some magic
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    sed "s/.xxx/.${LAST_REVISION}/" -i patches/9999-psiplus-application-info.diff
+    cd "patches"
+    ls -1 *.diff > series
+
+    # Delete some trash
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    rm -f configure.exe
+    rm -r win32/
+    rm -r libpsi/tools/zip/minizip/win32/
+    rm -r libpsi/tools/idle/win32/
+    rm -r scripts/win32/
+
+    # Make archive with sources
+    cd "${TEMP_DIR}"
+    echo "Generating orig.tar.bz2"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
-if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then
-    echo "File ${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2 is not found.";
-    exit 0;
-else
-    rm -rf "${PACKAGE}-${UBUNTU_VER}"
-    tar xjf "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2"
-    #mkdir -p "trash__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
-    #mv -f "${PACKAGE}-${UBUNTU_VER}/configure.exe" "trash__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}/"
-    rm -f "${PACKAGE}-${UBUNTU_VER}/configure.exe"
-    rm -f "${PACKAGE}-${UBUNTU_VER}/img.jpg"
-    tar -cjf "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" "${PACKAGE}-${UBUNTU_VER}"
-fi
-
-if !([ -e "${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz" ]); then
-    wget -c -4 "http://ppa.launchpad.net/psi-plus/ppa/ubuntu/pool/main/p/psi-plus/psi-plus_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
-    rm -rf debian
-    rm -rf "scripts__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
-    rm -rf "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
-    tar xzf "${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz"
-    mv -f debian/scripts "scripts__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
-    mv -f debian "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}"
-fi
-
-if !([ -e "${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz" ]); then
-  echo "File ${PACKAGE}_${UBUNTU_VER}${UBUNTU_SFX}.debian.tar.gz is not found.";
-  exit 0;
-fi
-
-export DEBIAN_DIFF="${PACKAGE}.debian.${UBUNTU_VER}${UBUNTU_SFX}.diff"
-diff -ur "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}" "${PKG_DIR}/debian" > "${DEBIAN_DIFF}"
-kwrite "${DEBIAN_DIFF}"
-
+exit 0
 
 ############################# General part of script body ###############################
 if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then              # Specific code

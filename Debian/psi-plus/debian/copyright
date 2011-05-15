@@ -1,19 +1,30 @@
 This package was debianized by Ivan Borzenkov <ivan1986@list.ru> on
 Mon, 23 Feb 2009 19:56:49 +0300.
 
-It was downloaded from git://github.com/psi-im/psi.git and
-http://psi-dev.googlecode.com/svn/trunk/
-Current versions are available from http://psi-dev.googlecode.com
+This package was modified by Boris Pek <tehnick-8@mail.ru> on
+Sun, 15 May 2011 22:10:31 +0300
 
-The orig.tar.gz is generated from the upstream source tree by removing
-the following files and directories:
-  build/iconsets-psi-plus/clients/default/FP_Freeware License.txt
-  build/iconsets-psi-plus/clients
-  build/iconsets-psi-plus/
-  resources
-  *win32*
-  configure.exe
-  img.jpg
+The orig.tar.gz is generated from a few upstream source trees:
+  git://github.com/psi-im/psi.git
+  git://github.com/psi-im/iris.git
+  git://github.com/psi-im/libpsi.git
+  http://psi-dev.googlecode.com/svn/trunk/
+
+Following files and directories were ignored:
+  https://github.com/psi-im/psi/blob/master/configure.exe
+  https://github.com/psi-im/psi/tree/master/win32/
+  https://github.com/psi-im/libpsi/tree/master/tools/zip/minizip/win32/
+  https://github.com/psi-im/libpsi/tree/master/tools/idle/win32/
+  http://psi-dev.googlecode.com/svn/trunk/.svg
+  http://psi-dev.googlecode.com/svn/trunk/iconsets/
+  http://psi-dev.googlecode.com/svn/trunk/img.jpg
+  http://psi-dev.googlecode.com/svn/trunk/resources/
+  http://psi-dev.googlecode.com/svn/trunk/scripts/win32/
+  http://psi-dev.googlecode.com/svn/trunk/version.txt
+
+Временные заметки:
+src/libpsi/*
+iris/*
 
 
 Psi+ Project Authors:
