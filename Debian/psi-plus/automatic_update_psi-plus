@@ -106,9 +106,9 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     GIT_DIR=libpsi
     echo "Exporting ${PSI_DIR}/${GIT_DIR}"
     cd "${PSI_DIR}/${GIT_DIR}"
-    mkdir -p "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${GIT_DIR}"
+    mkdir -p "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/src/${GIT_DIR}"
     git archive --format=tar HEAD |
-        ( cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${GIT_DIR}" ; tar xf - )
+        ( cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/src/${GIT_DIR}" ; tar xf - )
 
     SVN_DIR=psi+
     echo "Exporting ${PSI_DIR}/${SVN_DIR}"
@@ -124,10 +124,14 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     echo "SUB_DIR = ${SUB_DIR}"
     svn export --force "${PSI_DIR}/${SVN_DIR}/${SUB_DIR}" \
                        "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/src/${SUB_DIR}"
-    cp -f iconsets/system/default/psiplus/* \
-          "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/iconsets/system/default/"
-    cp -f iconsets/roster/default/* \
-          "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/iconsets/roster/default/"
+    SUB_DIR=iconsets/system/default/psiplus
+    echo "SUB_DIR = ${SUB_DIR}"
+    svn export --force "${PSI_DIR}/${SVN_DIR}/${SUB_DIR}" \
+           "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${SUB_DIR}"
+    SUB_DIR=iconsets/roster/default
+    echo "SUB_DIR = ${SUB_DIR}"
+    svn export --force "${PSI_DIR}/${SVN_DIR}/${SUB_DIR}" \
+           "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${SUB_DIR}"
 
     # Some magic
     cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
@@ -139,9 +143,9 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
     rm -f configure.exe
     rm -r win32/
-    rm -r libpsi/tools/zip/minizip/win32/
-    rm -r libpsi/tools/idle/win32/
     rm -r scripts/win32/
+    rm -r src/libpsi/tools/zip/minizip/win32/
+    rm -r src/libpsi/tools/idle/win32/
 
     # Make archive with sources
     cd "${TEMP_DIR}"

@@ -22,83 +22,131 @@ Following files and directories were ignored:
   http://psi-dev.googlecode.com/svn/trunk/scripts/win32/
   http://psi-dev.googlecode.com/svn/trunk/version.txt
 
-Временные заметки:
-src/libpsi/*
-iris/*
-
-
 Psi+ Project Authors:
-  Copyright (C) 2008-2009 zet <vladimir.shelukhin@gmail.com>,
-  Copyright (C) 2008-2009 maj <maksim.maj@gmail.com>
+  Copyright 2008-2011 zet <vladimir.shelukhin@gmail.com>,
+  Copyright 2008-2009 maj <maksim.maj@gmail.com>
 
 Upstream Authors:
   Kevin Smith <kismith@psi-im.org>,
   Justin Karneges <infiniti@affinix.com>
 
+Files:
+  iris/*
+Sources:
+  git://github.com/psi-im/iris.git
 Copyright:
+  Copyright 1999,2000  Tom Tromey
+  Copyright 2001-2008  Justin Karneges <justin@affinix.com>
+  Copyright 2002,2003  Simon Josefsson
+  Copyright 2003-2007  Michail Pishchagin
+  Copyright 2008-2010  Barracuda Networks, Inc.
+  Copyright 2005       Jeremie Miller
+  Copyright 2006       Maciek Niedzielski
+  Copyright 2008       Remko Troncon
+License:
+  LGPL-3
+  .
+  On Debian systems, the complete text of the GNU Lesser General
+  Public License can be found in `/usr/share/common-licenses/LGPL-3'.
 
-iris module:
-  Copyright (C) 1999,2000  Tom Tromey
-  Copyright (C) 2001-2008  Justin Karneges <justin@affinix.com>
-  Copyright (C) 2002,2003  Simon Josefsson
-  Copyright (C) 2003-2007  Michail Pishchagin
-  Copyright (C) 2008-2009  Barracuda Networks, Inc.
-  Copyright (C) 2005  Jeremie Miller
-  Copyright (C) 2006  Maciek Niedzielski
-  Copyright (C) 2008  Remko Troncon
+Files:
+  iris/tools/icetunnel/*
+  iris/tools/nettool/*
+  iris/src/irisnet/*
+  iris/src/libidn/*
+Sources:
+  git://github.com/psi-im/iris.git
+Copyright:
+  Copyright 2008-2010  Barracuda Networks, Inc.
+  Copyright 2006-2008  Justin Karneges <justin@affinix.com>
+  Copyright 2002-2003  Simon Josefsson
+License:
+  LGPL-2.1 or later
+  .
+  On Debian systems, the complete text of the GNU Lesser General
+  Public License can be found in `/usr/share/common-licenses/LGPL-2.1'.
+
+Files:
+  iris/src/jdns/*
+Sources:
+  git://github.com/psi-im/iris.git
+Copyright:
+  Copyright 2005-2006  Justin Karneges <justin@affinix.com>
+  Copyright 2005       Jeremie Miller
+License:
+  MIT
+  .
+  Permission is hereby granted, free of charge, to any person obtaining a
+  copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to
+  permit persons to whom the Software is furnished to do so, subject to
+  the following conditions:
+  .
+  The above copyright notice and this permission notice shall be included
+  in all copies or substantial portions of the Software.
+  .
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 psi source:
-  Copyright (C) 2001-2008  Justin Karneges <justin@affinix.com>
-  Copyright (C) 2003-2007  Michail Pishchagin
-  Copyright (C) 2001-2008  Remko Troncon
-  Copyright (C) 2006-2008  Martin Hostettler
-  Copyright (C) 2006-2007  Kevin Smith
-  Copyright (C) 2006-2008  Joonas Govenius
-  Copyright (C) 2003  The Internet Society
-  Copyright (C) 2005  Jeremie Miller
-  Copyright (C) 2007  Maciek Niedzielski
-  Copyright (C) 2008  Armando Jagucki
+  Copyright 2001-2008  Justin Karneges <justin@affinix.com>
+  Copyright 2003-2007  Michail Pishchagin
+  Copyright 2001-2008  Remko Troncon
+  Copyright 2006-2008  Martin Hostettler
+  Copyright 2006-2007  Kevin Smith
+  Copyright 2006-2008  Joonas Govenius
+  Copyright 2003  The Internet Society
+  Copyright 2005  Jeremie Miller
+  Copyright 2007  Maciek Niedzielski
+  Copyright 2008  Armando Jagucki
 
 AutoUpdater:
-  Copyright (C) 2008  Remko Troncon
+  Copyright 2008  Remko Troncon
 
 Certificates:
-  Copyright (C) 2003  Justin Karneges <justin@affinix.com>
-  Copyright (C) 2008  Remko Troncon
+  Copyright 2003  Justin Karneges <justin@affinix.com>
+  Copyright 2008  Remko Troncon
 
 plugins:
-  Copyright (C) 1992-2000 Trolltech AS. All rights reserved
-  Copyright (C) 2006  Kevin Smith
-  Copyright (C) 2005 by SilverSoft.Net
-  Copyright (C) 2006-2008  Maciej Niedzielski
+  Copyright 1992-2000 Trolltech AS. All rights reserved
+  Copyright 2006  Kevin Smith
+  Copyright 2005 by SilverSoft.Net
+  Copyright 2006-2008  Maciej Niedzielski
 
 tools:
-  Copyright (C) 2001-2008  Justin Karneges <justin@affinix.com>
-  Copyright (C) 2003-2007  Michail Pishchagin
-  Copyright (C) 2003-2004 Juan F. Codagnone <juam@users.sourceforge.net>
-  Copyright (C) 2003-2007  Eric Smith
-  Copyright (C) 2005 Remko Troncon
-  Copyright (C) 2006 Cestonaro Thilo
-  Copyright (C) 2003 Tarkvara Design Inc.
-  Copyright (C) 2008 Rion
-  Copyright (C) 2003 Nullsoft, Inc.
-  Copyright (C) 1998 Gilles Vollant
-  Copyright (C) 2005, 2008 James Chaldecott
-  Copyright (C) 2005, 2008 Maciej Niedzielski
+  Copyright 2001-2008  Justin Karneges <justin@affinix.com>
+  Copyright 2003-2007  Michail Pishchagin
+  Copyright 2003-2004 Juan F. Codagnone <juam@users.sourceforge.net>
+  Copyright 2003-2007  Eric Smith
+  Copyright 2005 Remko Troncon
+  Copyright 2006 Cestonaro Thilo
+  Copyright 2003 Tarkvara Design Inc.
+  Copyright 2008 Rion
+  Copyright 2003 Nullsoft, Inc.
+  Copyright 1998 Gilles Vollant
+  Copyright 2005, 2008 James Chaldecott
+  Copyright 2005, 2008 Maciej Niedzielski
 
 third-party:
-  Copyright (C) 1999-2007 The Botan Project. All rights reserved.
-  Copyright (C) 2004-2007  Brad Hards <bradh@frogmouth.net>
-  Copyright (C) 2003-2008  Justin Karneges <justin@affinix.com>
-  Copyright (C) 1999, 2000, 2002 Aladdin Enterprises.  All rights reserved.
-  Copyright (C) 2003  Robert W. Brewer <rbrewer at op.net>
-  Copyright (C) 1999, 2000 Tom Tromey
+  Copyright 1999-2007 The Botan Project. All rights reserved.
+  Copyright 2004-2007  Brad Hards <bradh@frogmouth.net>
+  Copyright 2003-2008  Justin Karneges <justin@affinix.com>
+  Copyright 1999, 2000, 2002 Aladdin Enterprises.  All rights reserved.
+  Copyright 2003  Robert W. Brewer <rbrewer at op.net>
+  Copyright 1999, 2000 Tom Tromey
   Copyright 2000 Red Hat, Inc.
 
 libjingle:
-  Copyright (C) 2001  Simon MORLAT simon.morlat@linphone.org
-  Copyright (C) 2005 Remko Troncon
+  Copyright 2001  Simon MORLAT simon.morlat@linphone.org
+  Copyright 2005 Remko Troncon
 
 
 patches:
@@ -136,7 +184,7 @@ this program with the OpenSSL Library.
 Since version 0.8.6, psi contains 'minizip', a library for unpacking
 zip archives. It is distributed with the following copyright:
 
-    Copyright (C) 1998 Gilles Vollant
+    Copyright 1998 Gilles Vollant
 
     Condition of use and distribution are the same than zlib
 
