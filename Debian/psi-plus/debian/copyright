@@ -2,7 +2,7 @@ This package was debianized by Ivan Borzenkov <ivan1986@list.ru> on
 Mon, 23 Feb 2009 19:56:49 +0300.
 
 This package was modified by Boris Pek <tehnick-8@mail.ru> on
-Sun, 15 May 2011 22:10:31 +0300
+Mon, 16 May 2011 01:56:02 +0300
 
 The orig.tar.gz is generated from a few upstream source trees:
   git://github.com/psi-im/psi.git
@@ -312,7 +312,9 @@ Copyright:
   Copyright 2009-2010  Virnik
   Copyright 2006-2007  Maciej Niedzielski
   Copyright 2009-2010  Kravtsov Nikolai
-  Copyright 2011       Romanov Ivan aka taurus <drizt@land.ru>
+  Copyright 2009-2010  VampiRus
+  Copyright 2009-2010  Ivan Borzenkov <ivan1986@list.ru>
+  Copyright 2011       Ivan Romanov aka taurus <drizt@land.ru>
   Copyright 2003       Justin Karneges <justin@affinix.com>
   Copyright 2010       senu
   Copyright 2008       Ustyugov Roman <qtdevel@gmail.com>
@@ -320,7 +322,6 @@ Copyright:
   Copyright 2010       Dmitriy.trt
   Copyright 2008       Armando Jagucki
   Copyright 2010       Vitaly Tonkacheyev
-  Copyright 2009       Ivan Borzenkov <ivan1986@list.ru>
   Copyright 2010       KukuRuzo
   Copyright 2011       Aleksey Andreev
 License:
