@@ -1,8 +1,13 @@
-psimedia (1.0.3+svn807-1) natty; urgency=low
+psimedia (1.0.3+svn737-1) unstable; urgency=low
 
-  * FAKE
+  * Sources were updated from svn
+  * New maintainer (Closes: #620032)
+  * File debian/copyright was updated:
+    - now sources are copied from svn trunk
+  * Fixed psi-plus crashes on startup (Closes: #626802)
+  * Fixed build with new Linux kernel (>= 2.6.38) (Closes: #619540, #621967)
 
- -- Ivan Borzenkov <ivan1986@list.ru>  Tue, 29 Mar 2011 20:47:02 +0400
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 16 May 2011 23:30:54 +0300
 
 psimedia (1.0.3+r807-1ubuntu1) natty; urgency=low
 
