@@ -153,14 +153,12 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
-exit 0
 
 ############################# General part of script body ###############################
-if !([ -e "${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2" ]); then              # Specific code
-    echo "File ${PACKAGE}_${UBUNTU_VER}.orig.tar.bz2 is not found.";    # Specific code
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.bz2 is not found.";
     exit 0;
 fi
-
 
 echo "Updating is started."
 
@@ -250,11 +248,6 @@ cd "${TEMP_DIR}"
 cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
 
 dput -f mentors ${PACKAGE}_${NEW_VER_FULL}_source.changes
-
-# Specific code
-export DIFF_OUT="${PACKAGE}.debian.${NEW_VER_FULL}.out.diff"
-diff -ur "debian__${PACKAGE}-${UBUNTU_VER}${UBUNTU_SFX}" "${PACKAGE}-${NEW_VER}/debian" > "${DIFF_OUT}"
-# Specific code
 
 echo "Update finished successfully"
 

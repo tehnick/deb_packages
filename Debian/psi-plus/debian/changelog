@@ -1,8 +1,16 @@
-psi-plus (0.15~svn3777-1) experimental; urgency=low
+psi-plus (0.15~svn3884-1) experimental; urgency=low
 
-  * FAKE
+  * Uploader became maintainer (Closes: #620034)
+  * File debian/copyright was completely rewrited (Closes: #610338)
+  * File debian/control was updated:
+    - psi-plus now depends from psi-plus-common (= ${source:Version})
+    - psi-plus-webkit now depends from psi-plus-common (= ${source:Version})
+    - psi-plus-plugins now depends from psi-plus-common (= ${source:Version})
+      (Closes: #613232)
+  * Here are no appreciable memory leaks now (Closes: #610024)
+  * New upstream release
 
- -- Boris Pek <tehnick-8@mail.ru>  Sun, 15 May 2011 19:45:00 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 16 May 2011 04:20:27 +0300
 
 psi-plus (0.15~svn3775-0ubuntu1) natty; urgency=low
 
