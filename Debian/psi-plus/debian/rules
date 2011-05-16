@@ -47,11 +47,11 @@ override_dh_auto_install:
 override_dh_install:
 	dh_install
 	#Deleting exported plugins
-	rm -f $(CURDIR)/debian/psi-plus-plugins/usr/lib/psi/plugins/libcontentdownloaderplugin.so
+	rm -f $(CURDIR)/debian/psi-plus-plugins/usr/lib/psi-plus/plugins/libcontentdownloaderplugin.so
 	#Deleting exported icons
-	rm -rf $(CURDIR)/debian/psi-plus-icons/usr/share/psi/iconsets/roster
-	rm -rf $(CURDIR)/debian/psi-plus-icons/usr/share/psi/iconsets/clients
-	rm -rf $(CURDIR)/debian/psi-plus-icons/usr/share/psi/iconsets/emoticons
+	rm -rf $(CURDIR)/debian/psi-plus-icons/usr/share/psi-plus/iconsets/roster
+	rm -rf $(CURDIR)/debian/psi-plus-icons/usr/share/psi-plus/iconsets/clients
+	rm -rf $(CURDIR)/debian/psi-plus-icons/usr/share/psi-plus/iconsets/emoticons
 	#Exporting all from psi-plus-common
 	./debian/mergedups.sh
 

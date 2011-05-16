@@ -1,4 +1,4 @@
-psi-plus (0.15~svn3884-1) experimental; urgency=low
+psi-plus (0.15~svn3886-1) unstable; urgency=low
 
   * Uploader became maintainer (Closes: #620034)
   * File debian/copyright was completely rewrited (Closes: #610338)
@@ -8,9 +8,10 @@ psi-plus (0.15~svn3884-1) experimental; urgency=low
     - psi-plus-plugins now depends from psi-plus-common (= ${source:Version})
       (Closes: #613232)
   * Here are no appreciable memory leaks now (Closes: #610024)
+  * File psi2psi-plus.patch was removed
   * New upstream release
 
- -- Boris Pek <tehnick-8@mail.ru>  Mon, 16 May 2011 04:20:27 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 16 May 2011 20:09:12 +0300
 
 psi-plus (0.15~svn3775-0ubuntu1) natty; urgency=low
 

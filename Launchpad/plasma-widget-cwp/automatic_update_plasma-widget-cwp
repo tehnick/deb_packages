@@ -164,10 +164,11 @@ case "${1}" in
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
+    export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
     cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
     echo " "
     echo "Start building packages..."
-    dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE}
+    dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
     echo " "
 
