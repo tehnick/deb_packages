@@ -1,0 +1,111 @@
+psimedia (1.0.3+svn807-1) natty; urgency=low
+
+  * FAKE
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Tue, 29 Mar 2011 20:47:02 +0400
+
+psimedia (1.0.3+r807-1ubuntu1) natty; urgency=low
+
+  * psi to psi-plus
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Tue, 29 Mar 2011 20:47:02 +0400
+
+psimedia (1.0.3+r807-0ubuntu4) natty; urgency=low
+
+  * fix psi-plus to psi
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Wed, 09 Mar 2011 23:48:58 +0300
+
+psimedia (1.0.3+r807-0ubuntu3) natty; urgency=low
+
+  * update v4l patch
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Wed, 09 Mar 2011 20:36:49 +0300
+
+psimedia (1.0.3+r807-0ubuntu2) natty; urgency=low
+
+  * add qconf to depents
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Wed, 02 Mar 2011 09:42:30 +0300
+
+psimedia (1.0.3+r807-0ubuntu1) natty; urgency=low
+
+  * New upstream release
+  * add patch remove-v4l1-support.diff - kernel 2.6.38 not support v4l1
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Wed, 02 Mar 2011 01:13:22 +0300
+
+psimedia (1.0.3-8) unstable; urgency=low
+
+  * merge new and RC bugfix
+  * psi+ moved from psi to psi-plus
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Sat, 15 Jan 2011 02:00:28 +0300
+
+psimedia (1.0.3-7) unstable; urgency=low
+
+  * upload to Debian
+  * fix depends (Closes: #609416)
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Tue, 14 Dec 2010 00:17:50 +0300
+
+psimedia (1.0.3-6ubuntu2) natty; urgency=low
+
+  * depend on psi-plus or psi-plus-webkit
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Wed, 17 Nov 2010 14:46:13 +0300
+
+psimedia (1.0.3-6ubuntu1) natty; urgency=low
+
+  * rename to psi-plus-plugin-psimedia
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Fri, 22 Oct 2010 16:11:05 +0400
+
+psimedia (1.0.3-6) natty; urgency=low
+
+  * Bump Standards-Version to 3.9.1
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Sun, 03 Oct 2010 13:16:30 +0400
+
+psimedia (1.0.3-5) maverick; urgency=low
+
+  * add patch from psi+ - uvcvideo fix
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Sun, 03 Oct 2010 13:10:37 +0400
+
+psimedia (1.0.3-4.1) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * Make the gstreamer0.10-alsa dependency linux-only to get this package
+    installable on kfreebsd-* again. According to Axel Beckert it is
+    functional as is (Closes: #609559).
+  * Set urgency to “high” for RC bugfix.
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 14 Jan 2011 14:32:23 +0100
+
+psimedia (1.0.3-4) unstable; urgency=low
+
+  * Bump Standards-Version to 3.8.4
+  * chande source format to 3.0(quilt)
+  * add patch from psi+ - work whis asterisk
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Wed, 28 Apr 2010 12:51:48 +0400
+
+psimedia (1.0.3-3) unstable; urgency=low
+
+  * Only alsa supported (Closes: #544219)
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Sun, 30 Aug 2009 17:45:28 +0400
+
+psimedia (1.0.3-2) unstable; urgency=low
+
+  * Fix copyright - missing one author
+  * Add runtime depends to gstreamer0.10 plugins and backend (Closes: #543961)
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Sat, 15 Aug 2009 18:59:00 +0400
+
+psimedia (1.0.3-1) unstable; urgency=low
+
+  * Initial release (Closes: #537493)
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Sat, 18 Jul 2009 16:51:30 +0400

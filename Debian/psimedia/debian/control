@@ -1,0 +1,18 @@
+Source: psimedia
+Section: net
+Priority: extra
+Maintainer: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: cdbs (>= 0.4.53), debhelper (>= 7.0.1), libqt4-dev (>= 4.4.0), libgstreamer-plugins-base0.10-dev (>= 0.10.23), liboil0.3-dev, libspeexdsp-dev (>= 1.2~rc1), qconf
+Standards-Version: 3.9.2
+Homepage: http://delta.affinix.com/psimedia/
+
+Package: psi-plus-plugin-psimedia
+Architecture: any
+Depends: psi-plus | psi-plus-webkit, ${shlibs:Depends}, ${misc:Depends},
+         gstreamer0.10-plugins-good, gstreamer0.10-alsa [linux-any]
+Replaces: psimedia
+Description: Plugin for Psi/Psi+ for audio and video calls
+ PsiMedia is a thick abstraction layer for providing
+ audio and video RTP services to Psi-like IM clients.
+ .
+ The implementation is based on GStreamer.

@@ -1,0 +1,189 @@
+#!/bin/bash
+
+
+############################# Some options ##############################################
+export PACKAGE="psimedia"
+
+# Uncomment if necessary:
+#export SFX="-2"
+
+
+############################# General part of script body ###############################
+# experimental unstable
+export MAIN_DIST="unstable"
+
+if [ -z "${SFX}" ]; then
+    export SFX="-1"
+fi
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
+export TEMP_DIR="${PKG_DIR}/TEMP"
+export TEST_DIR="${TEMP_DIR}/TEST"
+
+mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
+
+
+############################# Specific part of script body ##############################
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*\+svn\([0-9]\+\)$/\1/")
+
+export LAST_REVISION=$(svn log https://delta.affinix.com/svn/trunk/psimedia/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
+
+echo "Number of old  revision: ${OLD_REVISION}"
+echo "Number of last revision: ${LAST_REVISION}"
+
+export CUR_VER="1.0.3"
+export NEW_VER="${CUR_VER}+svn${LAST_REVISION}"
+export NEW_VER_FULL="${NEW_VER}${SFX}"
+
+
+echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+
+
+if [ -z "${OLD_VER_FULL}" ]; then
+    echo "OLD_VER_FULL is empty!";
+    exit 0;
+elif [ -z ${CUR_VER} ]; then
+    echo "CUR_VER is empty!";
+    exit 0;
+elif [ -z ${LAST_REVISION} ]; then
+    echo "LAST_REVISION is empty!";
+    exit 0;
+elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+    echo "Upgrading is not required.";
+    exit 0;
+else
+    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+        if !([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
+    fi
+fi
+
+
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    export PSI_DIR="${HOME}/WorkDir/Devel/Psi+"
+
+    echo "Updating ${PSI_DIR}/psimedia"
+    svn update "${PSI_DIR}/psimedia"
+
+    echo "Exporting ${PSI_DIR}/psimedia"
+    rm -rf "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    svn export "${PSI_DIR}/psimedia" "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+    cd "${TEMP_DIR}"
+    echo "Generating orig.tar.bz2"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+fi
+
+
+############################# General part of script body ###############################
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.bz2 is not found.";
+    exit 0;
+fi
+
+echo "Updating is started."
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
+
+tar xjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2"                            # Specific code
+cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
+    diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
+             "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
+fi
+
+cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+echo " "
+echo "Uscan:"
+uscan --report-status
+echo " "
+
+export DIST="${MAIN_DIST}"
+if [ "${SFX}" = "-1" ]; then
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
+        "New upstream release"                                          # Specific code
+    kwrite debian/changelog
+    debuild -S -sa
+else
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
+        "Some fixes in package"                                         # Specific code
+    kwrite debian/changelog
+    # debuild -S -sd
+    debuild -S -sa
+fi
+
+
+case "${1}" in
+        fast)
+
+    echo " "
+    echo "Fast upload (without tests)."
+    echo " "
+
+        ;;
+        *)
+
+    echo " "
+    echo "Now will be tests."
+    echo " "
+
+    rm -rf "${TEST_DIR}"
+    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
+
+    cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${TEST_DIR}/"   # Specific code
+
+    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
+    export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
+    cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
+    echo " "
+    echo "Start building packages..."
+    dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
+    echo "Finished building packages."
+    echo " "
+
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
+    cd "${TEST_DIR}"
+    echo " "
+    echo "Now running lintian:"
+    lintian -ivI ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    cat ${LINTIAN_LOG_FILE} | grep "E: "
+    cat ${LINTIAN_LOG_FILE} | grep "W: "
+    echo "Finished running lintian."
+    echo " "
+    kwrite ${LINTIAN_LOG_FILE}
+
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+        ;;
+esac
+
+
+kwrite debian/changelog
+
+
+cd "${TEMP_DIR}"
+cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
+
+dput -f mentors ${PACKAGE}_${NEW_VER_FULL}_source.changes
+
+echo "Update finished successfully"
+
