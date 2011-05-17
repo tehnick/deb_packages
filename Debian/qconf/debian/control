@@ -1,0 +1,16 @@
+Source: qconf
+Section: devel
+Priority: optional
+Maintainer: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: debhelper (>= 7.0.50~), cdbs, libqt4-dev
+Standards-Version: 3.9.2
+Homepage: http://delta.affinix.com/qconf
+
+Package: qconf
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Nice configure script for your qmake-based project
+ It is intended for developers who don’t need (or want)
+ to use the more complex GNU autotools. With qconf/qmake,
+ it is easy to maintain a cross-platform project that
+ uses a familiar configuration interface on unix.

@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/qmake.mk
+
+QMAKE=qmake-qt4
+
+configure/qconf::
+	./configure --prefix=/usr
+
+clean::
+	rm -rf debian/qconf
+	rm -f config.guess config.sub conf.log conf.pri
+	rm -f debian/qconf.substvars debian/qconf.debhelper.log
+	rm -f qconf qconf.o stringhelp.o
+
+install/qconf::
+	mv debian/qconf/usr/bin/qconf debian/qconf/usr/bin/qt-qconf
+

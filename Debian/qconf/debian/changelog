@@ -1,0 +1,16 @@
+qconf (1.4-2) unstable; urgency=low
+
+  * New maintainer (Closes: #620033)
+  * Added file debian/source/format
+  * Small changes in debian/control:
+    - fixed lintian warning description-synopsis-starts-with-article
+    - updated build depends: debhelper (>= 7.0.50~)
+    - bumped standards version to 3.9.2
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 18 May 2011 00:09:06 +0300
+
+qconf (1.4-1) unstable; urgency=low
+
+  * Initial release (Closes: #536604)
+
+ -- Ivan Borzenkov <ivan1986@list.ru>  Sat, 11 Jul 2009 17:57:14 +0400
