@@ -1,31 +1,18 @@
 #!/bin/bash
 
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
-############################# Some options ##############################################
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
 #export SFX="-3ppa2"
 
 
-############################# General part of script body ###############################
-export MAIN_DIST="natty"
-export UBUNTU_SFX="~${MAIN_DIST}1"
-
-if [ -z "${SFX}" ]; then
-    export SFX="-0ppa1"
-fi
-
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
-
-export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
-export TEMP_DIR="${PKG_DIR}/TEMP"
-export TEST_DIR="${TEMP_DIR}/TEST"
-
-mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
+# Launch common script for setting variables
+source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
-############################# Specific part of script body ##############################
+# Check versions
 export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
@@ -71,6 +58,8 @@ else
     fi
 fi
 
+
+# Get the sources
 if !([ -e "eiskaltdcpp-${NEW_VER}.tar.bz2" ]); then
     wget -4 "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.bz2"
     rm -rf "eiskaltdcpp-${NEW_VER}"
@@ -79,116 +68,8 @@ if !([ -e "eiskaltdcpp-${NEW_VER}.tar.bz2" ]); then
 fi
 
 
-############################# General part of script body ###############################
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.bz2 is not found.";
-    exit 0;
-fi
+export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
-echo "Updating is started."
-
-export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
-
-rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
-
-tar xjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
-cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
-
-if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
-    diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
-             "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
-fi
-
-cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
-
-# If you want to build package on your system uncomment this:
-# dch -v "$NEW_VER-mybuild1" "Minor update."
-# dpkg-buildpackage -rfakeroot
-
-# Note: I am using gnupg-agent for comfortable work
-
-# Full list of Ubuntu releases:
-# hardy intrepid jaunty karmic lucid maverick natty
-# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
-
-# begin update for basic releases
-export DIST="${MAIN_DIST}"
-if [ "${SFX}" = "-0ppa1" ]; then
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "Update to stable release ${NEW_VER}."
-    kwrite debian/changelog
-    debuild -S -sa
-else
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "Some fixes in package."
-    kwrite debian/changelog
-    # debuild -S -sd
-    debuild -S -sa
-fi
-# end update for basic releases
-
-# begin update for other releases
-cp -f debian/changelog ../changelog # copy basic changelog
-
-for DIST in maverick lucid karmic ; do
-    cp -f ../changelog debian/changelog
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-        "Automated backport upload; no source changes."
-    debuild -S -sd
-done
-
-mv ../changelog debian/changelog # rollback basic changelog
-# end update for other releases
-
-
-case "${1}" in
-        test)
-
-    echo " "
-    echo "Now will be tests."
-    echo " "
-
-    rm -rf "${TEST_DIR}"
-    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
-
-    cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
-    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${TEST_DIR}/"
-
-    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
-    export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
-    cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
-    echo " "
-    echo "Start building packages..."
-    dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
-    echo "Finished building packages."
-    echo " "
-
-    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
-    cd "${TEST_DIR}"
-    echo " "
-    echo "Now running lintian:"
-    lintian -ivI ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
-    cat ${LINTIAN_LOG_FILE} | grep "E: "
-    cat ${LINTIAN_LOG_FILE} | grep "W: "
-    echo "Finished running lintian."
-    echo " "
-    kwrite ${LINTIAN_LOG_FILE}
-
-    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
-
-        ;;
-esac
-
-
-kwrite debian/changelog
-
-
-cd "${TEMP_DIR}"
-cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
-
-for DIST in natty maverick lucid karmic ; do
-    dput -f ubuntu ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
-done
-
-echo "Update finished successfully"
+# Launch common script for updating packages and uploading them to Launchpad
+source "${MAIN_DIR}/Launchpad/updating_packages"
 

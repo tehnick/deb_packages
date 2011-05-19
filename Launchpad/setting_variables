@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+# Common script for setting variables
+
+export MAIN_DIST="oneiric"
+export UBUNTU_SFX="~${MAIN_DIST}1"
+
+if [ -z "${SFX}" ]; then
+    export SFX="-0ppa1"
+fi
+
+export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
+export TEMP_DIR="${PKG_DIR}/TEMP"
+export TEST_DIR="${TEMP_DIR}/TEST"
+
+mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
+
