@@ -76,13 +76,13 @@ if !([ -e "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz" ]); then
     rm -r "plasma-widget-cwp-${NEW_VER}"
     tar xzf "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz"
     mv "cwp-${NEW_VER}" "plasma-widget-cwp-${NEW_VER}"
-    tar -czf "plasma-widget-cwp_${NEW_VER}.orig.tar.gz" "plasma-widget-cwp-${NEW_VER}"
+    tar -cjf "plasma-widget-cwp_${NEW_VER}.orig.tar.bz2" "plasma-widget-cwp-${NEW_VER}"
 fi
 
 
 ############################# General part of script body ###############################
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
-    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.gz is not found.";
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.bz2 is not found.";
     exit 0;
 fi
 
@@ -92,7 +92,7 @@ export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
 rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
-tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+tar xjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
 
 if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
@@ -140,7 +140,7 @@ case "${1}" in
     mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
 
     cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
-    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"

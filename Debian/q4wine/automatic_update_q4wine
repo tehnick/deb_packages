@@ -75,13 +75,13 @@ if !([ -e "q4wine-${NEW_VER}.tar.bz2" ]); then
     wget -4 "http://sourceforge.net/projects/q4wine/files/q4wine/q4wine%20${NEW_VER}/q4wine-${NEW_VER}.tar.bz2"
     rm -rf "q4wine-${NEW_VER}"
     tar xjf "q4wine-${NEW_VER}.tar.bz2"
-    tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "q4wine-${NEW_VER}"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "q4wine-${NEW_VER}"
 fi
 
 
 ############################# General part of script body ###############################
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
-    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.gz is not found.";
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.bz2 is not found.";
     exit 0;
 fi
 
@@ -91,7 +91,7 @@ export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
 rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
-tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+tar xjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
 
 if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
@@ -139,7 +139,7 @@ case "${1}" in
     mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
 
     cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
-    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"

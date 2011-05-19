@@ -91,13 +91,13 @@ fi
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
     tar xzf "${LAST_SRC}".tar.gz
     mv "brezerk-q4wine-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
-    tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
 
 ############################# General part of script body ###############################
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
-    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.gz is not found.";
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.bz2 is not found.";
     exit 0;
 fi
 
@@ -107,7 +107,7 @@ export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
 rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
-tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+tar xjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
 
 if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
@@ -152,14 +152,6 @@ for DIST in natty maverick lucid karmic ; do
     debuild -S -sd
 done
 
-mv debian/source ../ # make dirty hack
-export DIST=jaunty
-cp -f ../changelog debian/changelog
-dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
-  "Automated backport upload; no source changes."
-debuild -S -sd
-mv ../source debian/ # rollback dirty hack
-
 mv ../changelog debian/changelog # rollback basic changelog
 # end update for other releases
 
@@ -175,7 +167,7 @@ case "${1}" in
     mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
 
     cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
-    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
@@ -206,7 +198,7 @@ esac
 cd "${TEMP_DIR}"
 cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
 
-for DIST in oneiric natty maverick lucid karmic jaunty ; do
+for DIST in oneiric natty maverick lucid karmic ; do
     dput -f ubuntu ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
 done
 
