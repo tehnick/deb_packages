@@ -1,7 +1,7 @@
-psi-plus (0.15~svn3902-1) unstable; urgency=low
+psi-plus (0.15~svn3910-1) unstable; urgency=low
 
-  * Uploader became maintainer (Closes: #620034)
-  * File debian/copyright was completely rewrited (Closes: #610338)
+  * Uploader became maintainer. (Closes: #620034)
+  * File debian/copyright was completely rewrited. (Closes: #610338)
   * File debian/control was updated:
     - psi-plus now depends from psi-plus-common (= ${source:Version})
     - psi-plus-webkit now depends from psi-plus-common (= ${source:Version})
@@ -9,11 +9,12 @@ psi-plus (0.15~svn3902-1) unstable; urgency=low
       (Closes: #613232)
     - removed ${shlibs:Depends} dependences from psi-plus-common and
       psi-plus-skins packages
-  * Here are no appreciable memory leaks now (Closes: #610024)
-  * File psi2psi-plus.patch was removed
-  * New upstream release
+  * Here are no appreciable memory leaks now. (Closes: #610024)
+  * File psi2psi-plus.patch was removed.
+  * File debian-watch was updated.
+  * New upstream release.
 
- -- Boris Pek <tehnick-8@mail.ru>  Wed, 18 May 2011 21:22:54 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 22 May 2011 19:08:25 +0300
 
 psi-plus (0.15~svn3775-0ubuntu1) natty; urgency=low
 

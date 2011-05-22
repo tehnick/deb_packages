@@ -1,0 +1,10 @@
+# Obtaining the source tarball of psi-plus is a bit tricky because there is no
+# explicite link to a downloadable tarball on the web page and the source is
+# only in SVN.  There is even no versioning scheme and this watch file is just
+# checking for a new SVN commit
+
+version=3
+opts="dversionmangle=s/0.15~svn//" \
+  http://code.google.com/p/psi-dev/source/list \
+    detail\?r=([\d]+) \
+  debian debian/get-orig-source
