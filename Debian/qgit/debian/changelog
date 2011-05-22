@@ -1,3 +1,14 @@
+qgit (2.3-1) unstable; urgency=low
+
+  * FAKE!
+  * Add myself as uploader.
+  * File debian/watch was added.
+  * File debian/compat was updated.
+  * File debian/source/format was added.
+  * Bumped standards version to 3.9.2
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 22 May 2011 22:32:39 +0300
+
 qgit (2.3-1ubuntu2) lucid; urgency=low
 
   * Use "png" extension for Icon key in qgit.desktop

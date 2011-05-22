@@ -2,8 +2,9 @@ Source: qgit
 Section: x11
 Priority: optional
 Maintainer: Wartan Hachaturow <wart@debian.org>
-Build-Depends: debhelper (>= 4.0.0), libqt4-dev (>= 4.3), libxext-dev
-Standards-Version: 3.6.2
+Uploaders: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: debhelper (>= 7.0.50~), libqt4-dev (>= 4.3), libxext-dev
+Standards-Version: 3.9.2
 
 Package: qgit
 Architecture: any
@@ -13,6 +14,7 @@ Suggests: source-highlight
 Description: Qt application for viewing GIT trees
  With qgit you will be able to browse revision tree, view patch content
  and changed files, graphically following different development branches.
+ .
  Main features:
   - View revisions, diffs, files history, files annotation, archive tree.
   - Commit changes visually cherry picking modified files.
@@ -22,5 +24,3 @@ Description: Qt application for viewing GIT trees
     and apply/format patches. You can also create new patches or refresh
     current top one using the same semantics of git commit, i.e.
     cherry picking single modified files.
- .
-

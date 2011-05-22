@@ -21,14 +21,14 @@ export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 
-export VER_LIST=$(curl 'http://delta.affinix.com/download/' 2>&1 | grep 'qconf-' | grep '.tar.bz2' | sed -e "s/^.*qconf-\(.*\).tar.bz2.*$/\1/")
-export NEW_VER=$(echo ${VER_LIST} | sed -e "s/^.* \(.*\)$/\1/")
+export VER_LIST=$(curl 'http://sourceforge.net/projects/qgit/files/qgit4/' 2>&1 | grep '="/projects/qgit/files/qgit4/' | grep '/stats/timeline"' | sed -e "s:^.*/projects/qgit/files/qgit4/\(.*\)/stats/timeline.*$:\1:")
+export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 echo " "
-echo "http://delta.affinix.com/download/"
+echo "http://sourceforge.net/projects/qgit/files/qgit4/"
 echo " "
-echo "On delta.affinix.com now available such versions:"
+echo "On sourceforge.net now available such versions:"
 echo ${VER_LIST}
 echo " "
 
@@ -37,7 +37,6 @@ echo "NEW_VER = ${NEW_VER}"
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 echo " "
-
 
 if [ -z "${NEW_VER}" ]; then
     echo "NEW_VER is empty!";
@@ -65,11 +64,12 @@ fi
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    wget -4 "http://delta.affinix.com/download/qconf-${NEW_VER}.tar.bz2"
-    rm -rf "${PACKAGE}-${NEW_VER}"
-    tar xjf "${PACKAGE}-${NEW_VER}.tar.bz2"
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+if !([ -e "qgit-${NEW_VER}.tar.bz2" ]); then
+    wget -4 "http://sourceforge.net/projects/qgit/files/qgit4/${NEW_VER}/qgit-${NEW_VER}.tar.bz2"
+    rm -rf "qgit" "qgit-${NEW_VER}"
+    tar xjf "qgit-${NEW_VER}.tar.bz2"
+    mv "qgit" "qgit-${NEW_VER}"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "qgit-${NEW_VER}"
 fi
 
 
