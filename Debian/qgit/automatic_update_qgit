@@ -64,8 +64,8 @@ fi
 
 
 # Get the sources
-if !([ -e "qgit-${NEW_VER}.tar.bz2" ]); then
-    wget -4 "http://sourceforge.net/projects/qgit/files/qgit4/${NEW_VER}/qgit-${NEW_VER}.tar.bz2"
+if !([ -e "qgit_${NEW_VER}.orig.tar.bz2" ]); then
+    wget -4 -c "http://sourceforge.net/projects/qgit/files/qgit4/${NEW_VER}/qgit-${NEW_VER}.tar.bz2"
     rm -rf "qgit" "qgit-${NEW_VER}"
     tar xjf "qgit-${NEW_VER}.tar.bz2"
     mv "qgit" "qgit-${NEW_VER}"

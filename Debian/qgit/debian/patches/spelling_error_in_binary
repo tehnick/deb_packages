@@ -1,0 +1,27 @@
+# fix lintian notes about spelling error in binary
+--- qgit-2.3.orig/src/mainview.ui
++++ qgit-2.3/src/mainview.ui
+@@ -752,10 +752,10 @@
+   </action>
+   <action name="ActAmend">
+    <property name="text">
+-    <string>Amend comit...</string>
++    <string>Amend commit...</string>
+    </property>
+    <property name="toolTip">
+-    <string>Amend previous comit</string>
++    <string>Amend previous commit</string>
+    </property>
+   </action>
+   <action name="ActBranch">
+--- qgit-2.3.orig/src/rangeselect.ui
++++ qgit-2.3/src/rangeselect.ui
+@@ -331,7 +331,7 @@
+           </sizepolicy>
+          </property>
+          <property name="toolTip" >
+-          <string>You can always reenable the dialog from settings.</string>
++          <string>You can always re-enable the dialog from settings.</string>
+          </property>
+          <property name="text" >
+           <string>S&amp;how this dialog when opening a repository</string>

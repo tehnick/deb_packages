@@ -1,13 +1,26 @@
-qgit (2.3-1) unstable; urgency=low
+qgit (2.3-2) unstable; urgency=low
 
-  * FAKE!
   * Add myself as uploader.
-  * File debian/watch was added.
-  * File debian/compat was updated.
-  * File debian/source/format was added.
+  * Added files:
+    - debian/watch
+    - debian/source/format
+  * Added debian/patches/*:
+    - fix git repo-config deprecated bug (Closes: #626008, #625936)
+    - fix lintian notes about spelling error in binary
+  * Updated files:
+    - debian/compat
+    - debian/control
+    - debian/rules
+  * Fixed lintian warnings and notes:
+    - ancient-standards-version
+    - debian-rules-ignores-make-clean-error
+    - debian-watch-file-is-missing
+    - missing-debian-source-format
+    - package-uses-deprecated-debhelper-compat-version
+  * Updated dependence from 'git-core' to 'git' (Closes: #599201)
   * Bumped standards version to 3.9.2
 
- -- Boris Pek <tehnick-8@mail.ru>  Sun, 22 May 2011 22:32:39 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 23 May 2011 00:24:01 +0300
 
 qgit (2.3-1ubuntu2) lucid; urgency=low
 
@@ -44,7 +57,7 @@ qgit (2.2-1) unstable; urgency=low
 
 qgit (1.5.7-1) unstable; urgency=low
 
-  * New upstream release 
+  * New upstream release
   * Closes: #441570, #441280
   * Get rid of config.sub and config.guess, Closes: #441286
 

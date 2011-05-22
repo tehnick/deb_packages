@@ -1,0 +1,21 @@
+# fix git repo-config deprecated bug (Closes: #626008, #625936)
+--- qgit-2.3.orig/src/git.cpp
++++ qgit-2.3/src/git.cpp
+@@ -425,7 +425,7 @@
+ 	if (name == "Big5-HKSCS")
+ 		name = "Big5";
+
+-	run("git repo-config i18n.commitencoding " + name);
++	run("git config i18n.commitencoding " + name);
+ }
+
+ QTextCodec* Git::getTextCodec(bool* isGitArchive) {
+@@ -435,7 +435,7 @@
+ 		return NULL;
+
+ 	QString runOutput;
+-	if (!run("git repo-config --get i18n.commitencoding", &runOutput))
++	if (!run("git config --get i18n.commitencoding", &runOutput))
+ 		return NULL;
+
+ 	if (runOutput.isEmpty()) // git docs says default is utf-8

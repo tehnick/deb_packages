@@ -8,7 +8,7 @@ Standards-Version: 3.9.2
 
 Package: qgit
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, git-core (>= 1.3.0)
+Depends: ${shlibs:Depends}, ${misc:Depends}, git (>= 1.3.0)
 Recommends: stgit
 Suggests: source-highlight
 Description: Qt application for viewing GIT trees
