@@ -1,0 +1,2 @@
+?package(qgit):needs="X11" section="Applications/Programming"\
+  title="qgit" command="/usr/bin/qgit"

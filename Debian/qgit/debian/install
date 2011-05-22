@@ -1,0 +1,2 @@
+debian/qgit.desktop usr/share/applications
+bin/qgit usr/bin
