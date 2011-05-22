@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+# Common script for setting variables
+
+if [ -z "${SFX}" ]; then
+    export SFX="-1"
+fi
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
+export TEMP_DIR="${PKG_DIR}/TEMP"
+export TEST_DIR="${TEMP_DIR}/TEST"
+
+mkdir -p "${TEMP_DIR}" && cd "${TEMP_DIR}"
+

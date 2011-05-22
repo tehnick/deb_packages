@@ -1,3 +1,21 @@
+qgit (2.3-1ubuntu2) lucid; urgency=low
+
+  * Use "png" extension for Icon key in qgit.desktop
+
+ -- Daniel Hahler <ubuntu@thequod.de>  Thu, 25 Feb 2010 21:20:35 +0100
+
+qgit (2.3-1ubuntu1) lucid; urgency=low
+
+  * Install icon and refer to it in the desktop file (LP: #237018)
+    debian/qgit.desktop, debian/rules
+  * Fix qgit.desktop (Encoding, MimeType, X-KDE-*, ServiceTypes),
+    removing the last two ones (LP: #527971)
+    Closes: #549648
+  * Suggest source-highlight (debian/control)
+    Closes: #547972
+
+ -- Daniel Hahler <ubuntu@thequod.de>  Thu, 25 Feb 2010 20:58:34 +0100
+
 qgit (2.3-1) unstable; urgency=low
 
   * New upstream release

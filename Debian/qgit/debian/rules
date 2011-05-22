@@ -79,6 +79,10 @@ binary-arch: build install
 	dh_installexamples
 	dh_install
 	dh_installmenu
+	
+	install -D -m 644 src/resources/qgit.png debian/qgit/usr/share/pixmaps/qgit.png
+	dh_icons
+
 #	dh_installdebconf	
 #	dh_installlogrotate
 #	dh_installemacsen
