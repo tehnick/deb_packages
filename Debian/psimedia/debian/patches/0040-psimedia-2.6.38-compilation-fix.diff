@@ -1,3 +1,7 @@
+# http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=621967
+# http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=619540
+# http://psi-dev.googlecode.com/svn/trunk/patches/psimedia/0040-psimedia-2.6.38-compilation-fix.diff
+
 Index: psimedia/gstprovider/deviceenum/deviceenum_unix.cpp
 ===================================================================
 --- psimedia/gstprovider/deviceenum/deviceenum_unix.cpp	(revision 808)
@@ -9,12 +13,12 @@ Index: psimedia/gstprovider/deviceenum/deviceenum_unix.cpp
 -# include <linux/videodev.h>
 +# include <linux/videodev2.h>
  #endif
- 
+
  namespace DeviceEnum {
 @@ -475,77 +475,6 @@
  	return out;
  }
- 
+
 -// v4l detection scheme adapted from PWLib (used by Ekiga/Gnomemeeting)
 -static QList<Item> get_v4l_items()
 -{
@@ -97,4 +101,4 @@ Index: psimedia/gstprovider/deviceenum/deviceenum_unix.cpp
 -		out += get_v4l_items();
  	return out;
  }
- 
+
