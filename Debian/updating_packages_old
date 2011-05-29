@@ -1,0 +1,117 @@
+#!/bin/bash
+
+# This is the common script for updating packages and uploading them to mentors.debian.net
+#
+# It make such actions:
+# 1) Update changelog.
+# 2) Prepare sources to upload.
+#    Build the package and check it using lintian (optional)
+# 3) Upload sources to mentors.debian.net
+
+
+if [ -z "${PACKAGE}" ]; then
+    echo "Error: PACKAGE variable is empty!";
+    exit 1;
+elif [ -z "${NEW_VER}" ]; then
+    echo "Error: NEW_VER variable is empty!";
+    exit 1;
+fi
+
+
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.gz is not found.";
+    exit 0;
+fi
+
+echo "Updating is started."
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
+
+tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+cp -rf "${PKG_DIR}/debian" "${PACKAGE}-${NEW_VER}/"
+
+if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
+    diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
+             "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
+fi
+
+cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+echo " "
+echo "Uscan:"
+uscan --report-status
+echo " "
+
+export DIST="${MAIN_DIST}"
+if [ "${SFX}" = "-1" ]; then
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
+        "${UPDATE_STRING}"
+    kwrite debian/changelog
+    debuild -S -sa
+else
+    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
+        "Some fixes in package."
+    kwrite debian/changelog
+    # debuild -S -sd
+    debuild -S -sa
+fi
+
+
+case "${1}" in
+        fast)
+
+    echo " "
+    echo "Fast upload (without tests)."
+    echo " "
+
+        ;;
+        *)
+
+    echo " "
+    echo "Now will be tests."
+    echo " "
+
+    rm -rf "${TEST_DIR}"
+    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
+
+    cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
+
+    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
+    export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
+    cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
+    echo " "
+    echo "Start building packages..."
+    dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
+    echo "Finished building packages."
+    echo " "
+
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
+    cd "${TEST_DIR}"
+    echo " "
+    echo "Now running lintian:"
+    lintian -ivI ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    cat ${LINTIAN_LOG_FILE} | grep "E: "
+    cat ${LINTIAN_LOG_FILE} | grep "W: "
+    echo "Finished running lintian."
+    echo " "
+    kwrite ${LINTIAN_LOG_FILE}
+
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+        ;;
+esac
+
+
+kwrite debian/changelog
+
+
+cd "${TEMP_DIR}"
+cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
+
+dput -f mentors ${PACKAGE}_${NEW_VER_FULL}_source.changes
+
+echo "Update finished successfully"
+
