@@ -2,17 +2,13 @@ Source: leechcraft
 Section: net
 Priority: extra
 Maintainer: Boris Pek <tehnick-8@mail.ru>
-Build-Depends: debhelper (>= 7.0.50~),
- po-debconf,
- cdbs,
- cmake (>= 2.8),
- libboost-all-dev (>=1.42),
- libtorrent-rasterbar-dev (>=0.15),
+Build-Depends: debhelper (>= 7.0.50~), po-debconf, cmake (>= 2.8),
  libboost-thread-dev (>=1.42),
  libboost-date-time-dev (>=1.42),
  libboost-filesystem-dev (>=1.42),
  libboost-regex-dev (>=1.42),
  libboost-program-options-dev (>=1.42),
+ libtorrent-rasterbar-dev (>=0.15),
  kdelibs5-dev (>= 4.2.0),
  libphonon-dev,
  libbz2-dev,
@@ -21,7 +17,6 @@ Build-Depends: debhelper (>= 7.0.50~),
  libgeoip-dev,
  libcurl4-openssl-dev,
  libqscintilla2-dev,
- libqxmpp-dev (>= 0.2.92),
  libqjson-dev,
  libaspell-dev
 Standards-Version: 3.9.2
