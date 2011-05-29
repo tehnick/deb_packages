@@ -1,0 +1,88 @@
+#!/bin/bash
+
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PACKAGE="leechcraft"
+
+# Uncomment if necessary:
+#export SFX="-2"
+
+# experimental unstable
+export MAIN_DIST="unstable"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+
+# Check versions
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+
+export VER_LIST=$(curl 'https://github.com/0xd34df00d/leechcraft/downloads' 2>&1 | grep '="/0xd34df00d/leechcraft/tarball/' | sed -e "s:^.*\"/0xd34df00d/leechcraft/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
+export NEW_VER=$(echo ${VER_LIST} | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
+export NEW_VER_FULL=${NEW_VER}${SFX}
+
+echo " "
+echo "https://github.com/0xd34df00d/leechcraft/downloads"
+echo " "
+echo "On github.com now available such versions:"
+echo ${VER_LIST}
+echo " "
+
+echo "OLD_VER = ${OLD_VER}"
+echo "NEW_VER = ${NEW_VER}"
+echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+echo " "
+
+if [ -z "${NEW_VER}" ]; then
+    echo "NEW_VER is empty!";
+    exit 0;
+elif [ -z "${OLD_VER_FULL}" ]; then
+    echo "OLD_VER_FULL is empty!";
+    exit 0;
+elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+    echo "Upgrading is not required.";
+    exit 0;
+else
+    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+        if !([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
+    fi
+fi
+
+
+# Get the sources
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
+    # main sources
+    wget -4 -c "http://nodeload.github.com/0xd34df00d/leechcraft/tarball/${NEW_VER}"
+    rm -rf 0xd34df00d-leechcraft-*
+    tar xzf "${NEW_VER}"
+    mv 0xd34df00d-leechcraft-* "${PACKAGE}-${NEW_VER}"
+    # qxmpp sources
+    wget -4 -c "http://nodeload.github.com/0xd34df00d/qxmpp-dev/tarball/master"
+    rm -rf 0xd34df00d-qxmpp-dev-*
+    tar xzf "master"
+    mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"/qxmpp
+    # tarball
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+fi
+
+
+export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
+
