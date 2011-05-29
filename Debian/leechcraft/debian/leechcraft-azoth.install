@@ -1,0 +1,6 @@
+usr/lib/leechcraft/plugins/*leechcraft_azoth.so
+usr/share/leechcraft/translations/leechcraft_azoth_ru_RU.qm
+usr/share/leechcraft/translations/leechcraft_azoth_uk_UA.qm
+usr/share/leechcraft/translations/leechcraft_azoth_en.qm
+usr/share/leechcraft/settings/azothsettings.xml
+usr/share/leechcraft/azoth/iconsets/*

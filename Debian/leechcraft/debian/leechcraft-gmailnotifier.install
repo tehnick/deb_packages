@@ -1,0 +1,3 @@
+usr/lib/leechcraft/plugins/*leechcraft_gmailnotifier.so
+usr/share/leechcraft/translations/leechcraft_gmailnotifier*.qm
+usr/share/leechcraft/settings/gmailnotifiersettings.xml

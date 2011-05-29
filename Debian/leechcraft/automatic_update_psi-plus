@@ -1,0 +1,154 @@
+#!/bin/bash
+
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PACKAGE="leechcraft"
+
+# Uncomment if necessary:
+#export SFX="-2"
+
+# experimental unstable
+export MAIN_DIST="unstable"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+
+# Check versions
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
+
+export LAST_REVISION=$(svn log http://psi-dev.googlecode.com/svn/trunk/ |
+                       head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
+
+echo "Number of old  revision: ${OLD_REVISION}"
+echo "Number of last revision: ${LAST_REVISION}"
+
+export CUR_VER="0.15"
+export NEW_VER="${CUR_VER}~svn${LAST_REVISION}"
+export NEW_VER_FULL="${NEW_VER}${SFX}"
+
+
+echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+
+
+if [ -z "${OLD_VER_FULL}" ]; then
+    echo "OLD_VER_FULL is empty!";
+    exit 0;
+elif [ -z ${CUR_VER} ]; then
+    echo "CUR_VER is empty!";
+    exit 0;
+elif [ -z ${LAST_REVISION} ]; then
+    echo "LAST_REVISION is empty!";
+    exit 0;
+elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+    echo "Upgrading is not required.";
+    exit 0;
+else
+    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+        if !([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
+    fi
+fi
+
+
+# Get the sources
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    export PSI_DIR="${HOME}/WorkDir/Devel/Psi+"
+
+    # Update local copies of git and svn repositories
+    for GIT_DIR in psi iris libpsi; do
+        echo "Updating ${PSI_DIR}/${GIT_DIR}"
+        cd "${PSI_DIR}/${GIT_DIR}"
+        git pull
+    done
+    echo "Updating ${PSI_DIR}/psi+"
+    svn update "${PSI_DIR}/psi+"
+
+    # Prepare directories
+    rm -rf "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    mkdir -p "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+
+    # Copy and mix files to a sources tree
+    GIT_DIR=psi
+    echo "Exporting ${PSI_DIR}/${GIT_DIR}"
+    cd "${PSI_DIR}/${GIT_DIR}"
+    git archive --format=tar HEAD |
+        ( cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" ; tar xf - )
+
+    GIT_DIR=iris
+    echo "Exporting ${PSI_DIR}/${GIT_DIR}"
+    cd "${PSI_DIR}/${GIT_DIR}"
+    mkdir -p "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${GIT_DIR}"
+    git archive --format=tar HEAD |
+            ( cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${GIT_DIR}" ; tar xf - )
+
+    GIT_DIR=libpsi
+    echo "Exporting ${PSI_DIR}/${GIT_DIR}"
+    cd "${PSI_DIR}/${GIT_DIR}"
+    mkdir -p "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/src/${GIT_DIR}"
+    git archive --format=tar HEAD |
+        ( cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/src/${GIT_DIR}" ; tar xf - )
+
+    SVN_DIR=psi+
+    echo "Exporting ${PSI_DIR}/${SVN_DIR}"
+    cd "${PSI_DIR}/${SVN_DIR}"
+    cp -f copying*   "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/"
+    cp -f changelog* "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/"
+    for SUB_DIR in certs lang patches scripts skins sound themes; do
+        echo "SUB_DIR = ${SUB_DIR}"
+        svn export --force "${PSI_DIR}/${SVN_DIR}/${SUB_DIR}" \
+                           "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${SUB_DIR}"
+    done
+    SUB_DIR=plugins
+    echo "SUB_DIR = ${SUB_DIR}"
+    svn export --force "${PSI_DIR}/${SVN_DIR}/${SUB_DIR}" \
+                       "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/src/${SUB_DIR}"
+    SUB_DIR=iconsets/system/default/psiplus
+    echo "SUB_DIR = ${SUB_DIR}"
+    svn export --force "${PSI_DIR}/${SVN_DIR}/${SUB_DIR}" \
+           "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${SUB_DIR}"
+    SUB_DIR=iconsets/roster/default
+    echo "SUB_DIR = ${SUB_DIR}"
+    svn export --force "${PSI_DIR}/${SVN_DIR}/${SUB_DIR}" \
+           "${TEMP_DIR}/${PACKAGE}-${NEW_VER}/${SUB_DIR}"
+
+    # Some magic
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    sed "s/.xxx/.${LAST_REVISION}/" -i patches/9999-psiplus-application-info.diff
+    cd "patches"
+    ls -1 *.diff > series
+
+    # Delete some trash
+    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    rm -f configure.exe
+    rm -r win32/
+    rm -r scripts/win32/
+    rm -r src/libpsi/tools/zip/minizip/win32/
+    rm -r src/libpsi/tools/idle/win32/
+
+    # Make archive with sources
+    cd "${TEMP_DIR}"
+    echo "Generating orig.tar.bz2"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+fi
+
+
+export UPDATE_STRING="New upstream release"
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
+

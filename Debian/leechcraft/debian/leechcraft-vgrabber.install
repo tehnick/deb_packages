@@ -1,0 +1,3 @@
+usr/lib/leechcraft/plugins/*leechcraft_vgrabber.so
+usr/share/leechcraft/translations/leechcraft_vgrabber*.qm
+usr/share/leechcraft/settings/vgrabbersettings.xml

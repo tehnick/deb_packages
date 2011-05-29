@@ -1,0 +1,3 @@
+usr/lib/leechcraft/plugins/*leechcraft_deadlyrics.so
+usr/share/leechcraft/translations/leechcraft_deadlyrics*.qm
+usr/share/leechcraft/settings/deadlyricssettings.xml

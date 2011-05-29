@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# # This file is public domain software, originally written by Joey Hess. 
+#
+# # Uncomment this to turn on verbose mode.
+# #export DH_VERBOSE=1
+#
+# # $Id: rules 2396 2008-06-08 14:03:37Z roman_rybalko $
+#
+DEB_SRCDIR = "src"
+DEB_DH_INSTALL_SOURCEDIR = "$(CURDIR)/debian/tmp"
+export DEB_CMAKE_EXTRA_FLAGS = -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo -DDISABLE_RPATH_TRICKS=True -DLEECHCRAFT_VERSION=$(shell dpkg-parsechangelog | awk '/Version:/ {print $2}' | cut -b 10-) -DENABLE_POPISHU=True -DENABLE_SHELLOPEN=True -DENABLE_SECMAN=True -DENABLE_LACKMAN=True -DTEST=False -DENABLE_AZOTH=True -DENABLE_GMAILNOTIFIER=True -DENABLE_EISKALTDCPP=True
+
+	include /usr/share/cdbs/1/rules/debhelper.mk
+	include /usr/share/cdbs/1/class/cmake.mk
+
+clean::
+	rm -f src/data/leechcraft.1.gz

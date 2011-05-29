@@ -1,0 +1,14 @@
+usr/share/leechcraft/translations/be/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/bg/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/cs/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/en/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/es/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/fr/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/hu/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/pl/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/ru/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/sr/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/sk/LC_MESSAGES/libeiskaltdcpp.mo                                                                                                                                                       
+usr/share/leechcraft/translations/uk/LC_MESSAGES/libeiskaltdcpp.mo
+usr/share/leechcraft/eiskaltdcpp/*
+usr/lib/leechcraft/plugins/libleechcraft_eiskaltdcpp.so

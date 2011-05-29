@@ -1,0 +1,3 @@
+usr/lib/leechcraft/plugins/*leechcraft_lcftp.so
+usr/share/leechcraft/translations/leechcraft_lcftp*.qm
+usr/share/leechcraft/settings/lcftpsettings.xml

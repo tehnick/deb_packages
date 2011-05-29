@@ -1,0 +1,3 @@
+usr/lib/leechcraft/plugins/*leechcraft_popishu.so
+usr/share/leechcraft/translations/leechcraft_popishu*.qm
+usr/share/leechcraft/settings/popishusettings.xml

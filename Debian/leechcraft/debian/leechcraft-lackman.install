@@ -1,0 +1,3 @@
+usr/lib/leechcraft/plugins/*leechcraft_lackman.so
+usr/share/leechcraft/translations/leechcraft_lackman*.qm
+usr/share/leechcraft/settings/lackmansettings.xml
