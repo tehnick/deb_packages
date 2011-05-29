@@ -1,8 +1,8 @@
 Source: leechcraft
 Section: net
 Priority: extra
-Maintainer: Georg Rudoy <0xd34df00d@gmail.com>
-Build-Depends: debhelper (>= 7),
+Maintainer: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: debhelper (>= 7.0.50~),
  po-debconf,
  cdbs,
  cmake (>= 2.8),
@@ -24,7 +24,7 @@ Build-Depends: debhelper (>= 7),
  libqxmpp-dev (>= 0.2.92),
  libqjson-dev,
  libaspell-dev
-Standards-Version: 3.8.3
+Standards-Version: 3.9.2
 Homepage: http://leechcraft.org
 
 Package: leechcraft-full
@@ -73,7 +73,6 @@ Recommends:
 Suggests:
  leechcraft-extra,
  leechcraft-ugly
-Homepage: http://leechcraft.org
 Description: Full LeechCraft installation
  LeechCraft is a free modular "Internet client" application.
  .
@@ -92,7 +91,6 @@ Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-anhero (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Extra LeechCraft plugins beyond full installation
  LeechCraft is a free modular "Internet client" application.
  .
@@ -113,7 +111,6 @@ Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-lcftp (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Bad LeechCraft plugins
  LeechCraft is a free modular "Internet client" application.
  .
@@ -132,7 +129,6 @@ Package: leechcraft-incubator
 Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Homepage: http://leechcraft.org
 Description: Plugins for LeechCraft under heavy development
  LeechCraft is a free modular "Internet client" application.
  .
@@ -195,7 +191,6 @@ Recommends: leechcraft-aggregator,
  leechcraft-tabpp,
  leechcraft-vgrabber
 Suggests: leechcraft-anhero
-Homepage: http://leechcraft.org
 Description: Core executable of LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
@@ -252,7 +247,6 @@ Package: leechcraft-libxmlsettingsdialog0.3.0
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Homepage: http://leechcraft.org
 Description: Dynamic settings dialog builder for LeechCraft
  XmlSettingsDialog provides a simple but powerful and abstract way to
  create settings dialogs from XML files and store their (and not only)
@@ -262,7 +256,6 @@ Package: leechcraft-libplugininterface0.3.0
 Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Architecture: any
-Homepage: http://leechcraft.org
 Description: Common library for LeechCraft
  A library providing some useful and commonly used routines as well as
  communications with the LeechCraft core.
@@ -278,7 +271,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 Provides: leechcraft-provider-feedreader
 Recommends: leechcraft-provider-webbrowser,
  leechcraft-provider-tasksview
-Homepage: http://leechcraft.org
 Description: RSS/Atom feed reader for LeechCraft
  This package contains Aggregator, the RSS/Atom feed reader. It features:
   * RSS 0.92/0.93/1.0/2.0, Atom 0.3/1.0;
@@ -305,7 +297,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Crash handler for LeechCraft
  This package contains AnHero, the crash handler for LeechCraft.
  .
@@ -322,7 +313,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Screenshooter for LeechCraft
  This package contains Auscrie, the auto screenshooter for LeechCraft.
  It can make screenshots of LeechCraft and then either save them locally
@@ -348,7 +338,6 @@ Recommends: leechcraft-azoth-acetamide (= ${binary:Version}),
  leechcraft-azoth-nativeemoticons (= ${binary:Version}),
  leechcraft-azoth-p100q (= ${binary:Version}),
  leechcraft-azoth-xoox (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Modular IM client for LeechCraft
  This package contains the core of the Azoth, the modular IM client for
  LeechCraft.
@@ -370,7 +359,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: IRC protocol support for LeechCraft Azoth
  This plugin adds support for IRC protocol to Azoth.
  .
@@ -388,7 +376,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: History storage for LeechCraft Azoth
  This plugin adds support for storing chat history to Azoth.
  .
@@ -406,7 +393,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Support for emoticons packs for LeechCraft Azoth
  This plugin adds support for "standard" emoticons to Azoth.
  .
@@ -425,7 +411,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Provides: leechcraft-azoth-provider-styling
-Homepage: http://leechcraft.org
 Description: Standard styling support for LeechCraft Azoth
  Standard styling plugin that provides support for default (and pretty
  unimpressive) themes for chat windows.
@@ -444,7 +429,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Plugin for the Juick.com service for LeechCraft Azoth
  This package contains Juick.com microblogging service plugin that
  enhances the experience of using the service.
@@ -463,7 +447,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Plugin for psto.net service for LeechCraft Azoth
  This package contains psto.net microblogging service plugin that
  enhances the experience of using the service.
@@ -482,7 +465,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: XMPP support for LeechCraft Azoth
  This package contains the XMPP protocol plugin for Azoth, based on the
  QXmpp library.
@@ -502,7 +484,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version}),
  leechcraft-provider-tasksview
 Provides: leechcraft-provider-bittorrent
-Homepage: http://leechcraft.org
 Description: BitTorrent client for LeechCraft
  This package contains a sophisticated BitTorrent client. It's based on
  the Rasterbar Libtorrent library and features:
@@ -531,7 +512,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version}),
  leechcraft-provider-tasksview
 Provides: leechcraft-provider-http
-Homepage: http://leechcraft.org
 Description: HTTP client for LeechCraft
  This package contains clean and simple HTTP implementation.
  .
@@ -549,7 +529,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-dbus
-Homepage: http://leechcraft.org
 Description: D-Bus side of LeechCraft
  This package provides some DBus-related features, like integration with
  desktop notifications (KDE ≥ 4.4 and others supporting libnotify
@@ -569,7 +548,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-searchesview
-Homepage: http://leechcraft.org
 Description: Song lyrics finder for LeechCraft
  This package contains a simple client for finding song lyrics on
  various sites.
@@ -587,7 +565,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: EiskaltDC++ for LeechCraft
  This package contains EiskaltDC++ DC client as LeechCraft plugin.
  .
@@ -610,7 +587,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-dbus
-Homepage: http://leechcraft.org
 Description: Notifications about new mail in GMail for LeechCraft
  This plugin notifies whenever new mail arrives to your GMail inbox.
  .
@@ -628,7 +604,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-searchesview
-Homepage: http://leechcraft.org
 Description: History keeper for LeechCraft
  This package contains a history keeper that stores information about
  finished downloads and similar events.
@@ -646,7 +621,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Fancy notifications for LeechCraft
  This package contains Kinotify which provides fancy notifications for
  LeechCraft instead of old-style tray-based ones.
@@ -665,7 +639,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-http
-Homepage: http://leechcraft.org
 Description: Userspace Package Manager for LeechCraft
  This package contains LackMan, the Package Manager for userspace stuff
  like script plugins, extensions, themes and frequently updated data.
@@ -684,7 +657,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-mediaplayer
-Homepage: http://leechcraft.org
 Description: Media Previewer for LeechCraft
  This package contains the LMP, LeechCraft Media Previewer, small and
  dirty media player designed to preview already downloaded files or to
@@ -704,7 +676,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-searchesview
-Homepage: http://leechcraft.org
 Description: FTP client for LeechCraft
  This package adds FTP support and provides a simple two-panel FTP
  client based on libcurl.
@@ -722,7 +693,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Network monitor for LeechCraft
  This package contains a monitor that watches for HTTP requests
  and responses around.
@@ -741,7 +711,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-importer
-Homepage: http://leechcraft.org
 Description: Settings importer for LeechCraft
  This package contains importer of settings, preferences etc. from
  various applications into LeechCraft. Currently it supports importing
@@ -762,7 +731,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version}),
  libqscintilla2-5
 Provides: leechcraft-provider-texteditor
-Homepage: http://leechcraft.org
 Description: Plain text editor for LeechCraft
  This package contains Popishu, a simple text editor for LeechCraft
  with support for syntax highlighting and aimed at in-place editing
@@ -786,7 +754,6 @@ Recommends: leechcraft-provider-http,
  leechcraft-provider-feedreader,
  leechcraft-provider-search
 Provides: leechcraft-provider-webbrowser
-Homepage: http://leechcraft.org
 Description: Web browser for LeechCraft
  This package contains a full-featured web browser for LeechCraft based
  on WebKit. Poshuku is fully extensible with plugins. Currently it
@@ -811,7 +778,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Ad filter for Web browser for LeechCraft
  This package contains a plugin for the Poshuku web browser that
  filters out ads according to predefined rules. It is compatible with
@@ -833,7 +799,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: file://-schemes support for the Web browser for LeechCraft
  This package contains a plugin for the Poshuku web browser that allows
  it to handle file:// schemes.
@@ -852,7 +817,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Fake user agent plugin for Web browser for LeechCraft
  This package contains a plugin for the Poshuku web browser that allows
  it to set fake user agents for different domains or even URLs based on
@@ -872,7 +836,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Support for syncing bookmarks with online bookmarks services
  This package contains a plugin for the Poshuku web browser that allows
  it to synchronize local bookmarks with online social bookmarking
@@ -893,7 +856,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-mediaplayer
-Homepage: http://leechcraft.org
 Description: Flash video replacer for Web browser for LeechCraft
  This package contains a plugin for the Poshuku web browser that
  replaces default flash-based video players on some sites with any
@@ -913,7 +875,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-securestorage
-Homepage: http://leechcraft.org
 Description: Security Manager plugin for LeechCraft
  This package contains the base plugin for secure storage and such
  stuff for LeechCraft. Particular storage backends are implemented
@@ -933,7 +894,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-secman (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Simple storage backend for SecMan
  This package contains a simple, unencrypted storage backend for
  SecMan, LeechCraft's security manager plugin.
@@ -954,7 +914,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-provider-webbrowser,
  leechcraft-provider-searchesview
 Provides: leechcraft-provider-search
-Homepage: http://leechcraft.org
 Description: OpenSearch-support plugin for LeechCraft
  This package contains a search client for OpenSearch-aware web sites.
  .
@@ -971,7 +930,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
-Homepage: http://leechcraft.org
 Description: Support for opening files with external apps in LeechCraft
  This package contains module that adds an option to open files and
  handle entities with external applications. For example, you may choose
@@ -993,7 +951,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-searchesview,
  leechcraft-provider-tasksview
-Homepage: http://leechcraft.org
 Description: A quick summary of what's going on in LeechCraft
  This package contains Summary which shows currently running download
  tasks like BitTorrent files as well as news, events and statuses, like
@@ -1014,7 +971,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-searchesview
-Homepage: http://leechcraft.org
 Description: Tabbing experience enhancer for LeechCraft
  This package contains Tab++ which shows the tree of tabs in groups. For
  example, tabs with pages in a browser that belong to the same subdomain
@@ -1037,7 +993,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-provider-http,
  leechcraft-provider-searchesview
 Provides: leechcraft-provider-search
-Homepage: http://leechcraft.org
 Description: vkontakte.ru plugin for LeechCraft
  This package contains a music search/grabber for the vkontakte.ru social
  network.
@@ -1053,7 +1008,6 @@ Section: net
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Provides: leechcraft-iconset
-Homepage: http://leechcraft.org
 Description: Oxygen-based iconset for LeechCraft
  This package contains icons taken from the Oxygen project for LeechCraft.
  .
@@ -1069,7 +1023,6 @@ Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends},
  tango-icon-theme (>= 0.8.1)
 Provides: leechcraft-iconset
-Homepage: http://leechcraft.org
 Description: Iconset based on the Tango project for LeechCraft
  This package contains mapping to the Tango project icons.
  .
