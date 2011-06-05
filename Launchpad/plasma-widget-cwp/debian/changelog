@@ -1,3 +1,9 @@
+plasma-widget-cwp (1.5.3-0ppa1~oneiric1) oneiric; urgency=low
+
+  * Update to stable release 1.5.3.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Fri, 03 Jun 2011 21:03:55 +0300
+
 plasma-widget-cwp (1.5.2-0ppa1~natty1) natty; urgency=low
 
   * Update to stable release 1.5.2.

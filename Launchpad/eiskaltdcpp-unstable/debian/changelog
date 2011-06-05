@@ -1,3 +1,9 @@
+eiskaltdcpp-unstable (2.2.3-20110606-005226-05424b7-0ppa1~oneiric1) oneiric; urgency=low
+
+  * Minor update from GIT master branch.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 06 Jun 2011 00:55:44 +0300
+
 eiskaltdcpp-unstable (2.2.3-20110527-224419-4664577-0ppa1~oneiric1) oneiric; urgency=low
 
   * Minor update from GIT master branch.
