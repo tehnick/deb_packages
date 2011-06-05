@@ -2,7 +2,9 @@ Source: leechcraft
 Section: net
 Priority: extra
 Maintainer: Boris Pek <tehnick-8@mail.ru>
-Build-Depends: debhelper (>= 7.0.50~), po-debconf, cmake (>= 2.8),
+Build-Depends: debhelper (>= 7.0.50~),
+ po-debconf,
+ cmake (>= 2.8),
  libboost-thread-dev (>=1.42),
  libboost-date-time-dev (>=1.42),
  libboost-filesystem-dev (>=1.42),
@@ -33,9 +35,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-azoth (= ${binary:Version}),
  leechcraft-azoth-acetamide (= ${binary:Version}),
  leechcraft-azoth-chathistory (= ${binary:Version}),
+ leechcraft-azoth-hili (= ${binary:Version}),
  leechcraft-azoth-juick (= ${binary:Version}),
  leechcraft-azoth-nativeemoticons (= ${binary:Version}),
  leechcraft-azoth-p100q (= ${binary:Version}),
+ leechcraft-azoth-standardstyles (= ${binary:Version}),
  leechcraft-azoth-xoox (= ${binary:Version}),
  leechcraft-bittorrent (= ${binary:Version}),
  leechcraft-cstp (= ${binary:Version}),
@@ -52,6 +56,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-popishu (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft-poshuku-cleanweb (= ${binary:Version}),
+ leechcraft-poshuku-fatape (= ${binary:Version}),
  leechcraft-poshuku-filescheme (= ${binary:Version}),
  leechcraft-poshuku-fua (= ${binary:Version}),
  leechcraft-poshuku-wyfv (= ${binary:Version}),
@@ -156,6 +161,7 @@ Recommends: leechcraft-aggregator,
  leechcraft-azoth,
  leechcraft-azoth-acetamide,
  leechcraft-azoth-chathistory,
+ leechcraft-azoth-hili,
  leechcraft-azoth-juick,
  leechcraft-azoth-nativeemoticons,
  leechcraft-azoth-p100q,
@@ -175,6 +181,7 @@ Recommends: leechcraft-aggregator,
  leechcraft-popishu,
  leechcraft-poshuku,
  leechcraft-poshuku-cleanweb,
+ leechcraft-poshuku-fatape,
  leechcraft-poshuku-filescheme,
  leechcraft-poshuku-fua,
  leechcraft-poshuku-wyfv,
@@ -329,6 +336,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-azoth-provider-styling
 Recommends: leechcraft-azoth-acetamide (= ${binary:Version}),
  leechcraft-azoth-chathistory (= ${binary:Version}),
+ leechcraft-azoth-hili (= ${binary:Version}),
  leechcraft-azoth-juick (= ${binary:Version}),
  leechcraft-azoth-nativeemoticons (= ${binary:Version}),
  leechcraft-azoth-p100q (= ${binary:Version}),
@@ -373,6 +381,25 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-azoth (= ${binary:Version})
 Description: History storage for LeechCraft Azoth
  This plugin adds support for storing chat history to Azoth.
+ .
+ LeechCraft is a free modular "Internet client" application.
+ .
+ LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ download or play podcasts and other media files and much more.
+
+Package: leechcraft-azoth-hili
+Section: net
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
+ leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+ leechcraft (= ${binary:Version}),
+ leechcraft-azoth (= ${binary:Version})
+Description: Custom highlights for LeechCraft Azoth
+ This plugin allows to customize the highlight settings in multiuser
+ chatrooms in Azoth. Highlights could be triggered by a plain string
+ or by a regular expression.
  .
  LeechCraft is a free modular "Internet client" application.
  .
@@ -779,6 +806,25 @@ Description: Ad filter for Web browser for LeechCraft
  Firefox's AdBlock rules list files. It also supports disabling Flash
  and allowing it to load only after you click on the corresponding
  button.
+ .
+ LeechCraft is a free modular "Internet client" application.
+ .
+ LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ download or play podcasts and other media files and much more.
+
+Package: leechcraft-poshuku-fatape
+Section: net
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
+ leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+ leechcraft-poshuku (= ${binary:Version}),
+ leechcraft (= ${binary:Version})
+Description: GreaseMonkey support layer for LeechCraft Poshuku
+ The Poshuku FatApe plugin adds support for GreaseMonkey scripts to
+ the Poshuku browser. FatApe also supports basic scripts management,
+ allowing to install or remove them easily.
  .
  LeechCraft is a free modular "Internet client" application.
  .
