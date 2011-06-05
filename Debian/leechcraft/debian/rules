@@ -29,10 +29,19 @@ export DEB_CMAKE_EXTRA_FLAGS = -DTEST=False \
 clean::
 	rm -f src/data/leechcraft.1.gz
 
-build: build-stamp
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	mkdir -p $(DEB_BUILDDIR)
+	cd $(CURDIR)/qxmpp && qmake
+	cd $(DEB_BUILDDIR) && cmake ..
+	touch $@
 
+build: build-stamp
 build-stamp:  config.status
 	dh_testdir
+	qmake
+	cd $(CURDIR)/qxmpp && $(MAKE) -j$(NUMJOBS)
 	cd $(DEB_BUILDDIR) && $(MAKE) -j$(NUMJOBS)
 	touch $@
 

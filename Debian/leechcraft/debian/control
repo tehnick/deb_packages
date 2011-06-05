@@ -211,7 +211,8 @@ Description: Core executable of LeechCraft
 Package: leechcraft-dev
 Section: devel
 Architecture: any
-Depends: leechcraft (= ${binary:Version})
+Depends: ${misc:Depends},
+ leechcraft (= ${binary:Version})
 Description: Files required for development for LeechCraft.
  This package contains header files required to develop new modules for
  LeechCraft.
