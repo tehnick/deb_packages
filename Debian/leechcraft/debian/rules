@@ -24,7 +24,7 @@ export DEB_CMAKE_EXTRA_FLAGS = -DTEST=False \
 	-DLEECHCRAFT_VERSION=$(shell dpkg-parsechangelog | awk '/Version:/ {print $2}' | cut -b 10-)
 
 	include /usr/share/cdbs/1/rules/debhelper.mk
-	include /usr/share/cdbs/1/class/cmake.mk
+	#include /usr/share/cdbs/1/class/cmake.mk
 
 clean::
 	rm -f src/data/leechcraft.1.gz
@@ -38,7 +38,7 @@ configure-stamp:
 	touch $@
 
 build: build-stamp
-build-stamp:  config.status
+build-stamp:
 	dh_testdir
 	qmake
 	cd $(CURDIR)/qxmpp && $(MAKE) -j$(NUMJOBS)

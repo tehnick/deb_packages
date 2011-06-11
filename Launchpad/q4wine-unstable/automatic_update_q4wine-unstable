@@ -28,7 +28,7 @@ echo "Old  commit ID: ${OLD_COMMIT}"
 echo "Last commit ID: ${LAST_COMMIT}"
 
 
-export CUR_VER=$(curl -k "https://github.com/brezerk/q4wine/raw/master/src/CMakeLists.txt" 2>&1 | grep "SET(APP_VERSION" | sed -e "s/^SET(APP_VERSION \"\([0-9]\+\.[0-9]\+\).*\")$/\1/")
+export CUR_VER=$(curl -k "https://raw.github.com/brezerk/q4wine/master/src/CMakeLists.txt" 2>&1 | grep "SET(APP_VERSION" | sed -e "s/^SET(APP_VERSION \"\([0-9]\+\.[0-9]\+\).*\")$/\1/")
 export DATE=$(date "+%Y%m%d-%H%M%S")
 export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
