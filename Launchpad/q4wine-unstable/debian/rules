@@ -11,7 +11,6 @@ endif
 BUILDDIR = builddir
 
 CMAKEOPTS =	-DCMAKE_BUILD_TYPE=Release \
-			-DWITH_WINETRIKS=ON \
 			-USE_GZIP=ON \
 			-DCMAKE_INSTALL_PREFIX=/usr \
 			-DLIBS_ENTRY_PATH=/usr/lib/q4wine/ \
