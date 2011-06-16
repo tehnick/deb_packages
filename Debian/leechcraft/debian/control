@@ -1,4 +1,5 @@
 Source: leechcraft
+Section: net
 Priority: extra
 Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 7.0.50~),
@@ -24,7 +25,6 @@ Standards-Version: 3.9.2
 Homepage: http://leechcraft.org
 
 Package: leechcraft-full
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  libqt4-sql-sqlite (>= 4.6.0),
@@ -83,10 +83,9 @@ Description: Full LeechCraft installation
  each other with no effert while staying abstract from the exact
  implementation.
  .
- This meta package installs all main LeechCraft plugins.
+ This metapackage installs all main LeechCraft plugins.
 
 Package: leechcraft-extra
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-anhero (= ${binary:Version})
@@ -101,12 +100,11 @@ Description: Extra LeechCraft plugins beyond full installation
  each other with no effert while staying abstract from the exact
  implementation.
  .
- This meta package installs additional LeechCraft plugins that may
+ This metapackage installs additional LeechCraft plugins that may
  pull a lot of dependencies on some systems (like AnHero pulling
  half of KDE).
 
 Package: leechcraft-ugly
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-lcftp (= ${binary:Version})
@@ -121,11 +119,10 @@ Description: Bad LeechCraft plugins
  each other with no effert while staying abstract from the exact
  implementation.
  .
- This meta package installs additional LeechCraft plugins that are
+ This metapackage installs additional LeechCraft plugins that are
  abandoned or known to be extremely buggy. Use at your own risk.
 
 Package: leechcraft-incubator
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Plugins for LeechCraft under heavy development
@@ -139,13 +136,12 @@ Description: Plugins for LeechCraft under heavy development
  each other with no effert while staying abstract from the exact
  implementation.
  .
- This meta package installs additional LeechCraft plugins that are
+ This metapackage installs additional LeechCraft plugins that are
  still under (heavy) development. Things may stop working suddenly or
  behavior may change in an uncompatible way. Nevertheless, testing is
  appreciated.
 
 Package: leechcraft
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  libqt4-sql-sqlite (>= 4.6.0),
@@ -212,7 +208,7 @@ Section: devel
 Architecture: any
 Depends: ${misc:Depends},
  leechcraft (= ${binary:Version})
-Description: Files required for development for LeechCraft.
+Description: Files required for development for LeechCraft
  This package contains header files required to develop new modules for
  LeechCraft.
  .
@@ -227,7 +223,7 @@ Description: Files required for development for LeechCraft.
  implementation.
 
 Package: leechcraft-dbg
-Section: devel
+Section: debug
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version})
@@ -261,9 +257,14 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Common library for LeechCraft
  A library providing some useful and commonly used routines as well as
  communications with the LeechCraft core.
+ .
+ LeechCraft is a free modular "Internet client" application.
+ .
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
+ files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ download or play podcasts and other media files and much more.
 
 Package: leechcraft-aggregator
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -293,7 +294,6 @@ Description: RSS/Atom feed reader for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-anhero
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -309,7 +309,6 @@ Description: Crash handler for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-auscrie
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -327,7 +326,6 @@ Description: Screenshooter for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -355,7 +353,6 @@ Description: Modular IM client for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-acetamide
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -372,7 +369,6 @@ Description: IRC protocol support for LeechCraft Azoth
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-chathistory
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -389,7 +385,6 @@ Description: History storage for LeechCraft Azoth
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-hili
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -408,7 +403,6 @@ Description: Custom highlights for LeechCraft Azoth
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-nativeemoticons
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -425,7 +419,6 @@ Description: Support for emoticons packs for LeechCraft Azoth
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-standardstyles
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -444,7 +437,6 @@ Description: Standard styling support for LeechCraft Azoth
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-juick
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -462,7 +454,6 @@ Description: Plugin for the Juick.com service for LeechCraft Azoth
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-p100q
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -480,7 +471,6 @@ Description: Plugin for psto.net service for LeechCraft Azoth
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-xoox
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -498,7 +488,6 @@ Description: XMPP support for LeechCraft Azoth
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-bittorrent
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -526,7 +515,6 @@ Description: BitTorrent client for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-cstp
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -544,7 +532,6 @@ Description: HTTP client for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-dbusmanager
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -563,7 +550,6 @@ Description: D-Bus side of LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-deadlyrics
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -581,7 +567,6 @@ Description: Song lyrics finder for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-eiskaltdcpp
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -602,7 +587,6 @@ Description: EiskaltDC++ for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-gmailnotifier
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -619,7 +603,6 @@ Description: Notifications about new mail in GMail for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-historyholder
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -637,7 +620,6 @@ Description: History keeper for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-kinotify
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -654,7 +636,6 @@ Description: Fancy notifications for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-lackman
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -672,7 +653,6 @@ Description: Userspace Package Manager for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-lmp
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -691,7 +671,6 @@ Description: Media Previewer for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-lcftp
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -709,7 +688,6 @@ Description: FTP client for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-networkmonitor
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -726,7 +704,6 @@ Description: Network monitor for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-newlife
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -745,7 +722,6 @@ Description: Settings importer for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-popishu
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -765,7 +741,6 @@ Description: Plain text editor for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -793,7 +768,6 @@ Description: Web browser for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-cleanweb
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -814,7 +788,6 @@ Description: Ad filter for Web browser for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-fatape
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -833,7 +806,6 @@ Description: GreaseMonkey support layer for LeechCraft Poshuku
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-filescheme
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -851,7 +823,6 @@ Description: file://-schemes support for the Web browser for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-fua
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -870,7 +841,6 @@ Description: Fake user agent plugin for Web browser for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-onlinebookmarks
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -889,7 +859,6 @@ Description: Support for syncing bookmarks with online bookmarks services
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-wyfv
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -909,7 +878,6 @@ Description: Flash video replacer for Web browser for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-secman
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -928,7 +896,6 @@ Description: Security Manager plugin for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-secman-simplestorage
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -946,7 +913,6 @@ Description: Simple storage backend for SecMan
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-seekthru
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -965,7 +931,6 @@ Description: OpenSearch-support plugin for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-shellopen
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -984,7 +949,6 @@ Description: Support for opening files with external apps in LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-summary
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -1005,7 +969,6 @@ Description: Quick summary of what's going on in LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-tabpp
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -1025,7 +988,6 @@ Description: Tabbing experience enhancer for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-vgrabber
-Section: net
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
@@ -1045,7 +1007,6 @@ Description: vkontakte.ru plugin for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-iconset-oxygen
-Section: net
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Provides: leechcraft-iconset
@@ -1059,7 +1020,6 @@ Description: Oxygen-based iconset for LeechCraft
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-iconset-tango
-Section: net
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends},
  tango-icon-theme (>= 0.8.1)
