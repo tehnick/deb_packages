@@ -1,5 +1,4 @@
 Source: leechcraft
-Section: net
 Priority: extra
 Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 7.0.50~),
@@ -76,7 +75,7 @@ Suggests:
 Description: Full LeechCraft installation
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
  .
@@ -94,7 +93,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 Description: Extra LeechCraft plugins beyond full installation
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
  .
@@ -114,7 +113,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 Description: Bad LeechCraft plugins
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
  .
@@ -132,7 +131,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Plugins for LeechCraft under heavy development
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
  .
@@ -196,7 +195,7 @@ Suggests: leechcraft-anhero
 Description: Core executable of LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
  .
@@ -219,7 +218,7 @@ Description: Files required for development for LeechCraft.
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
  .
@@ -238,7 +237,7 @@ Description: Debug symbols for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
  .
@@ -257,8 +256,8 @@ Description: Dynamic settings dialog builder for LeechCraft
 
 Package: leechcraft-libplugininterface0.3.0
 Section: libs
-Depends: ${shlibs:Depends}, ${misc:Depends}
 Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Common library for LeechCraft
  A library providing some useful and commonly used routines as well as
  communications with the LeechCraft core.
@@ -289,7 +288,7 @@ Description: RSS/Atom feed reader for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -305,7 +304,7 @@ Description: Crash handler for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -323,7 +322,7 @@ Description: Screenshooter for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -351,7 +350,7 @@ Description: Modular IM client for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -368,7 +367,7 @@ Description: IRC protocol support for LeechCraft Azoth
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -385,7 +384,7 @@ Description: History storage for LeechCraft Azoth
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -398,13 +397,13 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Custom highlights for LeechCraft Azoth
- This plugin allows to customize the highlight settings in multiuser
+ This plugin allows one to customize the highlight settings in multiuser
  chatrooms in Azoth. Highlights could be triggered by a plain string
  or by a regular expression.
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -421,7 +420,7 @@ Description: Support for emoticons packs for LeechCraft Azoth
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -440,7 +439,7 @@ Description: Standard styling support for LeechCraft Azoth
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -458,7 +457,7 @@ Description: Plugin for the Juick.com service for LeechCraft Azoth
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -476,7 +475,7 @@ Description: Plugin for psto.net service for LeechCraft Azoth
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -494,7 +493,7 @@ Description: XMPP support for LeechCraft Azoth
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -522,7 +521,7 @@ Description: BitTorrent client for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -540,7 +539,7 @@ Description: HTTP client for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -559,7 +558,7 @@ Description: D-Bus side of LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -577,7 +576,7 @@ Description: Song lyrics finder for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -598,7 +597,7 @@ Description: EiskaltDC++ for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -615,7 +614,7 @@ Description: Notifications about new mail in GMail for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -633,7 +632,7 @@ Description: History keeper for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -650,7 +649,7 @@ Description: Fancy notifications for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -668,7 +667,7 @@ Description: Userspace Package Manager for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -687,7 +686,7 @@ Description: Media Previewer for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -705,7 +704,7 @@ Description: FTP client for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -722,7 +721,7 @@ Description: Network monitor for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -741,7 +740,7 @@ Description: Settings importer for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -761,7 +760,7 @@ Description: Plain text editor for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -789,7 +788,7 @@ Description: Web browser for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -810,7 +809,7 @@ Description: Ad filter for Web browser for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -829,7 +828,7 @@ Description: GreaseMonkey support layer for LeechCraft Poshuku
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -847,7 +846,7 @@ Description: file://-schemes support for the Web browser for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -866,7 +865,7 @@ Description: Fake user agent plugin for Web browser for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -885,7 +884,7 @@ Description: Support for syncing bookmarks with online bookmarks services
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -905,7 +904,7 @@ Description: Flash video replacer for Web browser for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -924,7 +923,7 @@ Description: Security Manager plugin for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -942,7 +941,7 @@ Description: Simple storage backend for SecMan
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -961,7 +960,7 @@ Description: OpenSearch-support plugin for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -980,7 +979,7 @@ Description: Support for opening files with external apps in LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -993,15 +992,15 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-searchesview,
  leechcraft-provider-tasksview
-Description: A quick summary of what's going on in LeechCraft
+Description: Quick summary of what's going on in LeechCraft
  This package contains Summary which shows currently running download
  tasks like BitTorrent files as well as news, events and statuses, like
- unread items in RSS feed reader. It also allows to perform search
+ unread items in RSS feed reader. It also allows one to perform search
  queries with instaled search plugins.
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -1021,7 +1020,7 @@ Description: Tabbing experience enhancer for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -1041,7 +1040,7 @@ Description: vkontakte.ru plugin for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -1055,7 +1054,7 @@ Description: Oxygen-based iconset for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -1070,6 +1069,6 @@ Description: Iconset based on the Tango project for LeechCraft
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
