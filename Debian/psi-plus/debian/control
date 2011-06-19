@@ -5,8 +5,10 @@ Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 7.0.50~),
  quilt, qconf, libqtwebkit-dev | libqt4-dev (>=4.5.2),
  libqca2-dev (>= 2.0.0), libxss-dev, libaspell-dev, zlib1g-dev, libsm-dev
-Standards-Version: 3.9.2
 Homepage: http://psi-dev.googlecode.com/
+Vcs-Svn: http://psi-dev.googlecode.com/svn/trunk/
+Vcs-Browser: http://code.google.com/p/psi-dev/source/browse/
+Standards-Version: 3.9.2
 
 Package: psi-plus
 Architecture: any

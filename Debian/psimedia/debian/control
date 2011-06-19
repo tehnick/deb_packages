@@ -3,8 +3,10 @@ Section: net
 Priority: extra
 Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: cdbs (>= 0.4.53), debhelper (>= 7.0.1), libqt4-dev (>= 4.4.0), libgstreamer-plugins-base0.10-dev (>= 0.10.23), liboil0.3-dev, libspeexdsp-dev (>= 1.2~rc1), qconf
-Standards-Version: 3.9.2
 Homepage: http://delta.affinix.com/psimedia/
+Vcs-Svn: https://delta.affinix.com/svn/trunk/psimedia/
+Vcs-Browser: https://delta.affinix.com/svn/trunk/psimedia/
+Standards-Version: 3.9.2
 
 Package: psi-plus-plugin-psimedia
 Architecture: any

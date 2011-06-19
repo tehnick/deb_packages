@@ -4,6 +4,8 @@ Priority: optional
 Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 7), cmake, autotools-dev, fakeroot, libqt4-dev (>=4.4.0), qt4-dev-tools (>=4.4.0), qt4-qtconfig (>=4.4.0), icoutils (>=0.26.0), libfuse2 [!hurd-i386], libfuse-dev [!hurd-i386], libkvm-dev [kfreebsd-i386 kfreebsd-amd64]
 Homepage: http://q4wine.brezblock.org.ua/
+Vcs-Git: git://github.com/brezerk/q4wine.git
+Vcs-Browser: https://github.com/brezerk/q4wine
 Standards-Version: 3.9.2
 
 Package: q4wine
