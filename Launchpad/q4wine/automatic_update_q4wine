@@ -6,7 +6,7 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 export PACKAGE="q4wine"
 
 # Uncomment if necessary:
-#export SFX="-3ppa2"
+export SFX="-2ppa1"
 
 
 # Launch common script for setting variables

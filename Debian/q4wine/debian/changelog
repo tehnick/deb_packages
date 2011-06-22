@@ -1,14 +1,24 @@
+q4wine (0.121-2) unstable; urgency=low
+
+  * Updated debian/copyright:
+    - section about src/fuseiso/src/linux/* was deleted because of
+      subdirectory src/fuseiso was removed from sources tarball in upstream.
+  * Small fix in debian/changelog.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 22 Jun 2011 22:45:31 +0300
+
 q4wine (0.121-1) unstable; urgency=low
 
   * Update to stable release 0.121.
   * Updated debian/control:
-    section about src/fuseiso/src/linux/* was deleted because of
-    subdirectory src/fuseiso was removed from sources tarball in upstream.
+    - added additional fields Vcs-Git and Vcs-Browser
+    - fixed misprint in description: Winetriks -> Winetricks (Closes: #631260)
   * Updated debian/rules:
     there is no cmake variable 'WITH_WINETRIKS' now (it is always enable).
   * Removed debian/patches/ (all this changes now available in upstream).
+  * Fixed lintian warning 'debian-rules-missing-recommended-target'.
 
- -- Boris Pek <tehnick-8@mail.ru>  Tue, 14 Jun 2011 00:41:16 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 22 Jun 2011 20:38:48 +0300
 
 q4wine (0.120-r1-4) unstable; urgency=low
 

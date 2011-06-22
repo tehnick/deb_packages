@@ -20,9 +20,13 @@ config.status:
 	dh_testdir
 	mkdir -p $(BUILDDIR) && cd $(BUILDDIR) && cmake $(CMAKEOPTS)
 
-build: build-stamp
+build: config.status build-arch build-indep
 
-build-stamp:  config.status
+build-arch: build-stamp
+
+build-indep: build-stamp
+
+build-stamp:
 	dh_testdir
 	cd $(BUILDDIR) && $(MAKE) -j$(NUMJOBS)
 	touch $@
@@ -63,4 +67,5 @@ binary-arch: build install
 	dh_builddeb
 
 binary: binary-indep binary-arch
+
 .PHONY: build clean binary-indep binary-arch binary install

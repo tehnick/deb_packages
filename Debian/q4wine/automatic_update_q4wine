@@ -6,7 +6,7 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 export PACKAGE="q4wine"
 
 # Uncomment if necessary:
-#export SFX="-2"
+export SFX="-2"
 
 # experimental unstable
 export MAIN_DIST="unstable"
