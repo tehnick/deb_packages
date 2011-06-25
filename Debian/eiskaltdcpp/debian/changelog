@@ -1,3 +1,18 @@
+eiskaltdcpp (2.2.3-1) unstable; urgency=low
+
+  * Update to stable release 2.2.3.
+  * Added additional fields Vcs-Git and Vcs-Browser in debian/control.
+  * Such bugs were fixed in upstream:
+    - added German translation (Closes: #627930)
+    - fixed bug with connecting to ADC hubs on armel architecture
+      (Closes: #630841)
+    - updated local file cmake/FindGTK2.cmake:
+      it works with Debian multiarch now (LP: #791231)
+  * Fixed new lintian warning 'debian-rules-missing-recommended-target'.
+  * Updated file debian/copyright: new files were added in upstream.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 25 Jun 2011 01:11:16 +0300
+
 eiskaltdcpp (2.2.2-1) unstable; urgency=low
 
   * Update to stable release 2.2.2.
