@@ -28,5 +28,5 @@ Description: Qt4 GUI for wine (W.I.N.E)
   - Easy cd-image use;
   - You can extract icons from PE files (.exe .dll);
   - Easy backup and restore for managed prefixes.
-  - Winetriks support.
+  - Winetricks support.
   - And more...
