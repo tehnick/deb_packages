@@ -80,9 +80,11 @@ binary-arch: build install
 	dh_strip --dbg-package=leechcraft-dbg
 	dh_compress -a
 	dh_fixperms -a
-	dh_makeshlibs -a
+	dh_makeshlibs -pleechcraft-libxmlsettingsdialog0.3.0 \
+				  -pleechcraft-libplugininterface0.3.0
 	dh_installdeb -a
-	dh_shlibdeps -a
+	dh_shlibdeps -a -ldebian/leechcraft-libxmlsettingsdialog0.3.0/usr/lib \
+					-ldebian/leechcraft-libplugininterface0.3.0/usr/lib
 	dh_installdebconf -a
 	dh_gencontrol -a
 	dh_md5sums -a

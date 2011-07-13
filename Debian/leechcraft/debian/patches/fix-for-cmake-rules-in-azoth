@@ -1,3 +1,5 @@
+fix for cmake rules in azoth
+
 --- a/src/plugins/azoth/CMakeLists.txt
 +++ b/src/plugins/azoth/CMakeLists.txt
 @@ -30,7 +30,7 @@ INCLUDE_DIRECTORIES (
