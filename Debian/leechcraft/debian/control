@@ -5,23 +5,24 @@ Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 7.0.50~),
  po-debconf,
  cmake (>= 2.8),
+ kdelibs5-dev (>= 4.2.0),
  libboost-thread-dev (>=1.42),
  libboost-date-time-dev (>=1.42),
  libboost-filesystem-dev (>=1.42),
  libboost-regex-dev (>=1.42),
  libboost-program-options-dev (>=1.42),
  libtorrent-rasterbar-dev (>=0.15),
- kdelibs5-dev (>= 4.2.0),
  libphonon-dev,
  libbz2-dev,
- zlib1g-dev,
  libqt4-dev (>= 4.6.0),
  libgeoip-dev,
  libcurl4-openssl-dev,
  libqscintilla2-dev,
  libqjson-dev,
  libaspell-dev,
- libspeex-dev
+ libspeex-dev,
+ qtmobility-dev,
+ zlib1g-dev
 Standards-Version: 3.9.2
 Vcs-Git: git://github.com/0xd34df00d/leechcraft.git
 Vcs-Browser: https://github.com/0xd34df00d/leechcraft

@@ -2,7 +2,7 @@
 
 # Script to protect laptop from overheating.
 
-CRIT_TEMP=98
+CRIT_TEMP=95
 
 
 SCRIPT_NAME=`echo "$0" | sed -e "s|^.*/\(.*\)$|\1|"`

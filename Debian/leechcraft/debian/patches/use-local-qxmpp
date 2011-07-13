@@ -1,7 +1,5 @@
 use local qxmpp
 
-diff --git a/src/plugins/azoth/plugins/xoox/cmake/FindQXmpp.cmake b/src/plugins/azoth/plugins/xoox/cmake/FindQXmpp.cmake
-index d900b05..701745a 100644
 --- a/src/plugins/azoth/plugins/xoox/cmake/FindQXmpp.cmake
 +++ b/src/plugins/azoth/plugins/xoox/cmake/FindQXmpp.cmake
 @@ -10,8 +10,17 @@

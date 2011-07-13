@@ -1,1 +1,2 @@
-use-local-qxmpp.patch
+use-local-qxmpp
+fix-for-cmake-rules-in-azoth
