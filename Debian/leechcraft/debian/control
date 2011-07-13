@@ -401,7 +401,7 @@ Description: Automatic paste of long messages to pastebins
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -429,13 +429,13 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Conference ignore plugin for LeechCraft Azoth
- This plugin allows to ignore messages from selected multiuser
+ This plugin allows one to ignore messages from selected multiuser
  chatroom participants, blocking both general messages in the room
  and private messages.
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -447,12 +447,12 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Embeds media files in the chat window of Azoth
- This plugin allows to show various media objects (like videos from
+ This plugin allows one to show various media objects (like videos from
  the YouTube service) directly in the chat window.
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -468,7 +468,7 @@ Description: Basic antispam plugin for Azoth
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
@@ -583,13 +583,13 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Plugin for publishing current tune for LeechCraft Azoth
- This plugin allows to publish current user tune. MPRIS-compatible
+ This plugin allows one to publish current user tune. MPRIS-compatible
  players and standard files are supported as sources of information
  about current tune.
  .
  LeechCraft is a free modular "Internet client" application.
  .
- LeechCraft allows to browse the web, read RSS/Atom feeds, download
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
  files via BitTorrent, HTTP, FTP and DC, automatically stream,
  download or play podcasts and other media files and much more.
 
