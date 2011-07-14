@@ -14,6 +14,7 @@ DEB_DH_INSTALL_SOURCEDIR = "$(CURDIR)/debian/tmp"
 
 CMAKEOPTS = "$(CURDIR)/$(DEB_SRCDIR)" \
 	-DTEST=False \
+	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
 	-DDISABLE_RPATH_TRICKS=True \
 	-DQXMPP_LOCAL="$(CURDIR)/qxmpp" \
@@ -59,7 +60,7 @@ install: build
 binary-indep: build install
 	dh_testdir -i
 	dh_testroot -i
-	dh_movefiles -i
+	dh_install -i
 	dh_installdocs -i
 	dh_installchangelogs -i README
 	dh_compress -i
@@ -72,7 +73,7 @@ binary-indep: build install
 binary-arch: build install
 	dh_testdir -a
 	dh_testroot -a
-	dh_movefiles -a
+	dh_install -a
 	dh_installchangelogs -a README
 	dh_installdocs -a
 	dh_installman -a
