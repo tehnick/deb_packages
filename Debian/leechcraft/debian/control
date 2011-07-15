@@ -678,6 +678,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
  leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
+Suggests: php5-cli
+Recommends: libqtscript4-core,
+ libqtscript4-gui,
+ libqtscript4-network,
+ libqtscript4-xml
 Description: EiskaltDC++ for LeechCraft
  This package contains EiskaltDC++ DC client as LeechCraft plugin.
  .
