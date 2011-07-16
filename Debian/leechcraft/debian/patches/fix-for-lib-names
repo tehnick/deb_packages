@@ -1,0 +1,194 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index fb81ac7..35cb002 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -80,7 +80,7 @@ ADD_SUBDIRECTORY (xmlsettingsdialog)
+ ADD_SUBDIRECTORY (iconsets)
+ 
+ SET (LEECHCRAFT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+-SET (LEECHCRAFT_LIBRARIES plugininterface xmlsettingsdialog)
++SET (LEECHCRAFT_LIBRARIES leechcraft-plugininterface leechcraft-xmlsettingsdialog)
+ 
+ OPTION (ENABLE_SUMMARY "Build Summary, the plugin that shows a handy summary of the stuff going on" ON)
+ OPTION (ENABLE_TORRENT "Build BitTorrent, the BitTorrent client" ON)
+@@ -451,8 +451,7 @@ ENDIF (UNIX)
+ TARGET_LINK_LIBRARIES(leechcraft
+ 						${QT_LIBRARIES}
+ 						${Boost_PROGRAM_OPTIONS_LIBRARY}
+-						plugininterface
+-						xmlsettingsdialog)
++						${LEECHCRAFT_LIBRARIES})
+ INSTALL (TARGETS leechcraft DESTINATION bin)
+ INSTALL (FILES ${COMPILED_TRANSLATIONS} DESTINATION ${LC_TRANSLATIONS_DEST})
+ INSTALL (FILES coresettings.xml DESTINATION ${LC_SETTINGS_DEST})
+diff --git a/src/FindLeechCraft.cmake.in b/src/FindLeechCraft.cmake.in
+index 54d33e0..4129865 100644
+--- a/src/FindLeechCraft.cmake.in
++++ b/src/FindLeechCraft.cmake.in
+@@ -6,8 +6,8 @@ FIND_PATH(LEECHCRAFT_INCLUDE_DIR NAMES leechcraft/config.h PATH ENV)
+ IF (LEECHCRAFT_INCLUDE_DIR)
+ 	SET (LEECHCRAFT_INCLUDE_DIR "${LEECHCRAFT_INCLUDE_DIR}/leechcraft")
+ ENDIF (LEECHCRAFT_INCLUDE_DIR)
+-FIND_LIBRARY(_LEECHCRAFT_PI NAMES plugininterface)
+-FIND_LIBRARY(_LEECHCRAFT_XSD NAMES xmlsettingsdialog)
++FIND_LIBRARY(_LEECHCRAFT_PI NAMES leechcraft-plugininterface)
++FIND_LIBRARY(_LEECHCRAFT_XSD NAMES leechcraft-xmlsettingsdialog)
+ SET (LEECHCRAFT_LIBRARIES ${_LEECHCRAFT_PI} ${_LEECHCRAFT_XSD})
+ SET (LEECHCRAFT_USE_FILE "${CMAKE_MODULE_PATH}/UseLeechCraft.cmake")
+ 
+diff --git a/src/plugininterface/CMakeLists.txt b/src/plugininterface/CMakeLists.txt
+index 54d33e0..4129865 100644
+--- a/src/plugininterface/CMakeLists.txt
++++ b/src/plugininterface/CMakeLists.txt
+@@ -75,14 +75,14 @@ ADD_DEFINITIONS(-DQT_NO_DEBUG)
+ ADD_DEFINITIONS(-DQT_SHARED)
+ ADD_DEFINITIONS(-DQT_GUI_LIB)
+ QT4_WRAP_CPP (MOC_SRCS ${HEADERS})
+-ADD_LIBRARY (plugininterface SHARED
++ADD_LIBRARY (leechcraft-plugininterface SHARED
+ 	${SRCS}
+ 	${MOC_SRCS}
+ 	${UIS_H}
+ 	)
+-TARGET_LINK_LIBRARIES (plugininterface
++TARGET_LINK_LIBRARIES (leechcraft-plugininterface
+ 	${QT_LIBRARIES}
+-	xmlsettingsdialog
++	leechcraft-xmlsettingsdialog
+ 	)
+-SET_PROPERTY (TARGET plugininterface PROPERTY SOVERSION 0.3.0)
+-INSTALL (TARGETS plugininterface DESTINATION ${LIBDIR})
++SET_PROPERTY (TARGET leechcraft-plugininterface PROPERTY SOVERSION 0.3.0)
++INSTALL (TARGETS leechcraft-plugininterface DESTINATION ${LIBDIR})
+diff --git a/src/plugins/azoth/plugins/xoox/CMakeLists.txt b/src/plugins/azoth/plugins/xoox/CMakeLists.txt
+index 496e8d1..8847017 100644
+--- a/src/plugins/azoth/plugins/xoox/CMakeLists.txt
++++ b/src/plugins/azoth/plugins/xoox/CMakeLists.txt
+@@ -134,8 +134,7 @@ ADD_LIBRARY (leechcraft_azoth_xoox SHARED
+ 	)
+ TARGET_LINK_LIBRARIES (leechcraft_azoth_xoox
+ 	${QT_LIBRARIES}
+-	plugininterface
+-	xmlsettingsdialog
++	${LEECHCRAFT_LIBRARIES}
+ 	${QXMPP_LIBRARIES}
+ 	${SPEEX_LIBRARIES}
+ 	)
+diff --git a/src/plugins/poshuku/plugins/cleanweb/CMakeLists.txt b/src/plugins/poshuku/plugins/cleanweb/CMakeLists.txt
+index ee75638..151bd2e 100644
+--- a/src/plugins/poshuku/plugins/cleanweb/CMakeLists.txt
++++ b/src/plugins/poshuku/plugins/cleanweb/CMakeLists.txt
+@@ -64,8 +64,7 @@ ADD_LIBRARY (leechcraft_poshuku_cleanweb SHARED
+ 	)
+ TARGET_LINK_LIBRARIES (leechcraft_poshuku_cleanweb
+ 	${QT_LIBRARIES}
+-	plugininterface
+-	xmlsettingsdialog
++	${LEECHCRAFT_LIBRARIES}
+ 	)
+ INSTALL (TARGETS leechcraft_poshuku_cleanweb DESTINATION ${LC_PLUGINS_DEST})
+ INSTALL (FILES ${CLEANWEB_COMPILED_TRANSLATIONS} DESTINATION ${LC_TRANSLATIONS_DEST})
+diff --git a/src/plugins/poshuku/plugins/fatape/CMakeLists.txt b/src/plugins/poshuku/plugins/fatape/CMakeLists.txt
+index 9df4f81..6a350d4 100644
+--- a/src/plugins/poshuku/plugins/fatape/CMakeLists.txt
++++ b/src/plugins/poshuku/plugins/fatape/CMakeLists.txt
+@@ -40,8 +40,7 @@ ADD_LIBRARY (leechcraft_poshuku_fatape SHARED
+ 	)
+ TARGET_LINK_LIBRARIES (leechcraft_poshuku_fatape
+ 	${QT_LIBRARIES}
+-	plugininterface
+-	xmlsettingsdialog
++	${LEECHCRAFT_LIBRARIES}
+ 	)
+ INSTALL (TARGETS leechcraft_poshuku_fatape DESTINATION ${LC_PLUGINS_DEST})
+ INSTALL (FILES poshukufatapesettings.xml DESTINATION ${LC_SETTINGS_DEST})
+diff --git a/src/plugins/poshuku/plugins/filescheme/CMakeLists.txt b/src/plugins/poshuku/plugins/filescheme/CMakeLists.txt
+index b2c359e..a31301f 100644
+--- a/src/plugins/poshuku/plugins/filescheme/CMakeLists.txt
++++ b/src/plugins/poshuku/plugins/filescheme/CMakeLists.txt
+@@ -29,8 +29,7 @@ ADD_LIBRARY (leechcraft_poshuku_filescheme SHARED
+ 	)
+ TARGET_LINK_LIBRARIES (leechcraft_poshuku_filescheme
+ 	${QT_LIBRARIES}
+-	plugininterface
+-	xmlsettingsdialog
++	${LEECHCRAFT_LIBRARIES}
+ 	)
+ INSTALL (TARGETS leechcraft_poshuku_filescheme DESTINATION ${LC_PLUGINS_DEST})
+ INSTALL (FILES ${FILESCHEME_COMPILED_TRANSLATIONS} DESTINATION ${LC_TRANSLATIONS_DEST})
+diff --git a/src/plugins/poshuku/plugins/fua/CMakeLists.txt b/src/plugins/poshuku/plugins/fua/CMakeLists.txt
+index b3fb2c3..f51aaa1 100644
+--- a/src/plugins/poshuku/plugins/fua/CMakeLists.txt
++++ b/src/plugins/poshuku/plugins/fua/CMakeLists.txt
+@@ -37,8 +37,7 @@ ADD_LIBRARY (leechcraft_poshuku_fua SHARED
+ 	)
+ TARGET_LINK_LIBRARIES (leechcraft_poshuku_fua
+ 	${QT_LIBRARIES}
+-	plugininterface
+-	xmlsettingsdialog
++	${LEECHCRAFT_LIBRARIES}
+ 	)
+ INSTALL (TARGETS leechcraft_poshuku_fua DESTINATION ${LC_PLUGINS_DEST})
+ INSTALL (FILES ${FUA_COMPILED_TRANSLATIONS} DESTINATION ${LC_TRANSLATIONS_DEST})
+diff --git a/src/plugins/poshuku/plugins/keywords/CMakeLists.txt b/src/plugins/poshuku/plugins/keywords/CMakeLists.txt
+index 0e96ba6..fc1e642 100644
+--- a/src/plugins/poshuku/plugins/keywords/CMakeLists.txt
++++ b/src/plugins/poshuku/plugins/keywords/CMakeLists.txt
+@@ -26,8 +26,7 @@ ADD_LIBRARY (leechcraft_poshuku_keywords SHARED
+ 	)
+ TARGET_LINK_LIBRARIES (leechcraft_poshuku_keywords
+ 	${QT_LIBRARIES}
+-	plugininterface
+-	xmlsettingsdialog
++	${LEECHCRAFT_LIBRARIES}
+ 	)
+ INSTALL (TARGETS leechcraft_poshuku_keywords DESTINATION ${LC_PLUGINS_DEST})
+ INSTALL (FILES poshukukeywordssettings.xml DESTINATION ${LC_SETTINGS_DEST}) 
+diff --git a/src/plugins/poshuku/plugins/pintab/CMakeLists.txt b/src/plugins/poshuku/plugins/pintab/CMakeLists.txt
+index 5c2e243..76cb48e 100644
+--- a/src/plugins/poshuku/plugins/pintab/CMakeLists.txt
++++ b/src/plugins/poshuku/plugins/pintab/CMakeLists.txt
+@@ -14,7 +14,6 @@ ADD_LIBRARY (leechcraft_poshuku_pintab SHARED
+ 	)
+ TARGET_LINK_LIBRARIES (leechcraft_poshuku_pintab
+ 	${QT_LIBRARIES}
+-	plugininterface
+-	xmlsettingsdialog
++	${LEECHCRAFT_LIBRARIES}
+ 	)
+ INSTALL (TARGETS leechcraft_poshuku_pintab DESTINATION ${LC_PLUGINS_DEST})
+diff --git a/src/plugins/poshuku/plugins/wyfv/CMakeLists.txt b/src/plugins/poshuku/plugins/wyfv/CMakeLists.txt
+index c149a30..645d307 100644
+--- a/src/plugins/poshuku/plugins/wyfv/CMakeLists.txt
++++ b/src/plugins/poshuku/plugins/wyfv/CMakeLists.txt
+@@ -54,8 +54,7 @@ ADD_LIBRARY (leechcraft_poshuku_wyfv SHARED
+ 	)
+ TARGET_LINK_LIBRARIES (leechcraft_poshuku_wyfv
+ 	${QT_LIBRARIES}
+-	plugininterface
+-	xmlsettingsdialog
++	${LEECHCRAFT_LIBRARIES}
+ 	)
+ INSTALL (TARGETS leechcraft_poshuku_wyfv DESTINATION ${LC_PLUGINS_DEST})
+ INSTALL (FILES ${WYFV_COMPILED_TRANSLATIONS} DESTINATION ${LC_TRANSLATIONS_DEST})
+diff --git a/src/xmlsettingsdialog/CMakeLists.txt b/src/xmlsettingsdialog/CMakeLists.txt
+index 89da52f..e8d1d6c 100644
+--- a/src/xmlsettingsdialog/CMakeLists.txt
++++ b/src/xmlsettingsdialog/CMakeLists.txt
+@@ -90,12 +90,12 @@ SET (FORMS
+ 	)
+ QT4_WRAP_CPP (MOC_SRCS ${HEADERS})
+ QT4_WRAP_UI (UIS_H ${FORMS})
+-ADD_LIBRARY (xmlsettingsdialog SHARED
++ADD_LIBRARY (leechcraft-xmlsettingsdialog SHARED
+ 	${SRCS}
+ 	${MOC_SRCS}
+ 	${UIS_H})
+-TARGET_LINK_LIBRARIES (xmlsettingsdialog
++TARGET_LINK_LIBRARIES (leechcraft-xmlsettingsdialog
+ 	${QT_LIBRARIES}
+ 	)
+-SET_PROPERTY (TARGET xmlsettingsdialog PROPERTY SOVERSION 0.3.0)
+-INSTALL (TARGETS xmlsettingsdialog DESTINATION ${LIBDIR})
++SET_PROPERTY (TARGET leechcraft-xmlsettingsdialog PROPERTY SOVERSION 0.3.0)
++INSTALL (TARGETS leechcraft-xmlsettingsdialog DESTINATION ${LIBDIR})

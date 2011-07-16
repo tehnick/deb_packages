@@ -77,6 +77,8 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     tar xzf "master"
     mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"/qxmpp
     # tarball
+    rm -rf "${PACKAGE}-${NEW_VER}"/doc
+    rm -rf "${PACKAGE}-${NEW_VER}"/iconsets
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 

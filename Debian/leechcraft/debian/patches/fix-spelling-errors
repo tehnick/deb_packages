@@ -1,0 +1,1057 @@
+diff --git a/README b/README
+index c6f339e..745bf9f 100644
+--- a/README
++++ b/README
+@@ -1,5 +1,5 @@
+ LeechCraft is a free open source cross-platform modular internet-client.
+-LeechCraft allows to browse the web, read RSS/Atom feeds, download files
++LeechCraft allows one to browse the web, read RSS/Atom feeds, download files
+ via BitTorrent, FTP, HTTP and ADC/NMDC, automatically download, play or
+ stream podcasts (and other media files) and much more.
+ 
+@@ -35,14 +35,14 @@ Currently it includes following plugins:
+ * Poshuku, the web browser.
+   * Poshuku CleanWeb, AdBlock+-compatible ad blocker.
+   * Poshuku FileScheme, support for the file:// browsing.
+-  * Poshuku FUA, which allows to set fake user agents per domain.
+-  * Poshuku WYFV, which allows to play flash video on some sites without
++  * Poshuku FUA, which allows one to set fake user agents per domain.
++  * Poshuku WYFV, which allows one to play flash video on some sites without
+     Flash installed.
+ * Qrosp, scripting support for LeechCraft via Qross library.
+ * SecMan, password & other sensitive info manager.
+ * SeekThru, client for OpenSearch-aware web sites.
+ * Summary, a plugin which shows all the downloads, tasks, events and
+-  statuses and allows to perform searches.
++  statuses and allows one to perform searches.
+ * Syncer, for synchronizing data and state between different machines
+   running LeechCraft.
+ * Tab++, for better tabs management.
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 35cb002..6ed5db6 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -112,7 +112,7 @@ OPTION (ENABLE_POTORCHU "Build Potorchu, the new generation audio/video player"
+ OPTION (ENABLE_TRANSPARENTARCH "Build TransparentArch, the plugin for transparent access to archives in various formats" OFF)
+ OPTION (ENABLE_JUFFED "Build JuffEd, the advanced text editor" OFF)
+ OPTION (ENABLE_GMAILNOTIFIER "Build GMail Notifier which notifies about new mail in your GMail inbox" OFF)
+-OPTION (ENABLE_OTZERKALU "Build Otzerkalu, which allows to download web sites recursively" OFF)
++OPTION (ENABLE_OTZERKALU "Build Otzerkalu, which allows one to download web sites recursively" OFF)
+ OPTION (ENABLE_ADVANCEDNOTIFICATIONS "Build Advanced Notifications module for more customizable notifications" OFF)
+ ENABLE_TESTING ()
+ 
+diff --git a/src/core.h b/src/core.h
+index 3e52eb8..73fac13 100644
+--- a/src/core.h
++++ b/src/core.h
+@@ -115,7 +115,7 @@ namespace LeechCraft
+ 
+ 		/** Returns the model which manages the plugins, displays
+ 		 * various info about them like name, description, icon and
+-		 * allows to switch them off.
++		 * allows one to switch them off.
+ 		 *
+ 		 * For example, this model is used in the Plugin Manager page
+ 		 * in the settings.
+diff --git a/src/interfaces/ifinder.h b/src/interfaces/ifinder.h
+index 27b9f08..5cfc065 100644
+--- a/src/interfaces/ifinder.h
++++ b/src/interfaces/ifinder.h
+@@ -104,7 +104,7 @@ public:
+ 	 * and the other one is "music", because your plugin searches for
+ 	 * music. Then, if user selects both music and the site name, only
+ 	 * one search find proxy should be returned. Thus, this function
+-	 * allows to avoid such situations.
++	 * allows one to avoid such situations.
+ 	 *
+ 	 * @return The string with unique ID.
+ 	 */
+diff --git a/src/interfaces/iinfo.h b/src/interfaces/iinfo.h
+index 879ccf7..9b36b8b 100644
+--- a/src/interfaces/iinfo.h
++++ b/src/interfaces/iinfo.h
+@@ -422,7 +422,7 @@ public:
+ 
+ /** @brief Proxy class for the communication with LeechCraft.
+  *
+- * Allows to talk with LeechCraft, requesting and getting various
++ * Allows one to talk with LeechCraft, requesting and getting various
+  * services.
+  */
+ class ICoreProxy
+diff --git a/src/plugininterface/customcookiejar.h b/src/plugininterface/customcookiejar.h
+index 044ced4..50a1363 100644
+--- a/src/plugininterface/customcookiejar.h
++++ b/src/plugininterface/customcookiejar.h
+@@ -26,7 +26,7 @@ namespace LeechCraft
+ {
+ 	namespace Util
+ 	{
+-		/** Customized cookie jar. Allows to filter tracking cookies, 
++		/** Customized cookie jar. Allows one to filter tracking cookies, 
+ 		 * filter duplicate cookies and has unlimited storage period.
+ 		 */
+ 		class PLUGININTERFACE_API CustomCookieJar : public QNetworkCookieJar
+diff --git a/src/plugininterface/mergemodel.h b/src/plugininterface/mergemodel.h
+index 82adf88..f0a7bb4 100644
+--- a/src/plugininterface/mergemodel.h
++++ b/src/plugininterface/mergemodel.h
+@@ -151,7 +151,7 @@ namespace LeechCraft
+ 			/** Returns the model that corresponds to the given row. If
+ 			 * there is no such model, throws std::runtime_error. If
+ 			 * starting is not null, it also calculates and returns the
+-			 * starting row for the returned model. This allows to avoid
++			 * starting row for the returned model. This allows one to avoid
+ 			 * calling GetStartingRow() after this function and thus
+ 			 * speed things up.
+ 			 *
+diff --git a/src/plugins/aggregator/core.cpp b/src/plugins/aggregator/core.cpp
+index 9ffaf4e..aa5d9a4 100644
+--- a/src/plugins/aggregator/core.cpp
++++ b/src/plugins/aggregator/core.cpp
+@@ -236,7 +236,7 @@ namespace LeechCraft
+ 				if (!dir.cd (".leechcraft/aggregator") &&
+ 						!dir.mkpath (".leechcraft/aggregator"))
+ 				{
+-					qCritical () << Q_FUNC_INFO << "could not create neccessary "
++					qCritical () << Q_FUNC_INFO << "could not create necessary "
+ 						"directories for Aggregator";
+ 					return false;
+ 				}
+diff --git a/src/plugins/aggregator/export.ui b/src/plugins/aggregator/export.ui
+index 916bf02..88e2274 100644
+--- a/src/plugins/aggregator/export.ui
++++ b/src/plugins/aggregator/export.ui
+@@ -11,7 +11,7 @@
+    </rect>
+   </property>
+   <property name="windowTitle">
+-   <string>This string is overriden in the source code</string>
++   <string>This string is overridden in the source code</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+diff --git a/src/plugins/aggregator/feed.h b/src/plugins/aggregator/feed.h
+index cadbe54..53088c2 100644
+--- a/src/plugins/aggregator/feed.h
++++ b/src/plugins/aggregator/feed.h
+@@ -73,7 +73,7 @@ namespace LeechCraft
+ 					 * everything set to default values - so, no
+ 					 * settings are overridden.
+ 					 *
+-					 * This constructor allows to reuse an existing ID
++					 * This constructor allows one to reuse an existing ID
+ 					 * for the SettingsID_.
+ 					 *
+ 					 * @param[in] feedId ID of the feed that these
+diff --git a/src/plugins/aggregator/item.cpp b/src/plugins/aggregator/item.cpp
+index e9f3fda..e1d3dcc 100644
+--- a/src/plugins/aggregator/item.cpp
++++ b/src/plugins/aggregator/item.cpp
+@@ -283,7 +283,7 @@ namespace LeechCraft
+ 						>> thumb.Time_;
+ 				else
+ 					qWarning () << Q_FUNC_INFO
+-						<< "unkown version"
++						<< "unknown version"
+ 						<< version;
+ 				return in;
+ 			}
+@@ -306,7 +306,7 @@ namespace LeechCraft
+ 						>> credit.Who_;
+ 				else
+ 					qWarning () << Q_FUNC_INFO
+-						<< "unkown version"
++						<< "unknown version"
+ 						<< version;
+ 				return in;
+ 			}
+@@ -329,7 +329,7 @@ namespace LeechCraft
+ 						>> c.Comment_;
+ 				else
+ 					qWarning () << Q_FUNC_INFO
+-						<< "unkown version"
++						<< "unknown version"
+ 						<< version;
+ 				return in;
+ 			}
+@@ -352,7 +352,7 @@ namespace LeechCraft
+ 						>> p.Link_;
+ 				else
+ 					qWarning () << Q_FUNC_INFO
+-						<< "unkown version"
++						<< "unknown version"
+ 						<< version;
+ 				return in;
+ 			}
+@@ -379,7 +379,7 @@ namespace LeechCraft
+ 						>> s.EndTime_;
+ 				else
+ 					qWarning () << Q_FUNC_INFO
+-						<< "unkown version"
++						<< "unknown version"
+ 						<< version;
+ 				return in;
+ 			}
+@@ -466,7 +466,7 @@ namespace LeechCraft
+ 					>> e.Scenes_;
+ 				else
+ 					qWarning () << Q_FUNC_INFO
+-						<< "unkown version"
++						<< "unknown version"
+ 						<< version;
+ 				return in;
+ 			}
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_ar.ts b/src/plugins/aggregator/leechcraft_aggregator_ar.ts
+index a1955a6..b8b5e0f 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_ar.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_ar.ts
+@@ -99,7 +99,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_be.ts b/src/plugins/aggregator/leechcraft_aggregator_be.ts
+index 39f02b1..af62594 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_be.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_be.ts
+@@ -99,7 +99,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_de.ts b/src/plugins/aggregator/leechcraft_aggregator_de.ts
+index 382d113..940238d 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_de.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_de.ts
+@@ -99,7 +99,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_en.ts b/src/plugins/aggregator/leechcraft_aggregator_en.ts
+index 7582bad..b302eed 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_en.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_en.ts
+@@ -99,8 +99,8 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
+-        <translation>This string is overriden in the source code</translation>
++        <source>This string is overridden in the source code</source>
++        <translation>This string is overridden in the source code</translation>
+     </message>
+     <message>
+         <location filename="export.ui" line="25"/>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_eo.ts b/src/plugins/aggregator/leechcraft_aggregator_eo.ts
+index 71146fb..6113b26 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_eo.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_eo.ts
+@@ -100,7 +100,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation>Tio signovico estas lacegigita en la fontkodo</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_es.ts b/src/plugins/aggregator/leechcraft_aggregator_es.ts
+index 2ea4425..5df0cfe 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_es.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_es.ts
+@@ -81,7 +81,7 @@
+ <context>
+     <name>Export</name>
+     <message>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation>Esta cadena está sobrescrita en el código fuente</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_fr.ts b/src/plugins/aggregator/leechcraft_aggregator_fr.ts
+index fe607a6..9e97b6e 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_fr.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_fr.ts
+@@ -99,7 +99,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation>Cette chaîne est passée outre dans le code source</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_it.ts b/src/plugins/aggregator/leechcraft_aggregator_it.ts
+index 2bf8ad4..e30ee83 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_it.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_it.ts
+@@ -99,7 +99,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation>Questa stringa è ridefinito nel codice sorgente</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_oc.ts b/src/plugins/aggregator/leechcraft_aggregator_oc.ts
+index 93b6321..05f9609 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_oc.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_oc.ts
+@@ -99,7 +99,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_pl.ts b/src/plugins/aggregator/leechcraft_aggregator_pl.ts
+index 9495363..9b0c014 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_pl.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_pl.ts
+@@ -101,7 +101,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation>Ten tekst jest napisany w kodzie źródłowym</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_ru_RU.ts b/src/plugins/aggregator/leechcraft_aggregator_ru_RU.ts
+index ea5c0d5..b43ca10 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_ru_RU.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_ru_RU.ts
+@@ -99,7 +99,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/aggregator/leechcraft_aggregator_uk_UA.ts b/src/plugins/aggregator/leechcraft_aggregator_uk_UA.ts
+index 964fe23..8a73f45 100644
+--- a/src/plugins/aggregator/leechcraft_aggregator_uk_UA.ts
++++ b/src/plugins/aggregator/leechcraft_aggregator_uk_UA.ts
+@@ -99,7 +99,7 @@
+     <name>Export</name>
+     <message>
+         <location filename="export.ui" line="14"/>
+-        <source>This string is overriden in the source code</source>
++        <source>This string is overridden in the source code</source>
+         <translation></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/azoth/azoth.cpp b/src/plugins/azoth/azoth.cpp
+index 874b838..1eb7598 100644
+--- a/src/plugins/azoth/azoth.cpp
++++ b/src/plugins/azoth/azoth.cpp
+@@ -150,7 +150,7 @@ namespace Azoth
+ 		{
+ 			"SD",
+ 			tr ("Service discovery"),
+-			tr ("A service discovery tab that allows to discover "
++			tr ("A service discovery tab that allows one to discover "
+ 				"capabilities of remote entries"),
+ 			QIcon (),
+ 			55,
+diff --git a/src/plugins/azoth/leechcraft_azoth_en.ts b/src/plugins/azoth/leechcraft_azoth_en.ts
+index 36a7be9..e2c5979 100644
+--- a/src/plugins/azoth/leechcraft_azoth_en.ts
++++ b/src/plugins/azoth/leechcraft_azoth_en.ts
+@@ -1873,8 +1873,8 @@
+     </message>
+     <message>
+         <location filename="azoth.cpp" line="153"/>
+-        <source>A service discovery tab that allows to discover capabilities of remote entries</source>
+-        <translation>A service discovery tab that allows to discover capabilities of remote entries</translation>
++        <source>A service discovery tab that allows one to discover capabilities of remote entries</source>
++        <translation>A service discovery tab that allows one to discover capabilities of remote entries</translation>
+     </message>
+     <message>
+         <location filename="azoth.cpp" line="162"/>
+@@ -1919,8 +1919,8 @@
+     </message>
+     <message>
+         <location filename="servicediscoverywidget.cpp" line="100"/>
+-        <source>A service discovery tab that allows to discover capabilities of remote entries</source>
+-        <translation>A service discovery tab that allows to discover capabilities of remote entries</translation>
++        <source>A service discovery tab that allows one to discover capabilities of remote entries</source>
++        <translation>A service discovery tab that allows one to discover capabilities of remote entries</translation>
+     </message>
+     <message>
+         <location filename="servicediscoverywidget.cpp" line="142"/>
+diff --git a/src/plugins/azoth/leechcraft_azoth_ru_RU.ts b/src/plugins/azoth/leechcraft_azoth_ru_RU.ts
+index 87dd0c0..ed9485f 100644
+--- a/src/plugins/azoth/leechcraft_azoth_ru_RU.ts
++++ b/src/plugins/azoth/leechcraft_azoth_ru_RU.ts
+@@ -1874,7 +1874,7 @@
+     </message>
+     <message>
+         <location filename="azoth.cpp" line="153"/>
+-        <source>A service discovery tab that allows to discover capabilities of remote entries</source>
++        <source>A service discovery tab that allows one to discover capabilities of remote entries</source>
+         <translation>Вкладка с обзором сервисом, позволяющая выполнять обзор сервисов</translation>
+     </message>
+     <message>
+@@ -1920,7 +1920,7 @@
+     </message>
+     <message>
+         <location filename="servicediscoverywidget.cpp" line="100"/>
+-        <source>A service discovery tab that allows to discover capabilities of remote entries</source>
++        <source>A service discovery tab that allows one to discover capabilities of remote entries</source>
+         <translation>Вкладка с обзором сервисом, позволяющая выполнять обзор сервисов</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/azoth/leechcraft_azoth_uk_UA.ts b/src/plugins/azoth/leechcraft_azoth_uk_UA.ts
+index 8977d8d..ec82608 100644
+--- a/src/plugins/azoth/leechcraft_azoth_uk_UA.ts
++++ b/src/plugins/azoth/leechcraft_azoth_uk_UA.ts
+@@ -1874,7 +1874,7 @@
+     </message>
+     <message>
+         <location filename="azoth.cpp" line="153"/>
+-        <source>A service discovery tab that allows to discover capabilities of remote entries</source>
++        <source>A service discovery tab that allows one to discover capabilities of remote entries</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+@@ -1920,7 +1920,7 @@
+     </message>
+     <message>
+         <location filename="servicediscoverywidget.cpp" line="100"/>
+-        <source>A service discovery tab that allows to discover capabilities of remote entries</source>
++        <source>A service discovery tab that allows one to discover capabilities of remote entries</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/azoth/plugins/depester/depester.cpp b/src/plugins/azoth/plugins/depester/depester.cpp
+index 7bed7cb..612b3b3 100644
+--- a/src/plugins/azoth/plugins/depester/depester.cpp
++++ b/src/plugins/azoth/plugins/depester/depester.cpp
+@@ -63,7 +63,7 @@ namespace Depester
+ 
+ 	QString Plugin::GetInfo () const
+ 	{
+-		return tr ("Allows to block messages from unwanted contacts in MUCs.");
++		return tr ("Allows one to block messages from unwanted contacts in MUCs.");
+ 	}
+ 
+ 	QIcon Plugin::GetIcon () const
+diff --git a/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_en.ts b/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_en.ts
+index 1b42a4f..4362608 100644
+--- a/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_en.ts
++++ b/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_en.ts
+@@ -5,7 +5,7 @@
+     <name>LeechCraft::Azoth::Depester::Plugin</name>
+     <message>
+         <location filename="depester.cpp" line="57"/>
+-        <source>Allows to block messages from unwanted contacts in MUCs.</source>
++        <source>Allows one to block messages from unwanted contacts in MUCs.</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_ru_RU.ts b/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_ru_RU.ts
+index 419d240..7885b14 100644
+--- a/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_ru_RU.ts
++++ b/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_ru_RU.ts
+@@ -5,7 +5,7 @@
+     <name>LeechCraft::Azoth::Depester::Plugin</name>
+     <message>
+         <location filename="depester.cpp" line="57"/>
+-        <source>Allows to block messages from unwanted contacts in MUCs.</source>
++        <source>Allows one to block messages from unwanted contacts in MUCs.</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_uk_UA.ts b/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_uk_UA.ts
+index 802ef1c..01a976e 100644
+--- a/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_uk_UA.ts
++++ b/src/plugins/azoth/plugins/depester/leechcraft_azoth_depester_uk_UA.ts
+@@ -5,7 +5,7 @@
+     <name>LeechCraft::Azoth::Depester::Plugin</name>
+     <message>
+         <location filename="depester.cpp" line="57"/>
+-        <source>Allows to block messages from unwanted contacts in MUCs.</source>
++        <source>Allows one to block messages from unwanted contacts in MUCs.</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/azoth/plugins/hili/hili.cpp b/src/plugins/azoth/plugins/hili/hili.cpp
+index fc6a728..b1cd7e5 100644
+--- a/src/plugins/azoth/plugins/hili/hili.cpp
++++ b/src/plugins/azoth/plugins/hili/hili.cpp
+@@ -67,7 +67,7 @@ namespace HiLi
+ 
+ 	QString Plugin::GetInfo () const
+ 	{
+-		return tr ("Azoth Hili allows to customize the settings of highlights in conferences.");
++		return tr ("Azoth Hili allows one to customize the settings of highlights in conferences.");
+ 	}
+ 
+ 	QIcon Plugin::GetIcon () const
+diff --git a/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_en.ts b/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_en.ts
+index b6e5ee0..3548104 100644
+--- a/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_en.ts
++++ b/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_en.ts
+@@ -5,8 +5,8 @@
+     <name>LeechCraft::Azoth::HiLi::Plugin</name>
+     <message>
+         <location filename="hili.cpp" line="66"/>
+-        <source>Azoth Hili allows to customize the settings of highlights in conferences.</source>
+-        <translation>Azoth Hili allows to customize the settings of highlights in conferences.</translation>
++        <source>Azoth Hili allows one to customize the settings of highlights in conferences.</source>
++        <translation>Azoth Hili allows one to customize the settings of highlights in conferences.</translation>
+     </message>
+ </context>
+ <context>
+diff --git a/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_ru_RU.ts b/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_ru_RU.ts
+index 19d730e..447e2b3 100644
+--- a/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_ru_RU.ts
++++ b/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_ru_RU.ts
+@@ -5,7 +5,7 @@
+     <name>LeechCraft::Azoth::HiLi::Plugin</name>
+     <message>
+         <location filename="hili.cpp" line="66"/>
+-        <source>Azoth Hili allows to customize the settings of highlights in conferences.</source>
++        <source>Azoth Hili allows one to customize the settings of highlights in conferences.</source>
+         <translation>Azoth Hili позволяет настроить параметры подсветки в конференциях.</translation>
+     </message>
+ </context>
+diff --git a/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_uk_UA.ts b/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_uk_UA.ts
+index 7be469e..005b942 100644
+--- a/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_uk_UA.ts
++++ b/src/plugins/azoth/plugins/hili/leechcraft_azoth_hili_uk_UA.ts
+@@ -5,7 +5,7 @@
+     <name>LeechCraft::Azoth::HiLi::Plugin</name>
+     <message>
+         <location filename="hili.cpp" line="66"/>
+-        <source>Azoth Hili allows to customize the settings of highlights in conferences.</source>
++        <source>Azoth Hili allows one to customize the settings of highlights in conferences.</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/azoth/servicediscoverywidget.cpp b/src/plugins/azoth/servicediscoverywidget.cpp
+index f3578f8..fceb7e1 100644
+--- a/src/plugins/azoth/servicediscoverywidget.cpp
++++ b/src/plugins/azoth/servicediscoverywidget.cpp
+@@ -97,7 +97,7 @@ namespace Azoth
+ 		{
+ 			"SD",
+ 			tr ("Service discovery"),
+-			tr ("A service discovery tab that allows to discover "
++			tr ("A service discovery tab that allows one to discover "
+ 				"capabilities of remote entries"),
+ 			QIcon (),
+ 			55,
+diff --git a/src/plugins/bittorrent/core.cpp b/src/plugins/bittorrent/core.cpp
+index 88af86c..6a3e83d 100644
+--- a/src/plugins/bittorrent/core.cpp
++++ b/src/plugins/bittorrent/core.cpp
+@@ -2793,7 +2793,7 @@ namespace LeechCraft
+ 								"LeechCraft BitTorrent",
+ 								tr ("Storage notifications are disabled. Live streaming "
+ 									"definitely won't work without them, so if you are "
+-									"experiencing troubles, reenable storage notifications "
++									"experiencing troubles, re-enable storage notifications "
+ 									"in \"Notifications\" section of BitTorrent settings. "
+ 									"Do you want to enable them now?"),
+ 								QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_ar.ts b/src/plugins/bittorrent/leechcraft_bittorrent_ar.ts
+index a614f44..bcdb6a2 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_ar.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_ar.ts
+@@ -507,7 +507,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_be.ts b/src/plugins/bittorrent/leechcraft_bittorrent_be.ts
+index 2d9d9ae..0ef7957 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_be.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_be.ts
+@@ -607,7 +607,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_de.ts b/src/plugins/bittorrent/leechcraft_bittorrent_de.ts
+index 7b8a26a..b3eb437 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_de.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_de.ts
+@@ -607,7 +607,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation>Storage-Benachrichtigungen sind deaktiviert. Live-Streaming wird definitiv nicht funktionieren. Falls ein Problem auftritt, reaktivieren der Storage-Benachrichtigungen im &quot;Benachrichtigungen&quot; Abschnitt der BitTorrent-Einstellungen. Wollen Sie diese nun Aktivieren?</translation>
+     </message>
+ </context>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_en.ts b/src/plugins/bittorrent/leechcraft_bittorrent_en.ts
+index cda6f71..8b551a5 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_en.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_en.ts
+@@ -607,8 +607,8 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+-        <translation>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</translation>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <translation>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</translation>
+     </message>
+ </context>
+ <context>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_eo.ts b/src/plugins/bittorrent/leechcraft_bittorrent_eo.ts
+index 5c7202e..fbb2c26 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_eo.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_eo.ts
+@@ -507,7 +507,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_es.ts b/src/plugins/bittorrent/leechcraft_bittorrent_es.ts
+index 9ce40c8..af5d04e 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_es.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_es.ts
+@@ -607,7 +607,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_fr.ts b/src/plugins/bittorrent/leechcraft_bittorrent_fr.ts
+index b4308ac..22ad037 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_fr.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_fr.ts
+@@ -607,7 +607,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation>Les notifications de stockage sont désactivées. La diffusion de contenu en direct ne fonctionnera définitivement pas sans elle, si vous avez des problèmes, réactivez les notifications de stockage dans la partie &quot;Notifications&quot; des paramètres BitTorrent. Voulez-vous les activer maintenant ?</translation>
+     </message>
+ </context>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_it.ts b/src/plugins/bittorrent/leechcraft_bittorrent_it.ts
+index a26a82e..7430c12 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_it.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_it.ts
+@@ -607,7 +607,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_oc.ts b/src/plugins/bittorrent/leechcraft_bittorrent_oc.ts
+index 73215af..8bcc33b 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_oc.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_oc.ts
+@@ -607,7 +607,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_pl.ts b/src/plugins/bittorrent/leechcraft_bittorrent_pl.ts
+index 7fe72ab..fb67a04 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_pl.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_pl.ts
+@@ -507,7 +507,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_ru_RU.ts b/src/plugins/bittorrent/leechcraft_bittorrent_ru_RU.ts
+index 985d4f8..7c9649f 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_ru_RU.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_ru_RU.ts
+@@ -512,7 +512,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation>Уведомления хранилища отключены. Проигрывание на лету точно не будет работать без них, поэтому если Вы испытываете проблемы, включите уведомления хранилища в секции &quot;Уведомления&quot; параметров BitTorrent. Вы хотите включить их сейчас?</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/bittorrent/leechcraft_bittorrent_uk_UA.ts b/src/plugins/bittorrent/leechcraft_bittorrent_uk_UA.ts
+index 19752e4..eab8eda 100644
+--- a/src/plugins/bittorrent/leechcraft_bittorrent_uk_UA.ts
++++ b/src/plugins/bittorrent/leechcraft_bittorrent_uk_UA.ts
+@@ -507,7 +507,7 @@ IPv6 input mask</extracomment>
+     </message>
+     <message>
+         <location filename="core.cpp" line="2794"/>
+-        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, reenable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
++        <source>Storage notifications are disabled. Live streaming definitely won&apos;t work without them, so if you are experiencing troubles, re-enable storage notifications in &quot;Notifications&quot; section of BitTorrent settings. Do you want to enable them now?</source>
+         <translation>Сповіщеня підсистеми збереження відключені. Відтворення в реальному часі буде недоступне. Якщо у Вас виникли проблеми, увімкніть сповіщення у розділі &quot;Сповіщення&quot; параметрів BitTorrent. Хочете увімкнути їх зараз?</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/lackman/delegatebuttongroup.h b/src/plugins/lackman/delegatebuttongroup.h
+index b26bcd1..82f8cad 100644
+--- a/src/plugins/lackman/delegatebuttongroup.h
++++ b/src/plugins/lackman/delegatebuttongroup.h
+@@ -32,7 +32,7 @@ namespace LeechCraft
+ 			 *
+ 			 * Usual QButtonGroup doesn't allow to have no checked
+ 			 * buttons at all. This class is used to work around this
+-			 * and allows to have no checked buttons.
++			 * and allows one to have no checked buttons.
+ 			 *
+ 			 * Used in PackagesDelegate to represent the update or
+ 			 * (install|remove) action group.
+diff --git a/src/plugins/lcftp/lcftpsettings.xml b/src/plugins/lcftp/lcftpsettings.xml
+index 52ad8f4..caa4e65 100644
+--- a/src/plugins/lcftp/lcftpsettings.xml
++++ b/src/plugins/lcftp/lcftpsettings.xml
+@@ -97,7 +97,7 @@
+ 						<label lang="en" value="SOCKS5-HOSTNAME" />
+ 					</option>
+ 				</item>
+-				<item type="checkbox" propery="ProxyTunnel" default="off">
++				<item type="checkbox" property="ProxyTunnel" default="off">
+ 					<label lang="en" value="Tunnel requests through the proxy" />
+ 				</item>
+ 				<item type="lineedit" property="NoProxy" default="">
+diff --git a/src/plugins/otzerkalu/otzerkalu.cpp b/src/plugins/otzerkalu/otzerkalu.cpp
+index 4a130b4..0ce4dbe 100644
+--- a/src/plugins/otzerkalu/otzerkalu.cpp
++++ b/src/plugins/otzerkalu/otzerkalu.cpp
+@@ -47,7 +47,7 @@ namespace Otzerkalu
+ 
+ 	QString Plugin::GetInfo () const
+ 	{
+-		return tr ("Otzerkalu allows to recursively download a web site.");
++		return tr ("Otzerkalu allows one to recursively download a web site.");
+ 	}
+ 
+ 	QIcon Plugin::GetIcon () const
+diff --git a/src/plugins/poshuku/core.cpp b/src/plugins/poshuku/core.cpp
+index 88af43d..038938f 100644
+--- a/src/plugins/poshuku/core.cpp
++++ b/src/plugins/poshuku/core.cpp
+@@ -123,8 +123,8 @@ namespace Poshuku
+ 				!dir.mkpath (".leechcraft/poshuku"))
+ 		{
+ 			qCritical () << Q_FUNC_INFO
+-				<< "could not create neccessary directories for Poshuku";
+-			throw std::runtime_error ("could not create neccessary directories for Poshuku");
++				<< "could not create necessary directories for Poshuku";
++			throw std::runtime_error ("could not create necessary directories for Poshuku");
+ 		}
+ 
+ 		StorageBackend::Type type;
+@@ -577,7 +577,7 @@ namespace Poshuku
+ 				winver = "unknown DOS-based";
+ 				break;
+ 			case QSysInfo::WV_NT_based:
+-				winver = "unkown NT-based";
++				winver = "unknown NT-based";
+ 				break;
+ 			case QSysInfo::WV_CE_based:
+ 				winver = "unknown CE-based";
+@@ -685,7 +685,7 @@ namespace Poshuku
+ 			.arg ("any UNIX BSD/SYSV")
+ #else
+ #warning "Unknown OS"
+-			.arg ("unkown subplatform")
++			.arg ("unknown subplatform")
+ #endif
+ 			// %4 locale
+ 			.arg (QLocale::system ().name ())
+diff --git a/src/plugins/poshuku/plugins/fua/fua.cpp b/src/plugins/poshuku/plugins/fua/fua.cpp
+index 6e3ce63..0b905df 100644
+--- a/src/plugins/poshuku/plugins/fua/fua.cpp
++++ b/src/plugins/poshuku/plugins/fua/fua.cpp
+@@ -109,7 +109,7 @@ namespace Fua
+ 
+ 	QString LeechCraft::Poshuku::Fua::FUA::GetInfo () const
+ 	{
+-		return tr ("Allows to set fake user agents for different sites.");
++		return tr ("Allows one to set fake user agents for different sites.");
+ 	}
+ 
+ 	QIcon FUA::GetIcon () const
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_ar.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_ar.ts
+index a291d05..4e2a3e1 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_ar.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_ar.ts
+@@ -52,7 +52,7 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
++        <source>Allows one to set fake user agents for different sites.</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_de.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_de.ts
+index e9e1abe..196313e 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_de.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_de.ts
+@@ -56,7 +56,7 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
++        <source>Allows one to set fake user agents for different sites.</source>
+         <translation type="unfinished">Erlaubt die Einstellung gefälschter User Agents für verschiedene Websites.</translation>
+     </message>
+ </context>
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_en.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_en.ts
+index 18de1c9..bea556b 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_en.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_en.ts
+@@ -56,8 +56,8 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
+-        <translation>Allows to set fake user agents for different sites.</translation>
++        <source>Allows one to set fake user agents for different sites.</source>
++        <translation>Allows one to set fake user agents for different sites.</translation>
+     </message>
+ </context>
+ <context>
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_eo.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_eo.ts
+index 87e65a6..05d3d4f 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_eo.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_eo.ts
+@@ -52,7 +52,7 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
++        <source>Allows one to set fake user agents for different sites.</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_es.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_es.ts
+index eb4904b..b213984 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_es.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_es.ts
+@@ -56,7 +56,7 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
++        <source>Allows one to set fake user agents for different sites.</source>
+         <translation type="unfinished">Permite asignar agentes de usuarios falsos para diferentes sitios.</translation>
+     </message>
+ </context>
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_fr.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_fr.ts
+index ed0c9a3..42cf675 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_fr.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_fr.ts
+@@ -56,7 +56,7 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
++        <source>Allows one to set fake user agents for different sites.</source>
+         <translation type="unfinished">Autorise la création de faux agents utilisateurs pour différents sites.</translation>
+     </message>
+ </context>
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_it.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_it.ts
+index 2a35354..2a93496 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_it.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_it.ts
+@@ -52,7 +52,7 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
++        <source>Allows one to set fake user agents for different sites.</source>
+         <translation>Consente di impostare user agent falso per diversi siti.</translation>
+     </message>
+ </context>
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_pl.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_pl.ts
+index 6838042..6704fac 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_pl.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_pl.ts
+@@ -52,7 +52,7 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
++        <source>Allows one to set fake user agents for different sites.</source>
+         <translation type="unfinished"></translation>
+     </message>
+ </context>
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_ru_RU.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_ru_RU.ts
+index a4e9c0c..baa5149 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_ru_RU.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_ru_RU.ts
+@@ -56,7 +56,7 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
++        <source>Allows one to set fake user agents for different sites.</source>
+         <translation>Позволяет устанавливать поддельные user-agent для различных сайтов.</translation>
+     </message>
+ </context>
+diff --git a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_uk_UA.ts b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_uk_UA.ts
+index d42fde0..07c8d08 100644
+--- a/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_uk_UA.ts
++++ b/src/plugins/poshuku/plugins/fua/leechcraft_poshuku_fua_uk_UA.ts
+@@ -56,7 +56,7 @@
+     </message>
+     <message>
+         <location filename="fua.cpp" line="112"/>
+-        <source>Allows to set fake user agents for different sites.</source>
++        <source>Allows one to set fake user agents for different sites.</source>
+         <translation>Дозволяє встановти підробні user agent&apos;и для різних сайтів.</translation>
+     </message>
+ </context>
+diff --git a/src/plugins/shellopen/leechcraft_shellopen_en.ts b/src/plugins/shellopen/leechcraft_shellopen_en.ts
+index a5b930f..7721742 100644
+--- a/src/plugins/shellopen/leechcraft_shellopen_en.ts
++++ b/src/plugins/shellopen/leechcraft_shellopen_en.ts
+@@ -5,8 +5,8 @@
+     <name>LeechCraft::Plugins::ShellOpen::Plugin</name>
+     <message>
+         <location filename="shellopen.cpp" line="61"/>
+-        <source>Allows to open files and otherwise handle entities with external applications.</source>
+-        <translation>Allows to open files and otherwise handle entities with external applications.</translation>
++        <source>Allows one to open files and otherwise handle entities with external applications.</source>
++        <translation>Allows one to open files and otherwise handle entities with external applications.</translation>
+     </message>
+     <message>
+         <location filename="shellopen.cpp" line="116"/>
+diff --git a/src/plugins/shellopen/leechcraft_shellopen_ru_RU.ts b/src/plugins/shellopen/leechcraft_shellopen_ru_RU.ts
+index bded47e..ce2a26a 100644
+--- a/src/plugins/shellopen/leechcraft_shellopen_ru_RU.ts
++++ b/src/plugins/shellopen/leechcraft_shellopen_ru_RU.ts
+@@ -5,7 +5,7 @@
+     <name>LeechCraft::Plugins::ShellOpen::Plugin</name>
+     <message>
+         <location filename="shellopen.cpp" line="61"/>
+-        <source>Allows to open files and otherwise handle entities with external applications.</source>
++        <source>Allows one to open files and otherwise handle entities with external applications.</source>
+         <translation>Позволяет открывать файлы и обрабатывать сущности при помощи внешних приложений.</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/shellopen/leechcraft_shellopen_uk_UA.ts b/src/plugins/shellopen/leechcraft_shellopen_uk_UA.ts
+index eea7b10..125f85c 100644
+--- a/src/plugins/shellopen/leechcraft_shellopen_uk_UA.ts
++++ b/src/plugins/shellopen/leechcraft_shellopen_uk_UA.ts
+@@ -5,7 +5,7 @@
+     <name>LeechCraft::Plugins::ShellOpen::Plugin</name>
+     <message>
+         <location filename="shellopen.cpp" line="61"/>
+-        <source>Allows to open files and otherwise handle entities with external applications.</source>
++        <source>Allows one to open files and otherwise handle entities with external applications.</source>
+         <translation>Дозволяє відкривати файли і обробляти сутності з допомогою зовнішніх програм.</translation>
+     </message>
+     <message>
+diff --git a/src/plugins/shellopen/shellopen.cpp b/src/plugins/shellopen/shellopen.cpp
+index 0f86b68..21d834e 100644
+--- a/src/plugins/shellopen/shellopen.cpp
++++ b/src/plugins/shellopen/shellopen.cpp
+@@ -58,7 +58,7 @@ namespace LeechCraft
+ 
+ 			QString Plugin::GetInfo () const
+ 			{
+-				return tr ("Allows to open files and otherwise handle entities with external applications.");
++				return tr ("Allows one to open files and otherwise handle entities with external applications.");
+ 			}
+ 
+ 			QIcon Plugin::GetIcon () const
+diff --git a/src/xmlsettingsdialog/itemhandlerfactory.cpp b/src/xmlsettingsdialog/itemhandlerfactory.cpp
+index b180516..d9c8166 100644
+--- a/src/xmlsettingsdialog/itemhandlerfactory.cpp
++++ b/src/xmlsettingsdialog/itemhandlerfactory.cpp
+@@ -88,7 +88,7 @@ namespace LeechCraft
+ 		if (!object)
+ 		{
+ 			qWarning () << Q_FUNC_INFO
+-				<< "ItemHandler propery for widget is not set"
++				<< "ItemHandler property for widget is not set"
+ 				<< widget;
+ 			return;
+ 		}
+diff --git a/tools/patches/portable/portable.diff b/tools/patches/portable/portable.diff
+index d933211..44d6c4f 100644
+--- a/tools/patches/portable/portable.diff
++++ b/tools/patches/portable/portable.diff
+@@ -315,7 +315,7 @@
+ +				if (!dir.cd ("UserData/aggregator") &&
+ +						!dir.mkpath ("UserData/aggregator"))
+  				{
+- 					qCritical () << Q_FUNC_INFO << "could not create neccessary "
++ 					qCritical () << Q_FUNC_INFO << "could not create necessary "
+  						"directories for Aggregator";
+ --- a/src/plugins/aggregator/itemmodel.cpp
+ +++ b/src/plugins/aggregator/itemmodel.cpp
+@@ -741,7 +741,7 @@
+ +					!dir.mkpath ("UserData/poshuku"))
+  				{
+  					qCritical () << Q_FUNC_INFO
+- 						<< "could not create neccessary directories for Poshuku";
++ 						<< "could not create necessary directories for Poshuku";
+ @@ -876,8 +877,8 @@
+  					return;
+  			
+diff --git a/tools/win32/installer/mainscript.nsi b/tools/win32/installer/mainscript.nsi
+index c14ab12..e37592f 100644
+--- a/tools/win32/installer/mainscript.nsi
++++ b/tools/win32/installer/mainscript.nsi
+@@ -393,9 +393,9 @@ LangString DESC_VGRABBERPLUGIN ${LANG_ENGLISH} "VKontakte.ru audio/video grabber
+ LangString DESC_AUSCRIEPLUGIN ${LANG_ENGLISH} "Auto Screenshooter."
+ LangString DESC_KINOTIFYPLUGIN ${LANG_ENGLISH} "Provides fancy notifications instead of plain default ones."
+ LangString DESC_TABPPPLUGIN ${LANG_ENGLISH} "Enhances tabbed navigation experience."
+-LangString DESC_LACKMANPLUGIN ${LANG_ENGLISH} "LeechCraft Package Manager allows to install additional plugins, extensions, icons and various other data."
++LangString DESC_LACKMANPLUGIN ${LANG_ENGLISH} "LeechCraft Package Manager allows one to install additional plugins, extensions, icons and various other data."
+ LangString DESC_SECMANPLUGIN ${LANG_ENGLISH} "Security Manager stores passwords and various other data."
+-LangString DESC_SHELLOPENPLUGIN ${LANG_ENGLISH} "Allows to open unhandled entities via other applications."
++LangString DESC_SHELLOPENPLUGIN ${LANG_ENGLISH} "Allows one to open unhandled entities via other applications."
+ 
+ LangString DESC_MAINFILES ${LANG_RUSSIAN} "���� LeechCraft."
+ LangString DESC_QT ${LANG_RUSSIAN} "���������� Qt."

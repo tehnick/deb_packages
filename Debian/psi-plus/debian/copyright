@@ -4,7 +4,7 @@ Mon, 23 Feb 2009 19:56:49 +0300.
 This package was modified by Boris Pek <tehnick-8@mail.ru> on
 Mon, 16 May 2011 04:14:42 +0300
 
-The orig.tar.gz is generated from a few upstream source trees:
+The orig.tar.bz2 is generated from a few upstream source trees:
  git://github.com/psi-im/psi.git
  git://github.com/psi-im/iris.git
  git://github.com/psi-im/libpsi.git

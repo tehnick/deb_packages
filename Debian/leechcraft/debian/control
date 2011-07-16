@@ -2,7 +2,8 @@ Source: leechcraft
 Section: net
 Priority: extra
 Maintainer: Boris Pek <tehnick-8@mail.ru>
-Build-Depends: debhelper (>= 7.0.50~),
+Build-Depends:
+ debhelper (>= 7.0.50~),
  po-debconf,
  cmake (>= 2.8),
  kdelibs5-dev (>= 4.2.0),
@@ -30,7 +31,7 @@ Homepage: http://leechcraft.org
 
 Package: leechcraft-full
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Depends: ${misc:Depends},
  libqt4-sql-sqlite (>= 4.6.0),
  leechcraft (= ${binary:Version}),
  leechcraft-aggregator (= ${binary:Version}),
@@ -75,91 +76,90 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  leechcraft-summary (= ${binary:Version}),
  leechcraft-tabpp (= ${binary:Version}),
  leechcraft-vgrabber (= ${binary:Version})
-Recommends:
- libqt4-sql-psql (>= 4.6.0),
- libqt4-sql-mysql (>= 4.6.0)
 Suggests:
  leechcraft-extra,
  leechcraft-ugly
+Recommends:
+ libqt4-sql-psql (>= 4.6.0),
+ libqt4-sql-mysql (>= 4.6.0)
 Description: Full LeechCraft installation
+ This metapackage installs all main LeechCraft plugins.
+ .
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
  .
  Features can be easily added via plugins that can be integrated with
  each other with no effert while staying abstract from the exact
  implementation.
- .
- This metapackage installs all main LeechCraft plugins.
 
 Package: leechcraft-extra
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Depends: ${misc:Depends},
  leechcraft-anhero (= ${binary:Version})
 Description: Extra LeechCraft plugins beyond full installation
- LeechCraft is a free modular "Internet client" application.
- .
- LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
- download or play podcasts and other media files and much more.
- .
- Features can be easily added via plugins that can be integrated with
- each other with no effert while staying abstract from the exact
- implementation.
- .
  This metapackage installs additional LeechCraft plugins that may
  pull a lot of dependencies on some systems (like AnHero pulling
  half of KDE).
+ .
+ LeechCraft is a free modular "Internet client" application.
+ .
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
+ download or play podcasts and other media files and much more.
+ .
+ Features can be easily added via plugins that can be integrated with
+ each other with no effert while staying abstract from the exact
+ implementation.
 
 Package: leechcraft-ugly
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Depends: ${misc:Depends},
  leechcraft-lcftp (= ${binary:Version})
 Description: Bad LeechCraft plugins
- LeechCraft is a free modular "Internet client" application.
- .
- LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
- download or play podcasts and other media files and much more.
- .
- Features can be easily added via plugins that can be integrated with
- each other with no effert while staying abstract from the exact
- implementation.
- .
  This metapackage installs additional LeechCraft plugins that are
  abandoned or known to be extremely buggy. Use at your own risk.
-
-Package: leechcraft-incubator
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Plugins for LeechCraft under heavy development
+ .
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
  .
  Features can be easily added via plugins that can be integrated with
  each other with no effert while staying abstract from the exact
  implementation.
- .
+
+Package: leechcraft-incubator
+Architecture: all
+Depends: ${misc:Depends}
+Description: Plugins for LeechCraft under heavy development
  This metapackage installs additional LeechCraft plugins that are
  still under (heavy) development. Things may stop working suddenly or
  behavior may change in an uncompatible way. Nevertheless, testing is
  appreciated.
+ .
+ LeechCraft is a free modular "Internet client" application.
+ .
+ LeechCraft allows one to browse the web, read RSS/Atom feeds, download
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
+ download or play podcasts and other media files and much more.
+ .
+ Features can be easily added via plugins that can be integrated with
+ each other with no effert while staying abstract from the exact
+ implementation.
 
 Package: leechcraft
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Depends: ${misc:Depends}, ${shlibs:Depends},
  libqt4-sql-sqlite (>= 4.6.0),
  libqt4-sql-psql (>= 4.6.0),
  libqt4-svg (>= 4.6.0),
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
- leechcraft-iconset,
- libboost-program-options1.42.0
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ leechcraft-iconset
 Recommends: leechcraft-aggregator,
  leechcraft-auscrie,
  leechcraft-azoth,
@@ -203,19 +203,19 @@ Recommends: leechcraft-aggregator,
  leechcraft-vgrabber
 Suggests: leechcraft-anhero
 Description: Core executable of LeechCraft
+ This package contains the main LeechCraft executable, which connects
+ all the plugins with each other, routes requests between them, tracks
+ dependencies and performs several other housekeeping tasks.
+ .
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
  .
  Features can be easily added via plugins that can be integrated with
  each other with no effert while staying abstract from the exact
  implementation.
- .
- This package contains the main LeechCraft executable, which connects
- all the plugins with each other, routes requests between them, tracks
- dependencies and performs several other housekeeping tasks.
 
 Package: leechcraft-dev
 Section: devel
@@ -229,7 +229,7 @@ Description: Files required for development for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
  .
  Features can be easily added via plugins that can be integrated with
@@ -239,35 +239,35 @@ Description: Files required for development for LeechCraft
 Package: leechcraft-dbg
 Section: debug
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Depends: ${misc:Depends}, ${shlibs:Depends},
  leechcraft (= ${binary:Version})
 Description: Debug symbols for LeechCraft
- This package contains the debug symbols for LeechCraft and all the
+ This package contains the debug symbols for LeechCraft and all its
  official plugins.
  .
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
  .
  Features can be easily added via plugins that can be integrated with
  each other with no effert while staying abstract from the exact
  implementation.
 
-Package: leechcraft-libxmlsettingsdialog0.3.0
+Package: libleechcraft-xmlsettingsdialog0.3.0
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Dynamic settings dialog builder for LeechCraft
  XmlSettingsDialog provides a simple but powerful and abstract way to
  create settings dialogs from XML files and store their (and not only)
  values.
 
-Package: leechcraft-libplugininterface0.3.0
+Package: libleechcraft-plugininterface0.3.0
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Common library for LeechCraft
  A library providing some useful and commonly used routines as well as
  communications with the LeechCraft core.
@@ -275,14 +275,14 @@ Description: Common library for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-aggregator
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-http
 Provides: leechcraft-provider-feedreader
@@ -304,14 +304,14 @@ Description: RSS/Atom feed reader for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-anhero
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Crash handler for LeechCraft
  This package contains AnHero, the crash handler for LeechCraft.
@@ -319,14 +319,14 @@ Description: Crash handler for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-auscrie
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Screenshooter for LeechCraft
  This package contains Auscrie, the auto screenshooter for LeechCraft.
@@ -336,14 +336,14 @@ Description: Screenshooter for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth-provider-styling
 Recommends: leechcraft-azoth-acetamide (= ${binary:Version}),
@@ -368,14 +368,14 @@ Description: Modular IM client for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-acetamide
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: IRC protocol support for LeechCraft Azoth
@@ -384,14 +384,14 @@ Description: IRC protocol support for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-autopaste
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Automatic paste of long messages to pastebins
@@ -402,14 +402,14 @@ Description: Automatic paste of long messages to pastebins
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-chathistory
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: History storage for LeechCraft Azoth
@@ -418,14 +418,14 @@ Description: History storage for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-depester
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Conference ignore plugin for LeechCraft Azoth
@@ -436,14 +436,14 @@ Description: Conference ignore plugin for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-embedmedia
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Embeds media files in the chat window of Azoth
@@ -453,14 +453,14 @@ Description: Embeds media files in the chat window of Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-herbicide
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Basic antispam plugin for Azoth
@@ -469,14 +469,14 @@ Description: Basic antispam plugin for Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-hili
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Custom highlights for LeechCraft Azoth
@@ -487,14 +487,14 @@ Description: Custom highlights for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-nativeemoticons
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Support for emoticons packs for LeechCraft Azoth
@@ -503,14 +503,14 @@ Description: Support for emoticons packs for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-standardstyles
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Provides: leechcraft-azoth-provider-styling
@@ -521,14 +521,14 @@ Description: Standard styling support for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-juick
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Plugin for the Juick.com service for LeechCraft Azoth
@@ -538,14 +538,14 @@ Description: Plugin for the Juick.com service for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-p100q
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Plugin for psto.net service for LeechCraft Azoth
@@ -555,14 +555,14 @@ Description: Plugin for psto.net service for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-xoox
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: XMPP support for LeechCraft Azoth
@@ -572,14 +572,14 @@ Description: XMPP support for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-azoth-xtazy
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Plugin for publishing current tune for LeechCraft Azoth
@@ -590,41 +590,41 @@ Description: Plugin for publishing current tune for LeechCraft Azoth
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-bittorrent
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-tasksview
 Provides: leechcraft-provider-bittorrent
 Description: BitTorrent client for LeechCraft
  This package contains a sophisticated BitTorrent client. It's based on
  the Rasterbar Libtorrent library and features:
-  * full support for protocol and extensions;
-  * DHT;
-  * magnet links;
-  * sequential download mode instead of default random one;
-  * ability to alter the directory structure and file names in torrents;
-  * selective downloads with per-file priorities;
-  * torrents queue with smart rotation depending on torrent's health;
-  * fast resume;
-  * speed limits and IP filter.
+  * full support for protocol and extensions
+  * DHT
+  * magnet links
+  * sequential download mode instead of default random one
+  * ability to alter the directory structure and file names in torrents
+  * selective downloads with per-file priorities
+  * torrents queue with smart rotation depending on torrent's health
+  * fast resume
+  * speed limits and IP filter
  .
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-cstp
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-tasksview
 Provides: leechcraft-provider-http
@@ -634,14 +634,14 @@ Description: HTTP client for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-dbusmanager
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-dbus
 Description: D-Bus side of LeechCraft
@@ -652,14 +652,14 @@ Description: D-Bus side of LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-deadlyrics
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-searchesview
 Description: Song lyrics finder for LeechCraft
@@ -669,22 +669,23 @@ Description: Song lyrics finder for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-eiskaltdcpp
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Suggests: php5-cli
-Recommends: libqtscript4-core,
+Recommends:
+ libqtscript4-core,
  libqtscript4-gui,
  libqtscript4-network,
  libqtscript4-xml
-Description: EiskaltDC++ for LeechCraft
- This package contains EiskaltDC++ DC client as LeechCraft plugin.
+Description: Direct Connect client for LeechCraft
+ This package contains EiskaltDC++  plugin for LeechCraft.
  .
  EiskaltDC++ is a cross-platform program that uses the Direct Connect
  and ADC protocol. It is compatible with other DC clients, such as the
@@ -694,14 +695,14 @@ Description: EiskaltDC++ for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-gmailnotifier
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-dbus
 Description: Notifications about new mail in GMail for LeechCraft
@@ -710,14 +711,14 @@ Description: Notifications about new mail in GMail for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-historyholder
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-searchesview
 Description: History keeper for LeechCraft
@@ -727,14 +728,14 @@ Description: History keeper for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-kinotify
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Fancy notifications for LeechCraft
  This package contains Kinotify which provides fancy notifications for
@@ -743,14 +744,14 @@ Description: Fancy notifications for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-lackman
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-http
 Description: Userspace Package Manager for LeechCraft
@@ -760,14 +761,14 @@ Description: Userspace Package Manager for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-lmp
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-mediaplayer
 Description: Media Previewer for LeechCraft
@@ -778,14 +779,14 @@ Description: Media Previewer for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-lcftp
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-searchesview
 Description: FTP client for LeechCraft
@@ -795,14 +796,14 @@ Description: FTP client for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-networkmonitor
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Network monitor for LeechCraft
  This package contains a monitor that watches for HTTP requests
@@ -811,14 +812,14 @@ Description: Network monitor for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-newlife
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-importer
 Description: Settings importer for LeechCraft
@@ -829,14 +830,14 @@ Description: Settings importer for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-popishu
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  libqscintilla2-5
 Provides: leechcraft-provider-texteditor
@@ -848,14 +849,14 @@ Description: Plain text editor for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Recommends: leechcraft-provider-http,
  leechcraft-provider-bittorrent,
@@ -866,23 +867,23 @@ Description: Web browser for LeechCraft
  This package contains a full-featured web browser for LeechCraft based
  on WebKit. Poshuku is fully extensible with plugins. Currently it
  features:
-  * support for all major web-standards;
-  * integration with other plugins;
-  * autodiscovery;
-  * tagging bookmarks;
-  * support for SQLite or PostgreSQL storage.
+  * support for all major web-standards
+  * integration with other plugins
+  * autodiscovery
+  * tagging bookmarks
+  * support for SQLite or PostgreSQL storage
  .
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-cleanweb
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Ad filter for Web browser for LeechCraft
@@ -895,14 +896,14 @@ Description: Ad filter for Web browser for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-fatape
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: GreaseMonkey support layer for LeechCraft Poshuku
@@ -913,14 +914,14 @@ Description: GreaseMonkey support layer for LeechCraft Poshuku
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-filescheme
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: file://-schemes support for the Web browser for LeechCraft
@@ -930,14 +931,14 @@ Description: file://-schemes support for the Web browser for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-fua
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Fake user agent plugin for Web browser for LeechCraft
@@ -948,14 +949,14 @@ Description: Fake user agent plugin for Web browser for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-onlinebookmarks
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Support for syncing bookmarks with online bookmarks services
@@ -966,14 +967,14 @@ Description: Support for syncing bookmarks with online bookmarks services
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-poshuku-wyfv
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-mediaplayer
@@ -985,14 +986,14 @@ Description: Flash video replacer for Web browser for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-secman
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-securestorage
 Description: Security Manager plugin for LeechCraft
@@ -1003,14 +1004,14 @@ Description: Security Manager plugin for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-secman-simplestorage
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-secman (= ${binary:Version})
 Description: Simple storage backend for SecMan
@@ -1020,14 +1021,14 @@ Description: Simple storage backend for SecMan
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-seekthru
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-webbrowser,
  leechcraft-provider-searchesview
@@ -1038,14 +1039,14 @@ Description: OpenSearch-support plugin for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-shellopen
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Support for opening files with external apps in LeechCraft
  This package contains module that adds an option to open files and
@@ -1056,14 +1057,14 @@ Description: Support for opening files with external apps in LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-summary
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-searchesview,
  leechcraft-provider-tasksview
@@ -1076,14 +1077,14 @@ Description: Quick summary of what's going on in LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-tabpp
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-searchesview
 Description: Tabbing experience enhancer for LeechCraft
@@ -1095,14 +1096,14 @@ Description: Tabbing experience enhancer for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-vgrabber
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- leechcraft-libxmlsettingsdialog0.3.0 (= ${binary:Version}),
- leechcraft-libplugininterface0.3.0 (= ${binary:Version}),
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
+ libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-http,
  leechcraft-provider-searchesview
@@ -1114,12 +1115,12 @@ Description: vkontakte.ru plugin for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-iconset-oxygen
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${misc:Depends}
 Provides: leechcraft-iconset
 Description: Oxygen-based iconset for LeechCraft
  This package contains icons taken from the Oxygen project for LeechCraft.
@@ -1127,12 +1128,12 @@ Description: Oxygen-based iconset for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
 
 Package: leechcraft-iconset-tango
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends},
+Depends: ${misc:Depends},
  tango-icon-theme (>= 0.8.1)
 Provides: leechcraft-iconset
 Description: Iconset based on the Tango project for LeechCraft
@@ -1141,5 +1142,5 @@ Description: Iconset based on the Tango project for LeechCraft
  LeechCraft is a free modular "Internet client" application.
  .
  LeechCraft allows one to browse the web, read RSS/Atom feeds, download
- files via BitTorrent, HTTP, FTP and DC, automatically stream,
+ files via BitTorrent, HTTP, FTP and Direct Connect, automatically stream,
  download or play podcasts and other media files and much more.
