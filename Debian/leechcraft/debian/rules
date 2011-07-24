@@ -62,7 +62,7 @@ binary-indep: build install
 	dh_testroot -i
 	dh_install -i
 	dh_installdocs -i
-	dh_installchangelogs -i debian/CHANGELOG
+	dh_installchangelogs -i CHANGELOG
 	dh_compress -i
 	dh_fixperms -i
 	dh_installdeb -i
@@ -74,7 +74,7 @@ binary-arch: build install
 	dh_testdir -a
 	dh_testroot -a
 	dh_install -a
-	dh_installchangelogs -a debian/CHANGELOG
+	dh_installchangelogs -a CHANGELOG
 	dh_installdocs -a
 	dh_installman -a
 	dh_link -a
@@ -82,10 +82,10 @@ binary-arch: build install
 	dh_compress -a
 	dh_fixperms -a
 	dh_makeshlibs -plibleechcraft-xmlsettingsdialog0.3.0 \
-				  -plibleechcraft-plugininterface0.3.0
+				  -plibleechcraft-util0.3.0
 	dh_installdeb -a
 	dh_shlibdeps -a -ldebian/libleechcraft-xmlsettingsdialog0.3.0/usr/lib \
-					-ldebian/libleechcraft-plugininterface0.3.0/usr/lib
+					-ldebian/libleechcraft-util0.3.0/usr/lib
 	dh_installdebconf -a
 	dh_gencontrol -a
 	dh_md5sums -a

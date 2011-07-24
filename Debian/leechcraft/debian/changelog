@@ -1,7 +1,5 @@
-leechcraft (0.4.65-1) unstable; urgency=low
+leechcraft (0.4.80-1) unstable; urgency=low
 
   * Initial release (closes: #607440).
-  * All maintainer remarks were fixed in upstream and
-    all necessary patches were included.
 
- -- Boris Pek <tehnick-8@mail.ru>  Sun, 29 May 2011 23:20:19 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 16 Jul 2011 23:32:36 +0300

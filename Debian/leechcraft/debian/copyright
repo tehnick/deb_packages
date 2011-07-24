@@ -2,7 +2,7 @@ This package was debianized by Georg Rudoy <0xd34df00d@gmail.com>
 Sat, 21 Mar 2009 17:38:01 +0300
 
 This package was completely rewritten by Boris Pek <tehnick-8@mail.ru>
-Fri, 15 Jul 2011 22:39:08 +0300
+Sat, 16 Jul 2011 21:53:57 +0300
 
 The orig.tar.bz2 is generated from a few upstream source trees:
  git://github.com/0xd34df00d/leechcraft.git

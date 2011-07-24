@@ -158,7 +158,7 @@ Depends: ${misc:Depends}, ${shlibs:Depends},
  libqt4-sql-psql (>= 4.6.0),
  libqt4-svg (>= 4.6.0),
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft-iconset
 Recommends: leechcraft-aggregator,
  leechcraft-auscrie,
@@ -264,7 +264,7 @@ Description: Dynamic settings dialog builder for LeechCraft
  create settings dialogs from XML files and store their (and not only)
  values.
 
-Package: libleechcraft-plugininterface0.3.0
+Package: libleechcraft-util0.3.0
 Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
@@ -282,7 +282,7 @@ Package: leechcraft-aggregator
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-http
 Provides: leechcraft-provider-feedreader
@@ -311,7 +311,7 @@ Package: leechcraft-anhero
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Crash handler for LeechCraft
  This package contains AnHero, the crash handler for LeechCraft.
@@ -326,7 +326,7 @@ Package: leechcraft-auscrie
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Screenshooter for LeechCraft
  This package contains Auscrie, the auto screenshooter for LeechCraft.
@@ -343,7 +343,7 @@ Package: leechcraft-azoth
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth-provider-styling
 Recommends: leechcraft-azoth-acetamide (= ${binary:Version}),
@@ -375,7 +375,7 @@ Package: leechcraft-azoth-acetamide
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: IRC protocol support for LeechCraft Azoth
@@ -391,7 +391,7 @@ Package: leechcraft-azoth-autopaste
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Automatic paste of long messages to pastebins
@@ -409,7 +409,7 @@ Package: leechcraft-azoth-chathistory
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: History storage for LeechCraft Azoth
@@ -425,7 +425,7 @@ Package: leechcraft-azoth-depester
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Conference ignore plugin for LeechCraft Azoth
@@ -443,7 +443,7 @@ Package: leechcraft-azoth-embedmedia
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Embeds media files in the chat window of Azoth
@@ -460,7 +460,7 @@ Package: leechcraft-azoth-herbicide
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Basic antispam plugin for Azoth
@@ -476,7 +476,7 @@ Package: leechcraft-azoth-hili
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Custom highlights for LeechCraft Azoth
@@ -494,7 +494,7 @@ Package: leechcraft-azoth-nativeemoticons
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Support for emoticons packs for LeechCraft Azoth
@@ -510,7 +510,7 @@ Package: leechcraft-azoth-standardstyles
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Provides: leechcraft-azoth-provider-styling
@@ -528,7 +528,7 @@ Package: leechcraft-azoth-juick
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Plugin for the Juick.com service for LeechCraft Azoth
@@ -545,7 +545,7 @@ Package: leechcraft-azoth-p100q
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Plugin for psto.net service for LeechCraft Azoth
@@ -562,7 +562,7 @@ Package: leechcraft-azoth-xoox
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: XMPP support for LeechCraft Azoth
@@ -579,7 +579,7 @@ Package: leechcraft-azoth-xtazy
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-azoth (= ${binary:Version})
 Description: Plugin for publishing current tune for LeechCraft Azoth
@@ -597,7 +597,7 @@ Package: leechcraft-bittorrent
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-tasksview
 Provides: leechcraft-provider-bittorrent
@@ -624,7 +624,7 @@ Package: leechcraft-cstp
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-tasksview
 Provides: leechcraft-provider-http
@@ -641,7 +641,7 @@ Package: leechcraft-dbusmanager
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-dbus
 Description: D-Bus side of LeechCraft
@@ -659,7 +659,7 @@ Package: leechcraft-deadlyrics
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-searchesview
 Description: Song lyrics finder for LeechCraft
@@ -676,7 +676,7 @@ Package: leechcraft-eiskaltdcpp
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Suggests: php5-cli
 Recommends:
@@ -702,7 +702,7 @@ Package: leechcraft-gmailnotifier
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-dbus
 Description: Notifications about new mail in GMail for LeechCraft
@@ -718,7 +718,7 @@ Package: leechcraft-historyholder
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-searchesview
 Description: History keeper for LeechCraft
@@ -735,7 +735,7 @@ Package: leechcraft-kinotify
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Fancy notifications for LeechCraft
  This package contains Kinotify which provides fancy notifications for
@@ -751,7 +751,7 @@ Package: leechcraft-lackman
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-http
 Description: Userspace Package Manager for LeechCraft
@@ -768,7 +768,7 @@ Package: leechcraft-lmp
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-mediaplayer
 Description: Media Previewer for LeechCraft
@@ -786,7 +786,7 @@ Package: leechcraft-lcftp
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-searchesview
 Description: FTP client for LeechCraft
@@ -803,7 +803,7 @@ Package: leechcraft-networkmonitor
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Network monitor for LeechCraft
  This package contains a monitor that watches for HTTP requests
@@ -819,7 +819,7 @@ Package: leechcraft-newlife
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-importer
 Description: Settings importer for LeechCraft
@@ -837,7 +837,7 @@ Package: leechcraft-popishu
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  libqscintilla2-5
 Provides: leechcraft-provider-texteditor
@@ -856,7 +856,7 @@ Package: leechcraft-poshuku
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Recommends: leechcraft-provider-http,
  leechcraft-provider-bittorrent,
@@ -883,7 +883,7 @@ Package: leechcraft-poshuku-cleanweb
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Ad filter for Web browser for LeechCraft
@@ -903,7 +903,7 @@ Package: leechcraft-poshuku-fatape
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: GreaseMonkey support layer for LeechCraft Poshuku
@@ -921,7 +921,7 @@ Package: leechcraft-poshuku-filescheme
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: file://-schemes support for the Web browser for LeechCraft
@@ -938,7 +938,7 @@ Package: leechcraft-poshuku-fua
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Fake user agent plugin for Web browser for LeechCraft
@@ -956,7 +956,7 @@ Package: leechcraft-poshuku-onlinebookmarks
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Support for syncing bookmarks with online bookmarks services
@@ -974,7 +974,7 @@ Package: leechcraft-poshuku-wyfv
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft-poshuku (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-mediaplayer
@@ -993,7 +993,7 @@ Package: leechcraft-secman
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-securestorage
 Description: Security Manager plugin for LeechCraft
@@ -1011,7 +1011,7 @@ Package: leechcraft-secman-simplestorage
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-secman (= ${binary:Version})
 Description: Simple storage backend for SecMan
@@ -1028,7 +1028,7 @@ Package: leechcraft-seekthru
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-webbrowser,
  leechcraft-provider-searchesview
@@ -1046,7 +1046,7 @@ Package: leechcraft-shellopen
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Description: Support for opening files with external apps in LeechCraft
  This package contains module that adds an option to open files and
@@ -1064,7 +1064,7 @@ Package: leechcraft-summary
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-searchesview,
  leechcraft-provider-tasksview
@@ -1084,7 +1084,7 @@ Package: leechcraft-tabpp
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version})
 Provides: leechcraft-provider-searchesview
 Description: Tabbing experience enhancer for LeechCraft
@@ -1103,7 +1103,7 @@ Package: leechcraft-vgrabber
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
  libleechcraft-xmlsettingsdialog0.3.0 (= ${binary:Version}),
- libleechcraft-plugininterface0.3.0 (= ${binary:Version}),
+ libleechcraft-util0.3.0 (= ${binary:Version}),
  leechcraft (= ${binary:Version}),
  leechcraft-provider-http,
  leechcraft-provider-searchesview
