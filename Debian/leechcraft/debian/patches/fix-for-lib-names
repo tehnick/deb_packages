@@ -7,7 +7,7 @@ fix for lib names
  
  SET (LEECHCRAFT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 -SET (LEECHCRAFT_LIBRARIES lcutil xmlsettingsdialog)
-+SET (LEECHCRAFT_LIBRARIES libleechcraft-util leechcraft-xmlsettingsdialog)
++SET (LEECHCRAFT_LIBRARIES leechcraft-util leechcraft-xmlsettingsdialog)
  
  OPTION (ENABLE_SUMMARY "Build Summary, the plugin that shows a handy summary of the stuff going on" ON)
  OPTION (ENABLE_TORRENT "Build BitTorrent, the BitTorrent client" ON)
@@ -19,7 +19,7 @@ fix for lib names
  ENDIF (LEECHCRAFT_INCLUDE_DIR)
 -FIND_LIBRARY(_LEECHCRAFT_UTIL NAMES lcutil)
 -FIND_LIBRARY(_LEECHCRAFT_XSD NAMES xmlsettingsdialog)
-+FIND_LIBRARY(_LEECHCRAFT_UTIL NAMES libleechcraft-util)
++FIND_LIBRARY(_LEECHCRAFT_UTIL NAMES leechcraft-util)
 +FIND_LIBRARY(_LEECHCRAFT_XSD NAMES leechcraft-xmlsettingsdialog)
  SET (LEECHCRAFT_LIBRARIES ${_LEECHCRAFT_UTIL} ${_LEECHCRAFT_XSD})
  SET (LEECHCRAFT_USE_FILE "${CMAKE_MODULE_PATH}/UseLeechCraft.cmake")
@@ -32,21 +32,21 @@ fix for lib names
 +ADD_DEFINITIONS(-Dlcutil_EXPORTS)
  QT4_WRAP_CPP (MOC_SRCS ${HEADERS})
 -ADD_LIBRARY (lcutil SHARED
-+ADD_LIBRARY (libleechcraft-util SHARED
++ADD_LIBRARY (leechcraft-util SHARED
  	${SRCS}
  	${MOC_SRCS}
  	${UIS_H}
  	)
 -TARGET_LINK_LIBRARIES (lcutil
-+TARGET_LINK_LIBRARIES (libleechcraft-util
++TARGET_LINK_LIBRARIES (leechcraft-util
  	${QT_LIBRARIES}
 -	xmlsettingsdialog
 +	leechcraft-xmlsettingsdialog
  	)
 -SET_PROPERTY (TARGET lcutil PROPERTY SOVERSION 0.5.0)
 -INSTALL (TARGETS lcutil DESTINATION ${LIBDIR})
-+SET_PROPERTY (TARGET libleechcraft-util PROPERTY SOVERSION 0.5.0)
-+INSTALL (TARGETS libleechcraft-util DESTINATION ${LIBDIR})
++SET_PROPERTY (TARGET leechcraft-util PROPERTY SOVERSION 0.5.0)
++INSTALL (TARGETS leechcraft-util DESTINATION ${LIBDIR})
 --- a/src/xmlsettingsdialog/CMakeLists.txt
 +++ b/src/xmlsettingsdialog/CMakeLists.txt
 @@ -5,6 +5,7 @@ INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS}
