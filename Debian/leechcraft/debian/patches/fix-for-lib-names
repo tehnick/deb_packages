@@ -29,6 +29,7 @@ fix for lib names
 @@ -75,14 +75,14 @@ ADD_DEFINITIONS(-DQT_NO_DEBUG)
  ADD_DEFINITIONS(-DQT_SHARED)
  ADD_DEFINITIONS(-DQT_GUI_LIB)
++ADD_DEFINITIONS(-Dlcutil_EXPORTS)
  QT4_WRAP_CPP (MOC_SRCS ${HEADERS})
 -ADD_LIBRARY (lcutil SHARED
 +ADD_LIBRARY (libleechcraft-util SHARED
@@ -48,6 +49,14 @@ fix for lib names
 +INSTALL (TARGETS libleechcraft-util DESTINATION ${LIBDIR})
 --- a/src/xmlsettingsdialog/CMakeLists.txt
 +++ b/src/xmlsettingsdialog/CMakeLists.txt
+@@ -5,6 +5,7 @@ INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS}
+ 	${CMAKE_CURRENT_BINARY_DIR}
+ 	..
+ 	)
++ADD_DEFINITIONS (-Dxmlsettingsdialog_EXPORTS)
+ 
+ SET (SRCS
+     xmlsettingsdialog.cpp
 @@ -90,12 +90,12 @@ SET (FORMS
  	)
  QT4_WRAP_CPP (MOC_SRCS ${HEADERS})
@@ -65,43 +74,3 @@ fix for lib names
 -INSTALL (TARGETS xmlsettingsdialog DESTINATION ${LIBDIR})
 +SET_PROPERTY (TARGET leechcraft-xmlsettingsdialog PROPERTY SOVERSION 0.3.0)
 +INSTALL (TARGETS leechcraft-xmlsettingsdialog DESTINATION ${LIBDIR})
---- a/src/util/utilconfig.h
-+++ b/src/util/utilconfig.h
-@@ -22,7 +22,7 @@
- 
- #if defined(Q_CC_GNU)
- 
--# if defined(lcutil_EXPORTS)
-+# if defined(leechcraft_util_EXPORTS)
- #  define UTIL_API __attribute__ ((visibility("default")))
- # else
- #  define UTIL_API
-@@ -30,7 +30,7 @@
- 
- #elif defined(Q_CC_MSVC)
- 
--# if defined(lcutil_EXPORTS)
-+# if defined(leechcraft_util_EXPORTS)
- #  define UTIL_API __declspec(dllexport)
- # else
- #  define UTIL_API __declspec(dllimport)
---- a/src/xmlsettingsdialog/xsdconfig.h
-+++ b/src/xmlsettingsdialog/xsdconfig.h
-@@ -22,7 +22,7 @@
- 
- #if defined(Q_CC_GNU)
- 
--# if defined(xmlsettingsdialog_EXPORTS)
-+# if defined(leechcraft_xmlsettingsdialog_EXPORTS)
- #  define XMLSETTINGSMANAGER_API __attribute__ ((visibility("default")))
- # else
- #  define XMLSETTINGSMANAGER_API
-@@ -30,7 +30,7 @@
- 
- #elif defined(Q_CC_MSVC)
- 
--# if defined(xmlsettingsdialog_EXPORTS)
-+# if defined(leechcraft_xmlsettingsdialog_EXPORTS)
- #  define XMLSETTINGSMANAGER_API __declspec(dllexport)
- # else
- #  define XMLSETTINGSMANAGER_API __declspec(dllimport)

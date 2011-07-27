@@ -82,10 +82,10 @@ binary-arch: build install
 	dh_compress -a
 	dh_fixperms -a
 	dh_makeshlibs -plibleechcraft-xmlsettingsdialog0.3.0 \
-				  -plibleechcraft-util0.3.0
+				  -plibleechcraft-util0.5.0
 	dh_installdeb -a
 	dh_shlibdeps -a -ldebian/libleechcraft-xmlsettingsdialog0.3.0/usr/lib \
-					-ldebian/libleechcraft-util0.3.0/usr/lib
+					-ldebian/libleechcraft-util0.5.0/usr/lib
 	dh_installdebconf -a
 	dh_gencontrol -a
 	dh_md5sums -a
