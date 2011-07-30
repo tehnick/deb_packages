@@ -1,3 +1,9 @@
+freedcpp (0.0.5-0ppa2~oneiric1) oneiric; urgency=low
+
+  * Some fixes in package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 30 Jul 2011 13:44:08 +0300
+
 freedcpp (0.0.5-0ppa1~natty1) natty; urgency=low
 
   * Update to stable release 0.0.5.

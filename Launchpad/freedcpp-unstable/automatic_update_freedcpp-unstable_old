@@ -6,7 +6,7 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 export PACKAGE="freedcpp-unstable"
 
 # Uncomment if necessary:
-#export SFX="-0ppa6"
+export SFX="-0ppa2"
 
 
 # Launch common script for setting variables
@@ -67,7 +67,7 @@ fi
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
     # Begin local updating
     export SVN_DIR="${HOME}/WorkDir/Devel/FreeDC++/freedcpp_trunk/"
     svn update "${SVN_DIR}"
@@ -75,12 +75,12 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     # End local updating
     # Or you can use:
     # svn export http://freedcpp.googlecode.com/svn/trunk/ "freedcpp-unstable-$NEW_VER/"
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
 export UPDATE_STRING="Minor update from SVN trunk branch."
 
 # Launch common script for updating packages and uploading them to Launchpad
-source "${MAIN_DIR}/Launchpad/updating_packages"
+source "${MAIN_DIR}/Launchpad/updating_packages_old"
 

@@ -25,6 +25,8 @@ CMAKEOPTS = "$(CURDIR)/$(DEB_SRCDIR)" \
 	-DENABLE_AZOTH=True \
 	-DENABLE_GMAILNOTIFIER=True \
 	-DENABLE_EISKALTDCPP=True \
+	-DENABLE_GLANCE=True \
+	-DENABLE_TABSLIST=True \
 	-DLEECHCRAFT_VERSION=$(shell dpkg-parsechangelog | awk '/Version:/ {print $2}' | cut -b 10-)
 
 

@@ -1,3 +1,9 @@
+freedcpp-unstable (0.0.5.0~svn204-0ppa2~oneiric1) oneiric; urgency=low
+
+  * Some fixes in package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 30 Jul 2011 13:55:47 +0300
+
 freedcpp-unstable (0.0.5.0~svn204-0ppa1~natty1) natty; urgency=low
 
   * Minor update.
