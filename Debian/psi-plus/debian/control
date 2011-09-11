@@ -80,7 +80,7 @@ Description: Qt-based jabber client (WebKit version) [debug symbols]
 
 Package: psi-plus-common
 Architecture: all
-Recommends: sox, libqca2-plugin-ossl, psi-plus-plugins, psi-plus-icons, psi-plus-skins
+Recommends: sox, libqca2-plugin-ossl, psi-plus-plugins, psi-plus-skins
 Breaks: psi-plus (<< 0.15~svn3057)
 Depends: ${misc:Depends}
 Suggests: libqca2-plugin-gnupg, xdg-utils

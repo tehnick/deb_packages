@@ -5,8 +5,11 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
 export PACKAGE="psi-plus"
 
+export CUR_VER="0.15"
+
 # Uncomment if necessary:
-#export SFX="-2"
+export NEW_VER="0.15~svn3910"
+export SFX="-2"
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -28,8 +31,10 @@ export LAST_REVISION=$(svn log http://psi-dev.googlecode.com/svn/trunk/ |
 echo "Number of old  revision: ${OLD_REVISION}"
 echo "Number of last revision: ${LAST_REVISION}"
 
-export CUR_VER="0.15"
-export NEW_VER="${CUR_VER}~svn${LAST_REVISION}"
+if [ -z "${NEW_VER}" ]; then
+    export NEW_VER="${CUR_VER}~svn${LAST_REVISION}"
+fi
+
 export NEW_VER_FULL="${NEW_VER}${SFX}"
 
 
@@ -39,9 +44,6 @@ echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 
 if [ -z "${OLD_VER_FULL}" ]; then
     echo "OLD_VER_FULL is empty!";
-    exit 0;
-elif [ -z ${CUR_VER} ]; then
-    echo "CUR_VER is empty!";
     exit 0;
 elif [ -z ${LAST_REVISION} ]; then
     echo "LAST_REVISION is empty!";

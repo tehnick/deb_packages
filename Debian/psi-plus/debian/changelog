@@ -1,3 +1,13 @@
+psi-plus (0.15~svn3910-2) unstable; urgency=low
+
+  * File debian/control was updated:
+    - removed dependence from non available package psi-plus-icons
+      (Closes: #640399, #640723)
+    - added additional fields Vcs-Svn and Vcs-Browser
+  * Removed useless file README.source
+
+ -- Boris Pek <tehnick-8@mail.ru>  Mon, 12 Sep 2011 01:32:00 +0300
+
 psi-plus (0.15~svn3910-1) unstable; urgency=low
 
   * Uploader became maintainer. (Closes: #620034)
