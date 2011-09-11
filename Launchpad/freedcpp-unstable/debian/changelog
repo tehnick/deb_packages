@@ -1,8 +1,14 @@
+freedcpp-unstable (0.0.5.2~svn207-0ppa1~oneiric1) oneiric; urgency=low
+
+  * Minor update from SVN trunk branch.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 27 Aug 2011 19:54:34 +0300
+
 freedcpp-unstable (0.0.5.0~svn204-0ppa2~oneiric1) oneiric; urgency=low
 
   * Some fixes in package.
 
- -- Boris Pek <tehnick-8@mail.ru>  Sat, 30 Jul 2011 13:55:47 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Sat, 30 Jul 2011 17:34:46 +0300
 
 freedcpp-unstable (0.0.5.0~svn204-0ppa1~natty1) natty; urgency=low
 
