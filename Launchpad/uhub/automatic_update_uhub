@@ -1,0 +1,75 @@
+#!/bin/bash
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PACKAGE="uhub"
+
+# Uncomment if necessary:
+#export SFX="-3ppa2"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Launchpad/setting_variables"
+
+
+# Check versions
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
+
+export VER_LIST=$(curl 'http://code.google.com/p/eiskaltdc/downloads/list' 2>&1 | grep 'eiskaltdc.googlecode.com/files/eiskaltdcpp-' | grep '.tar.bz2"' | sed -e "s:^.*eiskaltdc.googlecode.com/files/eiskaltdcpp-\(.*\).tar.bz2\".*$:\1:")
+export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
+
+echo " "
+echo "http://code.google.com/p/eiskaltdc/downloads/list"
+echo " "
+echo "On code.google.com now available such versions:"
+echo ${VER_LIST}
+echo " "
+
+echo "OLD_VER = ${OLD_VER}"
+echo "NEW_VER = ${NEW_VER}"
+echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+echo " "
+
+if [ -z "${NEW_VER}" ]; then
+    echo "NEW_VER is empty!";
+    exit 0;
+elif [ -z "${OLD_VER_FULL}" ]; then
+    echo "OLD_VER_FULL is empty!";
+    exit 0;
+elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+    echo "Upgrading is not required.";
+    exit 0;
+else
+    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+        if !([ "${SFX}" = "-0ppa1" ]); then
+            echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-0ppa1" ]); then
+            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
+    fi
+fi
+
+
+# Get the sources
+if !([ -e "eiskaltdcpp-${NEW_VER}.tar.bz2" ]); then
+    wget -4 "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.bz2"
+    rm -rf "eiskaltdcpp-${NEW_VER}"
+    tar xjf "eiskaltdcpp-${NEW_VER}.tar.bz2"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "eiskaltdcpp-${NEW_VER}"
+fi
+
+
+export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+# Launch common script for updating packages and uploading them to Launchpad
+source "${MAIN_DIR}/Launchpad/updating_packages"
+

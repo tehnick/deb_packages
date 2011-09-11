@@ -1,0 +1,94 @@
+#!/bin/bash
+
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export PACKAGE="uhub-unstable"
+
+# Uncomment if necessary:
+#export SFX="-0ppa6"
+
+# Available branches: master, 2.2.x
+#export BRANCH=2.2.x
+export BRANCH=master
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Launchpad/setting_variables"
+
+
+# Check versions
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-0ppa.*$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\{6,6\}-\(.*\)$/\1/")
+
+export LAST_SRC_INFO=$(curl -I https://nodeload.github.com/negativ/eiskaltdcpp/tarball/${BRANCH} 2>&1)
+export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(negativ-eiskaltdcpp.*\).tar.gz.*/\1/")
+export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^negativ-eiskaltdcpp.*-[0-9]\+-g\(.*\)$/\1/")
+
+
+echo "Old  commit ID: ${OLD_COMMIT}"
+echo "Last commit ID: ${LAST_COMMIT}"
+
+
+export CUR_VER=$(curl -k "https://raw.github.com/negativ/eiskaltdcpp/${BRANCH}/CMakeLists.txt" 2>&1 | grep "set (VERSION " | sed -e "s/^.*VERSION \"\(.*\+\)\")$/\1/")
+export DATE=$(date "+%Y%m%d-%H%M%S")
+export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
+export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
+
+
+echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+
+
+if [ -z "${OLD_COMMIT}" ]; then
+    echo "OLD_COMMIT is empty!";
+    exit 0;
+elif [ -z "${LAST_COMMIT}" ]; then
+    echo "LAST_COMMIT is empty!";
+    exit 0;
+elif [ -z ${CUR_VER} ]; then
+    echo "CUR_VER is empty!";
+    exit 0;
+else
+    if !([ "${LAST_COMMIT}" = "${OLD_COMMIT}" ]); then
+        if !([ "${SFX}" = "-0ppa1" ]); then
+            echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-0ppa1" ]); then
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
+    fi
+fi
+
+
+# Get the sources
+if !([ -e "${LAST_SRC}.tar.gz" ]); then
+    rm -f ${BRANCH}*
+    # wget -4 https://github.com/negativ/eiskaltdcpp/tarball/${BRANCH}
+    wget -4 https://nodeload.github.com/negativ/eiskaltdcpp/tarball/${BRANCH}
+    rm -f negativ-eiskaltdcpp-*.tar.gz*
+    mv ${BRANCH} "${LAST_SRC}.tar.gz"
+fi
+
+if !([ -e "${LAST_SRC}.tar.gz" ]); then
+    echo "File ${LAST_SRC}.tar.gz is not found.";
+    exit 0;
+fi
+
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    tar xzf "${LAST_SRC}".tar.gz
+    mv "negativ-eiskaltdcpp-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+fi
+
+
+export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
+
+# Launch common script for updating packages and uploading them to Launchpad
+source "${MAIN_DIR}/Launchpad/updating_packages"
+
