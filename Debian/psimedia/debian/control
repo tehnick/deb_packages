@@ -10,7 +10,8 @@ Standards-Version: 3.9.2
 
 Package: psi-plus-plugin-psimedia
 Architecture: any
-Depends: psi-plus | psi-plus-webkit, ${shlibs:Depends}, ${misc:Depends},
+Depends: ${shlibs:Depends}, ${misc:Depends},
+         psi-plus | psi-plus-webkit, libqca2-plugin-ossl,
          gstreamer0.10-plugins-good, gstreamer0.10-alsa [linux-any]
 Replaces: psimedia
 Description: Plugin for Psi/Psi+ for audio and video calls

@@ -1,3 +1,12 @@
+psimedia (1.0.3+svn737-2) unstable; urgency=low
+
+  * Added dependence from package libqca2-plugin-ossl (Closes: #632233)
+  * Small change in debian/patches/
+    - psimedia-drop-v4lsrc-gst-plugin.patch file was renamed to the
+      psimedia-drop-v4lsrc-gst-plugin.diff
+
+ -- Boris Pek <tehnick-8@mail.ru>  Tue, 13 Sep 2011 00:45:31 +0300
+
 psimedia (1.0.3+svn737-1) unstable; urgency=low
 
   * Sources were updated from svn
