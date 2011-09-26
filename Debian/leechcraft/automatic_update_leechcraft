@@ -21,12 +21,14 @@ export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 
-export VER_LIST=$(curl 'https://github.com/0xd34df00d/leechcraft/downloads' 2>&1 | grep '="/0xd34df00d/leechcraft/tarball/' | sed -e "s:^.*\"/0xd34df00d/leechcraft/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
-export NEW_VER=$(echo ${VER_LIST} | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
-export NEW_VER_FULL=${NEW_VER}${SFX}
+export DEVELOPER=0xd34df00d
+export PROJECT=leechcraft
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/downloads" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
+export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 echo " "
-echo "https://github.com/0xd34df00d/leechcraft/downloads"
+echo "https://github.com/${DEVELOPER}/${PROJECT}/downloads"
 echo " "
 echo "On github.com now available such versions:"
 echo ${VER_LIST}

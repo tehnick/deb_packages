@@ -17,14 +17,16 @@ export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 
-export VER_LIST=$(curl 'http://code.google.com/p/eiskaltdc/downloads/list' 2>&1 | grep 'eiskaltdc.googlecode.com/files/eiskaltdcpp-' | grep '.tar.bz2"' | sed -e "s:^.*eiskaltdc.googlecode.com/files/eiskaltdcpp-\(.*\).tar.bz2\".*$:\1:")
+export DEVELOPER=janvidar
+export PROJECT=uhub
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/downloads" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
 export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 echo " "
-echo "http://code.google.com/p/eiskaltdc/downloads/list"
+echo "https://github.com/${DEVELOPER}/${PROJECT}/downloads"
 echo " "
-echo "On code.google.com now available such versions:"
+echo "On github.com now available such versions:"
 echo ${VER_LIST}
 echo " "
 
@@ -60,11 +62,18 @@ fi
 
 
 # Get the sources
-if !([ -e "eiskaltdcpp-${NEW_VER}.tar.bz2" ]); then
-    wget -4 "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.bz2"
-    rm -rf "eiskaltdcpp-${NEW_VER}"
-    tar xjf "eiskaltdcpp-${NEW_VER}.tar.bz2"
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "eiskaltdcpp-${NEW_VER}"
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
+    # sources
+    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
+    rm -rf ${DEVELOPER}-${PROJECT}-*
+    tar xzf "${NEW_VER}"
+    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
+    rm -rf "${PACKAGE}-${NEW_VER}/debian"
+    # tarball
+    rm -rf "${PACKAGE}-${NEW_VER}"/doc
+    rm -rf "${PACKAGE}-${NEW_VER}"/iconsets
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
 
