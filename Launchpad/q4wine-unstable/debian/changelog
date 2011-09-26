@@ -1,3 +1,9 @@
+q4wine-unstable (0.121-20110920-000214-43fd9d2-0ppa1~oneiric1) oneiric; urgency=low
+
+  * Minor update from GIT master branch.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Tue, 20 Sep 2011 00:02:29 +0300
+
 q4wine-unstable (0.121-20110919-003319-2e80d34-0ppa1~oneiric1) oneiric; urgency=low
 
   * Minor update from GIT master branch.
