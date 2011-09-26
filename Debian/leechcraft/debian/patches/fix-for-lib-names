@@ -2,20 +2,20 @@ fix for lib names
 
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -82,7 +82,7 @@ ADD_SUBDIRECTORY (xmlsettingsdialog)
+@@ -84,7 +84,7 @@ ADD_SUBDIRECTORY (xmlsettingsdialog)
  ADD_SUBDIRECTORY (iconsets)
  
  SET (LEECHCRAFT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 -SET (LEECHCRAFT_LIBRARIES lcutil xmlsettingsdialog)
 +SET (LEECHCRAFT_LIBRARIES leechcraft-util leechcraft-xmlsettingsdialog)
  
- OPTION (ENABLE_SUMMARY "Build Summary, the plugin that shows a handy summary of the stuff going on" ON)
- OPTION (ENABLE_TORRENT "Build BitTorrent, the BitTorrent client" ON)
+ # Basic & traditional set of options
+ OPTION (ENABLE_AGGREGATOR "Build Aggregator, the RSS/Atom feed reader" ON)
 --- a/src/FindLeechCraft.cmake.in
 +++ b/src/FindLeechCraft.cmake.in
 @@ -6,8 +6,8 @@ FIND_PATH(LEECHCRAFT_INCLUDE_DIR NAMES leechcraft/config.h PATH ENV)
  IF (LEECHCRAFT_INCLUDE_DIR)
- 	SET (LEECHCRAFT_INCLUDE_DIR "${LEECHCRAFT_INCLUDE_DIR}/leechcraft")
+    SET (LEECHCRAFT_INCLUDE_DIR "${LEECHCRAFT_INCLUDE_DIR}/leechcraft")
  ENDIF (LEECHCRAFT_INCLUDE_DIR)
 -FIND_LIBRARY(_LEECHCRAFT_UTIL NAMES lcutil)
 -FIND_LIBRARY(_LEECHCRAFT_XSD NAMES xmlsettingsdialog)
@@ -26,23 +26,23 @@ fix for lib names
  
 --- a/src/util/CMakeLists.txt
 +++ b/src/util/CMakeLists.txt
-@@ -75,14 +75,14 @@ ADD_DEFINITIONS(-DQT_NO_DEBUG)
+@@ -74,15 +74,16 @@ ADD_DEFINITIONS(-DQT_PLUGIN)
+ ADD_DEFINITIONS(-DQT_NO_DEBUG)
  ADD_DEFINITIONS(-DQT_SHARED)
  ADD_DEFINITIONS(-DQT_GUI_LIB)
 +ADD_DEFINITIONS(-Dlcutil_EXPORTS)
  QT4_WRAP_CPP (MOC_SRCS ${HEADERS})
--ADD_LIBRARY (lcutil SHARED
-+ADD_LIBRARY (leechcraft-util SHARED
- 	${SRCS}
- 	${MOC_SRCS}
- 	${UIS_H}
- 	)
+ ADD_LIBRARY (lcutil SHARED
+    ${SRCS}
+    ${MOC_SRCS}
+    ${UIS_H}
+    )
 -TARGET_LINK_LIBRARIES (lcutil
 +TARGET_LINK_LIBRARIES (leechcraft-util
- 	${QT_LIBRARIES}
--	xmlsettingsdialog
-+	leechcraft-xmlsettingsdialog
- 	)
+    ${QT_LIBRARIES}
+-   xmlsettingsdialog
++   leechcraft-xmlsettingsdialog
+    )
 -SET_PROPERTY (TARGET lcutil PROPERTY SOVERSION 0.5.0)
 -INSTALL (TARGETS lcutil DESTINATION ${LIBDIR})
 +SET_PROPERTY (TARGET leechcraft-util PROPERTY SOVERSION 0.5.0)
@@ -50,26 +50,26 @@ fix for lib names
 --- a/src/xmlsettingsdialog/CMakeLists.txt
 +++ b/src/xmlsettingsdialog/CMakeLists.txt
 @@ -5,6 +5,7 @@ INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIRS}
- 	${CMAKE_CURRENT_BINARY_DIR}
- 	..
- 	)
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ..
+    )
 +ADD_DEFINITIONS (-Dxmlsettingsdialog_EXPORTS)
  
  SET (SRCS
      xmlsettingsdialog.cpp
-@@ -90,12 +90,12 @@ SET (FORMS
- 	)
+@@ -90,12 +91,12 @@ SET (FORMS
+    )
  QT4_WRAP_CPP (MOC_SRCS ${HEADERS})
  QT4_WRAP_UI (UIS_H ${FORMS})
 -ADD_LIBRARY (xmlsettingsdialog SHARED
 +ADD_LIBRARY (leechcraft-xmlsettingsdialog SHARED
- 	${SRCS}
- 	${MOC_SRCS}
- 	${UIS_H})
+    ${SRCS}
+    ${MOC_SRCS}
+    ${UIS_H})
 -TARGET_LINK_LIBRARIES (xmlsettingsdialog
 +TARGET_LINK_LIBRARIES (leechcraft-xmlsettingsdialog
- 	${QT_LIBRARIES}
- 	)
+    ${QT_LIBRARIES}
+    )
 -SET_PROPERTY (TARGET xmlsettingsdialog PROPERTY SOVERSION 0.3.0)
 -INSTALL (TARGETS xmlsettingsdialog DESTINATION ${LIBDIR})
 +SET_PROPERTY (TARGET leechcraft-xmlsettingsdialog PROPERTY SOVERSION 0.3.0)
