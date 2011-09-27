@@ -1,11 +1,5 @@
 #!/bin/sh -e
 
-#
-if [ -x "/etc/init.d/uhub" ]; then
-	invoke-rc.d uhub stop || exit $?
-fi
-#
-
 #DEBHELPER#
 
 exit 0
