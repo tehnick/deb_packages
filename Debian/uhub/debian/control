@@ -1,0 +1,27 @@
+Source: uhub
+Section: net
+Priority: optional
+Maintainer: Boris Pek <tehnick-8@mail.ru>
+Build-Depends: debhelper (>= 7)
+Homepage: http://www.uhub.org/
+Vcs-Git: git://github.com/janvidar/uhub.git
+Vcs-Browser: https://github.com/janvidar/uhub/
+Standards-Version: 3.9.2
+
+Package: uhub
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: High performance Advanced Direct Connect p2p hub
+ uhub is a high performance peer-to-peer hub for the ADC network.
+ Its low memory footprint allows it to handle several thousand users on
+ high-end servers, or a small private hub on embedded hardware.
+ .
+ uhub uses the Advanced Direct Connect protocol, and is compatible with
+ DC++, LinuxDC++, EiskaltDC++ and other ADC clients.
+ .
+ Key features:
+  - High performance and low memory usage
+  - IPv4 and IPv6 support
+  - Experimental SSL support (optional)
+  - Advanced access control support
+  - Easy configuration
