@@ -1,3 +1,9 @@
+uhub (0.3.2-0ppa1~oneiric1) oneiric; urgency=low
+
+  * Update to stable release 0.3.2.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Tue, 27 Sep 2011 02:54:08 +0300
+
 uhub (0.3.0-1) unstable; urgency=low
 
   * Initial release (closes: #).

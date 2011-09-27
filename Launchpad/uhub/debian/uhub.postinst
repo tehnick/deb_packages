@@ -1,20 +1,13 @@
 #!/bin/sh
+
 set -e
 
 case "$1" in
     configure)
-	chmod 0750 /var/log/uhub
 
-	if [ -x /etc/init.d/uhub ]; then
-        	update-rc.d uhub defaults >/dev/null
+    chmod 0750 /var/log/uhub
 
-	        if [ -x /usr/sbin/invoke-rc.d ]; then
-	                invoke-rc.d uhub restart
-	        else
-        	        /etc/init.d/uhub restart
-	        fi
-	fi
-	;;
+    ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
         ;;
