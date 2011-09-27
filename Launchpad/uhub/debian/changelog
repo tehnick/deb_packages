@@ -1,3 +1,9 @@
+uhub (0.3.2-0ppa3~oneiric1) oneiric; urgency=low
+
+  * Some fixes in package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Tue, 27 Sep 2011 04:49:19 +0300
+
 uhub (0.3.2-0ppa2~oneiric1) oneiric; urgency=low
 
   * Some fixes in package.
