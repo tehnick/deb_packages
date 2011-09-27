@@ -1,3 +1,9 @@
+uhub (0.3.2-0ppa2~oneiric1) oneiric; urgency=low
+
+  * Some fixes in package.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Tue, 27 Sep 2011 03:35:11 +0300
+
 uhub (0.3.2-0ppa1~oneiric1) oneiric; urgency=low
 
   * Update to stable release 0.3.2.
@@ -6,6 +12,6 @@ uhub (0.3.2-0ppa1~oneiric1) oneiric; urgency=low
 
 uhub (0.3.0-1) unstable; urgency=low
 
-  * Initial release (closes: #).
+  * Initial release (closes: #643290).
 
  -- Boris Pek <tehnick-8@mail.ru>  Sun, 25 Apr 2010 02:06:31 +0400
