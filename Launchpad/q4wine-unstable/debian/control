@@ -30,3 +30,5 @@ Description: Qt4 GUI for wine (W.I.N.E)
   - Easy backup and restore for managed prefixes.
   - Winetricks support.
   - And more...
+ .
+ (This is daily builds of the Q4Wine package)

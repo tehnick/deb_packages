@@ -1,37 +1,53 @@
 #!/usr/bin/make -f
 
-# export DH_VERBOSE=1
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+	NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+endif
 
-makeopts := DESTDIR=$(shell pwd)/debian/uhub/ \
-	UHUB_PREFIX=$(shell pwd)/debian/uhub/usr \
+ifeq (,$(NUMJOBS))
+	NUMJOBS = 1
+endif
+
+makeopts := DESTDIR=$(CURDIR)/debian/uhub-unstable/ \
+	UHUB_PREFIX=$(CURDIR)/debian/uhub-unstable/usr \
 	RELEASE=YES SILENT=YES
 
-build: build-stamp
+build: build-arch build-indep
+
+build-arch: build-stamp
+
+build-indep: build-stamp
+
 build-stamp:
 	dh_testdir
-	make $(makeopts)
-	touch build-stamp
+	$(MAKE) -j$(NUMJOBS) $(makeopts)
+	cp -rf $(CURDIR)/debian/doc/ $(CURDIR)/
+	touch $@
 
 clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp
-	make clean
+	$(MAKE) clean
 	dh_clean
 
-binary-indep: build
-
-binary-arch: build
+install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k
+	dh_prep
 	dh_installdirs
 	$(MAKE) install $(makeopts)
+
+binary-indep: build install
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
 	dh_installdocs
 	dh_installinit
 	dh_installlogrotate
 	dh_installman -A
-	dh_installchangelogs	ChangeLog
+	dh_installchangelogs ChangeLog
 	dh_strip
 	dh_compress
 	dh_installdeb
@@ -41,5 +57,5 @@ binary-arch: build
 	dh_builddeb
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary
 
+.PHONY: build clean binary-indep binary-arch binary install

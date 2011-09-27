@@ -5,7 +5,7 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 echo "MAIN_DIR = ${MAIN_DIR}"
 echo " "
 
-for PACKAGE in eiskaltdcpp plasma-widget-cwp psimedia q4wine qconf ; do
+for PACKAGE in eiskaltdcpp plasma-widget-cwp psimedia q4wine qconf uhub ; do
     echo "Begin ${PACKAGE}"
     "${MAIN_DIR}/Debian/${PACKAGE}/automatic_update_${PACKAGE}"
     echo "End ${PACKAGE}"
