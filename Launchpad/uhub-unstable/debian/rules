@@ -21,7 +21,6 @@ build-indep: build-stamp
 build-stamp:
 	dh_testdir
 	$(MAKE) -j$(NUMJOBS) $(makeopts)
-	cp -rf $(CURDIR)/debian/doc/ $(CURDIR)/
 	touch $@
 
 clean:

@@ -18,6 +18,13 @@ case "$1" in
         ;;
 esac
 
+#
+if [ -x "/etc/init.d/uhub" ]; then
+	update-rc.d uhub defaults >/dev/null
+	invoke-rc.d uhub start || exit $?
+fi
+#
+
 #DEBHELPER#
 
 exit 0
