@@ -6,7 +6,7 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 export PACKAGE="uhub-unstable"
 
 # Uncomment if necessary:
-#export SFX="-0ppa2"
+export SFX="-0ppa2"
 
 # Available branches: master
 export BRANCH=master

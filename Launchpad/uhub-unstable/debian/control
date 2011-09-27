@@ -2,7 +2,8 @@ Source: uhub-unstable
 Section: net
 Priority: optional
 Maintainer: Boris Pek <tehnick-8@mail.ru>
-Build-Depends: debhelper (>= 7)
+Build-Depends: debhelper (>= 7), fakeroot,
+ libsqlite3-dev, libssl-dev
 Homepage: http://www.uhub.org/
 Vcs-Git: git://github.com/janvidar/uhub.git
 Vcs-Browser: https://github.com/janvidar/uhub/

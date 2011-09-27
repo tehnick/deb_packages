@@ -12,10 +12,9 @@ passive_ftp = 1
 
 [mentors]
 fqdn = mentors.debian.net
-method = ftp
+method = http
 login = anonymous
-incoming = .
+incoming = /upload/tehnick-8@mail.ru/01ba22cb472646b4e8efc7c9c1a5e15d
 allow_unsigned_uploads = 0
 run_dinstall = 0
 progress_indicator = 2
-passive_ftp = 1
