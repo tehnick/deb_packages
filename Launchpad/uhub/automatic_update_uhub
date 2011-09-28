@@ -5,7 +5,7 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 export PACKAGE="uhub"
 
 # Uncomment if necessary:
-export SFX="-0ppa4"
+export SFX="-1ppa1"
 
 
 # Launch common script for setting variables

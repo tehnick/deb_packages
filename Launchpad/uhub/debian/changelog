@@ -1,23 +1,12 @@
-uhub (0.3.2-0ppa4~oneiric1) oneiric; urgency=low
+uhub (0.3.2-1ppa1~oneiric1) oneiric; urgency=low
 
-  * Some fixes in package.
+  * Package on Launchpad was sync with package in Debian.
+  * Changelog was cleaned.
 
- -- Boris Pek <tehnick-8@mail.ru>  Tue, 27 Sep 2011 22:33:34 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Wed, 28 Sep 2011 23:33:20 +0300
 
-uhub (0.3.2-0ppa3~oneiric1) oneiric; urgency=low
-
-  * Some fixes in package.
-
- -- Boris Pek <tehnick-8@mail.ru>  Tue, 27 Sep 2011 22:25:23 +0300
-
-uhub (0.3.2-0ppa2~oneiric1) oneiric; urgency=low
-
-  * Some fixes in package.
-
- -- Boris Pek <tehnick-8@mail.ru>  Tue, 27 Sep 2011 22:19:26 +0300
-
-uhub (0.3.2-0ppa1~oneiric1) oneiric; urgency=low
+uhub (0.3.2-1) unstable; urgency=low
 
   * Initial release (closes: #643290).
 
- -- Boris Pek <tehnick-8@mail.ru>  Tue, 27 Sep 2011 21:36:03 +0300
+ -- Boris Pek <tehnick-8@mail.ru>  Tue, 27 Sep 2011 04:53:54 +0300
