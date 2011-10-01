@@ -78,9 +78,17 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     rm -rf 0xd34df00d-qxmpp-dev-*
     tar xzf "master"
     mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"/qxmpp
+    # deleting some files and directories
+    rm -rf "${PACKAGE}-${NEW_VER}"/doc/
+    rm -rf "${PACKAGE}-${NEW_VER}"/iconsets/
+    rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
+    mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
+       "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png
+    rm -f "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
+    mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png \
+       "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png
+    rm -f "${PACKAGE}-${NEW_VER}"/src/util/modeltest.*
     # tarball
-    rm -rf "${PACKAGE}-${NEW_VER}"/doc
-    rm -rf "${PACKAGE}-${NEW_VER}"/iconsets
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 

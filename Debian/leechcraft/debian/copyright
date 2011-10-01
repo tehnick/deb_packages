@@ -8,9 +8,12 @@ The orig.tar.bz2 is generated from a few upstream source trees:
  git://github.com/0xd34df00d/leechcraft.git
  git://github.com/0xd34df00d/qxmpp-dev.git
 
-Following directories were ignored:
+Following files and directories were ignored:
  https://github.com/0xd34df00d/leechcraft/tree/master/doc/
  https://github.com/0xd34df00d/leechcraft/tree/master/iconsets/
+ https://github.com/0xd34df00d/leechcraft/tree/master/src/plugins/lcftp/
+ https://github.com/0xd34df00d/leechcraft/tree/master/src/plugins/azoth/share/azoth/iconsets/clients/default/* (except file unknown.png)
+ https://github.com/0xd34df00d/leechcraft/tree/master/src/util/modeltest.*
 
 Upstream Authors:
  Georg Rudoy <0xd34df00d@gmail.com>
@@ -69,7 +72,7 @@ Copyright:
  Copyright 2006 Tristan Carel
  Copyright 2006 Alexander Neundorf <neundorf@kde.org>
 License:
- BSD License
+ BSD License (3-clause)
  .
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions
@@ -268,7 +271,7 @@ Copyright:
  Copyright (c) 1991, 1993 The Regents of the University of California
  Copyright (c) 2005-2010 Thomas Bernard (http://miniupnp.free.fr/)
 License:
- BSD License
+ BSD License (3-clause)
  .
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
