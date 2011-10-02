@@ -1,3 +1,14 @@
+eiskaltdcpp (2.2.4-1) unstable; urgency=low
+
+  * Update to stable release 2.2.4.
+  * Updated file debian/copyright:
+    - new author was added in upstream
+    - new files were added in upstream
+  * Updated file debian/rules:
+    - enabled DHT support in configurating options
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 02 Oct 2011 19:12:57 +0300
+
 eiskaltdcpp (2.2.3-1) unstable; urgency=low
 
   * Update to stable release 2.2.3.
