@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Free space is not enough for this build... =(
+
+sudo mount -o bind /mnt/win_rem2/TEMP/Devel/TEMP__psi-plus/ ~/WorkDir/Devel/deb_packages/Debian/psi-plus/TEMP/

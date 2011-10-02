@@ -1,3 +1,9 @@
+eiskaltdcpp (2.2.4-0ppa1~oneiric1) oneiric; urgency=low
+
+  * Update to stable release 2.2.4.
+
+ -- Boris Pek <tehnick-8@mail.ru>  Sun, 02 Oct 2011 18:44:07 +0300
+
 eiskaltdcpp (2.2.3-0ppa1~oneiric1) oneiric; urgency=low
 
   * Update to stable release 2.2.3.
