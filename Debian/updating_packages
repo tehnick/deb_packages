@@ -111,7 +111,11 @@ kwrite debian/changelog
 cd "${TEMP_DIR}"
 cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
 
-dput -f mentors ${PACKAGE}_${NEW_VER_FULL}_source.changes
+if [ -z "${DESTINATION}" ]; then
+    export DESTINATION="mentors"
+fi
+
+dput -f ${DESTINATION} ${PACKAGE}_${NEW_VER_FULL}_source.changes
 
 echo "Update finished successfully"
 

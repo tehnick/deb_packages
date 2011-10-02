@@ -1,0 +1,18 @@
+fix for resources in cstp
+
+--- a/src/plugins/cstp/cstpresources.qrc
++++ b/src/plugins/cstp/cstpresources.qrc
+@@ -1,13 +1,5 @@
+ <RCC>
+   <qresource prefix="/plugins/cstp/" >
+-    <file>resources/images/clients/firefox.png</file>
+-    <file>resources/images/clients/ie2.png</file>
+-    <file>resources/images/clients/ie4.png</file>
+-    <file>resources/images/clients/ie7.png</file>
+-    <file>resources/images/clients/seamonkey.png</file>
+-    <file>resources/images/clients/opera.png</file>
+-    <file>resources/images/clients/console.png</file>
+-    <file>resources/images/clients/konqueror4.png</file>
+     <file>resources/images/cstp.svg</file>
+   </qresource>
+ </RCC>

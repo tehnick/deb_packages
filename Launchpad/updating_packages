@@ -120,8 +120,12 @@ esac
 cd "${TEMP_DIR}"
 cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/"
 
+if [ -z "${DESTINATION}" ]; then
+    export DESTINATION="ubuntu"
+fi
+
 for DIST in oneiric natty maverick lucid karmic ; do
-    dput -f ubuntu ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
+    dput -f ${DESTINATION} ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
 done
 
 echo "Update finished successfully"

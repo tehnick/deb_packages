@@ -12,7 +12,7 @@ Following files and directories were ignored:
  https://github.com/0xd34df00d/leechcraft/tree/master/doc/
  https://github.com/0xd34df00d/leechcraft/tree/master/iconsets/
  https://github.com/0xd34df00d/leechcraft/tree/master/src/plugins/lcftp/
- https://github.com/0xd34df00d/leechcraft/tree/master/src/plugins/cstp/resources/images/*
+ https://github.com/0xd34df00d/leechcraft/tree/master/src/plugins/cstp/resources/images/clients/*
  https://github.com/0xd34df00d/leechcraft/tree/master/src/plugins/azoth/share/azoth/iconsets/clients/default/* (except file unknown.png)
  https://github.com/0xd34df00d/leechcraft/tree/master/src/util/modeltest.*
 

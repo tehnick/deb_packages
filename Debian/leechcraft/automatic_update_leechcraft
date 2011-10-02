@@ -82,7 +82,7 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     rm -rf "${PACKAGE}-${NEW_VER}"/doc/
     rm -rf "${PACKAGE}-${NEW_VER}"/iconsets/
     rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
-    rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/*
+    rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
        "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png
     rm -f "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
@@ -95,6 +95,8 @@ fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+export DESTINATION="mentors_ftp"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
