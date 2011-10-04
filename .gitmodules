@@ -13,3 +13,6 @@
 [submodule "Launchpad/plasma-widget-cwp/plasma-widget-cwp-debian"]
 	path = Launchpad/plasma-widget-cwp/plasma-widget-cwp-debian
 	url = git@github.com:tehnick/plasma-widget-cwp-debian.git
+[submodule "Debian/leechcraft/leechcraft-debian"]
+	path = Debian/leechcraft/leechcraft-debian
+	url = git@github.com:tehnick/leechcraft-debian.git
