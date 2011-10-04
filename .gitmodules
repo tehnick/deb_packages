@@ -28,3 +28,6 @@
 [submodule "Launchpad/uhub-unstable/uhub-unstable-debian"]
 	path = Launchpad/uhub-unstable/uhub-unstable-debian
 	url = git@github.com:tehnick/uhub-unstable-debian.git
+[submodule "Launchpad/q4wine-unstable/q4wine-unstable-debian"]
+	path = Launchpad/q4wine-unstable/q4wine-unstable-debian
+	url = git@github.com:tehnick/q4wine-unstable-debian.git
