@@ -4,3 +4,6 @@
 [submodule "Launchpad/uhub/uhub-debian"]
 	path = Launchpad/uhub/uhub-debian
 	url = git@github.com:tehnick/uhub-debian.git
+[submodule "Debian/psi-plus/psi-plus-debian"]
+	path = Debian/psi-plus/psi-plus-debian
+	url = git@github.com:tehnick/psi-plus-debian.git
