@@ -22,3 +22,6 @@
 [submodule "Debian/psimedia/psimedia-debian"]
 	path = Debian/psimedia/psimedia-debian
 	url = git@github.com:tehnick/psimedia-debian.git
+[submodule "Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian"]
+	path = Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian
+	url = git@github.com:tehnick/eiskaltdcpp-unstable-debian.git

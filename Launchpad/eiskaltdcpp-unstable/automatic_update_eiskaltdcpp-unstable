@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 
 export PACKAGE="eiskaltdcpp-unstable"
 
@@ -17,12 +17,14 @@ export BRANCH=master
 source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
-# Check versions
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+# Get old version
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-0ppa.*$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\{6,6\}-\(.*\)$/\1/")
 
+
+# Find new version
 export LAST_SRC_INFO=$(curl -I https://nodeload.github.com/negativ/eiskaltdcpp/tarball/${BRANCH} 2>&1)
 export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(negativ-eiskaltdcpp.*\).tar.gz.*/\1/")
 export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^negativ-eiskaltdcpp.*-[0-9]\+-g\(.*\)$/\1/")
@@ -38,10 +40,12 @@ export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
 
 
+# Display versions
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 
 
+# Check versions
 if [ -z "${OLD_COMMIT}" ]; then
     echo "OLD_COMMIT is empty!";
     exit 0;
