@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 
 export PACKAGE="psi-plus"
 
@@ -19,12 +19,14 @@ export MAIN_DIST="unstable"
 source "${MAIN_DIR}/Debian/setting_variables"
 
 
-# Check versions
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+# Get old version
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
 
+
+# Find new version
 export LAST_REVISION=$(svn log http://psi-dev.googlecode.com/svn/trunk/ |
                        head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
 
@@ -38,10 +40,12 @@ fi
 export NEW_VER_FULL="${NEW_VER}${SFX}"
 
 
+# Display versions
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 
 
+# Check versions
 if [ -z "${OLD_VER_FULL}" ]; then
     echo "OLD_VER_FULL is empty!";
     exit 0;
