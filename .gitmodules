@@ -31,3 +31,6 @@
 [submodule "Launchpad/q4wine-unstable/q4wine-unstable-debian"]
 	path = Launchpad/q4wine-unstable/q4wine-unstable-debian
 	url = git@github.com:tehnick/q4wine-unstable-debian.git
+[submodule "Launchpad/freedcpp-unstable/freedcpp-unstable-debian"]
+	path = Launchpad/freedcpp-unstable/freedcpp-unstable-debian
+	url = git@github.com:tehnick/freedcpp-unstable-debian.git
