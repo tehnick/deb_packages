@@ -7,3 +7,9 @@
 [submodule "Debian/psi-plus/psi-plus-debian"]
 	path = Debian/psi-plus/psi-plus-debian
 	url = git@github.com:tehnick/psi-plus-debian.git
+[submodule "Debian/plasma-widget-cwp/plasma-widget-cwp-debian"]
+	path = Debian/plasma-widget-cwp/plasma-widget-cwp-debian
+	url = git@github.com:tehnick/plasma-widget-cwp-debian.git
+[submodule "Launchpad/plasma-widget-cwp/plasma-widget-cwp-debian"]
+	path = Launchpad/plasma-widget-cwp/plasma-widget-cwp-debian
+	url = git@github.com:tehnick/plasma-widget-cwp-debian.git
