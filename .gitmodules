@@ -19,3 +19,6 @@
 [submodule "Debian/qconf/qconf-debian"]
 	path = Debian/qconf/qconf-debian
 	url = git@github.com:tehnick/qconf-debian.git
+[submodule "Debian/psimedia/psimedia-debian"]
+	path = Debian/psimedia/psimedia-debian
+	url = git@github.com:tehnick/psimedia-debian.git
