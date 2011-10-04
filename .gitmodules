@@ -1,3 +1,6 @@
 [submodule "Debian/uhub/uhub-debian"]
 	path = Debian/uhub/uhub-debian
 	url = git@github.com:tehnick/uhub-debian.git
+[submodule "Launchpad/uhub/uhub-debian"]
+	path = Launchpad/uhub/uhub-debian
+	url = git@github.com:tehnick/uhub-debian.git
