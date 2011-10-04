@@ -25,3 +25,6 @@
 [submodule "Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian"]
 	path = Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian
 	url = git@github.com:tehnick/eiskaltdcpp-unstable-debian.git
+[submodule "Launchpad/uhub-unstable/uhub-unstable-debian"]
+	path = Launchpad/uhub-unstable/uhub-unstable-debian
+	url = git@github.com:tehnick/uhub-unstable-debian.git
