@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 
 export PACKAGE="uhub"
 
@@ -39,7 +39,7 @@ echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 echo " "
 
-if [ -z "${NEW_VER}"if [ -z "${NEW_VER}" ]; then
+if [ -z "${NEW_VER}" ]; then
     echo "NEW_VER is empty!";
     exit 0;
 elif [ -z "${OLD_VER_FULL}" ]; then
