@@ -1,7 +1,9 @@
 #!/bin/bash
 
 
-export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
 
 export PACKAGE="uhub-unstable"
 

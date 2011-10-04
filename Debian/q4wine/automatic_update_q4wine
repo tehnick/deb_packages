@@ -1,7 +1,9 @@
 #!/bin/bash
 
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
 
 export PACKAGE="q4wine"
 
