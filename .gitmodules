@@ -1,0 +1,3 @@
+[submodule "Debian/uhub/uhub-debian"]
+	path = Debian/uhub/uhub-debian
+	url = git@github.com:tehnick/uhub-debian.git

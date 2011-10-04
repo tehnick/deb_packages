@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -e
-
-chmod 0750 /var/log/uhub
-
-#DEBHELPER#
-
-exit 0
