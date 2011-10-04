@@ -30,7 +30,7 @@ export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
 tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
-cp -rf "${PKG_DIR}/${PACKAGE}-debian" "${PACKAGE}-${NEW_VER}/debian"
+cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${PACKAGE}-${NEW_VER}/debian"
 
 if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
     diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
@@ -109,7 +109,7 @@ kwrite debian/changelog
 
 
 cd "${TEMP_DIR}"
-cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/${PACKAGE}-debian"
+cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/${PACKAGE}-debian/debian"
 
 dput -f mentors ${PACKAGE}_${NEW_VER_FULL}_source.changes
 

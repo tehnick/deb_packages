@@ -16,7 +16,7 @@ source "${MAIN_DIR}/Debian/setting_variables"
 
 
 # Get old version
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 

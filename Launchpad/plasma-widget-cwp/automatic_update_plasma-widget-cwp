@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 
 export PACKAGE="plasma-widget-cwp"
 
@@ -13,15 +13,19 @@ export PACKAGE="plasma-widget-cwp"
 source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
-# Check versions
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+# Get old version
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 
+
+# Find new version
 export VER_LIST=$(curl 'http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/' 2>&1 | grep 'kde-plasmoid-cwp_' | grep '.orig.tar.gz' | sed -e "s/^.*kde-plasmoid-cwp_\(.*\).orig.tar.gz.*$/\1/")
 export NEW_VER=$(echo ${VER_LIST} | sed -e "s/^.* \(.*\)$/\1/")
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
+
+# Display versions
 echo " "
 echo "http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/"
 echo " "
@@ -35,6 +39,8 @@ echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 echo " "
 
+
+# Check versions
 if [ -z "${NEW_VER}" ]; then
     echo "NEW_VER is empty!";
     exit 0;

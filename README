@@ -10,3 +10,7 @@ Notes:
 	git clone git://github.com/tehnick/deb_packages.git
 	git submodule init
 	git submodule update
+
+Other commands:
+	git submodule foreach 'git pull --all'
+	git submodule foreach 'git push'
