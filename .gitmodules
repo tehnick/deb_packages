@@ -16,3 +16,6 @@
 [submodule "Debian/leechcraft/leechcraft-debian"]
 	path = Debian/leechcraft/leechcraft-debian
 	url = git@github.com:tehnick/leechcraft-debian.git
+[submodule "Debian/qconf/qconf-debian"]
+	path = Debian/qconf/qconf-debian
+	url = git@github.com:tehnick/qconf-debian.git

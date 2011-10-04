@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 
 export PACKAGE="qconf"
 
@@ -16,15 +16,19 @@ export MAIN_DIST="unstable"
 source "${MAIN_DIR}/Debian/setting_variables"
 
 
-# Check versions
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+# Get old version
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 
+
+# Find new version
 export VER_LIST=$(curl 'http://delta.affinix.com/download/' 2>&1 | grep 'qconf-' | grep '.tar.bz2' | sed -e "s/^.*qconf-\(.*\).tar.bz2.*$/\1/")
 export NEW_VER=$(echo ${VER_LIST} | sed -e "s/^.* \(.*\)$/\1/")
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
+
+# Display versions
 echo " "
 echo "http://delta.affinix.com/download/"
 echo " "
@@ -39,6 +43,7 @@ echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 echo " "
 
 
+# Check versions
 if [ -z "${NEW_VER}" ]; then
     echo "NEW_VER is empty!";
     exit 0;
