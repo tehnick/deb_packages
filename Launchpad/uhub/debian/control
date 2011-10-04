@@ -4,8 +4,8 @@ Priority: optional
 Maintainer: Boris Pek <tehnick-8@mail.ru>
 Build-Depends: debhelper (>= 7)
 Homepage: http://www.uhub.org/
-Vcs-Git: git://github.com/janvidar/uhub.git
-Vcs-Browser: https://github.com/janvidar/uhub/
+Vcs-Git: git://github.com/tehnick/uhub-debian.git
+Vcs-Browser: https://github.com/tehnick/uhub-debian
 Standards-Version: 3.9.2
 
 Package: uhub
