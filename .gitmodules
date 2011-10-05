@@ -34,3 +34,9 @@
 [submodule "Launchpad/freedcpp-unstable/freedcpp-unstable-debian"]
 	path = Launchpad/freedcpp-unstable/freedcpp-unstable-debian
 	url = git@github.com:tehnick/freedcpp-unstable-debian.git
+[submodule "Debian/eiskaltdcpp/eiskaltdcpp-debian"]
+	path = Debian/eiskaltdcpp/eiskaltdcpp-debian
+	url = git@github.com:tehnick/eiskaltdcpp-debian.git
+[submodule "Launchpad/eiskaltdcpp/eiskaltdcpp-debian"]
+	path = Launchpad/eiskaltdcpp/eiskaltdcpp-debian
+	url = git@github.com:tehnick/eiskaltdcpp-debian.git

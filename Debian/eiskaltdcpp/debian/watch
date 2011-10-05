@@ -1,3 +1,0 @@
-version=3
-http://code.google.com/p/eiskaltdc/downloads/list .*name=eiskaltdcpp-(.+)\.tar\.bz2.* \
-debian uupdate
