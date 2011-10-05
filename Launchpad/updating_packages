@@ -118,7 +118,7 @@ esac
 
 
 cd "${TEMP_DIR}"
-cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/${PACKAGE}-debian/debian"
+cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 
 if [ -z "${DESTINATION}" ]; then
     export DESTINATION="ubuntu"
