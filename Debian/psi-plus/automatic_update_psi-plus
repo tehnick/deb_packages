@@ -157,6 +157,8 @@ fi
 
 export UPDATE_STRING="New upstream release"
 
+export DESTINATION="mentors_ftp"
+
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
 
