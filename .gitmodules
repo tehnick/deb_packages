@@ -40,3 +40,9 @@
 [submodule "Launchpad/eiskaltdcpp/eiskaltdcpp-debian"]
 	path = Launchpad/eiskaltdcpp/eiskaltdcpp-debian
 	url = git@github.com:tehnick/eiskaltdcpp-debian.git
+[submodule "Debian/q4wine/q4wine-debian"]
+	path = Debian/q4wine/q4wine-debian
+	url = git@github.com:tehnick/q4wine-debian.git
+[submodule "Launchpad/q4wine/q4wine-debian"]
+	path = Launchpad/q4wine/q4wine-debian
+	url = git@github.com:tehnick/q4wine-debian.git
