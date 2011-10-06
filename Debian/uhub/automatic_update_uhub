@@ -83,8 +83,6 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
     rm -rf "${PACKAGE}-${NEW_VER}/debian"
     # tarball
-    rm -rf "${PACKAGE}-${NEW_VER}"/doc
-    rm -rf "${PACKAGE}-${NEW_VER}"/iconsets
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
