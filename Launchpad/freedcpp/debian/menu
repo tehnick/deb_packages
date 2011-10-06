@@ -1,5 +1,0 @@
-?package(freedcpp):\
-        needs="X11"\
-        section="Applications/Network/File Transfer"\
-        title="FreeDC++"\
-        command="/usr/bin/freedcpp"

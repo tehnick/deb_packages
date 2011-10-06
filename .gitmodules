@@ -46,3 +46,9 @@
 [submodule "Launchpad/q4wine/q4wine-debian"]
 	path = Launchpad/q4wine/q4wine-debian
 	url = git@github.com:tehnick/q4wine-debian.git
+[submodule "Debian/freedcpp/freedcpp-debian"]
+	path = Debian/freedcpp/freedcpp-debian
+	url = git@github.com:tehnick/freedcpp-debian.git
+[submodule "Launchpad/freedcpp/freedcpp-debian"]
+	path = Launchpad/freedcpp/freedcpp-debian
+	url = git@github.com:tehnick/freedcpp-debian.git
