@@ -52,3 +52,9 @@
 [submodule "Launchpad/freedcpp/freedcpp-debian"]
 	path = Launchpad/freedcpp/freedcpp-debian
 	url = git@github.com:tehnick/freedcpp-debian.git
+[submodule "Debian/freedcpp-mediapack/freedcpp-mediapack-debian"]
+	path = Debian/freedcpp-mediapack/freedcpp-mediapack-debian
+	url = git@github.com:tehnick/freedcpp-mediapack-debian.git
+[submodule "Launchpad/freedcpp-mediapack/freedcpp-mediapack-debian"]
+	path = Launchpad/freedcpp-mediapack/freedcpp-mediapack-debian
+	url = git@github.com:tehnick/freedcpp-mediapack-debian.git

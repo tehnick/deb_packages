@@ -13,15 +13,19 @@ export PACKAGE="freedcpp-mediapack"
 source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
-# Check versions
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+# Get old version
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 
+
+# Find new version
 export VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/list' 2>&1 | grep '"http://freedcpp.googlecode.com/files/mediapack.' | grep '.tar.bz2"' | sed -e "s:^.*freedcpp.googlecode.com/files/mediapack.\(.*\).tar.bz2\".*$:\1:")
 export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
+
+# Display versions
 echo " "
 echo "http://code.google.com/p/freedcpp/downloads/list"
 echo " "
@@ -35,6 +39,8 @@ echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 echo " "
 
+
+# Check versions
 if [ -z "${NEW_VER}" ]; then
     echo "NEW_VER is empty!";
     exit 0;
