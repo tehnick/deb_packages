@@ -71,10 +71,10 @@ fi
 # Get the sources
 if !([ -e "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz" ]); then
     wget -4 -c "http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz"
-    rm -rf "plasma-widget-cwp-${NEW_VER}"
+    rm -rf "${PACKAGE}-${NEW_VER}"
     tar xzf "kde-plasmoid-cwp_${NEW_VER}.orig.tar.gz"
-    mv "cwp-${NEW_VER}" "plasma-widget-cwp-${NEW_VER}"
-    tar -cjf "plasma-widget-cwp_${NEW_VER}.orig.tar.bz2" "plasma-widget-cwp-${NEW_VER}"
+    mv "cwp-${NEW_VER}" "${PACKAGE}-${NEW_VER}"
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
 
