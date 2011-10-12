@@ -77,10 +77,10 @@ fi
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
     # main sources
-    wget -4 -c "http://nodeload.github.com/0xd34df00d/leechcraft/tarball/${NEW_VER}"
-    rm -rf 0xd34df00d-leechcraft-*
+    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
+    rm -rf ${DEVELOPER}-${PROJECT}-*
     tar xzf "${NEW_VER}"
-    mv 0xd34df00d-leechcraft-* "${PACKAGE}-${NEW_VER}"
+    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
     # qxmpp sources
     wget -4 -c "http://nodeload.github.com/0xd34df00d/qxmpp-dev/tarball/master"
     rm -rf 0xd34df00d-qxmpp-dev-*

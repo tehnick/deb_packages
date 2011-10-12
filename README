@@ -12,6 +12,6 @@ Notes:
 	git submodule update
 
 Other commands:
-	git status && git submodule foreach 'git status'
-	git submodule foreach 'git checkout master && git pull --all'
-	git submodule foreach 'git checkout master && git push'
+	git status; echo; git submodule foreach 'git status; echo;'
+	git submodule foreach 'git checkout master; git pull;'
+	git submodule foreach 'git checkout master; git push;'
