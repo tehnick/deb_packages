@@ -73,10 +73,11 @@ fi
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    wget -4 "http://delta.affinix.com/download/qconf-${NEW_VER}.tar.bz2"
-    rm -rf "${PACKAGE}-${NEW_VER}"
-    tar xjf "${PACKAGE}-${NEW_VER}.tar.bz2"
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    wget -4 -c "http://delta.affinix.com/download/qconf-${NEW_VER}.tar.bz2"
+    #rm -rf "${PACKAGE}-${NEW_VER}"
+    #tar xjf "${PACKAGE}-${NEW_VER}.tar.bz2"
+    #tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    mv -f "${PACKAGE}-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 fi
 
 
