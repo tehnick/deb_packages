@@ -27,14 +27,14 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 # Find new version
 export DEVELOPER=0xd34df00d
 export PROJECT=leechcraft
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/downloads" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
 export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
-export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
+export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
 echo " "
-echo "https://github.com/${DEVELOPER}/${PROJECT}/downloads"
+echo "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 echo " "
 echo "On github.com now available such versions:"
 echo ${VER_LIST}

@@ -5,17 +5,14 @@ if [ -z "${MAIN_DIR}" ]; then
     export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 fi
 
-export PACKAGE="leechcraft"
+export PACKAGE="leechcraft-unstable"
 
 # Uncomment if necessary:
-#export SFX="-2"
-
-# experimental unstable
-export MAIN_DIST="unstable"
+#export SFX="-3ppa2"
 
 
 # Launch common script for setting variables
-source "${MAIN_DIR}/Debian/setting_variables"
+source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
 # Get old version
@@ -27,14 +24,14 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 # Find new version
 export DEVELOPER=0xd34df00d
 export PROJECT=leechcraft
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/downloads" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
 export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
 echo " "
-echo "https://github.com/${DEVELOPER}/${PROJECT}/downloads"
+echo "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 echo " "
 echo "On github.com now available such versions:"
 echo ${VER_LIST}
@@ -59,12 +56,12 @@ elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
     exit 0;
 else
     if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
-        if !([ "${SFX}" = "-1" ]); then
-            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+        if !([ "${SFX}" = "-0ppa1" ]); then
+            echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
             exit 0;
         fi
     else
-        if ([ "${SFX}" = "-1" ]); then
+        if ([ "${SFX}" = "-0ppa1" ]); then
             echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
             echo "Upgrading is not required.";
             exit 0;
@@ -104,8 +101,8 @@ fi
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
-export DESTINATION="mentors_ftp"
+export DESTINATION="leechcraft-unstable"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
-source "${MAIN_DIR}/Debian/updating_packages"
+source "${MAIN_DIR}/Launchpad/updating_packages"
 
