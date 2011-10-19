@@ -8,7 +8,7 @@ fi
 export PACKAGE="leechcraft-unstable"
 
 # Uncomment if necessary:
-#export SFX="-3ppa2"
+export SFX="-0ppa4"
 
 
 # Launch common script for setting variables
@@ -17,8 +17,8 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 # Get old version
 export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
-export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
-export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 
 
 # Find new version
@@ -102,6 +102,10 @@ fi
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DESTINATION="leechcraft-unstable"
+
+export DIST_LIST="oneiric
+                  natty
+                  maverick"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Launchpad/updating_packages"

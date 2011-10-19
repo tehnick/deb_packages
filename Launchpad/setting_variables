@@ -3,7 +3,7 @@
 
 # Common script for setting variables
 
-export MAIN_DIST="oneiric"
+export MAIN_DIST="precise"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
 if [ -z "${SFX}" ]; then
