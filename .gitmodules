@@ -64,3 +64,6 @@
 [submodule "Launchpad/leechcraft-unstable/leechcraft-unstable-debian"]
 	path = Launchpad/leechcraft-unstable/leechcraft-unstable-debian
 	url = git@github.com:tehnick/leechcraft-unstable-debian.git
+[submodule "Launchpad/leechcraft/leechcraft-debian"]
+	path = Launchpad/leechcraft/leechcraft-debian
+	url = git@github.com:tehnick/leechcraft-debian.git

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Free space is not enough for this build... =(
+
+sudo mount -o bind /mnt/win_rem2/TEMP/Devel/TEMP__leechcraft-stable/ ~/WorkDir/Devel/deb_packages/Launchpad/leechcraft/TEMP/

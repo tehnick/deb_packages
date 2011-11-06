@@ -5,31 +5,28 @@ if [ -z "${MAIN_DIR}" ]; then
     export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 fi
 
-export PACKAGE="uhub"
+export PACKAGE="leechcraft"
 
 # Uncomment if necessary:
-#export SFX="-2"
-
-# experimental unstable
-export MAIN_DIST="unstable"
+#export SFX="-0ppa4"
 
 
 # Launch common script for setting variables
-source "${MAIN_DIR}/Debian/setting_variables"
+source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
 # Get old version
 export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
-export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
-export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 
 
 # Find new version
-export DEVELOPER=janvidar
-export PROJECT=uhub
+export DEVELOPER=0xd34df00d
+export PROJECT=leechcraft
 export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
 export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
-export NEW_VER_FULL=${NEW_VER}${SFX}
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
@@ -59,12 +56,12 @@ elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
     exit 0;
 else
     if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
-        if !([ "${SFX}" = "-1" ]); then
-            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+        if !([ "${SFX}" = "-0ppa1" ]); then
+            echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
             exit 0;
         fi
     else
-        if ([ "${SFX}" = "-1" ]); then
+        if ([ "${SFX}" = "-0ppa1" ]); then
             echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
             echo "Upgrading is not required.";
             exit 0;
@@ -76,12 +73,27 @@ fi
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
-    # sources
+    # main sources
     wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
     rm -rf ${DEVELOPER}-${PROJECT}-*
     tar xzf "${NEW_VER}"
     mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
-    rm -rf "${PACKAGE}-${NEW_VER}/debian"
+    # qxmpp sources
+    wget -4 -c "http://nodeload.github.com/0xd34df00d/qxmpp-dev/tarball/master"
+    rm -rf 0xd34df00d-qxmpp-dev-*
+    tar xzf "master"
+    mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"/qxmpp
+    # deleting some files and directories
+    rm -rf "${PACKAGE}-${NEW_VER}"/doc/
+    rm -rf "${PACKAGE}-${NEW_VER}"/iconsets/
+    rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
+    rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
+    mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
+       "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png
+    rm -f "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
+    mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png \
+       "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png
+    rm -f "${PACKAGE}-${NEW_VER}"/src/util/modeltest.*
     # tarball
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
@@ -89,6 +101,12 @@ fi
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
+export DESTINATION="leechcraft-stable"
+
+export DIST_LIST="oneiric
+                  natty
+                  maverick"
+
 # Launch common script for updating packages and uploading them to mentors.debian.net
-source "${MAIN_DIR}/Debian/updating_packages"
+source "${MAIN_DIR}/Launchpad/updating_packages"
 

@@ -54,13 +54,13 @@ export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "${UPDATE_STRING}"
-    debuild -S -sa
+    debuild -S -sa || exit 1
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
     # debuild -S -sd
-    debuild -S -sa
+    debuild -S -sa || exit 1
 fi
 # end update for basic releases
 
@@ -113,7 +113,7 @@ case "${1}" in
     cd "${TEST_DIR}"
     echo " "
     echo "Now running lintian:"
-    lintian -ivI ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    lintian -ivI --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
     cat ${LINTIAN_LOG_FILE} | grep "E: "
     cat ${LINTIAN_LOG_FILE} | grep "W: "
     echo "Finished running lintian."
@@ -130,7 +130,7 @@ cd "${TEMP_DIR}"
 cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 
 if [ -z "${DESTINATION}" ]; then
-    export DESTINATION="ubuntu"
+    export DESTINATION="tehnick"
 fi
 
 for DIST in ${MAIN_DIST} ${DIST_LIST} ; do

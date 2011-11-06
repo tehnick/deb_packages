@@ -92,7 +92,7 @@ case "${1}" in
     cd "${TEST_DIR}"
     echo " "
     echo "Now running lintian:"
-    lintian -ivI ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    lintian -ivI --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
     cat ${LINTIAN_LOG_FILE} | grep "E: "
     cat ${LINTIAN_LOG_FILE} | grep "W: "
     echo "Finished running lintian."
