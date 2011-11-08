@@ -27,9 +27,11 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\{6,6\}-\(.*\)$/\1/")
 
 
 # Find new version
-export LAST_SRC_INFO=$(curl -I https://nodeload.github.com/negativ/eiskaltdcpp/tarball/${BRANCH} 2>&1)
-export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(negativ-eiskaltdcpp.*\).tar.gz.*/\1/")
-export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^negativ-eiskaltdcpp.*-[0-9]\+-g\(.*\)$/\1/")
+export DEVELOPER=negativ
+export PROJECT=eiskaltdcpp
+export LAST_SRC_INFO=$(curl -I "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}" 2>&1)
+export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
+export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
 
 
 echo "Old  commit ID: ${OLD_COMMIT}"
@@ -75,9 +77,8 @@ fi
 # Get the sources
 if !([ -e "${LAST_SRC}.tar.gz" ]); then
     rm -f ${BRANCH}*
-    # wget -4 https://github.com/negativ/eiskaltdcpp/tarball/${BRANCH}
-    wget -4 https://nodeload.github.com/negativ/eiskaltdcpp/tarball/${BRANCH}
-    rm -f negativ-eiskaltdcpp-*.tar.gz*
+    wget -4 -c "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}"
+    rm -f ${DEVELOPER}-${PROJECT}-*.tar.gz*
     mv ${BRANCH} "${LAST_SRC}.tar.gz"
 fi
 

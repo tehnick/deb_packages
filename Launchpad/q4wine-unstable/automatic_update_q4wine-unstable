@@ -92,6 +92,8 @@ fi
 
 export UPDATE_STRING="Minor update from GIT master branch."
 
+export DESTINATION="q4wine"
+
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 

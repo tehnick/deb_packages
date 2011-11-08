@@ -69,15 +69,18 @@ fi
 
 
 # Get the sources
-if !([ -e "q4wine-${NEW_VER}.tar.bz2" ]); then
-    wget -4 "http://sourceforge.net/projects/q4wine/files/q4wine/q4wine%20${NEW_VER}/q4wine-${NEW_VER}.tar.bz2"
-    rm -rf "q4wine-${NEW_VER}"
-    tar xjf "q4wine-${NEW_VER}.tar.bz2"
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "q4wine-${NEW_VER}"
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    wget -4 -c "http://sourceforge.net/projects/q4wine/files/q4wine/q4wine%20${NEW_VER}/q4wine-${NEW_VER}.tar.bz2"
+    #rm -rf "${PACKAGE}-${NEW_VER}"
+    #tar xjf "${PACKAGE}-${NEW_VER}.tar.bz2"
+    #tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    mv -f "${PACKAGE}-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+export DESTINATION="q4wine"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"

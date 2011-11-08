@@ -8,7 +8,9 @@ fi
 export PACKAGE="leechcraft-unstable"
 
 # Uncomment if necessary:
-export SFX="-0ppa4"
+export SFX="-0ppa1"
+
+export BRANCH=master
 
 
 # Launch common script for setting variables
@@ -24,24 +26,23 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 # Find new version
 export DEVELOPER=0xd34df00d
 export PROJECT=leechcraft
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
-export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
+export LAST_SRC_INFO=$(curl -I "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}" 2>&1)
+export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
+export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
+
+
+# Display versions
+echo "Old  commit ID: ${OLD_COMMIT}"
+echo "Last commit ID: ${LAST_COMMIT}"
+
+
+export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-echo " "
-echo "https://github.com/${DEVELOPER}/${PROJECT}/tags"
-echo " "
-echo "On github.com now available such versions:"
-echo ${VER_LIST}
-echo " "
-
-echo "OLD_VER = ${OLD_VER}"
-echo "NEW_VER = ${NEW_VER}"
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
-echo " "
 
 
 # Check versions
@@ -72,28 +73,30 @@ fi
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
+    rm -rf  "${PACKAGE}-${NEW_VER}"/
     # main sources
-    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
+    rm -f "${BRANCH}"*
+    wget -4 -c "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}"
     rm -rf ${DEVELOPER}-${PROJECT}-*
-    tar xzf "${NEW_VER}"
+    tar xzf "${BRANCH}"
     mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
     # qxmpp sources
-    wget -4 -c "http://nodeload.github.com/0xd34df00d/qxmpp-dev/tarball/master"
-    rm -rf 0xd34df00d-qxmpp-dev-*
+    rm -f "master"*
+    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/qxmpp-dev/tarball/master"
+    rm -rf ${DEVELOPER}-qxmpp-dev-*
     tar xzf "master"
     mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"/qxmpp
     # deleting some files and directories
-    rm -rf "${PACKAGE}-${NEW_VER}"/doc/
-    rm -rf "${PACKAGE}-${NEW_VER}"/iconsets/
-    rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
-    rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
+    rm -r "${PACKAGE}-${NEW_VER}"/doc/
+    rm -r "${PACKAGE}-${NEW_VER}"/iconsets/
+    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
+    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
        "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png
-    rm -f "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
+    rm "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png \
        "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png
-    rm -f "${PACKAGE}-${NEW_VER}"/src/util/modeltest.*
+    rm "${PACKAGE}-${NEW_VER}"/src/util/modeltest.*
     # tarball
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
