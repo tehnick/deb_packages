@@ -30,6 +30,7 @@ export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
 
 tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+rm -rf "${PACKAGE}-${NEW_VER}/debian"
 cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${PACKAGE}-${NEW_VER}/debian"
 
 if ([ -d "${PACKAGE}-${OLD_VER}" ]); then

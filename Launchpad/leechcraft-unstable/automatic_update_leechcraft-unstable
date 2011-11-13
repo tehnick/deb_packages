@@ -8,7 +8,9 @@ fi
 export PACKAGE="leechcraft-unstable"
 
 # Uncomment if necessary:
-export SFX="-0ppa1"
+#export SFX="-0ppa2"
+
+#export NEW_VER=0.4.90-731-g4d6080a
 
 export BRANCH=master
 
@@ -21,7 +23,7 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
-
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
 
 # Find new version
 export DEVELOPER=0xd34df00d
@@ -35,8 +37,9 @@ export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[
 echo "Old  commit ID: ${OLD_COMMIT}"
 echo "Last commit ID: ${LAST_COMMIT}"
 
-
-export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
+if [ -z "${NEW_VER}" ]; then
+    export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
@@ -87,8 +90,6 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     tar xzf "master"
     mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"/qxmpp
     # deleting some files and directories
-    rm -r "${PACKAGE}-${NEW_VER}"/doc/
-    rm -r "${PACKAGE}-${NEW_VER}"/iconsets/
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
@@ -96,7 +97,6 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     rm "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png \
        "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png
-    rm "${PACKAGE}-${NEW_VER}"/src/util/modeltest.*
     # tarball
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
