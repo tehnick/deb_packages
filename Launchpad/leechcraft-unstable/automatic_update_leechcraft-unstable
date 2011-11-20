@@ -10,7 +10,7 @@ export PACKAGE="leechcraft-unstable"
 # Uncomment if necessary:
 #export SFX="-0ppa2"
 
-#export NEW_VER=0.4.90-731-g4d6080a
+#export NEW_VER=0.4.90-744-gda59196
 
 export BRANCH=master
 

@@ -90,7 +90,6 @@ fi
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     tar xzf "${LAST_SRC}".tar.gz
     mv "${DEVELOPER}-${PROJECT}-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
-    rm -rf "${PACKAGE}-${NEW_VER}/debian"
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
