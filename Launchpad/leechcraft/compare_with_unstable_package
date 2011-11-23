@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
+
+export PACKAGE="leechcraft"
+
+export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
+
+
+rm -rf "${PKG_DIR}/${PACKAGE}-debian/debian-unstable"
+cp -rfa "${PKG_DIR}-unstable/${PACKAGE}-unstable-debian/debian" \
+       "${PKG_DIR}/${PACKAGE}-debian/debian-unstable"
+
+
+cd "${PKG_DIR}/${PACKAGE}-debian/debian-unstable"
+for FILE_FROM in *-unstable* ; do
+    FILE_TO=$(echo ${FILE_FROM} | sed -e "s/-unstable//")
+    echo "Moving '${FILE_FROM}' to '${FILE_TO}'"
+    mv -f "${FILE_FROM}" "${FILE_TO}"
+done
+
+
+cd "${PKG_DIR}/${PACKAGE}-debian"
+echo;
+echo "diff -urN debian debian-unstable > debian.diff"
+diff -urN debian debian-unstable > debian.diff
+kwrite debian.diff &

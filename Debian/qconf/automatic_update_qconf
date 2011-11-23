@@ -9,6 +9,7 @@ export PACKAGE="qconf"
 
 # Uncomment if necessary:
 #export SFX="-2"
+export SFX="-3"
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -72,7 +73,8 @@ fi
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+#if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
     wget -4 -c "http://delta.affinix.com/download/qconf-${NEW_VER}.tar.bz2"
     #rm -rf "${PACKAGE}-${NEW_VER}"
     #tar xjf "${PACKAGE}-${NEW_VER}.tar.bz2"
@@ -84,5 +86,6 @@ fi
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
-source "${MAIN_DIR}/Debian/updating_packages"
+#source "${MAIN_DIR}/Debian/updating_packages"
+source "${MAIN_DIR}/Debian/updating_packages_old"
 
