@@ -91,9 +91,9 @@ mv ../changelog debian/changelog # rollback basic changelog
 case "${1}" in
         test)
 
-    echo " "
+    echo ;
     echo "Now will be tests."
-    echo " "
+    echo ;
 
     rm -rf "${TEST_DIR}"
     mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
@@ -104,21 +104,23 @@ case "${1}" in
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
     cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
-    echo " "
+    echo ;
     echo "Start building packages..."
     nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
-    echo " "
+    echo ;
 
     export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
     cd "${TEST_DIR}"
-    echo " "
+    echo ;
     echo "Now running lintian:"
     lintian -ivI --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
-    cat ${LINTIAN_LOG_FILE} | grep "E: "
-    cat ${LINTIAN_LOG_FILE} | grep "W: "
+    grep "E: " "${LINTIAN_LOG_FILE}"
+    grep "W: " "${LINTIAN_LOG_FILE}"
+    grep "I: " "${LINTIAN_LOG_FILE}"
+    grep "P: " "${LINTIAN_LOG_FILE}"
     echo "Finished running lintian."
-    echo " "
+    echo ;
     kwrite ${LINTIAN_LOG_FILE}
 
     cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"

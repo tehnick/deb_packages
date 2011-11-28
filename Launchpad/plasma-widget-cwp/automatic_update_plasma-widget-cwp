@@ -23,23 +23,23 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 
 # Find new version
 export VER_LIST=$(curl 'http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/' 2>&1 | grep 'kde-plasmoid-cwp_' | grep '.orig.tar.gz' | sed -e "s/^.*kde-plasmoid-cwp_\(.*\).orig.tar.gz.*$/\1/")
-export NEW_VER=$(echo ${VER_LIST} | sed -e "s/^.* \(.*\)$/\1/")
+export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-echo " "
+echo ;
 echo "http://download.opensuse.org/repositories/home:/georg298/xUbuntu_10.04/"
-echo " "
+echo ;
 echo "On opensuse.org now available such versions:"
-echo ${VER_LIST}
-echo " "
+echo "${VER_LIST}" | sort -r | head -n50
+echo ;
 
 echo "OLD_VER = ${OLD_VER}"
 echo "NEW_VER = ${NEW_VER}"
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
-echo " "
+echo ;
 
 
 # Check versions

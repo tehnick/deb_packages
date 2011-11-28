@@ -27,23 +27,23 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 
 # Find new version
 export VER_LIST=$(curl 'http://delta.affinix.com/download/' 2>&1 | grep 'qconf-' | grep '.tar.bz2' | sed -e "s/^.*qconf-\(.*\).tar.bz2.*$/\1/")
-export NEW_VER=$(echo ${VER_LIST} | sed -e "s/^.* \(.*\)$/\1/")
+export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-echo " "
+echo ;
 echo "http://delta.affinix.com/download/"
-echo " "
+echo ;
 echo "On delta.affinix.com now available such versions:"
-echo ${VER_LIST}
-echo " "
+echo "${VER_LIST}" | sort -r | head -n50
+echo ;
 
 echo "OLD_VER = ${OLD_VER}"
 echo "NEW_VER = ${NEW_VER}"
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
-echo " "
+echo ;
 
 
 # Check versions

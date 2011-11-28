@@ -28,23 +28,23 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 export DEVELOPER=0xd34df00d
 export PROJECT=leechcraft
 export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
-export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
+export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-echo " "
+echo ;
 echo "https://github.com/${DEVELOPER}/${PROJECT}/tags"
-echo " "
+echo ;
 echo "On github.com now available such versions:"
-echo ${VER_LIST}
-echo " "
+echo "${VER_LIST}" | sort -r | head -n50
+echo ;
 
 echo "OLD_VER = ${OLD_VER}"
 echo "NEW_VER = ${NEW_VER}"
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
-echo " "
+echo ;
 
 
 # Check versions
@@ -87,16 +87,13 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     tar xzf "master"
     mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"/qxmpp
     # deleting some files and directories
-    rm -rf "${PACKAGE}-${NEW_VER}"/doc/
-    rm -rf "${PACKAGE}-${NEW_VER}"/iconsets/
-    rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
-    rm -rf "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
+    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
+    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
        "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png
-    rm -f "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
+    rm "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png \
        "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png
-    rm -f "${PACKAGE}-${NEW_VER}"/src/util/modeltest.*
     # tarball
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
