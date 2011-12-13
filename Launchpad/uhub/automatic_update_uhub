@@ -7,7 +7,7 @@ fi
 export PACKAGE="uhub"
 
 # Uncomment if necessary:
-export SFX="-1ppa2"
+export SFX="-1ppa4"
 
 
 # Launch common script for setting variables
@@ -23,14 +23,14 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 # Find new version
 export DEVELOPER=janvidar
 export PROJECT=uhub
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/downloads" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\">TAR\.GZ.*:\1:" | sed -e "s/show//")
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\" .*:\1:")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
 echo ;
-echo "https://github.com/${DEVELOPER}/${PROJECT}/downloads"
+echo "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 echo ;
 echo "On github.com now available such versions:"
 echo "${VER_LIST}" | sort -r | head -n50

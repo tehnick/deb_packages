@@ -85,7 +85,7 @@ case "${1}" in
     cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
     echo ;
     echo "Start building packages..."
-    nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
+    time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
     echo ;
 
