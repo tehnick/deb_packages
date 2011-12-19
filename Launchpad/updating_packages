@@ -114,7 +114,7 @@ case "${1}" in
     cd "${TEST_DIR}"
     echo ;
     echo "Now running lintian:"
-    lintian -ivI --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    lintian -ivIE --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
     grep "E: " "${LINTIAN_LOG_FILE}"
     grep "W: " "${LINTIAN_LOG_FILE}"
     grep "I: " "${LINTIAN_LOG_FILE}"
