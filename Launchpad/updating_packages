@@ -55,13 +55,13 @@ export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "${UPDATE_STRING}"
-    debuild -S -sa || exit 1
+    nice -n19 debuild -S -sa || exit 1
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
     # debuild -S -sd
-    debuild -S -sa || exit 1
+    nice -n19 debuild -S -sa || exit 1
 fi
 # end update for basic releases
 
@@ -81,7 +81,7 @@ for DIST in ${DIST_LIST} ; do
     cp -f ../changelog debian/changelog
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
         "Automated backport upload; no source changes."
-    debuild -S -sd || exit 1
+    nice -n19 debuild -S -sd || exit 1
 done
 
 mv ../changelog debian/changelog # rollback basic changelog
@@ -107,6 +107,7 @@ case "${1}" in
     echo ;
     echo "Start building packages..."
     time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
+    cat  ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
     echo ;
 
@@ -114,7 +115,7 @@ case "${1}" in
     cd "${TEST_DIR}"
     echo ;
     echo "Now running lintian:"
-    lintian -ivIE --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    time nice -n19 lintian -ivIE --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
     grep "E: " "${LINTIAN_LOG_FILE}"
     grep "W: " "${LINTIAN_LOG_FILE}"
     grep "I: " "${LINTIAN_LOG_FILE}"

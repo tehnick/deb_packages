@@ -50,13 +50,13 @@ if [ "${SFX}" = "-1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
         "${UPDATE_STRING}"
     kwrite debian/changelog
-    debuild -S -sa
+    nice -n19 debuild -S -sa
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER_FULL}" \
         "Some fixes in package."
     kwrite debian/changelog
     # debuild -S -sd
-    debuild -S -sa
+    nice -n19 debuild -S -sa
 fi
 
 
@@ -86,6 +86,7 @@ case "${1}" in
     echo ;
     echo "Start building packages..."
     time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
+    cat  ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
     echo ;
 
@@ -93,7 +94,7 @@ case "${1}" in
     cd "${TEST_DIR}"
     echo ;
     echo "Now running lintian:"
-    lintian -ivIE --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    time nice -n19 lintian -ivIE --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
     grep "E: " "${LINTIAN_LOG_FILE}"
     grep "W: " "${LINTIAN_LOG_FILE}"
     grep "I: " "${LINTIAN_LOG_FILE}"
