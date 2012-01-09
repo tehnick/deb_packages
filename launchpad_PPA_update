@@ -5,12 +5,10 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 echo "MAIN_DIR = ${MAIN_DIR}"
 echo " "
 
-for PACKAGE in eiskaltdcpp-unstable q4wine-unstable freedcpp-unstable plasma-widget-cwp ; do
+for PACKAGE in eiskaltdcpp-unstable uhub-unstable q4wine-unstable freedcpp-unstable plasma-widget-cwp ; do
     echo "Begin ${PACKAGE}"
     "${MAIN_DIR}/Launchpad/${PACKAGE}/automatic_update_${PACKAGE}"
     echo "End ${PACKAGE}"
     echo " "
 done
 
-
-echo "uhub-unstable is temporary disabled"
