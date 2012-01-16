@@ -107,8 +107,7 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 export DESTINATION="leechcraft-unstable"
 
 export DIST_LIST="oneiric
-                  natty
-                  maverick"
+                  natty"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Launchpad/updating_packages"
