@@ -23,22 +23,31 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
     exit 0;
 fi
 
+if [ -z "${DIR_NAME}" ]; then
+    export DIR_NAME="${PACKAGE}-${NEW_VER}"
+fi
+
+if [ -z "${OLD_DIR_NAME}" ]; then
+    export OLD_DIR_NAME="${PACKAGE}-${OLD_VER}"
+fi
+
+
 echo "Updating is started."
 
 export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
-rm -rf "${PACKAGE}-${NEW_VER}" "${PACKAGE}_${NEW_VER}-"*
+rm -rf "${DIR_NAME}" "${PACKAGE}_${NEW_VER}-"*
 
 tar xzf "${PACKAGE}_${NEW_VER}.orig.tar.gz"
-rm -rf "${PACKAGE}-${NEW_VER}/debian"
-cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${PACKAGE}-${NEW_VER}/debian"
+rm -rf "${DIR_NAME}/debian"
+cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${DIR_NAME}/debian"
 
-if ([ -d "${PACKAGE}-${OLD_VER}" ]); then
-    diff -ur "${PACKAGE}-${OLD_VER}" "${PACKAGE}-${NEW_VER}" > \
+if ([ -d "${OLD_DIR_NAME}" ]); then
+    diff -ur "${OLD_DIR_NAME}" "${DIR_NAME}" > \
              "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
 fi
 
-cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+cd "${TEMP_DIR}/${DIR_NAME}"
 
 # If you want to build package on your system uncomment this:
 # dch -v "$NEW_VER-mybuild1" "Minor update."
@@ -98,12 +107,12 @@ case "${1}" in
     rm -rf "${TEST_DIR}"
     mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
 
-    cp -r "${TEMP_DIR}/${PACKAGE}-${NEW_VER}" "${TEST_DIR}/"
+    cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.gz" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
-    cd "${TEST_DIR}/${PACKAGE}-${NEW_VER}"
+    cd "${TEST_DIR}/${DIR_NAME}"
     echo ;
     echo "Start building packages..."
     time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
@@ -124,14 +133,14 @@ case "${1}" in
     echo ;
     kwrite ${LINTIAN_LOG_FILE}
 
-    cd "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
+    cd "${TEMP_DIR}/${DIR_NAME}"
 
         ;;
 esac
 
 
 cd "${TEMP_DIR}"
-cp -fr "${PACKAGE}-${NEW_VER}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
+cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 
 if [ -z "${DESTINATION}" ]; then
     export DESTINATION="tehnick"
