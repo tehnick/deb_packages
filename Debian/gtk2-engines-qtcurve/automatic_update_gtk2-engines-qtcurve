@@ -83,9 +83,6 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 export DIR_NAME="QtCurve-Gtk2-${NEW_VER}"
 export OLD_DIR_NAME="QtCurve-Gtk2-${OLD_VER}"
 
-exit 0
-
-
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
 

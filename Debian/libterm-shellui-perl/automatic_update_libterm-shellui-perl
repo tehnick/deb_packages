@@ -5,7 +5,7 @@ if [ -z "${MAIN_DIR}" ]; then
     export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 fi
 
-export PACKAGE="eiskaltdcpp"
+export PACKAGE="libterm-shellui-perl"
 
 # Uncomment if necessary:
 #export SFX="-2"
@@ -23,17 +23,20 @@ export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" 
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 
+
 # Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/eiskaltdc/downloads/list' 2>&1 | grep 'eiskaltdc.googlecode.com/files/eiskaltdcpp-' | grep '.tar.bz2"' | sed -e "s:^.*eiskaltdc.googlecode.com/files/eiskaltdcpp-\(.*\).tar.bz2\".*$:\1:")
+export DEVELOPER=BRONSON
+export PROJECT=Term-ShellUI
+export VER_LIST=$(curl "http://search.cpan.org/dist/${PROJECT}/" 2>&1 | grep "/CPAN/authors/id/" | grep "${DEVELOPER}/${PROJECT}-" | sed -e "s:^.*/${DEVELOPER}/${PROJECT}-\(.*\).tar.gz.*:\1:")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
 echo ;
-echo "http://code.google.com/p/eiskaltdc/downloads/list"
+echo "http://search.cpan.org/dist/${PROJECT}/"
 echo ;
-echo "On code.google.com now available such versions:"
+echo "On cpan.org now available such versions:"
 echo "${VER_LIST}" | sort -r | head -n50
 echo ;
 
@@ -71,14 +74,17 @@ fi
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    wget -4 -c "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.bz2"
-    mv -f "${PACKAGE}-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    wget -4 -c "http://cpan.makeperl.org/authors/id/B/BR/${DEVELOPER}/${PROJECT}-${NEW_VER}.tar.gz"
+    mv -f "${PROJECT}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
 fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
+export DIR_NAME="${PROJECT}-${NEW_VER}"
+export OLD_DIR_NAME="${PROJECT}-${OLD_VER}"
+
 # Launch common script for updating packages and uploading them to mentors.debian.net
-source "${MAIN_DIR}/Debian/updating_packages"
+source "${MAIN_DIR}/Debian/updating_packages_old"
 

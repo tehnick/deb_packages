@@ -5,7 +5,7 @@ if [ -z "${MAIN_DIR}" ]; then
     export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 fi
 
-export PACKAGE="eiskaltdcpp"
+export PACKAGE="qxmpp-leechcraft"
 
 # Uncomment if necessary:
 #export SFX="-2"
@@ -23,17 +23,20 @@ export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" 
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 
+
 # Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/eiskaltdc/downloads/list' 2>&1 | grep 'eiskaltdc.googlecode.com/files/eiskaltdcpp-' | grep '.tar.bz2"' | sed -e "s:^.*eiskaltdc.googlecode.com/files/eiskaltdcpp-\(.*\).tar.bz2\".*$:\1:")
+export DEVELOPER=0xd34df00d
+export PROJECT=qxmpp-dev
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/downloads" 2>&1 | grep "=\"/downloads/${DEVELOPER}/${PROJECT}/" | grep "-extras.tar.bz2" | sed -e "s:^.*\"/downloads/${DEVELOPER}/${PROJECT}/qxmpp-\(.*\)-extras\.tar\.bz2\">.*:\1:")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
 echo ;
-echo "http://code.google.com/p/eiskaltdc/downloads/list"
+echo "https://github.com/${DEVELOPER}/${PROJECT}/downloads"
 echo ;
-echo "On code.google.com now available such versions:"
+echo "On github.com now available such versions:"
 echo "${VER_LIST}" | sort -r | head -n50
 echo ;
 
@@ -72,12 +75,18 @@ fi
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    wget -4 -c "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.bz2"
-    mv -f "${PACKAGE}-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+    wget -4 -c "http://cloud.github.com/downloads/${DEVELOPER}/${PROJECT}/qxmpp-${NEW_VER}-extras.tar.bz2"
+    mv -f "qxmpp-${NEW_VER}-extras.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+export DESTINATION="mentors_ftp"
+
+export DIR_NAME="qxmpp-${NEW_VER}"
+export OLD_DIR_NAME="qxmpp-${OLD_VER}"
+
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
