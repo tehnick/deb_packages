@@ -82,3 +82,6 @@
 [submodule "Launchpad/libterm-shellui-perl/libterm-shellui-perl-debian"]
 	path = Launchpad/libterm-shellui-perl/libterm-shellui-perl-debian
 	url = git@github.com:tehnick/libterm-shellui-perl-debian.git
+[submodule "Debian/yagf/yagf-debian"]
+	path = Debian/yagf/yagf-debian
+	url = git@github.com:tehnick/yagf-debian.git

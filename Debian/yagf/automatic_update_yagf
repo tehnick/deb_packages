@@ -1,0 +1,89 @@
+#!/bin/bash
+
+
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
+
+export PACKAGE="yagf"
+
+# Uncomment if necessary:
+#export SFX="-2"
+
+# experimental unstable
+export MAIN_DIST="unstable"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+
+# Get old version
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+
+
+# Find new version
+export PROJECT=yagf
+export VER_LIST=$(curl "http://symmetrica.net/cuneiform-linux/yagf-en.html" 2>&1 | grep "yagf-" | grep ".tar.gz" | sed -e "s:^.*${PROJECT}-\(.*\).tar.gz.*:\1:")
+export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
+export NEW_VER_FULL=${NEW_VER}${SFX}
+
+
+# Display versions
+echo ;
+echo "http://symmetrica.net/cuneiform-linux/yagf-en.html"
+echo ;
+echo "On symmetrica.net now available such versions:"
+echo "${VER_LIST}" | sort -r | head -n50
+echo ;
+
+echo "OLD_VER = ${OLD_VER}"
+echo "NEW_VER = ${NEW_VER}"
+echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+echo ;
+
+
+# Check versions
+if [ -z "${NEW_VER}" ]; then
+    echo "NEW_VER is empty!";
+    exit 0;
+elif [ -z "${OLD_VER_FULL}" ]; then
+    echo "OLD_VER_FULL is empty!";
+    exit 0;
+elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+    echo "Upgrading is not required.";
+    exit 0;
+else
+    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+        if !([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
+    fi
+fi
+
+
+# Get the sources
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    wget -4 -c "http://symmetrica.net/cuneiform-linux/${PROJECT}-${NEW_VER}.tar.gz"
+    mv -f "${PROJECT}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+fi
+
+
+export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+export DIR_NAME="${PROJECT}-${NEW_VER}"
+export OLD_DIR_NAME="${PROJECT}-${OLD_VER}"
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages_old"
+
