@@ -43,8 +43,8 @@ rm -rf "${DIR_NAME}/debian"
 cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${DIR_NAME}/debian"
 
 if ([ -d "${OLD_DIR_NAME}" ]); then
-    diff -ur "${OLD_DIR_NAME}" "${DIR_NAME}" > \
-             "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
+    diff -urN "${OLD_DIR_NAME}" "${DIR_NAME}" > \
+              "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
 fi
 
 cd "${TEMP_DIR}/${DIR_NAME}"
