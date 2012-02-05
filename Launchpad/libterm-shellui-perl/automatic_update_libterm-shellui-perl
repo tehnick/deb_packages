@@ -8,7 +8,7 @@ fi
 export PACKAGE="libterm-shellui-perl"
 
 # Uncomment if necessary:
-export SFX="-1ppa1"
+#export SFX="-1ppa1"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
@@ -71,7 +71,7 @@ fi
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
-    wget -4 -c "http://cpan.makeperl.org/authors/id/B/BR/${DEVELOPER}/${PROJECT}-${NEW_VER}.tar.gz"
+    wget -4 -c "http://search.cpan.org/CPAN/authors/id/B/BR/${DEVELOPER}/${PROJECT}-${NEW_VER}.tar.gz"
     mv -f "${PROJECT}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
 fi
 
