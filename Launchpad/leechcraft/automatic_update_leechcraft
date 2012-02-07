@@ -78,11 +78,6 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     rm -rf ${DEVELOPER}-${PROJECT}-*
     tar xzf "${NEW_VER}"
     mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
-    # qxmpp sources
-    wget -4 -c "http://nodeload.github.com/0xd34df00d/qxmpp-dev/tarball/master"
-    rm -rf 0xd34df00d-qxmpp-dev-*
-    tar xzf "master"
-    mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"/qxmpp
     # deleting some files and directories
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
