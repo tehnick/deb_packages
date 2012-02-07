@@ -85,3 +85,6 @@
 [submodule "Debian/yagf/yagf-debian"]
 	path = Debian/yagf/yagf-debian
 	url = git@github.com:tehnick/yagf-debian.git
+[submodule "Debian/kde-gtk-config/kde-gtk-config-debian"]
+	path = Debian/kde-gtk-config/kde-gtk-config-debian
+	url = git@github.com:tehnick/kde-gtk-config-debian.git

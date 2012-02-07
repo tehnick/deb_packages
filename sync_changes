@@ -10,7 +10,7 @@ for PACKAGE in * ; do
     echo "Begin ${PACKAGE}"
     cd "${MAIN_DIR}/Debian/${PACKAGE}/${PACKAGE}-debian" || continue
     git checkout master
-    git pull origin master
+    git pull --all
     git push origin master
     echo "End ${PACKAGE}"
 done
@@ -21,7 +21,7 @@ for PACKAGE in * ; do
     echo "Begin ${PACKAGE}"
     cd "${MAIN_DIR}/Launchpad/${PACKAGE}/${PACKAGE}-debian" || continue
     git checkout launchpad
-    git pull origin launchpad
+    git pull --all
     git push origin launchpad
     echo "End ${PACKAGE}"
 done

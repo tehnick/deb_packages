@@ -1,0 +1,90 @@
+#!/bin/bash
+
+
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
+
+export PACKAGE="kde-gtk-config"
+
+# Uncomment if necessary:
+#export SFX="-2"
+
+# experimental unstable
+export MAIN_DIST="unstable"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+
+# Get old version
+export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
+export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+
+
+# Find new version
+export VER_LIST=$(curl "https://projects.kde.org/projects/playground/base/kde-gtk-config/repository/revisions/master/raw/README" 2>&1 | grep "CHAKRA GTK CONFIG" | sed -e "s:^.*CHAKRA GTK CONFIG v\(.*\).*:\1:")
+export DATE=$(date "+%Y%m%d")
+export NEW_VER="$(echo "${VER_LIST}" | sort -r | head -n1)+git${DATE}"
+export NEW_VER_FULL=${NEW_VER}${SFX}
+
+
+# Display versions
+echo ;
+echo "https://projects.kde.org/projects/playground/base/kde-gtk-config/repository"
+echo ;
+echo "On projects.kde.org now available such version:"
+echo "${VER_LIST}" | sort -r | head -n50
+echo ;
+
+echo "OLD_VER = ${OLD_VER}"
+echo "NEW_VER = ${NEW_VER}"
+echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+echo ;
+
+
+# Check versions
+if [ -z "${NEW_VER}" ]; then
+    echo "NEW_VER is empty!";
+    exit 0;
+elif [ -z "${OLD_VER_FULL}" ]; then
+    echo "OLD_VER_FULL is empty!";
+    exit 0;
+elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+    echo "Upgrading is not required.";
+    exit 0;
+else
+    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
+        if !([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+            exit 0;
+        fi
+    else
+        if ([ "${SFX}" = "-1" ]); then
+            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+            echo "Upgrading is not required.";
+            exit 0;
+        fi
+    fi
+fi
+
+
+# Get the sources
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    rm -rf ./kde-gtk-config/
+    git clone --depth 1 git://anongit.kde.org/kde-gtk-config
+    rm -rf ./kde-gtk-config/.git
+    mv kde-gtk-config "${PACKAGE}-${NEW_VER}"
+    # tarball
+    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+fi
+
+
+export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
+
