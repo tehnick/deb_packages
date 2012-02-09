@@ -37,7 +37,8 @@ echo "Old  commit ID: ${OLD_COMMIT}"
 echo "Last commit ID: ${LAST_COMMIT}"
 
 
-export CUR_VER="0.3.2"
+#export CUR_VER="0.3.2"
+export CUR_VER=$(curl "https://raw.github.com/janvidar/uhub/master/version.h" 2>&1 | grep "#define VERSION" | sed -e "s/^.*#define VERSION \"\(.*\+\)\"$/\1/")
 
 export DATE=$(date "+%Y%m%d-%H%M%S")
 export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
