@@ -6,9 +6,11 @@ echo "MAIN_DIR = ${MAIN_DIR}"
 
 cd "${MAIN_DIR}"/Debian/
 for PACKAGE in * ; do
+    PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}/${PACKAGE}-debian"
+    if !([ -d "${PKG_DIR}" ]); then continue; fi
     echo;
     echo "Begin ${PACKAGE}"
-    cd "${MAIN_DIR}/Debian/${PACKAGE}/${PACKAGE}-debian" || continue
+    cd "${PKG_DIR}"
     git checkout master
     git pull --all
     git push origin master
@@ -17,9 +19,11 @@ done
 
 cd "${MAIN_DIR}"/Launchpad/
 for PACKAGE in * ; do
+    PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}/${PACKAGE}-debian"
+    if !([ -d "${PKG_DIR}" ]); then continue; fi
     echo;
     echo "Begin ${PACKAGE}"
-    cd "${MAIN_DIR}/Launchpad/${PACKAGE}/${PACKAGE}-debian" || continue
+    cd "${PKG_DIR}"
     git checkout launchpad
     git pull --all
     git push origin launchpad
