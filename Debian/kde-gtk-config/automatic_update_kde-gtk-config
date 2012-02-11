@@ -25,7 +25,7 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 
 
 # Find new version
-export VER_LIST=$(curl "https://projects.kde.org/projects/playground/base/kde-gtk-config/repository/revisions/master/raw/README" 2>&1 | grep "CHAKRA GTK CONFIG" | sed -e "s:^.*CHAKRA GTK CONFIG v\(.*\).*:\1:")
+export VER_LIST=$(curl "https://projects.kde.org/projects/playground/base/kde-gtk-config/repository/revisions/master/raw/README" 2>&1 | grep "KDE GTK CONFIG" | sed -e "s:^.*KDE GTK CONFIG v\(.*\).*:\1:")
 export DATE=$(date "+%Y%m%d")
 export NEW_VER="$(echo "${VER_LIST}" | sort -r | head -n1)+git${DATE}"
 export NEW_VER_FULL=${NEW_VER}${SFX}
