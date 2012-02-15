@@ -5,10 +5,14 @@ if [ -z "${MAIN_DIR}" ]; then
     export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 fi
 
-export PACKAGE="leechcraft"
+export PACKAGE="qxmpp-unstable"
 
 # Uncomment if necessary:
-export SFX="-0ppa2"
+#export SFX="-0ppa3"
+
+#export NEW_VER=0.3.45.2-171-g5c130b9
+
+export BRANCH=master
 
 
 # Launch common script for setting variables
@@ -19,29 +23,29 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
 export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
 export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
-
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
 
 # Find new version
 export DEVELOPER=0xd34df00d
-export PROJECT=leechcraft
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\" .*:\1:")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
+export PROJECT=qxmpp-dev
+export LAST_SRC_INFO=$(curl -I "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}" 2>&1)
+export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
+export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
+
+
+# Display versions
+echo "Old  commit ID: ${OLD_COMMIT}"
+echo "Last commit ID: ${LAST_COMMIT}"
+
+if [ -z "${NEW_VER}" ]; then
+    export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-echo ;
-echo "https://github.com/${DEVELOPER}/${PROJECT}/tags"
-echo ;
-echo "On github.com now available such versions:"
-echo "${VER_LIST}" | sort -r | head -n50
-echo ;
-
-echo "OLD_VER = ${OLD_VER}"
-echo "NEW_VER = ${NEW_VER}"
 echo "OLD_VER_FULL = ${OLD_VER_FULL}"
 echo "NEW_VER_FULL = ${NEW_VER_FULL}"
-echo ;
 
 
 # Check versions
@@ -72,32 +76,21 @@ fi
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
-    # main sources
-    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
-    rm -rf ${DEVELOPER}-${PROJECT}-*
-    tar xzf "${NEW_VER}"
-    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
-    # deleting some files and directories
-    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
-    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
-    mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
-       "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png
-    rm "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
-    mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png \
-       "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png
-    # tarball
+    rm -rf  "${PACKAGE}-${NEW_VER}"/
+    rm -f "master"*
+    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/qxmpp-dev/tarball/master"
+    rm -rf ${DEVELOPER}-qxmpp-dev-*
+    tar xzf "master"
+    mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
 
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
+export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
 
-export DESTINATION="leechcraft-stable"
+export DESTINATION="leechcraft-unstable"
 
-export DIST_LIST="oneiric
-                  natty
-                  maverick"
+export DIST_LIST="oneiric"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Launchpad/updating_packages"

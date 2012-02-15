@@ -76,6 +76,9 @@
 [submodule "Launchpad/qxmpp/qxmpp-debian"]
 	path = Launchpad/qxmpp/qxmpp-debian
 	url = git@github.com:tehnick/qxmpp-debian.git
+[submodule "Launchpad/qxmpp-unstable/qxmpp-unstable-debian"]
+	path = Launchpad/qxmpp-unstable/qxmpp-unstable-debian
+	url = git@github.com:tehnick/qxmpp-unstable-debian.git
 [submodule "Debian/libterm-shellui-perl/libterm-shellui-perl-debian"]
 	path = Debian/libterm-shellui-perl/libterm-shellui-perl-debian
 	url = git@github.com:tehnick/libterm-shellui-perl-debian.git
