@@ -68,12 +68,9 @@ fi
 
 
 # Get the sources
-if !([ -e "eiskaltdcpp-${NEW_VER}.tar.bz2" ]); then
-    wget -4 "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.bz2"
-    rm -rf "eiskaltdcpp-${NEW_VER}"
-    #tar xjf "eiskaltdcpp-${NEW_VER}.tar.bz2"
-    #tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "eiskaltdcpp-${NEW_VER}"
-    mv -f "eiskaltdcpp-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    wget -4 -c "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.bz2"
+    mv -f "${PACKAGE}-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 fi
 
 

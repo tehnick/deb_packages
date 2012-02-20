@@ -69,7 +69,7 @@ else
 fi
 
 
-if ["${1}" = "fast"]; then
+if [ "${1}" = "fast" ]; then
     echo ;
     echo "Fast upload (without tests)."
     echo ;
