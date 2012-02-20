@@ -97,9 +97,7 @@ mv ../changelog debian/changelog # rollback basic changelog
 # end update for other releases
 
 
-case "${1}" in
-        test)
-
+if ["${1}" = "test"]; then
     echo ;
     echo "Now will be tests."
     echo ;
@@ -134,9 +132,7 @@ case "${1}" in
     kwrite ${LINTIAN_LOG_FILE}
 
     cd "${TEMP_DIR}/${DIR_NAME}"
-
-        ;;
-esac
+fi
 
 
 cd "${TEMP_DIR}"

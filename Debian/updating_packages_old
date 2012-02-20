@@ -69,16 +69,11 @@ else
 fi
 
 
-case "${1}" in
-        fast)
-
+if ["${1}" = "fast"]; then
     echo ;
     echo "Fast upload (without tests)."
     echo ;
-
-        ;;
-        *)
-
+else
     echo ;
     echo "Now will be tests."
     echo ;
@@ -113,9 +108,7 @@ case "${1}" in
     kwrite ${LINTIAN_LOG_FILE}
 
     cd "${TEMP_DIR}/${DIR_NAME}"
-
-        ;;
-esac
+fi
 
 
 kwrite debian/changelog

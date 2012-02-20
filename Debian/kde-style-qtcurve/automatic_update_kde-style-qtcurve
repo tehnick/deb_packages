@@ -26,7 +26,7 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 
 # Find new version
 export VER_LIST=$(curl "http://www.kde-look.org/content/download.php?content=40492&id=1" 2>&1 | grep "/QtCurve-KDE4-" | sed -e "s:^.*/QtCurve-KDE4-\(.*\).tar.bz2\".*:\1:")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
+export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
@@ -35,7 +35,7 @@ echo ;
 echo "http://kde-look.org/content/show.php?content=40492"
 echo ;
 echo "On kde-look.org now available such version:"
-echo "${VER_LIST}" | sort -r | head -n50
+echo "${VER_LIST}" | sort -r -V | head -n50
 echo ;
 
 echo "OLD_VER = ${OLD_VER}"
@@ -56,13 +56,13 @@ elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
     echo "Upgrading is not required.";
     exit 0;
 else
-    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
-        if !([ "${SFX}" = "-1" ]); then
+    if [ "${NEW_VER}" != "${OLD_VER}" ]; then
+        if [ "${SFX}" != "-1" ]; then
             echo "Now SFX = ${SFX} but must be '-1' for a new release!";
             exit 0;
         fi
     else
-        if ([ "${SFX}" = "-1" ]); then
+        if [ "${SFX}" = "-1" ]; then
             echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
             echo "Upgrading is not required.";
             exit 0;

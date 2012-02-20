@@ -60,13 +60,13 @@ elif [ -z ${CUR_VER} ]; then
     echo "CUR_VER is empty!";
     exit 0;
 else
-    if !([ "${LAST_COMMIT}" = "${OLD_COMMIT}" ]); then
-        if !([ "${SFX}" = "-0ppa1" ]); then
+    if [ "${LAST_COMMIT}" != "${OLD_COMMIT}" ]; then
+        if [ "${SFX}" != "-0ppa1" ]; then
             echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
             exit 0;
         fi
     else
-        if ([ "${SFX}" = "-0ppa1" ]); then
+        if [ "${SFX}" = "-0ppa1" ]; then
             echo "Upgrading is not required.";
             exit 0;
         fi

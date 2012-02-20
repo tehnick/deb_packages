@@ -27,7 +27,7 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 # Find new version
 export PROJECT=yagf
 export VER_LIST=$(curl "http://symmetrica.net/cuneiform-linux/yagf-en.html" 2>&1 | grep "yagf-" | grep ".tar.gz" | sed -e "s:^.*${PROJECT}-\(.*\).tar.gz.*:\1:")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r | head -n1)
+export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
@@ -36,7 +36,7 @@ echo ;
 echo "http://symmetrica.net/cuneiform-linux/yagf-en.html"
 echo ;
 echo "On symmetrica.net now available such versions:"
-echo "${VER_LIST}" | sort -r | head -n50
+echo "${VER_LIST}" | sort -r -V | head -n50
 echo ;
 
 echo "OLD_VER = ${OLD_VER}"
@@ -57,13 +57,13 @@ elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
     echo "Upgrading is not required.";
     exit 0;
 else
-    if !([ "${NEW_VER}" = "${OLD_VER}" ]); then
-        if !([ "${SFX}" = "-1" ]); then
+    if [ "${NEW_VER}" != "${OLD_VER}" ]; then
+        if [ "${SFX}" != "-1" ]; then
             echo "Now SFX = ${SFX} but must be '-1' for a new release!";
             exit 0;
         fi
     else
-        if ([ "${SFX}" = "-1" ]); then
+        if [ "${SFX}" = "-1" ]; then
             echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
             echo "Upgrading is not required.";
             exit 0;
