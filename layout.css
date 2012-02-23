@@ -1,0 +1,56 @@
+/* --[ stat ]--*/
+#stat {
+    padding: 0px;
+    margin: 0px;
+}
+
+#stat table {
+    width: 100%;
+    border: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+}
+
+#stat table caption {
+    text-align: left;
+    padding-bottom: 1em;
+}
+
+#stat th {
+    padding: 0.5em 0.2em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #666;
+}
+
+#stat td {
+    padding: 0.1em 0.2em;
+    border-left-style: solid; 
+    border-left-width: 1px; 
+    border-left-color: #666;
+    border-right-style: solid; 
+    border-right-width: 1px; 
+    border-right-color: #666;
+}
+
+#stat table {
+    text-align: left;
+}
+
+#stat table caption {
+    font-size: 12px;
+}
+
+#stat th {
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 4px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+#stat td {
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 4px;
+}

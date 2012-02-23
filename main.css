@@ -1,0 +1,47 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    color: #000000;
+    background-color: #caced1;
+    font: 12px sans-serif;
+}
+
+#mainText {
+    margin: 0 2% 0 2%;
+}
+
+#statText {
+    margin: 0 3% 0 3%;
+}
+
+#header {
+    text-align: center;
+    font: 16px sans-serif;
+}
+
+#footer {
+    text-align: center;
+    font: 10px sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #3179ac;
+    font-weight: bold;
+}
+
+a:hover {
+    color:grey;
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+}
+
+*{
+    margin: 0px;
+}
+
+.color { background-color: #aaaaaa; }
+

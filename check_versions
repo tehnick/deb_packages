@@ -1,0 +1,136 @@
+#!/bin/sh
+
+export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+
+export HTML_FILE="${MAIN_DIR}/my-packages.html"
+
+echo "HTML_FILE = ${HTML_FILE}"
+
+echo "<html>" > "${HTML_FILE}"
+echo "<head>" >> "${HTML_FILE}"
+echo "<meta content=\"text/html;\" http-equiv=\"content-type\">" >> "${HTML_FILE}"
+echo "<meta content=\"Boris Pek\" name=\"author\">" >> "${HTML_FILE}"
+echo "<meta content=\"Tehnick (c) 2012\" name=\"copyright\">" >> "${HTML_FILE}"
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"main.css\">" >> "${HTML_FILE}"
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"layout.css\">" >> "${HTML_FILE}"
+echo "<title>Packages overview for Boris Pek</title>" >> "${HTML_FILE}"
+echo "</head>" >> "${HTML_FILE}"
+echo "<body>" >> "${HTML_FILE}"
+
+echo "<div id=\"header\" style=\"text-align: center;\">" >> "${HTML_FILE}"
+echo "Packages overview for Boris Pek" >> "${HTML_FILE}"
+echo "</div>" >> "${HTML_FILE}"
+echo "<br>" >> "${HTML_FILE}"
+
+echo "<div id=\"mainText\">" >> "${HTML_FILE}"
+echo "<div id=\"statText\">" >> "${HTML_FILE}"
+
+DATE_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+echo "<b>Last update:</b> ${DATE_TIME}<br>" >> "${HTML_FILE}"
+echo "<br>" >> "${HTML_FILE}"
+
+
+cd "${MAIN_DIR}"/Debian/
+PACKAGES_NUMBER=$(ls */automatic_update_* | wc -l)
+echo "<b>Debian (${PACKAGES_NUMBER}):</b>" >> "${HTML_FILE}"
+
+echo "<div id=\"stat\">" >> "${HTML_FILE}"
+echo "<table id=\"Debian\">" >> "${HTML_FILE}"
+echo "<thead>" >> "${HTML_FILE}"
+echo "<tr class=\"color\">" >> "${HTML_FILE}"
+echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "Source Name" >> "${HTML_FILE}"
+echo "</th>" >> "${HTML_FILE}"
+echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "Old version" >> "${HTML_FILE}"
+echo "</th>" >> "${HTML_FILE}"
+echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "New version" >> "${HTML_FILE}"
+echo "</th>" >> "${HTML_FILE}"
+echo "</tr>" >> "${HTML_FILE}"
+echo "</thead>" >> "${HTML_FILE}"
+echo "<tbody>" >> "${HTML_FILE}"
+
+for PACKAGE in * ; do
+    PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
+    if !([ -e "${PKG_DIR}/automatic_update_${PACKAGE}" ]); then continue; fi
+    if [ "${TR}" = "<tr>" ]; then
+        TRC="<tr>"
+        TR="<tr class=\"color\">"
+    else
+        TR="<tr>"
+        TRC="<tr class=\"color\">"
+    fi
+    echo;
+    echo "Begin ${PACKAGE}"
+    echo "${TR}" >> "${HTML_FILE}"
+    "${PKG_DIR}/automatic_update_${PACKAGE}" "print-versions" "${HTML_FILE}"
+    echo "</tr>" >> "${HTML_FILE}"
+    echo "End ${PACKAGE}"
+done
+
+echo "</tbody>" >> "${HTML_FILE}"
+echo "</table>" >> "${HTML_FILE}"
+echo "</div>" >> "${HTML_FILE}"
+echo "<br>" >> "${HTML_FILE}"
+TR=""
+
+cd "${MAIN_DIR}"/Launchpad/
+PACKAGES_NUMBER=$(ls */automatic_update_* | wc -l)
+echo "<b>Launchpad (${PACKAGES_NUMBER}):</b>" >> "${HTML_FILE}"
+
+echo "<div id=\"stat\">" >> "${HTML_FILE}"
+echo "<table id=\"Launchpad\">" >> "${HTML_FILE}"
+echo "<thead>" >> "${HTML_FILE}"
+echo "<tr class=\"color\">" >> "${HTML_FILE}"
+echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "Source Name" >> "${HTML_FILE}"
+echo "</th>" >> "${HTML_FILE}"
+echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "Old version" >> "${HTML_FILE}"
+echo "</th>" >> "${HTML_FILE}"
+echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "New version" >> "${HTML_FILE}"
+echo "</th>" >> "${HTML_FILE}"
+echo "</tr>" >> "${HTML_FILE}"
+echo "</thead>" >> "${HTML_FILE}"
+echo "<tbody>" >> "${HTML_FILE}"
+
+for PACKAGE in * ; do
+    PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
+    if !([ -e "${PKG_DIR}/automatic_update_${PACKAGE}" ]); then continue; fi
+    if [ "${TR}" = "<tr>" ]; then
+        TRC="<tr>"
+        TR="<tr class=\"color\">"
+    else
+        TR="<tr>"
+        TRC="<tr class=\"color\">"
+    fi
+    echo;
+    echo "Begin ${PACKAGE}"
+    echo "${TR}" >> "${HTML_FILE}"
+    "${PKG_DIR}/automatic_update_${PACKAGE}" "print-versions" "${HTML_FILE}"
+    echo "</tr>" >> "${HTML_FILE}"
+    echo "End ${PACKAGE}"
+done
+
+echo "</tbody>" >> "${HTML_FILE}"
+echo "</table>" >> "${HTML_FILE}"
+echo "</div>" >> "${HTML_FILE}"
+echo "<br>" >> "${HTML_FILE}"
+
+echo "<b>See also:</b> <a href=\"http://qa.debian.org/developer.php?login=Boris%20Pek\">qa.debian.org</a><br>" >> "${HTML_FILE}"
+echo "<br>" >> "${HTML_FILE}"
+echo "</div>" >> "${HTML_FILE}"
+echo "</div>" >> "${HTML_FILE}"
+
+echo "<div id=\"footer\">" >> "${HTML_FILE}"
+echo "Boris Pek &copy; 2012" >> "${HTML_FILE}"
+echo "</div>" >> "${HTML_FILE}"
+
+echo "</body>" >> "${HTML_FILE}"
+echo "</html>" >> "${HTML_FILE}"
+echo "" >> "${HTML_FILE}"
+
+xdg-open "${HTML_FILE}" &
+
