@@ -44,24 +44,7 @@ echo "NEW_VER_FULL = ${NEW_VER_FULL}"
 
 
 # Print versions
-if [ "${1}" = "print-versions" ]; then
-    if [ -z "${2}" ]; then
-        echo "File name must be not empty!"
-        exit 1
-    else
-        HTML_FILE="${2}"
-        echo "<td align=\"center\">" >> "${HTML_FILE}"
-        echo "${PACKAGE}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "<td align=\"center\">" >> "${HTML_FILE}"
-        echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "<td align=\"center\">" >> "${HTML_FILE}"
-        echo "${NEW_VER_FULL}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        exit 0
-    fi
-fi
+PrintVersionsUnstable "${@}"
 
 
 # Check versions

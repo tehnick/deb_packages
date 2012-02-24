@@ -19,3 +19,60 @@ git checkout launchpad 2> /dev/null || exit 1
 
 mkdir -p "${TEMP_DIR}"
 cd "${TEMP_DIR}" || exit 1
+
+
+# Print versions
+PrintVersions()
+{
+if [ "${1}" = "print-versions" ]; then
+    if [ -z "${2}" ]; then
+        echo "File name must be not empty!"
+        exit 1
+    else
+        HTML_FILE="${2}"
+        echo "<td style=\"font-weight: bold;\">" >> "${HTML_FILE}"
+        echo "${PACKAGE}" >> "${HTML_FILE}"
+        echo "</td>" >> "${HTML_FILE}"
+        echo "<td>" >> "${HTML_FILE}"
+        echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
+        echo "</td>" >> "${HTML_FILE}"
+        if [ "${NEW_VER}" != "${OLD_VER}" ]; then
+            echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+        else
+            echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
+        fi
+        echo "${NEW_VER_FULL}" >> "${HTML_FILE}"
+        echo "</td>" >> "${HTML_FILE}"
+        exit 0
+    fi
+fi
+}
+
+
+# Print versions for unstable packages
+PrintVersionsUnstable()
+{
+if [ "${1}" = "print-versions" ]; then
+    if [ -z "${2}" ]; then
+        echo "File name must be not empty!"
+        exit 1
+    else
+        HTML_FILE="${2}"
+        echo "<td style=\"font-weight: bold;\">" >> "${HTML_FILE}"
+        echo "${PACKAGE}" >> "${HTML_FILE}"
+        echo "</td>" >> "${HTML_FILE}"
+        echo "<td>" >> "${HTML_FILE}"
+        echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
+        echo "</td>" >> "${HTML_FILE}"
+        if [ "${LAST_COMMIT}" != "${OLD_COMMIT}" ]; then
+            echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+        else
+            echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
+        fi
+        echo "${NEW_VER_FULL}" >> "${HTML_FILE}"
+        echo "</td>" >> "${HTML_FILE}"
+        exit 0
+    fi
+fi
+}
+

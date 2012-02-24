@@ -20,8 +20,8 @@ export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
 
 
 # Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/list' 2>&1 | grep '"http://freedcpp.googlecode.com/files/mediapack.' | grep '.tar.bz2"' | sed -e "s:^.*freedcpp.googlecode.com/files/mediapack.\(.*\).tar.bz2\".*$:\1:")
-export NEW_VER=$(echo ${VER_LIST}  | sed -e "s/ /#/" | sed -e "s/^\(.*\)#.*$/\1/")
+export VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/list' 2>&1 | grep 'freedcpp.googlecode.com/files/mediapack.' | grep '.tar.bz2"' | sed -e "s:^.*freedcpp.googlecode.com/files/mediapack.\(.*\).tar.bz2\".*$:\1:")
+export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
@@ -41,24 +41,7 @@ echo " "
 
 
 # Print versions
-if [ "${1}" = "print-versions" ]; then
-    if [ -z "${2}" ]; then
-        echo "File name must be not empty!"
-        exit 1
-    else
-        HTML_FILE="${2}"
-        echo "<td align=\"center\">" >> "${HTML_FILE}"
-        echo "${PACKAGE}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "<td align=\"center\">" >> "${HTML_FILE}"
-        echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "<td align=\"center\">" >> "${HTML_FILE}"
-        echo "${NEW_VER_FULL}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        exit 0
-    fi
-fi
+PrintVersions "${@}"
 
 
 # Check versions

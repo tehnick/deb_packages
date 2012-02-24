@@ -2,7 +2,7 @@
 
 export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
-export HTML_FILE="${MAIN_DIR}/my-packages.html"
+export HTML_FILE="${MAIN_DIR}/deb-packages.html"
 
 echo "HTML_FILE = ${HTML_FILE}"
 
@@ -11,8 +11,7 @@ echo "<head>" >> "${HTML_FILE}"
 echo "<meta content=\"text/html;\" http-equiv=\"content-type\">" >> "${HTML_FILE}"
 echo "<meta content=\"Boris Pek\" name=\"author\">" >> "${HTML_FILE}"
 echo "<meta content=\"Tehnick (c) 2012\" name=\"copyright\">" >> "${HTML_FILE}"
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"main.css\">" >> "${HTML_FILE}"
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"layout.css\">" >> "${HTML_FILE}"
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">" >> "${HTML_FILE}"
 echo "<title>Packages overview for Boris Pek</title>" >> "${HTML_FILE}"
 echo "</head>" >> "${HTML_FILE}"
 echo "<body>" >> "${HTML_FILE}"
@@ -37,14 +36,14 @@ echo "<b>Debian (${PACKAGES_NUMBER}):</b>" >> "${HTML_FILE}"
 echo "<div id=\"stat\">" >> "${HTML_FILE}"
 echo "<table id=\"Debian\">" >> "${HTML_FILE}"
 echo "<thead>" >> "${HTML_FILE}"
-echo "<tr class=\"color\">" >> "${HTML_FILE}"
-echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "<tr>" >> "${HTML_FILE}"
+echo "<th>" >> "${HTML_FILE}"
 echo "Source Name" >> "${HTML_FILE}"
 echo "</th>" >> "${HTML_FILE}"
-echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "<th>" >> "${HTML_FILE}"
 echo "Old version" >> "${HTML_FILE}"
 echo "</th>" >> "${HTML_FILE}"
-echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "<th>" >> "${HTML_FILE}"
 echo "New version" >> "${HTML_FILE}"
 echo "</th>" >> "${HTML_FILE}"
 echo "</tr>" >> "${HTML_FILE}"
@@ -56,10 +55,10 @@ for PACKAGE in * ; do
     if !([ -e "${PKG_DIR}/automatic_update_${PACKAGE}" ]); then continue; fi
     if [ "${TR}" = "<tr>" ]; then
         TRC="<tr>"
-        TR="<tr class=\"color\">"
+        TR="<tr class=\"color-odd\">"
     else
         TR="<tr>"
-        TRC="<tr class=\"color\">"
+        TRC="<tr class=\"color-odd\">"
     fi
     echo;
     echo "Begin ${PACKAGE}"
@@ -82,14 +81,14 @@ echo "<b>Launchpad (${PACKAGES_NUMBER}):</b>" >> "${HTML_FILE}"
 echo "<div id=\"stat\">" >> "${HTML_FILE}"
 echo "<table id=\"Launchpad\">" >> "${HTML_FILE}"
 echo "<thead>" >> "${HTML_FILE}"
-echo "<tr class=\"color\">" >> "${HTML_FILE}"
-echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "<tr class=\"color-odd\">" >> "${HTML_FILE}"
+echo "<th>" >> "${HTML_FILE}"
 echo "Source Name" >> "${HTML_FILE}"
 echo "</th>" >> "${HTML_FILE}"
-echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "<th>" >> "${HTML_FILE}"
 echo "Old version" >> "${HTML_FILE}"
 echo "</th>" >> "${HTML_FILE}"
-echo "<th align=\"center\">" >> "${HTML_FILE}"
+echo "<th>" >> "${HTML_FILE}"
 echo "New version" >> "${HTML_FILE}"
 echo "</th>" >> "${HTML_FILE}"
 echo "</tr>" >> "${HTML_FILE}"
@@ -101,10 +100,10 @@ for PACKAGE in * ; do
     if !([ -e "${PKG_DIR}/automatic_update_${PACKAGE}" ]); then continue; fi
     if [ "${TR}" = "<tr>" ]; then
         TRC="<tr>"
-        TR="<tr class=\"color\">"
+        TR="<tr class=\"color-odd\">"
     else
         TR="<tr>"
-        TRC="<tr class=\"color\">"
+        TRC="<tr class=\"color-odd\">"
     fi
     echo;
     echo "Begin ${PACKAGE}"
