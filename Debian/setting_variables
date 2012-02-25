@@ -80,10 +80,10 @@ CheckVersions()
 {
     if [ -z "${NEW_VER}" ]; then
         echo "NEW_VER is empty!";
-        exit 0;
+        exit 1;
     elif [ -z "${OLD_VER_FULL}" ]; then
         echo "OLD_VER_FULL is empty!";
-        exit 0;
+        exit 1;
     elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
         echo "Upgrading is not required.";
         exit 0;

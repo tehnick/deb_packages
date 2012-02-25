@@ -16,9 +16,7 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
 # Get old version
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
-export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
-export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
+GetOldVersion
 
 
 # Find new version
@@ -28,18 +26,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-echo ;
-echo "http://sourceforge.net/projects/q4wine/files/q4wine/"
-echo ;
-echo "On sourceforge.net now available such versions:"
-echo "${VER_LIST}" | sort -r -V | head -n50
-echo ;
-
-echo "OLD_VER = ${OLD_VER}"
-echo "NEW_VER = ${NEW_VER}"
-echo "OLD_VER_FULL = ${OLD_VER_FULL}"
-echo "NEW_VER_FULL = ${NEW_VER_FULL}"
-echo ;
+DisplayVersions "http://sourceforge.net/projects/q4wine/files/q4wine/"
 
 
 # Print versions
@@ -47,29 +34,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-if [ -z "${NEW_VER}" ]; then
-    echo "NEW_VER is empty!";
-    exit 0;
-elif [ -z "${OLD_VER_FULL}" ]; then
-    echo "OLD_VER_FULL is empty!";
-    exit 0;
-elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
-    echo "Upgrading is not required.";
-    exit 0;
-else
-    if [ "${NEW_VER}" != "${OLD_VER}" ]; then
-        if [ "${SFX}" != "-0ppa1" ]; then
-            echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
-            exit 0;
-        fi
-    else
-        if [ "${SFX}" = "-0ppa1" ]; then
-            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
-            echo "Upgrading is not required.";
-            exit 0;
-        fi
-    fi
-fi
+CheckVersions
 
 
 # Get the sources

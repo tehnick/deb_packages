@@ -20,9 +20,7 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
 # Get old version
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
-export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
-export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
+GetOldVersion
 export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
 
 # Find new version
@@ -32,11 +30,6 @@ export LAST_SRC_INFO=$(curl -I "https://nodeload.github.com/${DEVELOPER}/${PROJE
 export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
 export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
 
-
-# Display versions
-echo "Old  commit ID: ${OLD_COMMIT}"
-echo "Last commit ID: ${LAST_COMMIT}"
-
 if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
 fi
@@ -44,8 +37,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-echo "OLD_VER_FULL = ${OLD_VER_FULL}"
-echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+DisplayVersionsUnstable
 
 
 # Print versions
@@ -53,29 +45,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-if [ -z "${NEW_VER}" ]; then
-    echo "NEW_VER is empty!";
-    exit 0;
-elif [ -z "${OLD_VER_FULL}" ]; then
-    echo "OLD_VER_FULL is empty!";
-    exit 0;
-elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
-    echo "Upgrading is not required.";
-    exit 0;
-else
-    if [ "${NEW_VER}" != "${OLD_VER}" ]; then
-        if [ "${SFX}" != "-0ppa1" ]; then
-            echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
-            exit 0;
-        fi
-    else
-        if [ "${SFX}" = "-0ppa1" ]; then
-            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
-            echo "Upgrading is not required.";
-            exit 0;
-        fi
-    fi
-fi
+CheckVersions
 
 
 # Get the sources

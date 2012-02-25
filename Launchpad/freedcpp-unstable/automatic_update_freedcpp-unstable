@@ -16,28 +16,21 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
 # Get old version
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
-export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-0ppa.*$/\1/")
-export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]ppa[0-9]\).*$/\1/")
-export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
+GetOldVersion
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
 
 
 # Find new version
-#export LAST_REVISION=$(svn log http://freedcpp.googlecode.com/svn/trunk/ -r HEAD --quiet |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
-export LAST_REVISION=$(svn log http://freedcpp.googlecode.com/svn/trunk/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
-
-echo "Number of old  revision: ${OLD_REVISION}"
-echo "Number of last revision: ${LAST_REVISION}"
+export LAST_COMMIT=$(svn log http://freedcpp.googlecode.com/svn/trunk/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
 
 export CUR_VER=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | grep "GUI_VERSION_STRING " | sed -e "s/^.*GUI_VERSION_STRING \"\(.*\+\)\"$/\1/")
 export BUILD_STRING=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | grep "GUI_VERSION_BUILD_STRING " | sed -e "s/^.*GUI_VERSION_BUILD_STRING \"\(.*\+\)\"$/\1/")
-export NEW_VER="${CUR_VER}.${BUILD_STRING}~svn${LAST_REVISION}"
+export NEW_VER="${CUR_VER}.${BUILD_STRING}~svn${LAST_COMMIT}"
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
 
 
 # Display versions
-echo "OLD_VER_FULL = ${OLD_VER_FULL}"
-echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+DisplayVersionsUnstable
 
 
 # Print versions
@@ -45,35 +38,11 @@ PrintVersions "${@}"
 
 
 # Check versions
-if [ -z "${OLD_VER_FULL}" ]; then
-    echo "OLD_VER_FULL is empty!";
-    exit 0;
-elif [ -z ${CUR_VER} ]; then
-    echo "CUR_VER is empty!";
-    exit 0;
-elif [ -z ${BUILD_STRING} ]; then
+if [ -z ${BUILD_STRING} ]; then
     echo "BUILD_STRING is empty!";
-    exit 0;
-elif [ -z ${LAST_REVISION} ]; then
-    echo "LAST_REVISION is empty!";
-    exit 0;
-elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
-    echo "Upgrading is not required.";
-    exit 0;
-else
-    if [ "${NEW_VER}" != "${OLD_VER}" ]; then
-        if [ "${SFX}" != "-0ppa1" ]; then
-            echo "Now SFX = ${SFX} but must be '-0ppa1' for a new release!";
-            exit 0;
-        fi
-    else
-        if [ "${SFX}" = "-0ppa1" ]; then
-            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
-            echo "Upgrading is not required.";
-            exit 0;
-        fi
-    fi
+    exit 1;
 fi
+CheckVersionsUnstable
 
 
 # Get the sources
