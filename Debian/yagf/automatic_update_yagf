@@ -19,9 +19,7 @@ source "${MAIN_DIR}/Debian/setting_variables"
 
 
 # Get old version
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
-export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
-export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+GetOldVersion
 
 
 # Find new version
@@ -32,18 +30,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-echo ;
-echo "http://symmetrica.net/cuneiform-linux/yagf-en.html"
-echo ;
-echo "On symmetrica.net now available such versions:"
-echo "${VER_LIST}" | sort -r -V | head -n50
-echo ;
-
-echo "OLD_VER = ${OLD_VER}"
-echo "NEW_VER = ${NEW_VER}"
-echo "OLD_VER_FULL = ${OLD_VER_FULL}"
-echo "NEW_VER_FULL = ${NEW_VER_FULL}"
-echo ;
+DisplayVersions "http://symmetrica.net/cuneiform-linux/yagf-en.html"
 
 
 # Print versions
@@ -51,29 +38,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-if [ -z "${NEW_VER}" ]; then
-    echo "NEW_VER is empty!";
-    exit 0;
-elif [ -z "${OLD_VER_FULL}" ]; then
-    echo "OLD_VER_FULL is empty!";
-    exit 0;
-elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
-    echo "Upgrading is not required.";
-    exit 0;
-else
-    if [ "${NEW_VER}" != "${OLD_VER}" ]; then
-        if [ "${SFX}" != "-1" ]; then
-            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
-            exit 0;
-        fi
-    else
-        if [ "${SFX}" = "-1" ]; then
-            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
-            echo "Upgrading is not required.";
-            exit 0;
-        fi
-    fi
-fi
+CheckVersions
 
 
 # Get the sources

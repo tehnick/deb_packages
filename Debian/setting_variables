@@ -20,30 +20,86 @@ mkdir -p "${TEMP_DIR}"
 cd "${TEMP_DIR}" || exit 1
 
 
+# Get old version
+GetOldVersion()
+{
+    export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+    export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
+    export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
+}
+
+
+# Display versions
+DisplayVersions()
+{
+    echo ;
+    echo "${1}"
+    echo ;
+    echo "On $(echo \"${1}\" | cut -f 3 -d /) now available such versions:"
+    echo "${VER_LIST}" | sort -r -V | head -n10
+    echo ;
+
+    echo "OLD_VER = ${OLD_VER}"
+    echo "NEW_VER = ${NEW_VER}"
+    echo "OLD_VER_FULL = ${OLD_VER_FULL}"
+    echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+    echo ;
+}
+
+
 # Print versions
 PrintVersions()
 {
-if [ "${1}" = "print-versions" ]; then
-    if [ -z "${2}" ]; then
-        echo "File name must be not empty!"
-        exit 1
-    else
-        HTML_FILE="${2}"
-        echo "<td style=\"font-weight: bold;\">" >> "${HTML_FILE}"
-        echo "${PACKAGE}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "<td>" >> "${HTML_FILE}"
-        echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        if [ "${NEW_VER}" != "${OLD_VER}" ]; then
-            echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+    if [ "${1}" = "print-versions" ]; then
+        if [ -z "${2}" ]; then
+            echo "File name must be not empty!"
+            exit 1
         else
-            echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
+            HTML_FILE="${2}"
+            echo "<td style=\"font-weight: bold;\">" >> "${HTML_FILE}"
+            echo "${PACKAGE}" >> "${HTML_FILE}"
+            echo "</td>" >> "${HTML_FILE}"
+            echo "<td>" >> "${HTML_FILE}"
+            echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
+            echo "</td>" >> "${HTML_FILE}"
+            if [ "${NEW_VER}" != "${OLD_VER}" ]; then
+                echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+            else
+                echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
+            fi
+            echo "${NEW_VER_FULL}" >> "${HTML_FILE}"
+            echo "</td>" >> "${HTML_FILE}"
+            exit 0
         fi
-        echo "${NEW_VER_FULL}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        exit 0
     fi
-fi
+}
+
+
+# Check versions
+CheckVersions()
+{
+    if [ -z "${NEW_VER}" ]; then
+        echo "NEW_VER is empty!";
+        exit 0;
+    elif [ -z "${OLD_VER_FULL}" ]; then
+        echo "OLD_VER_FULL is empty!";
+        exit 0;
+    elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+        echo "Upgrading is not required.";
+        exit 0;
+    else
+        if [ "${NEW_VER}" != "${OLD_VER}" ]; then
+            if [ "${SFX}" != "-1" ]; then
+                echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+                exit 0;
+            fi
+        else
+            if [ "${SFX}" = "-1" ]; then
+                echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
+                echo "Upgrading is not required.";
+                exit 0;
+            fi
+        fi
+    fi
 }
 
