@@ -1,17 +1,12 @@
-﻿My deb packages rules and updating scripts for Debian and Ubuntu
+﻿My package rules and updating scripts for Debian and Ubuntu
 
 Related links:
-	http://qa.debian.org/developer.php?login=tehnick-8%40mail.ru
-	http://mentors.debian.net/packages/uploader/tehnick-8%40mail.ru
-	https://launchpad.net/~tehnick/+related-software
-	http://tehnick-8.narod.ru/
+  http://qa.debian.org/developer.php?login=Boris%20Pek
+  http://mentors.debian.net/packages/uploader/tehnick-8%40mail.ru
+  https://launchpad.net/~tehnick/+related-software
+  http://tehnick-8.narod.ru/
 
 Notes:
-	git clone git://github.com/tehnick/deb_packages.git
-	git submodule init
-	git submodule update
-
-Other commands:
-	git status; echo; git submodule foreach 'git status; echo;'
-	git submodule foreach 'git checkout master; git pull;'
-	git submodule foreach 'git checkout master; git push;'
+  git clone git://github.com/tehnick/deb_packages.git
+  git submodule init
+  git submodule update
