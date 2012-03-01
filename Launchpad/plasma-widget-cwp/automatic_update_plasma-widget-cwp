@@ -48,6 +48,9 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DESTINATION="plasma-widget-cwp"
 
+export DIR_NAME="cwp-${NEW_VER}"
+export OLD_DIR_NAME="cwp-${OLD_VER}"
+
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 
