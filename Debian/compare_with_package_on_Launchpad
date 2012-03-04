@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
+
+cd "${PKG_DIR}/${PACKAGE}-debian"
+git diff origin/launchpad . > debian.diff
+echo "git diff origin/launchpad . > debian.diff"
+kwrite debian.diff &

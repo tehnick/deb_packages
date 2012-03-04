@@ -7,6 +7,6 @@ Related links:
   http://tehnick-8.narod.ru/
 
 Notes:
-  git clone git://github.com/tehnick/deb_packages.git
+  git clone --depth 1 git://github.com/tehnick/deb_packages.git
   git submodule init
   git submodule update
