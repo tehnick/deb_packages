@@ -8,7 +8,10 @@ fi
 export PACKAGE="psimedia"
 
 # Uncomment if necessary:
-export SFX="-2"
+#export SFX="-2"
+
+# Available branches: master
+export BRANCH=master
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -20,76 +23,49 @@ source "${MAIN_DIR}/Debian/setting_variables"
 
 # Get old version
 GetOldVersion
-export OLD_REVISION=$(echo ${OLD_VER} | sed -e "s/^.*\+svn\([0-9]\+\)$/\1/")
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-git[0-9]\{8,8\}-\(.*\)$/\1/")
 
 
 # Find new version
-export LAST_REVISION=$(svn log https://delta.affinix.com/svn/trunk/psimedia/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
-
-echo "Number of old  revision: ${OLD_REVISION}"
-echo "Number of last revision: ${LAST_REVISION}"
+export DEVELOPER=psi-plus
+export PROJECT=psimedia
+export LAST_SRC_INFO=$(curl -I "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}" 2>&1)
+export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
+export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
 
 export CUR_VER="1.0.3"
-export NEW_VER="${CUR_VER}+svn${LAST_REVISION}"
+export DATE=$(date "+%Y%m%d")
+export NEW_VER="${CUR_VER}-git${DATE}-${LAST_COMMIT}"
 export NEW_VER_FULL="${NEW_VER}${SFX}"
 
 
 # Display versions
-echo "OLD_VER_FULL = ${OLD_VER_FULL}"
-echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+DisplayVersionsUnstable
 
 
 # Print versions
-PrintVersions "${@}"
+PrintVersionsUnstable "${@}"
 
 
 # Check versions
-if [ -z "${OLD_VER_FULL}" ]; then
-    echo "OLD_VER_FULL is empty!";
-    exit 0;
-elif [ -z ${CUR_VER} ]; then
-    echo "CUR_VER is empty!";
-    exit 0;
-elif [ -z ${LAST_REVISION} ]; then
-    echo "LAST_REVISION is empty!";
-    exit 0;
-elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
-    echo "Upgrading is not required.";
-    exit 0;
-else
-    if [ "${NEW_VER}" != "${OLD_VER}" ]; then
-        if [ "${SFX}" != "-1" ]; then
-            echo "Now SFX = ${SFX} but must be '-1' for a new release!";
-            exit 0;
-        fi
-    else
-        if [ "${SFX}" = "-1" ]; then
-            echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
-            echo "Upgrading is not required.";
-            exit 0;
-        fi
-    fi
-fi
+CheckVersionsUnstable
 
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    export PSI_DIR="${HOME}/WorkDir/Devel/Psi+"
-
-    echo "Updating ${PSI_DIR}/psimedia"
-    svn update "${PSI_DIR}/psimedia"
-
-    echo "Exporting ${PSI_DIR}/psimedia"
-    rm -rf "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
-    svn export "${PSI_DIR}/psimedia" "${TEMP_DIR}/${PACKAGE}-${NEW_VER}"
-
-    cd "${TEMP_DIR}"
-    echo "Generating orig.tar.bz2"
+    rm -rf  "${PACKAGE}-${NEW_VER}"/
+    # sources
+    rm -f "${BRANCH}"*
+    wget -4 -c "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}"
+    rm -rf ${DEVELOPER}-${PROJECT}-*
+    tar xzf "${BRANCH}"
+    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
+    # tarball
     tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
 fi
 
 
-export UPDATE_STRING="New upstream release"
+export UPDATE_STRING="New upstream release."
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
