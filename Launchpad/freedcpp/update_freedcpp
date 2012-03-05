@@ -10,7 +10,6 @@ export NEW_VER="0.0.5"
 # Uncomment if necessary:
 #export SFX="-0ppa2"
 
-
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
 
@@ -51,7 +50,9 @@ fi
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
+export A_TYPE="gz"
+export D_ARGS="xzf"
+
 # Launch common script for updating packages and uploading them to Launchpad
-#source "${MAIN_DIR}/Launchpad/updating_packages"
-source "${MAIN_DIR}/Launchpad/updating_packages_old"
+source "${MAIN_DIR}/Launchpad/updating_packages"
 

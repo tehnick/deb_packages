@@ -50,6 +50,9 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 export DIR_NAME="${PROJECT}-${NEW_VER}"
 export OLD_DIR_NAME="${PROJECT}-${OLD_VER}"
 
+export A_TYPE="gz"
+export D_ARGS="xzf"
+
 # Launch common script for updating packages and uploading them to Launchpad
-source "${MAIN_DIR}/Launchpad/updating_packages_old"
+source "${MAIN_DIR}/Launchpad/updating_packages"
 

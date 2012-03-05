@@ -17,9 +17,13 @@ elif [ -z "${NEW_VER}" ]; then
     exit 1;
 fi
 
+if [ -z "${A_TYPE}" ]; then
+    export A_TYPE="bz2"
+    export D_ARGS="xjf"
+fi
 
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.bz2 is not found.";
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE} is not found.";
     exit 0;
 fi
 
@@ -38,7 +42,7 @@ export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
 rm -rf "${DIR_NAME}" "${PACKAGE}_${NEW_VER}-"*
 
-tar xjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+tar "${D_ARGS}" "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}"
 rm -rf "${DIR_NAME}/debian"
 cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${DIR_NAME}/debian"
 
@@ -107,7 +111,7 @@ if [ "${1}" = "test" ]; then
     mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
 
     cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
-    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
