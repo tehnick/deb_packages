@@ -62,10 +62,10 @@ if !([ -e "${LAST_SRC}.tar.gz" ]); then
     exit 0;
 fi
 
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
     tar xzf "${LAST_SRC}".tar.gz
     mv "negativ-eiskaltdcpp-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
@@ -73,6 +73,9 @@ export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
 
 export DIST_LIST="oneiric
                   natty"
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"

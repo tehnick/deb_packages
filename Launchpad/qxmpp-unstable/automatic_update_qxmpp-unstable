@@ -49,14 +49,14 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
     rm -rf  "${PACKAGE}-${NEW_VER}"/
     rm -f "master"*
     wget -4 -c "http://nodeload.github.com/${DEVELOPER}/qxmpp-dev/tarball/master"
     rm -rf ${DEVELOPER}-qxmpp-dev-*
     tar xzf "master"
     mv 0xd34df00d-qxmpp-dev-* "${PACKAGE}-${NEW_VER}"
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
@@ -65,6 +65,9 @@ export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
 export DESTINATION="leechcraft-unstable"
 
 export DIST_LIST="oneiric"
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Launchpad/updating_packages"
