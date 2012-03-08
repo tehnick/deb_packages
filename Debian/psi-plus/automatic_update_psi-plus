@@ -41,20 +41,23 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
     rm -rf  tehnick-psi-plus-* "${PACKAGE}-${NEW_VER}"
     # sources
     wget -4 -c "http://githubredir.debian.net/github/tehnick/psi-plus/${NEW_VER}.tar.gz"
     tar xzf "${NEW_VER}.tar.gz"
     mv tehnick-psi-plus-* "${PACKAGE}-${NEW_VER}"
     # tarball
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
 export UPDATE_STRING="New upstream release ${NEW_VER}."
 
 export DESTINATION="mentors_ftp"
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"

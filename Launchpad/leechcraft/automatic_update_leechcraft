@@ -40,7 +40,7 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
     rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
     # main sources
     wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
@@ -56,7 +56,7 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png \
        "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png
     # tarball
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
@@ -67,6 +67,9 @@ export DESTINATION="leechcraft-stable"
 export DIST_LIST="oneiric
                   natty
                   maverick"
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Launchpad/updating_packages"

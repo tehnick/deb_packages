@@ -49,7 +49,6 @@ if !([ -e "${LAST_SRC}.tar.gz" ]); then
     rm -f master*
     # -4 wget https://github.com/brezerk/q4wine/tarball/master
     wget -4 https://nodeload.github.com/brezerk/q4wine/tarball/master
-
     rm -f brezerk-q4wine-*.tar.gz*
     mv master "${LAST_SRC}.tar.gz"
 fi
@@ -59,16 +58,19 @@ if !([ -e "${LAST_SRC}.tar.gz" ]); then
     exit 0;
 fi
 
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
     tar xzf "${LAST_SRC}".tar.gz
     mv "brezerk-q4wine-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
 export UPDATE_STRING="Minor update from GIT master branch."
 
 export DESTINATION="q4wine"
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"

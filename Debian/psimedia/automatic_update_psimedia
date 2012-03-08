@@ -52,7 +52,7 @@ CheckVersionsUnstable
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
     rm -rf  "${PACKAGE}-${NEW_VER}"/
     # sources
     rm -f "${BRANCH}"*
@@ -61,11 +61,14 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     tar xzf "${BRANCH}"
     mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
     # tarball
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
 export UPDATE_STRING="New upstream release."
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"

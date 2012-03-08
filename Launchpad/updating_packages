@@ -86,8 +86,7 @@ if [ -z "${DIST_LIST}" ]; then
     DIST_LIST="oneiric
                natty
                maverick
-               lucid
-               karmic"
+               lucid"
     export DIST_LIST;
 fi
 

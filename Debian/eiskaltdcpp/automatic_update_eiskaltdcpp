@@ -23,7 +23,7 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/eiskaltdc/downloads/list' 2>&1 | grep 'eiskaltdc.googlecode.com/files/eiskaltdcpp-' | grep '.tar.bz2"' | sed -e "s:^.*eiskaltdc.googlecode.com/files/eiskaltdcpp-\(.*\).tar.bz2\".*$:\1:")
+export VER_LIST=$(curl 'http://code.google.com/p/eiskaltdc/downloads/list' 2>&1 | grep 'eiskaltdc.googlecode.com/files/eiskaltdcpp-' | grep '.tar.xz"' | sed -e "s:^.*eiskaltdc.googlecode.com/files/eiskaltdcpp-\(.*\).tar.xz\".*$:\1:")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -41,13 +41,16 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    wget -4 -c "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.bz2"
-    mv -f "${PACKAGE}-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+    wget -4 -c "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.xz"
+    mv -f "${PACKAGE}-${NEW_VER}.tar.xz" "${PACKAGE}_${NEW_VER}.orig.tar.xz"
 fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
