@@ -24,13 +24,14 @@ GetOldVersion
 
 # Find new version
 export PROJECT=kde-gtk-config
-export VER_LIST=$(curl "http://proli.net/meu/netrunner/" 2>&1 | grep "kde-gtk-config" | grep ".tar.bz2" | sed -e "s:^.*href=\"kde-gtk-config-\(.*\).tar.bz2\">.*:\1:")
+#export VER_LIST=$(curl "http://proli.net/meu/netrunner/" 2>&1 | grep "kde-gtk-config" | grep ".tar.bz2" | sed -e "s:^.*href=\"kde-gtk-config-\(.*\).tar.bz2\">.*:\1:")
+export VER_LIST=$(curl "ftp://ftp.kde.org/pub/kde/stable/kde-gtk-config/" 2>&1 | grep "drwxr-xr-x" | sed -e "s:^.* \(.*\)$:\1:")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://proli.net/meu/netrunner/"
+DisplayVersions "ftp://ftp.kde.org/pub/kde/stable/kde-gtk-config/"
 
 
 # Print versions
@@ -43,7 +44,7 @@ CheckVersions
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    wget -4 -c "http://proli.net/meu/netrunner/${PROJECT}-${NEW_VER}.tar.bz2"
+    wget -4 -c "ftp://ftp.kde.org/pub/kde/stable/${PROJECT}/${NEW_VER}/src/${PROJECT}-${NEW_VER}.tar.bz2"
     mv -f "${PROJECT}-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 fi
 
