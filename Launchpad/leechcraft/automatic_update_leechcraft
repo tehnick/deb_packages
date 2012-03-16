@@ -8,7 +8,7 @@ fi
 export PACKAGE="leechcraft"
 
 # Uncomment if necessary:
-export SFX="-0ppa2"
+#export SFX="-0ppa2"
 
 
 # Launch common script for setting variables
@@ -64,9 +64,7 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DESTINATION="leechcraft-stable"
 
-export DIST_LIST="oneiric
-                  natty
-                  maverick"
+export DIST_LIST="oneiric"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
