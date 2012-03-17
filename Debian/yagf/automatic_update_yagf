@@ -10,6 +10,9 @@ export PACKAGE="yagf"
 # Uncomment if necessary:
 #export SFX="-2"
 
+# Temporary:
+#export NEW_VER=0.9+svn247
+
 # experimental unstable
 export MAIN_DIST="unstable"
 
@@ -25,7 +28,9 @@ GetOldVersion
 # Find new version
 export PROJECT=yagf
 export VER_LIST=$(curl "http://symmetrica.net/cuneiform-linux/yagf-en.html" 2>&1 | grep "yagf-" | grep ".tar.gz" | sed -e "s:^.*${PROJECT}-\(.*\).tar.gz.*:\1:")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
