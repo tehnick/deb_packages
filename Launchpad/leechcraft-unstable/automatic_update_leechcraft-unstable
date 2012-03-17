@@ -10,7 +10,9 @@ export PACKAGE="leechcraft-unstable"
 # Uncomment if necessary:
 #export SFX="-0ppa2"
 
-#export NEW_VER=0.4.90-744-gda59196
+export RPKGD="+dfsg"
+
+#export CUR_VER=0.4.90-744-gda59196
 
 export BRANCH=master
 
@@ -31,8 +33,9 @@ export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e
 export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
 
 if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
+    export CUR_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
 fi
+export NEW_VER=${CUR_VER}${RPKGD}
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
