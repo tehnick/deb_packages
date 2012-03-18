@@ -63,6 +63,7 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
     # deleting some files and directories
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
+    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/advancednotifications/share/sounds/*
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
        "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png
     rm "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
