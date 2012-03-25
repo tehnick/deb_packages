@@ -10,6 +10,8 @@ export PACKAGE="psi-plus"
 # Uncomment if necessary:
 #export SFX="-2"
 
+#export NEW_VER=0.15.5267
+
 # experimental unstable
 export MAIN_DIST="unstable"
 
@@ -23,13 +25,19 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://githubredir.debian.net/github/tehnick/psi-plus' 2>&1 | grep '/github/tehnick/psi-plus/' | grep '.tar.gz' | sed -e "s:^.*/github/tehnick/psi-plus/\(.*\)\.tar\.gz.*$:\1:")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+export DEVELOPER=tehnick
+export PROJECT=psi-plus
+#export VER_LIST=$(curl 'http://githubredir.debian.net/github/tehnick/psi-plus' 2>&1 | grep '/github/tehnick/psi-plus/' | grep '.tar.gz' | sed -e "s:^.*/github/tehnick/psi-plus/\(.*\)\.tar\.gz.*$:\1:")
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\" .*:\1:")
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://githubredir.debian.net/github/tehnick/psi-plus"
+#DisplayVersions "http://githubredir.debian.net/github/tehnick/psi-plus"
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
 # Print versions
@@ -42,17 +50,18 @@ CheckVersions
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-    rm -rf  tehnick-psi-plus-* "${PACKAGE}-${NEW_VER}"
+    rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
     # sources
-    wget -4 -c "http://githubredir.debian.net/github/tehnick/psi-plus/${NEW_VER}.tar.gz"
-    tar xzf "${NEW_VER}.tar.gz"
-    mv tehnick-psi-plus-* "${PACKAGE}-${NEW_VER}"
+    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
+    rm -rf ${DEVELOPER}-${PROJECT}-*
+    tar xzf "${NEW_VER}"
+    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
     # tarball
     tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
-export UPDATE_STRING="New upstream release ${NEW_VER}."
+export UPDATE_STRING="New upstream release."
 
 export DESTINATION="mentors_ftp"
 

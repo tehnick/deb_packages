@@ -23,7 +23,7 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 # Get old version
 GetOldVersion
-export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/" | sed 's/\+dfsg//')
 
 # Find new version
 export DEVELOPER=0xd34df00d
