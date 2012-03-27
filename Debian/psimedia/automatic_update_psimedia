@@ -10,6 +10,9 @@ export PACKAGE="psimedia"
 # Uncomment if necessary:
 #export SFX="-2"
 
+#export NEW_VER=1.0.3-git20120319-78a4c9e
+
+
 # Available branches: master
 export BRANCH=master
 
@@ -35,7 +38,10 @@ export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.
 
 export CUR_VER="1.0.3"
 export DATE=$(date "+%Y%m%d")
-export NEW_VER="${CUR_VER}-git${DATE}-${LAST_COMMIT}"
+
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER="${CUR_VER}-git${DATE}-${LAST_COMMIT}"
+fi
 export NEW_VER_FULL="${NEW_VER}${SFX}"
 
 
