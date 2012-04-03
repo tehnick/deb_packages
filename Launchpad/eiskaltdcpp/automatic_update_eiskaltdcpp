@@ -7,7 +7,7 @@ fi
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-#export SFX="-0ppa3"
+#export SFX="-0ppa2"
 
 
 # Launch common script for setting variables
@@ -47,6 +47,9 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DIST_LIST="oneiric
                   natty"
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
