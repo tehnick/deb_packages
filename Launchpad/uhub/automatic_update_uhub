@@ -7,7 +7,9 @@ fi
 export PACKAGE="uhub"
 
 # Uncomment if necessary:
-export SFX="-1ppa4"
+#export SFX="-1ppa4"
+
+#export NEW_VER=0.4.0~git20120405-390b63e
 
 
 # Launch common script for setting variables
@@ -22,7 +24,9 @@ GetOldVersion
 export DEVELOPER=janvidar
 export PROJECT=uhub
 export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\" .*:\1:")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
