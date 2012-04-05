@@ -25,6 +25,9 @@
 [submodule "Debian/psi-plus-i18n/psi-plus-i18n-debian"]
 	path = Debian/psi-plus-i18n/psi-plus-i18n-debian
 	url = git@github.com:tehnick/psi-plus-i18n-debian.git
+[submodule "Launchpad/psi-plus-i18n/psi-plus-i18n-debian"]
+	path = Launchpad/psi-plus-i18n/psi-plus-i18n-debian
+	url = git@github.com:tehnick/psi-plus-i18n-debian.git
 [submodule "Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian"]
 	path = Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian
 	url = git@github.com:tehnick/eiskaltdcpp-unstable-debian.git
