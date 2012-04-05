@@ -10,8 +10,7 @@ export PACKAGE="psi-plus-i18n"
 # Uncomment if necessary:
 #export SFX="-2"
 
-# Available branches: master
-export BRANCH=master
+#export NEW_VER=0.15.5267
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -23,44 +22,37 @@ source "${MAIN_DIR}/Debian/setting_variables"
 
 # Get old version
 GetOldVersion
-export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*+git[0-9]\{8,8\}-\(.*\)$/\1/")
 
 
 # Find new version
 export DEVELOPER=tehnick
 export PROJECT=psi-plus-i18n
-export LAST_SRC_INFO=$(curl -I "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}" 2>&1)
-export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
-export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
-
-export TAGS_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\" .*:\1:")
-export CUR_VER=$(echo "${TAGS_LIST}" | sort -r -V | head -n1)
-
-export DATE=$(date "+%Y%m%d")
-export NEW_VER="${CUR_VER}+git${DATE}-${LAST_COMMIT}"
-export NEW_VER_FULL="${NEW_VER}${SFX}"
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\" .*:\1:")
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersionsUnstable
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
 # Print versions
-PrintVersionsUnstable "${@}"
+PrintVersions "${@}"
 
 
 # Check versions
-CheckVersionsUnstable
+CheckVersions
 
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-    rm -rf  "${PACKAGE}-${NEW_VER}"/
+    rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
     # sources
-    rm -f "${BRANCH}"*
-    wget -4 -c "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}"
+    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
     rm -rf ${DEVELOPER}-${PROJECT}-*
-    tar xzf "${BRANCH}"
+    tar xzf "${NEW_VER}"
     mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
     # tarball
     tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
