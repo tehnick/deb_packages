@@ -73,8 +73,12 @@ if [ "${1}" = "print-versions" ]; then
         echo "<td>" >> "${HTML_FILE}"
         echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
-        if [ "${NEW_VER}" != "${OLD_VER}" ]; then
-            echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+            if [ "${NEW_VER}" != "${OLD_VER}" ]; then
+                if ( dpkg --compare-versions "${NEW_VER}" gt "${OLD_VER}" ); then
+                    echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+                else
+                    echo "<td class=\"color-newer\">" >> "${HTML_FILE}"
+                fi
         else
             echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
         fi

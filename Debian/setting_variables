@@ -73,7 +73,11 @@ PrintVersions()
             echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             if [ "${NEW_VER}" != "${OLD_VER}" ]; then
-                echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+                if ( dpkg --compare-versions "${NEW_VER}" gt "${OLD_VER}" ); then
+                    echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+                else
+                    echo "<td class=\"color-newer\">" >> "${HTML_FILE}"
+                fi
             else
                 echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
             fi
@@ -83,6 +87,7 @@ PrintVersions()
         fi
     fi
 }
+if dpkg --compare-versions 2.2.5~beta1 gt 2.2.5; then echo true; fi
 
 
 # Print versions for unstable packages
