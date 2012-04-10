@@ -38,7 +38,6 @@ DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
 #for pbuilder debuild
 BUILDSOURCEROOTCMD="fakeroot"
-#PBUILDERROOTCMD="sudo -E"
 PBUILDERROOTCMD="sudo -E"
 # use cowbuilder for pdebuild
 PDEBUILD_PBUILDER="cowbuilder"
