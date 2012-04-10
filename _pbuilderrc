@@ -77,11 +77,9 @@ DEBBUILDOPTS=""
 APTCONFDIR=""
 
 # the username and ID used by pbuilder, inside chroot. Needs fakeroot, really
-#BUILDUSERID=1234
 BUILDUSERID=1000
 BUILDUSERNAME=fu
 export LOGNAME=fu
-#BUILDUSERID=fakeuser
 #BUILDUSERNAME=pbuilder
 
 # BINDMOUNTS is a space separated list of things to mount
