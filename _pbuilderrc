@@ -107,7 +107,6 @@ export SHELL=/bin/bash
 
 # The name of debootstrap command, you might want "cdebootstrap".
 DEBOOTSTRAP="debootstrap"
-#DEBOOTSTRAP="cdebootstrap"
 
 # default file extension for pkgname-logfile
 PKGNAME_LOGFILE_EXTENTION="_$(dpkg --print-architecture).build"
