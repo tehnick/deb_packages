@@ -5,7 +5,8 @@ export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 echo "MAIN_DIR = ${MAIN_DIR}"
 echo " "
 
-for PACKAGE in eiskaltdcpp-unstable uhub-unstable q4wine-unstable freedcpp-unstable
+for PACKAGE in eiskaltdcpp-unstable uhub-unstable q4wine-unstable \
+               freedcpp-unstable psi-plus-i18n
 do
     echo "Begin ${PACKAGE}"
     "${MAIN_DIR}/Launchpad/${PACKAGE}/automatic_update_${PACKAGE}"
