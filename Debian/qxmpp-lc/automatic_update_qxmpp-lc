@@ -1,0 +1,63 @@
+#!/bin/bash
+
+
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
+
+export PACKAGE="qxmpp-lc"
+
+# Uncomment if necessary:
+#export SFX="-2"
+
+#export NEW_VER=0.4.0~git20120405-390b63e
+
+# experimental unstable
+export MAIN_DIST="unstable"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+
+# Get old version
+GetOldVersion
+
+
+# Find new version
+export DEVELOPER=0xd34df00d
+export PROJECT=qxmpp-dev
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/downloads" 2>&1 | grep "=\"/downloads/${DEVELOPER}/${PROJECT}/" | grep "-extras.tar.bz2" | sed -e "s:^.*\"/downloads/${DEVELOPER}/${PROJECT}/qxmpp-\(.*\)-extras\.tar\.bz2\">.*:\1:")
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}
+
+
+# Display versions
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/downloads"
+
+
+# Print versions
+PrintVersions "${@}"
+
+
+# Check versions
+CheckVersions
+
+
+# Get the sources
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+    wget -4 -c "http://cloud.github.com/downloads/${DEVELOPER}/${PROJECT}/qxmpp-${NEW_VER}-extras.tar.bz2"
+    mv -f "qxmpp-${NEW_VER}-extras.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+fi
+
+
+export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+#export A_TYPE="xz"
+#export D_ARGS="xJf"
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
+

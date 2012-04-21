@@ -79,12 +79,15 @@
 [submodule "Debian/kde-style-qtcurve/kde-style-qtcurve-debian"]
 	path = Debian/kde-style-qtcurve/kde-style-qtcurve-debian
 	url = git@github.com:tehnick/kde-style-qtcurve-debian.git
-[submodule "Launchpad/qxmpp/qxmpp-debian"]
-	path = Launchpad/qxmpp/qxmpp-debian
-	url = git@github.com:tehnick/qxmpp-debian.git
-[submodule "Launchpad/qxmpp-unstable/qxmpp-unstable-debian"]
-	path = Launchpad/qxmpp-unstable/qxmpp-unstable-debian
-	url = git@github.com:tehnick/qxmpp-unstable-debian.git
+[submodule "Debian/qxmpp-lc/qxmpp-lc-debian"]
+	path = Debian/qxmpp-lc/qxmpp-lc-debian
+	url = git@github.com:tehnick/qxmpp-lc-debian.git
+[submodule "Launchpad/qxmpp-lc/qxmpp-lc-debian"]
+	path = Launchpad/qxmpp-lc/qxmpp-lc-debian
+	url = git@github.com:tehnick/qxmpp-lc-debian.git
+[submodule "Launchpad/qxmpp-lc-unstable/qxmpp-lc-unstable-debian"]
+	path = Launchpad/qxmpp-lc-unstable/qxmpp-lc-unstable-debian
+	url = git@github.com:tehnick/qxmpp-lc-unstable-debian.git
 [submodule "Debian/libterm-shellui-perl/libterm-shellui-perl-debian"]
 	path = Debian/libterm-shellui-perl/libterm-shellui-perl-debian
 	url = git@github.com:tehnick/libterm-shellui-perl-debian.git

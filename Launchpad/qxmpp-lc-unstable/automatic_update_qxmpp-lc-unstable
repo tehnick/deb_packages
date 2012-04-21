@@ -5,10 +5,10 @@ if [ -z "${MAIN_DIR}" ]; then
     export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 fi
 
-export PACKAGE="qxmpp-unstable"
+export PACKAGE="qxmpp-lc-unstable"
 
 # Uncomment if necessary:
-#export SFX="-0ppa3"
+export SFX="-0ppa5"
 
 #export NEW_VER=0.3.45.2-171-g5c130b9
 

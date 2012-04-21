@@ -5,7 +5,7 @@ if [ -z "${MAIN_DIR}" ]; then
     export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 fi
 
-export PACKAGE="qxmpp"
+export PACKAGE="qxmpp-lc"
 
 # Uncomment if necessary:
 #export SFX="-0ppa3"
