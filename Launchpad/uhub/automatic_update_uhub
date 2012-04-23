@@ -9,7 +9,7 @@ export PACKAGE="uhub"
 # Uncomment if necessary:
 #export SFX="-1ppa4"
 
-#export NEW_VER=0.4.0~git20120405-390b63e
+#export NEW_VER=0.4.0~git20120423-9efe4bc
 
 
 # Launch common script for setting variables
