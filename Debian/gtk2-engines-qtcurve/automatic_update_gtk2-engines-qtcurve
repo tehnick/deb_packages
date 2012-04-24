@@ -10,6 +10,8 @@ export PACKAGE="gtk2-engines-qtcurve"
 # Uncomment if necessary:
 #export SFX="-2"
 
+#export NEW_VER=1.8.15
+
 # experimental unstable
 export MAIN_DIST="unstable"
 
@@ -24,7 +26,9 @@ GetOldVersion
 
 # Find new version
 export VER_LIST=$(curl "http://www.kde-look.org/content/download.php?content=40492&id=3" 2>&1 | grep "/QtCurve-Gtk2-" | sed -e "s:^.*/QtCurve-Gtk2-\(.*\).tar.bz2\".*:\1:")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 

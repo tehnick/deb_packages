@@ -87,7 +87,6 @@ PrintVersions()
         fi
     fi
 }
-if dpkg --compare-versions 2.2.5~beta1 gt 2.2.5; then echo true; fi
 
 
 # Print versions for unstable packages
