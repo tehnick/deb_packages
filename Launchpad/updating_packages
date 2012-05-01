@@ -60,7 +60,7 @@ cd "${TEMP_DIR}/${DIR_NAME}"
 # Note: I am using gnupg-agent for comfortable work
 
 # Full list of Ubuntu releases:
-# hardy intrepid jaunty karmic lucid maverick natty oneiric precise
+# hardy intrepid jaunty karmic lucid maverick natty oneiric precise quantal
 # But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
 
 # begin update for basic releases
@@ -83,7 +83,8 @@ fi
 cp -f debian/changelog ../changelog # copy basic changelog
 
 if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="oneiric
+    DIST_LIST="precise
+               oneiric
                natty
                maverick
                lucid"

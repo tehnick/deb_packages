@@ -56,7 +56,8 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DESTINATION="leechcraft-stable"
 
-export DIST_LIST="oneiric"
+export DIST_LIST="precise
+                  oneiric"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

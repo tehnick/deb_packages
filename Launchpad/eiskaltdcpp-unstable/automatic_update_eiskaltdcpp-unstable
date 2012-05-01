@@ -71,7 +71,8 @@ fi
 
 export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
 
-export DIST_LIST="oneiric
+export DIST_LIST="precise
+                  oneiric
                   natty"
 
 export A_TYPE="xz"

@@ -45,7 +45,8 @@ fi
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
-export DIST_LIST="oneiric
+export DIST_LIST="precise
+                  oneiric
                   natty"
 
 export A_TYPE="xz"
