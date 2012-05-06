@@ -8,7 +8,7 @@ fi
 export PACKAGE="qxmpp-lc-unstable"
 
 # Uncomment if necessary:
-export SFX="-0ppa5"
+#export SFX="-0ppa2"
 
 #export NEW_VER=0.3.45.2-171-g5c130b9
 

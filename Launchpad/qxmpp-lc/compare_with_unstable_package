@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
+
+export PACKAGE="qxmpp-lc"
+
+source "${MAIN_DIR}/Launchpad/compare_with_unstable_package"
