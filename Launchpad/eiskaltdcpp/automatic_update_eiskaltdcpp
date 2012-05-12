@@ -7,7 +7,7 @@ fi
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-#export SFX="-0ppa3"
+export SFX="-0ppa4"
 
 
 # Launch common script for setting variables
@@ -37,7 +37,7 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
     wget -4 -c "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.xz"
     mv -f "${PACKAGE}-${NEW_VER}.tar.xz" "${PACKAGE}_${NEW_VER}.orig.tar.xz"
 fi
@@ -49,8 +49,8 @@ export DIST_LIST="precise
                   oneiric
                   natty"
 
-export A_TYPE="xz"
-export D_ARGS="xJf"
+#export A_TYPE="xz"
+#export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
