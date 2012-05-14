@@ -7,7 +7,7 @@ fi
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-export SFX="-0ppa4"
+export SFX="-5ppa1"
 
 
 # Launch common script for setting variables
