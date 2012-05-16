@@ -23,7 +23,12 @@ cd "${TEMP_DIR}" || exit 1
 # Get old version
 GetOldVersion()
 {
-    export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+    
+    if [ -z "${EPOCH}" ]; then
+        export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
+    else
+        export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (${EPOCH}\(.*\)) .*/\1/")
+    fi
     export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]$/\1/")
     export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]\)$/\1/")
 }
@@ -41,8 +46,8 @@ DisplayVersions()
 
     echo "OLD_VER = ${OLD_VER}"
     echo "NEW_VER = ${NEW_VER}"
-    echo "OLD_VER_FULL = ${OLD_VER_FULL}"
-    echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+    echo "OLD_VER_FULL = ${EPOCH}${OLD_VER_FULL}"
+    echo "NEW_VER_FULL = ${EPOCH}${NEW_VER_FULL}"
     echo ;
 }
 
@@ -52,8 +57,8 @@ DisplayVersionsUnstable()
 {
     echo "Old  commit: ${OLD_COMMIT}"
     echo "Last commit: ${LAST_COMMIT}"
-    echo "OLD_VER_FULL = ${OLD_VER_FULL}"
-    echo "NEW_VER_FULL = ${NEW_VER_FULL}"
+    echo "OLD_VER_FULL = ${EPOCH}${OLD_VER_FULL}"
+    echo "NEW_VER_FULL = ${EPOCH}${NEW_VER_FULL}"
 }
 
 
@@ -70,7 +75,7 @@ PrintVersions()
             echo "${PACKAGE}" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             echo "<td>" >> "${HTML_FILE}"
-            echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
+            echo "${EPOCH}${OLD_VER_FULL}" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             if [ "${NEW_VER}" != "${OLD_VER}" ]; then
                 if ( dpkg --compare-versions "${NEW_VER}" gt "${OLD_VER}" ); then
@@ -81,7 +86,7 @@ PrintVersions()
             else
                 echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
             fi
-            echo "${NEW_VER_FULL}" >> "${HTML_FILE}"
+            echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             exit 0
         fi
@@ -102,14 +107,14 @@ if [ "${1}" = "print-versions" ]; then
         echo "${PACKAGE}" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         echo "<td>" >> "${HTML_FILE}"
-        echo "${OLD_VER_FULL}" >> "${HTML_FILE}"
+        echo "${EPOCH}${OLD_VER_FULL}" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         if [ "${LAST_COMMIT}" != "${OLD_COMMIT}" ]; then
             echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
         else
             echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
         fi
-        echo "${NEW_VER_FULL}" >> "${HTML_FILE}"
+        echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         exit 0
     fi
@@ -123,10 +128,10 @@ CheckVersions()
     if [ -z "${NEW_VER}" ]; then
         echo "NEW_VER is empty!";
         exit 1;
-    elif [ -z "${OLD_VER_FULL}" ]; then
+    elif [ -z "${EPOCH}${OLD_VER_FULL}" ]; then
         echo "OLD_VER_FULL is empty!";
         exit 1;
-    elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
+    elif [ "${EPOCH}${NEW_VER_FULL}" = "${EPOCH}${OLD_VER_FULL}" ]; then
         echo "Upgrading is not required.";
         exit 0;
     else
