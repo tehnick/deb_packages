@@ -8,7 +8,7 @@ fi
 export PACKAGE="kde-gtk-config"
 
 # Uncomment if necessary:
-#export SFX="-0ppa2"
+export SFX="-0ppa3"
 
 
 # Launch common script for setting variables
