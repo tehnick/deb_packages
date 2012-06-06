@@ -13,7 +13,7 @@ export EPOCH="3:"
 export SFX="-2"
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
