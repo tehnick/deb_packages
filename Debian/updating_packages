@@ -125,6 +125,9 @@ if [ -z "${DESTINATION}" ]; then
 fi
 
 if [ "${1}" = "upload" ]; then
+    echo "Command for testing build in clean and minimal environment:"
+    echo "sudo cowbuilder --build ${TEST_DIR}/${PACKAGE}_${NEW_VER_FULL}.dsc"
+    echo ;
     echo "Command for upload the package directly into Debian repository:"
     echo "dput -f ftp-eu ${TEST_DIR}/${PACKAGE}_${NEW_VER_FULL}_i386.changes";
     echo ;
