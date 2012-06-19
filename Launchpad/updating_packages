@@ -118,7 +118,7 @@ if [ "${1}" = "test" ]; then
     cd "${TEST_DIR}/${DIR_NAME}"
     echo ;
     echo "Start building packages..."
-    time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE}
+    time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
     cat  ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
     echo ;
