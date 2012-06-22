@@ -1,0 +1,121 @@
+#!/bin/bash
+
+# This is the common script for updating packages and uploading them to mentors.debian.net
+#
+# It make such actions:
+# 1) Update changelog.
+# 2) Prepare sources to upload.
+#    Build the package and check it using lintian (optional)
+# 3) Upload sources to mentors.debian.net
+
+
+if [ -z "${PACKAGE}" ]; then
+    echo "Error: PACKAGE variable is empty!";
+    exit 1;
+elif [ -z "${NEW_VER}" ]; then
+    echo "Error: NEW_VER variable is empty!";
+    exit 1;
+fi
+
+if [ -z "${A_TYPE}" ]; then
+    export A_TYPE="bz2"
+    export D_ARGS="xjf"
+fi
+
+if !([ -e "${PACKAGE}_${NEW_VER}.tar.${A_TYPE}" ]); then
+    echo "File ${PACKAGE}_${NEW_VER}.tar.${A_TYPE} is not found.";
+    exit 0;
+fi
+
+
+export DIR_NAME="${PACKAGE}-${NEW_VER}"
+export OLD_DIR_NAME="${PACKAGE}-${OLD_VER}"
+
+
+echo "Updating is started."
+
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+
+rm -rf "${PACKAGE}_${NEW_VER}.tar.${A_TYPE}"
+
+if ([ -d "${OLD_DIR_NAME}" ]); then
+    diff -urN "${OLD_DIR_NAME}" "${DIR_NAME}" > \
+              "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
+fi
+
+cd "${TEMP_DIR}/${DIR_NAME}"
+
+export DIST="${MAIN_DIST}"
+dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
+    "${UPDATE_STRING}"
+kwrite debian/changelog
+nice -n19 debuild -S -sa
+
+
+if [ "${1}" = "fast" ]; then
+    echo ;
+    echo "Fast upload (without tests)."
+    echo ;
+else
+    echo ;
+    echo "Now will be tests."
+    echo ;
+
+    rm -rf "${TEST_DIR}"
+    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
+
+    cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.tar.${A_TYPE}" "${TEST_DIR}/"
+
+    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
+    export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
+    cd "${TEST_DIR}/${DIR_NAME}"
+    echo ;
+    echo "Start building packages..."
+    time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
+    cat  ${WARNINGS_LOG_FILE}
+    echo "Finished building packages."
+    echo ;
+
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
+    cd "${TEST_DIR}"
+    echo ;
+    echo "Now running lintian:"
+    time nice -n19 lintian -ivIE --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    grep "E: " "${LINTIAN_LOG_FILE}"
+    grep "W: " "${LINTIAN_LOG_FILE}"
+    grep "I: " "${LINTIAN_LOG_FILE}"
+    grep "P: " "${LINTIAN_LOG_FILE}"
+    echo "Finished running lintian."
+    echo ;
+    kwrite ${LINTIAN_LOG_FILE}
+
+    cd "${TEMP_DIR}/${DIR_NAME}"
+fi
+
+
+kwrite debian/changelog
+
+
+cd "${TEMP_DIR}"
+cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
+
+if [ -z "${DESTINATION}" ]; then
+    export DESTINATION="mentors"
+fi
+
+if [ "${1}" = "upload" ]; then
+    echo "Command for testing build in clean and minimal environment:"
+    echo "sudo cowbuilder --build ${TEST_DIR}/${PACKAGE}_${NEW_VER_FULL}.dsc"
+    echo ;
+    echo "Command for upload the package directly into Debian repository:"
+    echo "dput -f ftp-eu ${TEST_DIR}/${PACKAGE}_${NEW_VER_FULL}_i386.changes";
+    echo ;
+else
+    dput -f ${DESTINATION} ${PACKAGE}_${NEW_VER_FULL}_source.changes || exit 1
+    echo "Package was uploaded successfully to: ${DESTINATION}"
+    echo ;
+fi
+
+echo "Update finished successfully"
+
