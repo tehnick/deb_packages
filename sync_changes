@@ -14,6 +14,7 @@ for PACKAGE in * ; do
     git checkout master
     git pull --all
     git push origin master
+    git push --tags
     echo "End ${PACKAGE}"
 done
 

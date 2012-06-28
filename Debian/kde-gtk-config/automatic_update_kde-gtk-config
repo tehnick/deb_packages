@@ -10,7 +10,7 @@ export PACKAGE="kde-gtk-config"
 export EPOCH="3:"
 
 # Uncomment if necessary:
-export SFX="-3"
+#export SFX="-3"
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -26,7 +26,6 @@ GetOldVersion
 
 # Find new version
 export PROJECT=kde-gtk-config
-#export VER_LIST=$(curl "http://proli.net/meu/netrunner/" 2>&1 | grep "kde-gtk-config" | grep ".tar.bz2" | sed -e "s:^.*href=\"kde-gtk-config-\(.*\).tar.bz2\">.*:\1:")
 export VER_LIST=$(curl "ftp://ftp.kde.org/pub/kde/stable/kde-gtk-config/" 2>&1 | grep "drwxr-xr-x" | sed -e "s:^.* \(.*\)$:\1:")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
