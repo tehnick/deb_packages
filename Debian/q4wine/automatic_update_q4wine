@@ -8,7 +8,7 @@ fi
 export PACKAGE="q4wine"
 
 # Uncomment if necessary:
-#export SFX="-3"
+export SFX="-2"
 
 # experimental unstable
 export MAIN_DIST="experimental"
