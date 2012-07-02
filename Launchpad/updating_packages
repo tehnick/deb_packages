@@ -102,7 +102,11 @@ mv ../changelog debian/changelog # rollback basic changelog
 # end update for other releases
 
 
-if [ "${1}" = "test" ]; then
+if [ "${1}" = "fast" ]; then
+    echo ;
+    echo "Fast upload (without tests)."
+    echo ;
+else
     echo ;
     echo "Now will be tests."
     echo ;

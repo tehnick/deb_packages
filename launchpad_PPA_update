@@ -9,7 +9,7 @@ for PACKAGE in eiskaltdcpp-unstable uhub-unstable q4wine-unstable \
                freedcpp-unstable psi-plus-i18n
 do
     echo "Begin ${PACKAGE}"
-    "${MAIN_DIR}/Launchpad/${PACKAGE}/automatic_update_${PACKAGE}"
+    "${MAIN_DIR}/Launchpad/${PACKAGE}/automatic_update_${PACKAGE}" fast
     echo "End ${PACKAGE}"
     echo " "
 done
