@@ -13,8 +13,8 @@ export PACKAGE="uhub"
 #export NEW_VER=0.4.0~git20120423-9efe4bc
 
 # experimental unstable
-export MAIN_DIST="unstable"
-#export MAIN_DIST="experimental"
+#export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
