@@ -64,8 +64,7 @@ export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
 
 export DESTINATION="leechcraft-unstable"
 
-export DIST_LIST="precise
-                  oneiric"
+export DIST_LIST="precise"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
