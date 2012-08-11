@@ -13,7 +13,7 @@ export PACKAGE="psi-plus"
 #export NEW_VER=0.15.5267
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
