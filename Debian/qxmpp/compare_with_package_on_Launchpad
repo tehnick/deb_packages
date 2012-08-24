@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
+
+export PACKAGE="qxmpp"
+
+source "${MAIN_DIR}/Debian/compare_with_package_on_Launchpad"
