@@ -124,7 +124,7 @@ if [ -z "${DESTINATION}" ]; then
     export DESTINATION="mentors"
 fi
 
-if [ "${1}" = "upload" ]; then
+if [ "${1}" = "debian" ]; then
     echo "Command for testing build in clean and minimal environment:"
     echo "sudo cowbuilder --build ${TEST_DIR}/${PACKAGE}_${NEW_VER_FULL}.dsc"
     echo ;
