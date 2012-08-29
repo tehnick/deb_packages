@@ -79,6 +79,9 @@
 [submodule "Debian/kde-style-qtcurve/kde-style-qtcurve-debian"]
 	path = Debian/kde-style-qtcurve/kde-style-qtcurve-debian
 	url = git@github.com:tehnick/kde-style-qtcurve-debian.git
+[submodule "Debian/qxmpp/qxmpp-debian"]
+	path = Debian/qxmpp/qxmpp-debian
+	url = tehnick-guest@git.debian.org/git/collab-maint/qxmpp.git
 [submodule "Debian/qxmpp-lc/qxmpp-lc-debian"]
 	path = Debian/qxmpp-lc/qxmpp-lc-debian
 	url = git@github.com:tehnick/qxmpp-lc-debian.git
