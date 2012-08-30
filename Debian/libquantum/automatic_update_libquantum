@@ -1,0 +1,62 @@
+#!/bin/bash
+
+
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
+
+export PACKAGE="libquantum"
+
+# Uncomment if necessary:
+export SFX="-3"
+
+#export NEW_VER=1.1.0
+
+# experimental unstable
+export MAIN_DIST="unstable"
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+export DEBEMAIL="Boris Pek <tehnick-8@yandex.ru>"
+
+
+# Get old version
+GetOldVersion
+
+
+# Find new version
+export VER_LIST=$(curl 'http://www.libquantum.de/downloads' 2>&1 | sed "s/<a /\n/g" | grep '/files/libquantum-' | sed -e "s:^.*/files/libquantum-\(.*\).tar.gz\".*$:\1:")
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}
+
+
+# Display versions
+DisplayVersions "http://www.libquantum.de/downloads"
+
+
+# Print versions
+PrintVersions "${@}"
+
+
+# Check versions
+CheckVersions
+
+
+# Get the sources
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    echo "Fix me!"
+    exit 1
+fi
+
+
+export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+export A_TYPE="gz"
+export D_ARGS="xzf"
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
+

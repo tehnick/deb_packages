@@ -106,3 +106,6 @@
 [submodule "Launchpad/kde-gtk-config/kde-gtk-config-debian"]
 	path = Launchpad/kde-gtk-config/kde-gtk-config-debian
 	url = git@github.com:tehnick/kde-gtk-config-debian.git
+[submodule "Debian/libquantum/libquantum-debian"]
+	path = Debian/libquantum/libquantum-debian
+	url = tehnick-guest@git.debian.org/git/debian-science/packages/libquantum.git
