@@ -14,7 +14,7 @@ export PACKAGE="yagf"
 #export NEW_VER=0.9+svn247
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
