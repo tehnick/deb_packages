@@ -82,6 +82,9 @@
 [submodule "Debian/qxmpp/qxmpp-debian"]
 	path = Debian/qxmpp/qxmpp-debian
 	url = tehnick-guest@git.debian.org/git/collab-maint/qxmpp.git
+[submodule "Launchpad/qxmpp/qxmpp-debian"]
+	path = Launchpad/qxmpp/qxmpp-debian
+	url = tehnick-guest@git.debian.org/git/collab-maint/qxmpp.git
 [submodule "Debian/qxmpp-lc/qxmpp-lc-debian"]
 	path = Debian/qxmpp-lc/qxmpp-lc-debian
 	url = git@github.com:tehnick/qxmpp-lc-debian.git
