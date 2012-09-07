@@ -66,12 +66,12 @@ cd "${TEMP_DIR}/${DIR_NAME}"
 # begin update for basic releases
 export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "${UPDATE_STRING}"
     if [ "${1}" = "test" ]; then kwrite debian/changelog; fi
     nice -n19 debuild -S -sa || exit 1
 else
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
     # debuild -S -sd
@@ -93,7 +93,7 @@ fi
 
 for DIST in ${DIST_LIST} ; do
     cp -f ../changelog debian/changelog
-    dch -b --force-distribution --distribution "${DIST}" -v "${NEW_VER}${SFX}~${DIST}1" \
+    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "Automated backport upload; no source changes."
     nice -n19 debuild -S -sd || exit 1
 done
