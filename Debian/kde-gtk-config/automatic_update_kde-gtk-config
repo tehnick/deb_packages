@@ -11,9 +11,12 @@ export EPOCH="3:"
 
 # Uncomment if necessary:
 #export SFX="-3"
+#export SFX="-1ubuntu1"
 
-# experimental unstable
-export MAIN_DIST="unstable"
+
+# experimental unstable quantal
+export MAIN_DIST="experimental"
+#export MAIN_DIST="quantal"
 
 
 # Launch common script for setting variables
