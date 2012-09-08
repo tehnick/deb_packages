@@ -10,19 +10,20 @@ export HTML_FILE="${MAIN_DIR}/popcon-stat.html"
 
 echo "HTML_FILE = ${HTML_FILE}"
 
-rm -rf "${POPCON_DATA_DIR}"/*
+if [ "${1}" != "local" ]; then
+    rm -rf "${POPCON_DATA_DIR}"/*
+    # Download data files
+    mkdir -p "${POPCON_DATA_DIR}/Debian"
+    cd "${POPCON_DATA_DIR}/Debian"
+    wget -4 -c "http://popcon.debian.org/by_inst.gz"
+    gzip -d by_inst.gz
+    #
+    mkdir -p "${POPCON_DATA_DIR}/Ubuntu"
+    cd "${POPCON_DATA_DIR}/Ubuntu"
+    wget -4 -c "http://popcon.ubuntu.com/by_inst.gz"
+    gzip -d by_inst.gz
+fi
 
-# Download data files
-mkdir -p "${POPCON_DATA_DIR}/Debian"
-cd "${POPCON_DATA_DIR}/Debian"
-wget -4 -c "http://popcon.debian.org/by_inst.gz"
-gzip -d by_inst.gz
-#
-mkdir -p "${POPCON_DATA_DIR}/Ubuntu"
-cd "${POPCON_DATA_DIR}/Ubuntu"
-wget -4 -c "http://popcon.ubuntu.com/by_inst.gz"
-gzip -d by_inst.gz
-#
 cd "${MAIN_DIR}"
 
 # Update file
@@ -50,12 +51,13 @@ echo "<b>Last update:</b> ${DATE_TIME}<br>" >> "${HTML_FILE}"
 echo "<br>" >> "${HTML_FILE}"
 
 
-cd "${MAIN_DIR}"/Debian/
-PACKAGES_NUMBER=$(ls */automatic_update_* | wc -l)
-echo "<b>Debian (${PACKAGES_NUMBER}):</b>" >> "${HTML_FILE}"
+PACKAGES_LIST=$(grep "Source: " "${MAIN_DIR}"/*/*/*-debian/debian/control | sed -e "s|^.*Source: \(.*\)$|\1|" | sort | uniq)
+PACKAGES_NUMBER=$(echo "${PACKAGES_LIST}" | wc -l)
+echo "<b>There are ${PACKAGES_NUMBER} packages for Debian and Ubuntu:</b>" >> "${HTML_FILE}"
+
 
 echo "<div id=\"stat\">" >> "${HTML_FILE}"
-echo "<table id=\"Debian\">" >> "${HTML_FILE}"
+echo "<table id=\"Stat\">" >> "${HTML_FILE}"
 echo "<thead>" >> "${HTML_FILE}"
 echo "<tr>" >> "${HTML_FILE}"
 echo "<th>" >> "${HTML_FILE}"
@@ -65,24 +67,25 @@ echo "<th>" >> "${HTML_FILE}"
 echo "Package" >> "${HTML_FILE}"
 echo "</th>" >> "${HTML_FILE}"
 echo "<th>" >> "${HTML_FILE}"
-echo "Number of installed packages" >> "${HTML_FILE}"
+echo "Number of packages installed in Debian" >> "${HTML_FILE}"
+echo "</th>" >> "${HTML_FILE}"
+echo "<th>" >> "${HTML_FILE}"
+echo "Number of packages installed in Ubuntu" >> "${HTML_FILE}"
 echo "</th>" >> "${HTML_FILE}"
 echo "</tr>" >> "${HTML_FILE}"
 echo "</thead>" >> "${HTML_FILE}"
 echo "<tbody>" >> "${HTML_FILE}"
 
 
-for PACKAGE in * ; do
-    PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}/${PACKAGE}-debian/debian"
-    if [ ! -e "${PKG_DIR}/control" ]; then continue; fi
+for PACKAGE in ${PACKAGES_LIST} ; do
     echo;
     echo "Begin ${PACKAGE}"
     #
-    PKG_LIST=$(grep "Package: " "${PKG_DIR}/control" | sed -e "s|^Package: \(.*\)$|\1|")
+    PKG_LIST=$(grep "Package: " "${MAIN_DIR}"/*/${PACKAGE}/${PACKAGE}-debian/debian/control | sed -e "s|^.*Package: \(.*\)$|\1|" | sort | uniq)
     FIRST_LINE=true
     for PKG in ${PKG_LIST} ; do
-        PKG_STAT=$(grep " ${PKG} " "${POPCON_DATA_DIR}/Debian/by_inst")
-        PKG_INST=$(echo "${PKG_STAT}" | awk '{print $3}')
+        PKG_INST_DEBIAN=$(grep " ${PKG} " "${POPCON_DATA_DIR}/Debian/by_inst" | awk '{print $3}')
+        PKG_INST_UBUNTU=$(grep " ${PKG} " "${POPCON_DATA_DIR}/Ubuntu/by_inst" | awk '{print $3}')
         if [ "${TD}" = "<td>" ]; then
             TDC="<td>"
             TD="<td class=\"color-odd\">"
@@ -93,19 +96,23 @@ for PACKAGE in * ; do
         if [ "${FIRST_LINE}" = "true" ]; then
             FIRST_LINE=false
             echo "<tr class=\"td-separator\">" >> "${HTML_FILE}"
-            echo "<td>" >> "${HTML_FILE}"
-            echo "<a href=\"http://qa.debian.org/popcon.php?package=${PACKAGE}\">${PACKAGE}</a>" >> "${HTML_FILE}"
-
+            echo "<td style=\"font-weight: bold;\">" >> "${HTML_FILE}"
+            echo "${PACKAGE}" >> "${HTML_FILE}"
+            echo "(<a href=\"http://packages.qa.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
+            echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>)" >> "${HTML_FILE}"
         else
             echo "<tr>" >> "${HTML_FILE}"
             echo "<td>" >> "${HTML_FILE}"
         fi
         echo "</td>" >> "${HTML_FILE}"
         echo "${TD}" >> "${HTML_FILE}"
-        echo "<a href=\"http://qa.debian.org/popcon-graph.php?packages=${PKG}\">${PKG}</a>" >> "${HTML_FILE}"
+        echo "${PKG}" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         echo "${TD}" >> "${HTML_FILE}"
-        echo "<a href=\"http://qa.debian.org/popcon-graph.php?packages=${PKG}&show_installed=on&want_legend=on&want_ticks=on&date_fmt=%25Y-%25m&beenhere=1\">${PKG_INST}</a>" >> "${HTML_FILE}"
+        echo "<a href=\"http://qa.debian.org/popcon-graph.php?packages=${PKG}&show_installed=on&want_legend=on&want_ticks=on&date_fmt=%25Y-%25m&beenhere=1\">${PKG_INST_DEBIAN}</a>" >> "${HTML_FILE}"
+        echo "</td>" >> "${HTML_FILE}"
+        echo "${TD}" >> "${HTML_FILE}"
+        echo "<a href=\"http://popcon2.net/package/${PKG}.html#graph-1\">${PKG_INST_UBUNTU}</a>" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         echo "</tr>" >> "${HTML_FILE}"
     done
@@ -118,143 +125,6 @@ echo "</table>" >> "${HTML_FILE}"
 echo "</div>" >> "${HTML_FILE}"
 echo "<br>" >> "${HTML_FILE}"
 
-
-TD=""
-cd "${MAIN_DIR}"/Debian/
-PACKAGES_NUMBER=$(ls */automatic_update_* | wc -l)
-echo "<b>Ubuntu (${PACKAGES_NUMBER}):</b>" >> "${HTML_FILE}"
-
-echo "<div id=\"stat\">" >> "${HTML_FILE}"
-echo "<table id=\"Ubuntu\">" >> "${HTML_FILE}"
-echo "<thead>" >> "${HTML_FILE}"
-echo "<tr>" >> "${HTML_FILE}"
-echo "<th>" >> "${HTML_FILE}"
-echo "Source Name" >> "${HTML_FILE}"
-echo "</th>" >> "${HTML_FILE}"
-echo "<th>" >> "${HTML_FILE}"
-echo "Package" >> "${HTML_FILE}"
-echo "</th>" >> "${HTML_FILE}"
-echo "<th>" >> "${HTML_FILE}"
-echo "Number of installed packages" >> "${HTML_FILE}"
-echo "</th>" >> "${HTML_FILE}"
-echo "</tr>" >> "${HTML_FILE}"
-echo "</thead>" >> "${HTML_FILE}"
-echo "<tbody>" >> "${HTML_FILE}"
-
-for PACKAGE in * ; do
-    PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}/${PACKAGE}-debian/debian"
-    if [ ! -e "${PKG_DIR}/control" ]; then continue; fi
-    echo;
-    echo "Begin ${PACKAGE}"
-    #
-    PKG_LIST=$(grep "Package: " "${PKG_DIR}/control" | sed -e "s|^Package: \(.*\)$|\1|")
-    FIRST_LINE=true
-    for PKG in ${PKG_LIST} ; do
-        PKG_STAT=$(grep " ${PKG} " "${POPCON_DATA_DIR}/Ubuntu/by_inst")
-        PKG_INST=$(echo "${PKG_STAT}" | awk '{print $3}')
-        if [ "${TD}" = "<td>" ]; then
-            TDC="<td>"
-            TD="<td class=\"color-odd\">"
-        else
-            TD="<td>"
-            TDC="<td class=\"color-odd\">"
-        fi
-        if [ "${FIRST_LINE}" = "true" ]; then
-            FIRST_LINE=false
-            echo "<tr class=\"td-separator\">" >> "${HTML_FILE}"
-            echo "<td>" >> "${HTML_FILE}"
-            echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">${PACKAGE}</a>" >> "${HTML_FILE}"
-
-        else
-            echo "<tr>" >> "${HTML_FILE}"
-            echo "<td>" >> "${HTML_FILE}"
-        fi
-        echo "</td>" >> "${HTML_FILE}"
-        echo "${TD}" >> "${HTML_FILE}"
-        echo "<a href=\"http://popcon2.net/package/${PKG}.html#graph-0\">${PKG}</a>" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "${TD}" >> "${HTML_FILE}"
-        echo "<a href=\"http://popcon2.net/package/${PKG}.html#graph-1\">${PKG_INST}</a>" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "</tr>" >> "${HTML_FILE}"
-    done
-    #
-    echo "End ${PACKAGE}"
-done
-
-echo "</tbody>" >> "${HTML_FILE}"
-echo "</table>" >> "${HTML_FILE}"
-echo "</div>" >> "${HTML_FILE}"
-echo "<br>" >> "${HTML_FILE}"
-
-
-TD=""
-cd "${MAIN_DIR}"/Launchpad/
-PACKAGES_NUMBER=$(ls */automatic_update_* | wc -l)
-echo "<b>Launchpad (${PACKAGES_NUMBER}):</b>" >> "${HTML_FILE}"
-
-echo "<div id=\"stat\">" >> "${HTML_FILE}"
-echo "<table id=\"Launchpad\">" >> "${HTML_FILE}"
-echo "<thead>" >> "${HTML_FILE}"
-echo "<tr>" >> "${HTML_FILE}"
-echo "<th>" >> "${HTML_FILE}"
-echo "Source Name" >> "${HTML_FILE}"
-echo "</th>" >> "${HTML_FILE}"
-echo "<th>" >> "${HTML_FILE}"
-echo "Package" >> "${HTML_FILE}"
-echo "</th>" >> "${HTML_FILE}"
-echo "<th>" >> "${HTML_FILE}"
-echo "Number of installed packages" >> "${HTML_FILE}"
-echo "</th>" >> "${HTML_FILE}"
-echo "</tr>" >> "${HTML_FILE}"
-echo "</thead>" >> "${HTML_FILE}"
-echo "<tbody>" >> "${HTML_FILE}"
-
-for PACKAGE in * ; do
-    PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}/${PACKAGE}-debian/debian"
-    if [ ! -e "${PKG_DIR}/control" ]; then continue; fi
-    echo;
-    echo "Begin ${PACKAGE}"
-    #
-    PKG_LIST=$(grep "Package: " "${PKG_DIR}/control" | sed -e "s|^Package: \(.*\)$|\1|")
-    FIRST_LINE=true
-    for PKG in ${PKG_LIST} ; do
-        PKG_STAT=$(grep " ${PKG} " "${POPCON_DATA_DIR}/Ubuntu/by_inst")
-        PKG_INST=$(echo "${PKG_STAT}" | awk '{print $3}')
-        if [ "${TD}" = "<td>" ]; then
-            TDC="<td>"
-            TD="<td class=\"color-odd\">"
-        else
-            TD="<td>"
-            TDC="<td class=\"color-odd\">"
-        fi
-        if [ "${FIRST_LINE}" = "true" ]; then
-            FIRST_LINE=false
-            echo "<tr class=\"td-separator\">" >> "${HTML_FILE}"
-            echo "<td>" >> "${HTML_FILE}"
-            echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">${PACKAGE}</a>" >> "${HTML_FILE}"
-
-        else
-            echo "<tr>" >> "${HTML_FILE}"
-            echo "<td>" >> "${HTML_FILE}"
-        fi
-        echo "</td>" >> "${HTML_FILE}"
-        echo "${TD}" >> "${HTML_FILE}"
-        echo "<a href=\"http://popcon2.net/package/${PKG}.html#graph-0\">${PKG}</a>" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "${TD}" >> "${HTML_FILE}"
-        echo "<a href=\"http://popcon2.net/package/${PKG}.html#graph-1\">${PKG_INST}</a>" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "</tr>" >> "${HTML_FILE}"
-    done
-    #
-    echo "End ${PACKAGE}"
-done
-
-echo "</tbody>" >> "${HTML_FILE}"
-echo "</table>" >> "${HTML_FILE}"
-echo "</div>" >> "${HTML_FILE}"
-echo "<br>" >> "${HTML_FILE}"
 
 echo "<b>See also:</b>" >> "${HTML_FILE}"
 echo "<a href=\"http://qa.debian.org/developer.php?login=Boris%20Pek\">qa.debian.org</a>" >> "${HTML_FILE}"
