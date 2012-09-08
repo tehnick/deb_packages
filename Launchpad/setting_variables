@@ -78,8 +78,6 @@ if [ "${1}" = "print-versions" ]; then
         HTML_FILE="${2}"
         echo "<td style=\"font-weight: bold;\">" >> "${HTML_FILE}"
         echo "${PACKAGE}" >> "${HTML_FILE}"
-        echo "(<a href=\"http://packages.qa.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
-        echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>)" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         echo "<td>" >> "${HTML_FILE}"
         echo "${EPOCH}${OLD_VER_FULL}" >> "${HTML_FILE}"
@@ -94,6 +92,10 @@ if [ "${1}" = "print-versions" ]; then
             echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
         fi
         echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
+        echo "</td>" >> "${HTML_FILE}"
+        echo "<td>" >> "${HTML_FILE}"
+        echo "<a href=\"http://packages.qa.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
+        echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         exit 0
     fi
@@ -112,8 +114,6 @@ if [ "${1}" = "print-versions" ]; then
         HTML_FILE="${2}"
         echo "<td style=\"font-weight: bold;\">" >> "${HTML_FILE}"
         echo "${PACKAGE}" >> "${HTML_FILE}"
-        echo "(<a href=\"http://packages.qa.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
-        echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>)" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         echo "<td>" >> "${HTML_FILE}"
         echo "${EPOCH}${OLD_VER_FULL}" >> "${HTML_FILE}"
@@ -124,6 +124,10 @@ if [ "${1}" = "print-versions" ]; then
             echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
         fi
         echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
+        echo "</td>" >> "${HTML_FILE}"
+        echo "<td>" >> "${HTML_FILE}"
+        echo "<a href=\"http://packages.qa.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
+        echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         exit 0
     fi
