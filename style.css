@@ -56,7 +56,6 @@ a:hover {
     color: #0000aa;
 }
 
-
 /* --[ stat ]--*/
 #stat {
     padding: 0px;
@@ -105,3 +104,8 @@ a:hover {
     padding-left: 4px;
 }
 
+.td-separator {
+    border-top-style: solid; 
+    border-top-width: 1px; 
+    border-top-color: #666;
+}
