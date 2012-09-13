@@ -25,6 +25,7 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 GetOldVersion
 export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/" | sed 's/\+dfsg//')
 
+
 # Find new version
 export DEVELOPER=0xd34df00d
 export PROJECT=leechcraft

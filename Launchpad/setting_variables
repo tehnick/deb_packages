@@ -15,7 +15,7 @@ export TEMP_DIR="${PKG_DIR}/TEMP"
 export TEST_DIR="${TEMP_DIR}/TEST"
 
 cd "${PKG_DIR}/${PACKAGE}-debian" || exit 1
-git checkout launchpad 2> /dev/null || exit 1
+#git checkout launchpad 2> /dev/null || exit 1
 
 mkdir -p "${TEMP_DIR}"
 cd "${TEMP_DIR}" || exit 1
