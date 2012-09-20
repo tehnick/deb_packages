@@ -103,3 +103,6 @@
 [submodule "Debian/libquantum/libquantum-debian"]
 	path = Debian/libquantum/libquantum-debian
 	url = tehnick-guest@git.debian.org/git/debian-science/packages/libquantum.git
+[submodule "Debian/elmerfem/elmerfem-debian"]
+	path = Debian/elmerfem/elmerfem-debian
+	url = tehnick-guest@git.debian.org/git/debian-science/packages/elmerfem.git

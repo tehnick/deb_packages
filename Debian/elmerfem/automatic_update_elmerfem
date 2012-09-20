@@ -1,0 +1,74 @@
+#!/bin/bash
+
+
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
+
+export PACKAGE="elmerfem"
+
+# Uncomment if necessary:
+#export SFX="-3"
+
+export NEW_VER=6.1.0.svn.5396.dfsg2
+
+# experimental unstable
+export MAIN_DIST="unstable"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+
+# Get old version
+GetOldVersion
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
+
+
+# Find new version
+export CUR_VER="6.1.0"
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER="${CUR_VER}.svn.${LAST_COMMIT}.dfsg"
+    export LAST_COMMIT=$(svn log https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
+else
+    export LAST_COMMIT=$(echo ${NEW_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}
+
+
+echo "https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk/"
+echo ;
+# Display versions
+DisplayVersionsUnstable
+
+
+# Print versions
+PrintVersions "${@}"
+
+
+# Check versions
+#CheckVersionsUnstable
+
+
+# Get the sources
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    echo "FIX ME!" ; exit 1
+    # Begin local updating
+    export SVN_DIR="${HOME}/WorkDir/Devel/FreeDC++/freedcpp_trunk/"
+    svn update "${SVN_DIR}"
+    svn export "${SVN_DIR}" "freedcpp-unstable-${NEW_VER}"
+    # End local updating
+    # Or you can use:
+    # svn export http://freedcpp.googlecode.com/svn/trunk/ "freedcpp-unstable-$NEW_VER/"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
+fi
+
+
+export UPDATE_STRING="Minor update from SVN trunk branch."
+
+export A_TYPE="gz"
+export D_ARGS="xzf"
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
+
