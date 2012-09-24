@@ -8,16 +8,13 @@ fi
 export PACKAGE="elmerfem"
 
 # Uncomment if necessary:
-#export SFX="-3"
+export SFX="-1ppa1"
 
-#export NEW_VER=6.1.0.svn.5396.dfsg2
-
-# experimental unstable
-export MAIN_DIST="unstable"
+export NEW_VER=6.1.0.svn.5396.dfsg2
 
 
 # Launch common script for setting variables
-source "${MAIN_DIR}/Debian/setting_variables"
+source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
 # Get old version
@@ -33,7 +30,7 @@ if [ -z "${NEW_VER=}" ]; then
 else
     export LAST_COMMIT=$(echo ${NEW_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
 fi
-export NEW_VER_FULL=${NEW_VER}${SFX}
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 echo "https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk/"
@@ -47,7 +44,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersionsUnstable
+CheckVersionsUnstable
 
 
 # Get the sources
@@ -58,9 +55,13 @@ fi
 
 export UPDATE_STRING="New upstream revision."
 
+export DESTINATION="elmerfem"
+
+export DIST_LIST="precise"
+
 export A_TYPE="gz"
 export D_ARGS="xzf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
-source "${MAIN_DIR}/Debian/updating_packages"
+source "${MAIN_DIR}/Launchpad/updating_packages"
 

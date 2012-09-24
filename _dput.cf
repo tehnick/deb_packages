@@ -70,6 +70,16 @@ run_dinstall = 0
 progress_indicator = 2
 passive_ftp = 1
 
+[elmerfem]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~tehnick/elmerfem/ubuntu/
+login = anonymous
+allow_unsigned_uploads = 0
+run_dinstall = 0
+progress_indicator = 2
+passive_ftp = 1
+
 [mentors]
 fqdn = mentors.debian.net
 method = http
