@@ -10,7 +10,7 @@ export PACKAGE="elmerfem"
 # Uncomment if necessary:
 #export SFX="-3"
 
-export NEW_VER=6.1.0.svn.5396.dfsg2
+#export NEW_VER=6.1.0.svn.5396.dfsg2
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -28,8 +28,8 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/"
 # Find new version
 export CUR_VER="6.1.0"
 if [ -z "${NEW_VER=}" ]; then
-    export NEW_VER="${CUR_VER}.svn.${LAST_COMMIT}.dfsg"
     export LAST_COMMIT=$(svn log https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
+    export NEW_VER="${CUR_VER}.svn.${LAST_COMMIT}.dfsg"
 else
     export LAST_COMMIT=$(echo ${NEW_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
 fi
