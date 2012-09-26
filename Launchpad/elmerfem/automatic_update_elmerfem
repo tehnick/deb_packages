@@ -8,9 +8,9 @@ fi
 export PACKAGE="elmerfem"
 
 # Uncomment if necessary:
-export SFX="-1ppa1"
+#export SFX="-1ppa1"
 
-export NEW_VER=6.1.0.svn.5396.dfsg2
+#export NEW_VER=6.1.0.svn.5396.dfsg2
 
 
 # Launch common script for setting variables

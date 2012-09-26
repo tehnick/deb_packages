@@ -5,7 +5,7 @@ if [ -z "${MAIN_DIR}" ]; then
     export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 fi
 
-export PACKAGE="psi-plus-i18n"
+export PACKAGE="psi-plus-l10n"
 
 # Uncomment if necessary:
 #export SFX="-0ppa2"
@@ -20,8 +20,8 @@ GetOldVersion
 
 
 # Find new version
-export DEVELOPER=tehnick
-export PROJECT=psi-plus-i18n
+export DEVELOPER=psi-plus
+export PROJECT=psi-plus-l10n
 export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\" .*:\1:")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
@@ -43,7 +43,7 @@ CheckVersions
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-    rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
+    rm -rf  "${NEW_VER}" "${PACKAGE}-${NEW_VER}"
     # sources
     wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
     rm -rf ${DEVELOPER}-${PROJECT}-*
@@ -57,6 +57,10 @@ fi
 export UPDATE_STRING="New upstream release."
 
 export DESTINATION="psi-plus"
+
+export DIST_LIST="precise
+                  oneiric
+                  natty"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

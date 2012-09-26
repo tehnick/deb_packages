@@ -4,6 +4,6 @@ if [ -z "${MAIN_DIR}" ]; then
     export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
 fi
 
-export PACKAGE="psi-plus-i18n"
+export PACKAGE="psi-plus-l10n"
 
 source "${MAIN_DIR}/Debian/compare_with_package_on_Launchpad"
