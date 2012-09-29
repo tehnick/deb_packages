@@ -8,7 +8,7 @@ fi
 export PACKAGE="leechcraft"
 
 # Uncomment if necessary:
-export SFX="-0ppa4"
+export SFX="-0ppa6"
 
 export RPKGD="+dfsg"
 
