@@ -67,7 +67,7 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
 fi
 
 
-export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
+export UPDATE_STRING="Minor update from Git ${BRANCH} branch."
 
 export DESTINATION="leechcraft-unstable"
 

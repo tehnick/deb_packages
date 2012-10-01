@@ -23,10 +23,15 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/"
 
 
 # Find new version
-export CUR_VER="6.1.0"
+export SVN_REPO="https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk"
+export CUR_VER=$(curl "${SVN_REPO}/fem/configure" 2>&1 | grep "\ VERSION=" | sed -e "s/^ VERSION=\(.\+\)$/\1/")
+if [ -z "${CUR_VER}" ]; then
+    echo "Failed to define current version."
+    exit 1
+fi
 if [ -z "${NEW_VER=}" ]; then
-    export LAST_COMMIT=$(svn log https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
-    export NEW_VER="${CUR_VER}.svn.${LAST_COMMIT}.dfsg"
+    export LAST_COMMIT=$(svn log "${SVN_REPO}" | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
+    export NEW_VER="${CUR_VER}.svn.${LAST_COMMIT}+dfsg"
 else
     export LAST_COMMIT=$(echo ${NEW_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
 fi
@@ -49,7 +54,7 @@ CheckVersionsUnstable
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" | head -n 3
+    "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
 fi
 
 
