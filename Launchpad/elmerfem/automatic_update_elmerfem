@@ -53,7 +53,7 @@ CheckVersionsUnstable
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
     "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
 fi
 
@@ -64,8 +64,8 @@ export DESTINATION="elmerfem"
 
 export DIST_LIST="precise"
 
-export A_TYPE="gz"
-export D_ARGS="xzf"
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Launchpad/updating_packages"
