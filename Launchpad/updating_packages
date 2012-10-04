@@ -68,7 +68,7 @@ export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "${UPDATE_STRING}"
-    if [ "${1}" = "test" ]; then kwrite debian/changelog; fi
+    if [ ${EDIT_CHANGELOG} = "true" ]; then kwrite debian/changelog; fi
     nice -n19 debuild -S -sa || exit 1
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \

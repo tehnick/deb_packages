@@ -8,7 +8,7 @@ fi
 export PACKAGE="qxmpp"
 
 # Uncomment if necessary:
-#export SFX="-2ppa1"
+export SFX="-1ppa1"
 
 #export NEW_VER=0.4.0~git20120405-390b63e
 
