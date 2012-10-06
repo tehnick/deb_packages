@@ -8,7 +8,7 @@ fi
 export PACKAGE="elmerfem"
 
 # Uncomment if necessary:
-#export SFX="-1ppa1"
+export SFX="-0ppa3"
 
 #export NEW_VER=6.1.0.svn.5396.dfsg2
 
@@ -66,6 +66,8 @@ export DIST_LIST="precise"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
+
+export CLEAN_BUILD="true"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Launchpad/updating_packages"

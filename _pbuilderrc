@@ -1,5 +1,5 @@
-# pbuilder defaults; edit /etc/pbuilderrc to override these and see
-# pbuilderrc.5 for documentation
+# Files: /root/.pbuilderrc /etc/pbuilderrc
+# Documentation: pbuilderrc.5
 
 BASETGZ=/home/user/WorkDir/Devel/pbuilder/base.tgz
 BASEPATH="/home/user/WorkDir/Devel/pbuilder/base.cow"

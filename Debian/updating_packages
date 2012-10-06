@@ -89,10 +89,16 @@ else
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
-    cd "${TEST_DIR}/${DIR_NAME}"
     echo ;
+
+    cd "${TEST_DIR}/${DIR_NAME}"
     echo "Start building packages..."
-    time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
+    if [ "${CLEAN_BUILD}" = "true" ]; then
+        sudo time nice -n19 pdebuild --pbuilder cowbuilder --buildresult "${TEST_DIR}" > \
+                                     ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
+    else
+        time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
+    fi
     cat  ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
     echo ;
