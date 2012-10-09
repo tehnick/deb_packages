@@ -8,7 +8,7 @@ fi
 export PACKAGE="elmerfem"
 
 # Uncomment if necessary:
-export SFX="-0ppa3"
+#export SFX="-0ppa3"
 
 #export NEW_VER=6.1.0.svn.5396.dfsg2
 
