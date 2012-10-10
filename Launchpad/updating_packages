@@ -111,8 +111,14 @@ else
     echo "Now will be tests."
     echo ;
 
-    rm -rf "${TEST_DIR}"
-    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
+    if [ "${CLEAN_BUILD}" = "true" ]; then
+        sudo rm -rf "${TEST_DIR}"/*
+    else
+        rm -rf "${TEST_DIR}"/*
+    fi
+
+    mkdir -p "${TEST_DIR}"
+    cd "${TEST_DIR}" || exit 1
 
     cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${TEST_DIR}/"
