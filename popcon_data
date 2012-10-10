@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Test Internet connection:
+host github.com > /dev/null || exit 1
+
 export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
 export POPCON_DATA_DIR="${MAIN_DIR}/Popcon"

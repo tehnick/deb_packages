@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Test Internet connection:
+host github.com > /dev/null || exit 1
+
 export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
 export HTML_FILE="${MAIN_DIR}/deb-packages.html"
