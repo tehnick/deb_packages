@@ -1,7 +1,11 @@
 #!/bin/bash
 
 if [ -z "${MAIN_DIR}" ]; then
-    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+    if [[ ${0} =~ ^/.+$ ]]; then
+        export MAIN_DIR="$(dirname ${0})/../.."
+    else
+        export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+    fi
 fi
 
 export PACKAGE="eiskaltdcpp"
