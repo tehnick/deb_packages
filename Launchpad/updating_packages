@@ -35,6 +35,9 @@ if [ -z "${OLD_DIR_NAME}" ]; then
     export OLD_DIR_NAME="${PACKAGE}-${OLD_VER}"
 fi
 
+if [ "${1}" = "clean" ]; then
+    export CLEAN_BUILD="true"
+fi
 
 echo "Updating is started."
 

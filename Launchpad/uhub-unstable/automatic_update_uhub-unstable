@@ -75,6 +75,10 @@ export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
+export DIST_LIST="precise
+                  oneiric
+                  natty"
+
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 
