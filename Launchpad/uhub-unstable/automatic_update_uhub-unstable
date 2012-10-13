@@ -24,7 +24,7 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 # Get old version
 GetOldVersion
-export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\{6,6\}-\(.*\)$/\1/")
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-*[0-9]\+-g\(.*\)$/\1/")
 
 
 # Find new version
@@ -34,15 +34,13 @@ export LAST_SRC_INFO=$(curl -I "https://nodeload.github.com/${DEVELOPER}/${PROJE
 export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
 export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
 
-#export CUR_VER=$(curl "https://raw.github.com/janvidar/uhub/master/version.h" 2>&1 | grep "#define VERSION" | sed -e "s/^.*#define VERSION \"\(.*\+\)\"$/\1/")
-export CUR_VER="0.4.0"
-
-export DATE=$(date "+%Y%m%d-%H%M%S")
-export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
-# Update when 0.4.1 is released.
-#if [ -z "${NEW_VER}" ]; then
-#    export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
-#fi
+if [ -z "${NEW_VER}" ]; then
+    # Temporary hack:
+    export CUR_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/" | sed -e "s/^\(.*\)-[0-9]\+-g\(.*\)$/\1/")
+    export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/" | sed "s/${CUR_VER}-/${CUR_VER}-r/")
+    # Update when 0.4.1 is released.
+    # export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
+fi
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
 
 
@@ -55,25 +53,19 @@ PrintVersionsUnstable "${@}"
 
 
 # Check versions
-CheckVersionsUnstable
+CheckVersions
 
 
 # Get the sources
-if !([ -e "${LAST_SRC}.tar.gz" ]); then
-    rm -f ${BRANCH}*
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+    rm -rf  "${PACKAGE}-${NEW_VER}"
+    # sources
+    rm -f "${BRANCH}"*
     wget -4 -c "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}"
-    rm -f ${DEVELOPER}-${PROJECT}-*.tar.gz*
-    mv ${BRANCH} "${LAST_SRC}.tar.gz"
-fi
-
-if !([ -e "${LAST_SRC}.tar.gz" ]); then
-    echo "File ${LAST_SRC}.tar.gz is not found.";
-    exit 0;
-fi
-
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-    tar xzf "${LAST_SRC}".tar.gz
-    mv "${DEVELOPER}-${PROJECT}-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
+    rm -rf ${DEVELOPER}-${PROJECT}-*
+    tar xzf "${BRANCH}"
+    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
+    # tarball
     tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 

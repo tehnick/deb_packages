@@ -58,7 +58,7 @@ CheckVersions
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-    rm -rf  "${PACKAGE}-${NEW_VER}"/
+    rm -rf  "${PACKAGE}-${NEW_VER}"
     # sources
     rm -f "${BRANCH}"*
     wget -4 -c "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}"
