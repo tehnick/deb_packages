@@ -33,7 +33,7 @@ if [ -z "${CUR_VER}" ]; then
     echo "Failed to define current version."
     exit 1
 fi
-if [ -z "${NEW_VER=}" ]; then
+if [ -z "${NEW_VER}" ]; then
     export LAST_COMMIT=$(svn log "${SVN_REPO}" | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
     export NEW_VER="${CUR_VER}.svn.${LAST_COMMIT}+dfsg"
 else
