@@ -64,7 +64,8 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
-export DIST_LIST="precise
+export DIST_LIST="quantal
+                  precise
                   oneiric
                   natty"
 

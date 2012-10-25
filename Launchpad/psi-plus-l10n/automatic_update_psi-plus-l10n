@@ -62,7 +62,8 @@ export UPDATE_STRING="New upstream release."
 
 export DESTINATION="psi-plus"
 
-export DIST_LIST="precise
+export DIST_LIST="quantal
+                  precise
                   oneiric
                   natty"
 

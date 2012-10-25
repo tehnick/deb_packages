@@ -75,7 +75,8 @@ export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
-export DIST_LIST="precise
+export DIST_LIST="quantal
+                  precise
                   oneiric
                   natty"
 

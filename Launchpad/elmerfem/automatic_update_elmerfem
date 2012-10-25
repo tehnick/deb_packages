@@ -66,7 +66,8 @@ export UPDATE_STRING="New upstream revision."
 
 export DESTINATION="elmerfem"
 
-export DIST_LIST="precise"
+export DIST_LIST="quantal
+                  precise"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

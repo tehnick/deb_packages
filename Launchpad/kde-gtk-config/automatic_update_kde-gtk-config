@@ -55,7 +55,8 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DESTINATION="kde-gtk-config"
 
-export DIST_LIST="precise
+export DIST_LIST="quantal
+                  precise
                   oneiric"
 
 # Launch common script for updating packages and uploading them to Launchpad
