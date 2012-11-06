@@ -27,7 +27,7 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl "http://kde-look.org/content/download.php?content=98925&id=1" 2>&1 | grep "/CONTENT/content-files/98925-cwp-" | sed -e "s:^.*/98925-cwp-\(.*\).tar.bz2.*:\1:")
+export VER_LIST=$(curl "http://kde-look.org/content/download.php?content=98925&id=1" 2>&1 | sed -ne "s:^.*/98925-cwp-\(.*\).tar.bz2.*:\1:p")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -55,6 +55,8 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DIR_NAME="cwp-${NEW_VER}"
 export OLD_DIR_NAME="cwp-${OLD_VER}"
+
+export DM_FLAG="true"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"

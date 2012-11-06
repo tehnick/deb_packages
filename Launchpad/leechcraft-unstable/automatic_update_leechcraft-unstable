@@ -33,7 +33,7 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/" | sed 
 # Find new version
 export DEVELOPER=0xd34df00d
 export PROJECT=leechcraft
-export LAST_SRC_INFO=$(curl -I "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}" 2>&1)
+export LAST_SRC_INFO=$(curl -I "https://github.com/${DEVELOPER}/${PROJECT}/archive/${BRANCH}.tar.gz" 2>&1)
 export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
 export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
 
@@ -61,10 +61,10 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
     rm -rf  "${PACKAGE}-${NEW_VER}"
     # sources
     rm -f "${BRANCH}"*
-    wget -4 -c "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}"
+    wget -4 -c "https://github.com/${DEVELOPER}/${PROJECT}/archive/${BRANCH}.tar.gz"
     rm -rf ${DEVELOPER}-${PROJECT}-*
-    tar xzf "${BRANCH}"
-    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
+    tar xzf "${BRANCH}.tar.gz"
+    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}" || exit 1
     # deleting some files and directories
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*

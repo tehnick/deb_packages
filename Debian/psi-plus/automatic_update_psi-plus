@@ -31,8 +31,7 @@ GetOldVersion
 # Find new version
 export DEVELOPER=tehnick
 export PROJECT=psi-plus
-#export VER_LIST=$(curl 'http://githubredir.debian.net/github/tehnick/psi-plus' 2>&1 | grep '/github/tehnick/psi-plus/' | grep '.tar.gz' | sed -e "s:^.*/github/tehnick/psi-plus/\(.*\)\.tar\.gz.*$:\1:")
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\" .*:\1:")
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
@@ -54,6 +53,10 @@ CheckVersions
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+
+echo FIXME!
+exit 1
+
     rm -rf  "${NEW_VER}"/ "${PACKAGE}-${NEW_VER}"/
     # sources
     wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"

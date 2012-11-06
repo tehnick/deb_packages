@@ -30,7 +30,7 @@ export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e
 export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^brezerk-q4wine.*-[0-9]\+-g\(.*\)$/\1/")
 
 
-export CUR_VER=$(curl -k "https://raw.github.com/brezerk/q4wine/master/src/CMakeLists.txt" 2>&1 | grep "SET(APP_VERSION" | sed -e "s/^SET(APP_VERSION \"\([0-9]\+\.[0-9]\+\).*\")$/\1/")
+export CUR_VER=$(curl -k "https://raw.github.com/brezerk/q4wine/master/src/CMakeLists.txt" 2>&1 | sed -ne "s/^SET(APP_VERSION \"\([0-9]\+\.[0-9]\+\).*\")$/\1/p")
 export DATE=$(date "+%Y%m%d-%H%M%S")
 export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"

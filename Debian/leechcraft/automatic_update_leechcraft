@@ -31,7 +31,7 @@ GetOldVersion
 # Find new version
 export DEVELOPER=0xd34df00d
 export PROJECT=leechcraft
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | grep "=\"/${DEVELOPER}/${PROJECT}/tarball/" | sed -e "s:^.*\"/${DEVELOPER}/${PROJECT}/tarball/\(.*\)\" .*:\1:")
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
 export CUR_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER=${CUR_VER}${RPKGD}
 export NEW_VER_FULL=${NEW_VER}${SFX}
@@ -51,9 +51,13 @@ CheckVersions
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+
+echo FIXME!
+exit 1
+
     rm -rf  "${CUR_VER}"/ "${PACKAGE}-${NEW_VER}"/
     # main sources
-    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${CUR_VER}"
+    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${CUR_VER}"
     rm -rf ${DEVELOPER}-${PROJECT}-*
     tar xzf "${CUR_VER}"
     mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"

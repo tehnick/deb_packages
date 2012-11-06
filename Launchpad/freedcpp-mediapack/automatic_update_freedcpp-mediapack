@@ -24,7 +24,7 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/list' 2>&1 | grep 'freedcpp.googlecode.com/files/mediapack.' | grep '.tar.bz2"' | sed -e "s:^.*freedcpp.googlecode.com/files/mediapack.\(.*\).tar.bz2\".*$:\1:")
+export VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/list' 2>&1 | sed -ne "s:^.*freedcpp.googlecode.com/files/mediapack.\(.*\).tar.bz2\".*$:\1:p")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 

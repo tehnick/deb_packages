@@ -31,7 +31,7 @@ GetOldVersion
 
 # Find new version
 export PROJECT=yagf
-export VER_LIST=$(curl "http://symmetrica.net/cuneiform-linux/yagf-en.html" 2>&1 | grep "yagf-" | grep ".tar.gz" | sed -e "s:^.*${PROJECT}-\(.*\).tar.gz.*:\1:")
+export VER_LIST=$(curl "http://symmetrica.net/cuneiform-linux/yagf-en.html" 2>&1 | sed -ne "s:^.*${PROJECT}-\(.*\).tar.gz.*:\1:p")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi

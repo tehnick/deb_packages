@@ -25,10 +25,10 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*~svn\([0-9]\+\)$/\1/")
 
 
 # Find new version
-export LAST_COMMIT=$(svn log http://freedcpp.googlecode.com/svn/trunk/ | head -n2 |grep "r[0-9]\+" | sed -e "s/^r\([0-9]\+\).*$/\1/")
+export LAST_COMMIT=$(svn log http://freedcpp.googlecode.com/svn/trunk/ | head -n2 | sed -ne "s/^r\([0-9]\+\).*$/\1/p")
 
-export CUR_VER=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | grep "GUI_VERSION_STRING " | sed -e "s/^.*GUI_VERSION_STRING \"\(.*\+\)\"$/\1/")
-export BUILD_STRING=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | grep "GUI_VERSION_BUILD_STRING " | sed -e "s/^.*GUI_VERSION_BUILD_STRING \"\(.*\+\)\"$/\1/")
+export CUR_VER=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | sed -ne "s/^.*GUI_VERSION_STRING \"\(.*\+\)\"$/\1/p")
+export BUILD_STRING=$(curl "http://freedcpp.googlecode.com/svn/trunk/linux/version.hh" 2>&1 | sed -ne "s/^.*GUI_VERSION_BUILD_STRING \"\(.*\+\)\"$/\1/p")
 export NEW_VER="${CUR_VER}.${BUILD_STRING}~svn${LAST_COMMIT}"
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
 

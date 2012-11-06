@@ -28,7 +28,7 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://delta.affinix.com/download/' 2>&1 | grep 'qconf-' | grep '.tar.bz2' | sed -e "s/^.*qconf-\(.*\).tar.bz2.*$/\1/")
+export VER_LIST=$(curl 'http://delta.affinix.com/download/' 2>&1 | sed -ne "s/^.*qconf-\(.*\).tar.bz2.*$/\1/p")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 

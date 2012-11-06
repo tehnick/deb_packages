@@ -29,7 +29,7 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/qxmpp/downloads/list' 2>&1 | grep 'qxmpp.googlecode.com/files/qxmpp-' | grep '.tar.gz"' | sed -e "s:^.*qxmpp.googlecode.com/files/qxmpp-\(.*\).tar.gz\".*$:\1:")
+export VER_LIST=$(curl 'http://code.google.com/p/qxmpp/downloads/list' 2>&1 | sed -ne "s:^.*qxmpp.googlecode.com/files/qxmpp-\(.*\).tar.gz\".*$:\1:p")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi

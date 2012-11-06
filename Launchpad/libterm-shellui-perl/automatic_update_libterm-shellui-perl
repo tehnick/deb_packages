@@ -25,7 +25,7 @@ GetOldVersion
 # Find new version
 export DEVELOPER=BRONSON
 export PROJECT=Term-ShellUI
-export VER_LIST=$(curl "http://search.cpan.org/dist/${PROJECT}/" 2>&1 | grep "/CPAN/authors/id/" | grep "${DEVELOPER}/${PROJECT}-" | sed -e "s:^.*/${DEVELOPER}/${PROJECT}-\(.*\).tar.gz.*:\1:")
+export VER_LIST=$(curl "http://search.cpan.org/dist/${PROJECT}/" 2>&1 | sed -ne "s:^.*/${DEVELOPER}/${PROJECT}-\(.*\).tar.gz.*:\1:p")
 export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
