@@ -14,7 +14,7 @@ export PACKAGE="kde-gtk-config"
 export EPOCH="3:"
 
 # Uncomment if necessary:
-export SFX="-1ppa1"
+#export SFX="-1ppa1"
 
 
 # Launch common script for setting variables
@@ -52,6 +52,7 @@ fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
+export EDIT_CHANGELOG="true"
 
 export DESTINATION="kde-gtk-config"
 
