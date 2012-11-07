@@ -11,7 +11,7 @@ fi
 export PACKAGE="uhub"
 
 # Uncomment if necessary:
-export SFX="-0ppa2"
+#export SFX="-0ppa2"
 
 #export NEW_VER=0.4.0~git20120423-9efe4bc
 
@@ -48,22 +48,18 @@ CheckVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-
-echo FIXME!
-exit 1
-
     rm -rf  "${NEW_VER}" "${PACKAGE}-${NEW_VER}"
     # sources
-    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${NEW_VER}"
-    rm -rf ${DEVELOPER}-${PROJECT}-*
+    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${NEW_VER}"
+    rm -rf ${PROJECT}-*
     tar xzf "${NEW_VER}"
-    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
     # tarball
     tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
+export EDIT_CHANGELOG="true"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

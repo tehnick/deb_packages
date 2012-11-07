@@ -35,11 +35,7 @@ export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e
 export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
 
 if [ -z "${NEW_VER}" ]; then
-    # Temporary hack:
-    export CUR_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/" | sed -e "s/^\(.*\)-[0-9]\+-g\(.*\)$/\1/")
-    export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/" | sed "s/${CUR_VER}-/${CUR_VER}-r/")
-    # Update when 0.4.1 is released.
-    # export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
+    export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
 fi
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
 
@@ -58,6 +54,10 @@ CheckVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+
+echo FIXME!
+exit 1
+
     rm -rf  "${PACKAGE}-${NEW_VER}"
     # sources
     rm -f "${BRANCH}"*
@@ -70,7 +70,7 @@ if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
 fi
 
 
-export UPDATE_STRING="Minor update from GIT ${BRANCH} branch."
+export UPDATE_STRING="Minor update from Git ${BRANCH} branch."
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
