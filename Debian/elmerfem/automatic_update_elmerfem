@@ -31,7 +31,7 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/"
 
 # Find new version
 export SVN_REPO="https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk"
-export CUR_VER=$(curl "${SVN_REPO}/fem/configure" 2>&1 | sed n-e "s/^ VERSION=\(.\+\)$/\1/p")
+export CUR_VER=$(curl "${SVN_REPO}/fem/configure" 2>&1 | sed -ne "s/^ VERSION=\(.\+\)$/\1/p")
 if [ -z "${CUR_VER}" ]; then
     echo "Failed to define current version."
     exit 1

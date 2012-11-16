@@ -14,9 +14,6 @@ export PACKAGE="uhub-unstable"
 # Uncomment if necessary:
 #export SFX="-0ppa2"
 
-# Available branches: master
-export BRANCH=master
-
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
@@ -24,20 +21,21 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 # Get old version
 GetOldVersion
-export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-*[0-9]\+-g\(.*\)$/\1/")
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
 
 
 # Find new version
-export DEVELOPER=janvidar
-export PROJECT=uhub
-export LAST_SRC_INFO=$(curl -I "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}" 2>&1)
-export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
-export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
-
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
+GIT_REPO_DIR="${HOME}/WorkDir/Devel/uHub/uhub_orig"
+if [ -d "${GIT_REPO_DIR}" ]; then
+    cd "${GIT_REPO_DIR}" || exit 1
+    git pull --all || exit 1
 fi
-export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
+export LAST_COMMIT=$(git describe --tags | sed -e "s/^v.*-[0-9]\+-g\(.*\)$/\1/")
+if [ -z "${NEW_VER}" ]; then
+    export NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/")
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
+cd "${TEMP_DIR}" || exit 1
 
 
 # Display versions
@@ -54,23 +52,16 @@ CheckVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-
-echo FIXME!
-exit 1
-
     rm -rf  "${PACKAGE}-${NEW_VER}"
     # sources
-    rm -f "${BRANCH}"*
-    wget -4 -c "https://nodeload.github.com/${DEVELOPER}/${PROJECT}/tarball/${BRANCH}"
-    rm -rf ${DEVELOPER}-${PROJECT}-*
-    tar xzf "${BRANCH}"
-    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
+    mkdir "${PACKAGE}-${NEW_VER}" || exit 1
+    rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
     # tarball
     tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
-export UPDATE_STRING="Minor update from Git ${BRANCH} branch."
+export UPDATE_STRING="Minor update from Git master branch."
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

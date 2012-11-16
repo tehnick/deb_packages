@@ -25,15 +25,19 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\{6,6\}-\(.*\)$/\1/")
 
 
 # Find new version
-export LAST_SRC_INFO=$(curl -I https://nodeload.github.com/brezerk/q4wine/tarball/master 2>&1)
-export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(brezerk-q4wine.*\).tar.gz.*/\1/")
-export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^brezerk-q4wine.*-[0-9]\+-g\(.*\)$/\1/")
-
-
-export CUR_VER=$(curl -k "https://raw.github.com/brezerk/q4wine/master/src/CMakeLists.txt" 2>&1 | sed -ne "s/^SET(APP_VERSION \"\([0-9]\+\.[0-9]\+\).*\")$/\1/p")
-export DATE=$(date "+%Y%m%d-%H%M%S")
-export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
-export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
+GIT_REPO_DIR="${HOME}/WorkDir/Devel/Q4Wine/q4wine_orig"
+if [ -d "${GIT_REPO_DIR}" ]; then
+    cd "${GIT_REPO_DIR}" || exit 1
+    git pull --all || exit 1
+fi
+export LAST_COMMIT=$(git show -s --pretty=format:%h)
+if [ -z "${NEW_VER}" ]; then
+    export CUR_VER=$(cat "${GIT_REPO_DIR}/src/CMakeLists.txt" | sed -ne "s/^SET(APP_VERSION \"\([0-9]\+\.[0-9]\+\).*\")$/\1/p")
+    export DATE=$(date "+%Y%m%d-%H%M%S")
+    export NEW_VER="${CUR_VER}-${DATE}-${LAST_COMMIT}"
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
+cd "${TEMP_DIR}" || exit 1
 
 
 # Display versions
@@ -49,27 +53,17 @@ CheckVersionsUnstable
 
 
 # Get the sources
-if !([ -e "${LAST_SRC}.tar.gz" ]); then
-    rm -f master*
-    # -4 wget https://github.com/brezerk/q4wine/tarball/master
-    wget -4 https://nodeload.github.com/brezerk/q4wine/tarball/master
-    rm -f brezerk-q4wine-*.tar.gz*
-    mv master "${LAST_SRC}.tar.gz"
-fi
-
-if !([ -e "${LAST_SRC}.tar.gz" ]); then
-    echo "File ${LAST_SRC}.tar.gz is not found.";
-    exit 0;
-fi
-
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-    tar xzf "${LAST_SRC}".tar.gz
-    mv "brezerk-q4wine-${LAST_COMMIT}" "${PACKAGE}-${NEW_VER}"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+    rm -rf  "${PACKAGE}-${NEW_VER}"
+    # sources
+    mkdir "${PACKAGE}-${NEW_VER}" || exit 1
+    rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
+    # tarball
     tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
-export UPDATE_STRING="Minor update from GIT master branch."
+export UPDATE_STRING="Minor update from Git master branch."
 
 export DESTINATION="q4wine"
 

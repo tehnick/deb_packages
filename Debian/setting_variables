@@ -29,8 +29,13 @@ GetOldVersion()
     else
         export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (${EPOCH}\(.*\)) .*/\1/")
     fi
-    export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]*$/\1/")
-    export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]*\)$/\1/")
+    if [ "$(echo ${OLD_VER_FULL} | grep '~exp' | wc -l)" = "0" ]; then
+        export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]*$/\1/")
+        export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]*\)$/\1/")
+    else
+        export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]*\~exp.*$/\1/")
+        export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]*\~exp.*\)$/\1/")
+    fi
 }
 
 

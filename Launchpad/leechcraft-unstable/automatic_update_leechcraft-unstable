@@ -18,8 +18,6 @@ export RPKGD="+dfsg"
 
 #export CUR_VER=0.4.90-744-gda59196
 
-export BRANCH=master
-
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
@@ -31,17 +29,18 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/" | sed 
 
 
 # Find new version
-export DEVELOPER=0xd34df00d
-export PROJECT=leechcraft
-export LAST_SRC_INFO=$(curl -I "https://github.com/${DEVELOPER}/${PROJECT}/archive/${BRANCH}.tar.gz" 2>&1)
-export LAST_SRC=$(echo "${LAST_SRC_INFO}" | grep 'Content-Disposition:' | sed -e "s/.*\(${DEVELOPER}-${PROJECT}.*\).tar.gz.*/\1/")
-export LAST_COMMIT=$(echo "${LAST_SRC}" | sed -e "s/^${DEVELOPER}-${PROJECT}.*-[0-9]\+-g\(.*\)$/\1/")
-
-if [ -z "${CUR_VER}" ]; then
-    export CUR_VER=$(echo ${LAST_SRC} | sed -e "s/^${DEVELOPER}-${PROJECT}-\(.*\)$/\1/")
+GIT_REPO_DIR="${HOME}/WorkDir/Devel/LeechCraft/leechcraft_orig"
+if [ -d "${GIT_REPO_DIR}" ]; then
+    cd "${GIT_REPO_DIR}" || exit 1
+    git pull --all || exit 1
 fi
-export NEW_VER=${CUR_VER}${RPKGD}
+export LAST_COMMIT=$(git describe --tags | sed -e "s/^v.*-[0-9]\+-g\(.*\)$/\1/")
+if [ -z "${NEW_VER}" ]; then
+    export CUR_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/")
+    export NEW_VER=${CUR_VER}${RPKGD}
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
+cd "${TEMP_DIR}" || exit 1
 
 
 # Display versions
@@ -57,14 +56,11 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
     rm -rf  "${PACKAGE}-${NEW_VER}"
     # sources
-    rm -f "${BRANCH}"*
-    wget -4 -c "https://github.com/${DEVELOPER}/${PROJECT}/archive/${BRANCH}.tar.gz"
-    rm -rf ${DEVELOPER}-${PROJECT}-*
-    tar xzf "${BRANCH}.tar.gz"
-    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}" || exit 1
+    mkdir "${PACKAGE}-${NEW_VER}" || exit 1
+    rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
     # deleting some files and directories
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
