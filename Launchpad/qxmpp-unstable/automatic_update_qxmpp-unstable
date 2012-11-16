@@ -33,11 +33,6 @@ GIT_REPO_DIR="${HOME}/WorkDir/Devel/QXmpp/qxmpp_orig"
 if [ -d "${GIT_REPO_DIR}" ]; then
     cd "${GIT_REPO_DIR}" || exit 1
     git pull --all || exit 1
-else
-    echo "Creating ${MAIN_DIR}/${MOD}"
-    cd "${MAIN_DIR}"
-    git clone --depth 1 git://github.com/psi-plus/${MOD}.git || exit 1
-    echo;
 fi
 export LAST_COMMIT=$(git describe --tags | sed -e "s/^v.*-[0-9]\+-g\(.*\)$/\1/")
 if [ -z "${NEW_VER}" ]; then
