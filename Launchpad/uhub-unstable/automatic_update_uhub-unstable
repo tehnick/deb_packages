@@ -30,7 +30,7 @@ if [ -d "${GIT_REPO_DIR}" ]; then
     cd "${GIT_REPO_DIR}" || exit 1
     git pull --all || exit 1
 fi
-export LAST_COMMIT=$(git describe --tags | sed -e "s/^v.*-[0-9]\+-g\(.*\)$/\1/")
+export LAST_COMMIT=$(git show -s --pretty=format:%h)
 if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/")
 fi
