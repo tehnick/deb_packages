@@ -45,7 +45,7 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]; then
     wget -4 -c "http://kde-look.org/CONTENT/content-files/98925-cwp-${NEW_VER}.tar.bz2"
     mv -f "98925-cwp-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 fi
