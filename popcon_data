@@ -58,8 +58,8 @@ echo "<br>" >> "${HTML_FILE}"
 echo "<div id=\"mainText\">" >> "${HTML_FILE}"
 echo "<div id=\"statText\">" >> "${HTML_FILE}"
 
-DATE_TIME=$(date "+%Y-%m-%d %H:%M:%S")
-echo "<b>Last update:</b> ${DATE_TIME}<br>" >> "${HTML_FILE}"
+PAGE_DATE_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+echo "<b>Page was generated:</b> ${PAGE_DATE_TIME}<br>" >> "${HTML_FILE}"
 echo "<br>" >> "${HTML_FILE}"
 
 
@@ -153,6 +153,11 @@ echo "</div>" >> "${HTML_FILE}"
 echo "<br>" >> "${HTML_FILE}"
 
 
+DEBIAN_DATE_TIME=$(date "+%Y-%m-%d %H:%M:%S" -r "${POPCON_DATA_DIR}/Debian/by_inst")
+UBUNTU_DATE_TIME=$(date "+%Y-%m-%d %H:%M:%S" -r "${POPCON_DATA_DIR}/Ubuntu/by_inst")
+echo "<b><a href=\"http://popcon.debian.org/\">Debian data</a> were updated:</b> ${DEBIAN_DATE_TIME}<br>" >> "${HTML_FILE}"
+echo "<b><a href=\"http://popcon.ubuntu.com/\">Ubuntu data</a> were updated:</b> ${UBUNTU_DATE_TIME}<br>" >> "${HTML_FILE}"
+echo "<br>" >> "${HTML_FILE}"
 echo "<b>See also:</b>" >> "${HTML_FILE}"
 echo "<a href=\"http://qa.debian.org/developer.php?login=Boris%20Pek\">qa.debian.org</a>" >> "${HTML_FILE}"
 echo "<a href=\"./deb-packages.html\">deb-packages</a>" >> "${HTML_FILE}"
