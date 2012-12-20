@@ -109,3 +109,9 @@
 [submodule "Launchpad/elmerfem/elmerfem-debian"]
 	path = Launchpad/elmerfem/elmerfem-debian
 	url = git@github.com:tehnick/elmerfem-debian.git
+[submodule "Debian/astromenace/astromenace-debian"]
+	path = Debian/astromenace/astromenace-debian
+	url = tehnick-guest@git.debian.org/git/pkg-games/astromenace.git
+[submodule "Debian/astromenace-data/astromenace-data-debian"]
+	path = Debian/astromenace-data/astromenace-data-debian
+	url = tehnick-guest@git.debian.org/git/pkg-games/astromenace-data.git
