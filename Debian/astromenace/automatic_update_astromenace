@@ -13,7 +13,7 @@ export PACKAGE="astromenace"
 export RPKGD="+ds"
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
