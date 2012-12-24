@@ -17,7 +17,7 @@ export PACKAGE="leechcraft"
 export RPKGD="+dfsg"
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
@@ -51,16 +51,12 @@ CheckVersions
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-
-echo FIXME!
-exit 1
-
     rm -rf  "${CUR_VER}"/ "${PACKAGE}-${NEW_VER}"/
     # main sources
     wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${CUR_VER}"
-    rm -rf ${DEVELOPER}-${PROJECT}-*
+    rm -rf ${PROJECT}-*
     tar xzf "${CUR_VER}"
-    mv ${DEVELOPER}-${PROJECT}-* "${PACKAGE}-${NEW_VER}"
+    mv "${PROJECT}-${CUR_VER}" "${PACKAGE}-${NEW_VER}"
     # deleting some files and directories
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
