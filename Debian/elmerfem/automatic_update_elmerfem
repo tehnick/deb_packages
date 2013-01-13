@@ -15,9 +15,11 @@ export PACKAGE="elmerfem"
 #export SFX="-3"
 
 export NEW_VER=7.0.svn.5862+dfsg
+#export NEW_VER=5.5.0.svn.4499.dfsg2
 
 # experimental unstable
 export MAIN_DIST="experimental"
+#export MAIN_DIST="stable-proposed-updates"
 
 
 # Launch common script for setting variables
@@ -61,6 +63,7 @@ PrintVersions "${@}"
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+#if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
     "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
 fi
 
@@ -69,6 +72,8 @@ export UPDATE_STRING="New upstream revision."
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
+#export A_TYPE="gz"
+#export D_ARGS="xzf"
 
 export CLEAN_BUILD="true"
 
