@@ -15,7 +15,7 @@ export PACKAGE="plasma-widget-cwp"
 #export SFX="-2"
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
