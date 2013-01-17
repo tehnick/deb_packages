@@ -15,7 +15,8 @@ export EPOCH="3:"
 
 # Uncomment if necessary:
 #export SFX="-3"
-export SFX="-1~exp1"
+#export SFX="-1~exp1"
+export SFX="-1"
 
 
 # experimental unstable quantal
