@@ -12,12 +12,12 @@ fi
 export PACKAGE="gtk2-engines-qtcurve"
 
 # Uncomment if necessary:
-export SFX="-4"
+#export SFX="-4"
 
 #export NEW_VER=1.8.15
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
@@ -59,8 +59,6 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DIR_NAME="QtCurve-Gtk2-${NEW_VER}"
 export OLD_DIR_NAME="QtCurve-Gtk2-${OLD_VER}"
-
-export DM_FLAG="true"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
