@@ -12,7 +12,7 @@ fi
 export PACKAGE="q4wine"
 
 # Uncomment if necessary:
-export SFX="-2"
+#export SFX="-2"
 
 # experimental unstable
 export MAIN_DIST="experimental"
@@ -54,6 +54,8 @@ fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+export DM_FLAG="true"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
