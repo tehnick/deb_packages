@@ -12,7 +12,7 @@ fi
 export PACKAGE="qxmpp"
 
 # Uncomment if necessary:
-export SFX="-3"
+#export SFX="-3"
 
 #export NEW_VER=0.4.0~git20120405-390b63e
 
@@ -55,10 +55,12 @@ if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
 fi
 
 
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
+export UPDATE_STRING="New upstream release."
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
+
+export DM_FLAG="true"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
