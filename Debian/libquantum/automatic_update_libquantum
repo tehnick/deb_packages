@@ -12,12 +12,12 @@ fi
 export PACKAGE="libquantum"
 
 # Uncomment if necessary:
-export SFX="-3"
+#export SFX="-3"
 
 #export NEW_VER=1.1.0
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -51,8 +51,8 @@ CheckVersions
 
 # Get the sources
 if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
-    echo "Fix me!"
-    exit 1
+    wget -4 -c "http://www.libquantum.de/files/libquantum-${NEW_VER}.tar.gz"
+    mv -f "${PACKAGE}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
 fi
 
 
