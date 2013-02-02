@@ -6,7 +6,7 @@ echo "MAIN_DIR = ${MAIN_DIR}"
 echo " "
 
 for PACKAGE in eiskaltdcpp-unstable freedcpp-unstable uhub-unstable \
-               q4wine-unstable psi-plus-i18n ; do
+               q4wine-unstable psi-plus-l10n ; do
     echo "Begin ${PACKAGE}"
     rm -rf "${MAIN_DIR}/Launchpad/${PACKAGE}/TEMP/"*
     echo "End ${PACKAGE}"
