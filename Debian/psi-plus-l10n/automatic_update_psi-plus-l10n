@@ -67,6 +67,8 @@ export UPDATE_STRING="New upstream release."
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
+export DM_FLAG="true"
+
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
 
