@@ -45,9 +45,9 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    wget -4 -c "ftp://ftp.kde.org/pub/kde/stable/${PROJECT}/${NEW_VER}/src/${PROJECT}-${NEW_VER}.tar.bz2"
-    mv -f "${PROJECT}-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+    wget -4 -c "ftp://ftp.kde.org/pub/kde/stable/${PROJECT}/${NEW_VER}/src/${PROJECT}-${NEW_VER}.tar.xz"
+    mv -f "${PROJECT}-${NEW_VER}.tar.xz" "${PACKAGE}_${NEW_VER}.orig.tar.xz"
 fi
 
 
@@ -59,6 +59,9 @@ export DESTINATION="kde-gtk-config"
 export DIST_LIST="quantal
                   precise
                   oneiric"
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
