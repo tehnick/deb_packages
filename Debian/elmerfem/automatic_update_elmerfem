@@ -14,7 +14,7 @@ export PACKAGE="elmerfem"
 # Uncomment if necessary:
 #export SFX="-2"
 
-#export NEW_VER=7.0.svn.5862+dfsg
+export NEW_VER=7.0.svn.6034+dfsg
 #export NEW_VER=6.1.0.svn.5396.dfsg2
 #export NEW_VER=5.5.0.svn.4499.dfsg2
 
