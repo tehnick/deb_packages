@@ -1,0 +1,84 @@
+#!/bin/bash
+
+
+if [ -z "${MAIN_DIR}" ]; then
+    if [[ ${0} =~ ^/.+$ ]]; then
+        export MAIN_DIR="$(dirname ${0})/../.."
+    else
+        export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+    fi
+fi
+
+export PACKAGE="elmer-doc"
+
+# Uncomment if necessary:
+#export SFX="-2"
+
+export NEW_VER=2013.02.01
+#export NEW_VER=2011.09.06
+
+# experimental unstable
+export MAIN_DIST="experimental"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+
+# Get old version
+GetOldVersion
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
+
+
+# Find new version
+export SVN_REPO="https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk"
+export CUR_VER=$(curl "${SVN_REPO}/fem/configure" 2>&1 | sed -ne "s/^ VERSION=\(.\+\)$/\1/p")
+if [ -z "${CUR_VER}" ]; then
+    echo "Failed to define current version."
+    exit 1
+fi
+if [ -z "${NEW_VER}" ]; then
+    export LAST_COMMIT=$(svn log "${SVN_REPO}" | head -n2 | sed -ne "s/^r\([0-9]\+\).*$/\1/p")
+    export NEW_VER="${CUR_VER}.svn.${LAST_COMMIT}+dfsg"
+else
+    export LAST_COMMIT=$(echo ${NEW_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}
+
+
+echo "https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk/"
+echo ;
+# Display versions
+DisplayVersionsUnstable
+
+
+# Print versions
+PrintVersions "${@}"
+
+
+# Check versions
+#CheckVersionsUnstable
+
+
+# Get the sources
+#if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+    echo "Fix me!"
+fi
+
+
+export UPDATE_STRING="New upstream revision."
+
+#export A_TYPE="xz"
+#export D_ARGS="xJf"
+export A_TYPE="gz"
+export D_ARGS="xzf"
+
+# temporary
+#export DIR_NAME="elmerfem-${LAST_COMMIT}"
+#export OLD_DIR_NAME="elmerfem-${OLD_COMMIT}"
+
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
+
