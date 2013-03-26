@@ -109,6 +109,9 @@
 [submodule "Launchpad/elmerfem/elmerfem-debian"]
 	path = Launchpad/elmerfem/elmerfem-debian
 	url = git@github.com:tehnick/elmerfem-debian.git
+[submodule "Debian/elmer-doc/elmer-doc-debian"]
+	path = Debian/elmer-doc/elmer-doc-debian
+	url = tehnick-guest@git.debian.org/git/debian-science/packages/elmer-doc.git
 [submodule "Debian/astromenace/astromenace-debian"]
 	path = Debian/astromenace/astromenace-debian
 	url = tehnick-guest@git.debian.org/git/pkg-games/astromenace.git
