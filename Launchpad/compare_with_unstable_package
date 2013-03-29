@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
+export TEMP_DIR="${PKG_DIR}/TEMP"
 
 
 rm -rf "${PKG_DIR}/${PACKAGE}-debian/debian-unstable"
@@ -17,7 +18,5 @@ done
 
 
 cd "${PKG_DIR}/${PACKAGE}-debian"
-echo;
-echo "diff -urN debian debian-unstable > debian.diff"
-diff -urN debian debian-unstable > debian.diff
-kwrite debian.diff &
+diff -urN debian debian-unstable > "${TEMP_DIR}/debian.diff"
+kwrite "${TEMP_DIR}/debian.diff" > /dev/null &

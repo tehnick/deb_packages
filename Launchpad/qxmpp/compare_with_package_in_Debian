@@ -8,6 +8,6 @@ if [ -z "${MAIN_DIR}" ]; then
     fi
 fi
 
-export PACKAGE="eiskaltdcpp"
+export PACKAGE="qxmpp"
 
-source "${MAIN_DIR}/Launchpad/compare_with_unstable_package"
+source "${MAIN_DIR}/Launchpad/compare_with_package_in_Debian"

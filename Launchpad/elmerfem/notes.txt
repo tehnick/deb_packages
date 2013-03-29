@@ -1,0 +1,5 @@
+http://git.debian.org/?p=debian-science/packages/elmerfem.git
+https://github.com/tehnick/elmerfem-debian
+
+
+git remote add alioth git://anonscm.debian.org/debian-science/packages/elmerfem.git

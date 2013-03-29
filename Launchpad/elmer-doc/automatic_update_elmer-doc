@@ -9,12 +9,12 @@ if [ -z "${MAIN_DIR}" ]; then
     fi
 fi
 
-export PACKAGE="elmerfem"
+export PACKAGE="elmer-doc"
 
 # Uncomment if necessary:
-#export SFX="-1ppa1"
+export SFX="-1ppa1"
 
-#export NEW_VER=6.1.0.svn.5396.dfsg2
+#export NEW_VER=2013.02.01
 
 
 # Launch common script for setting variables
@@ -27,25 +27,19 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/"
 
 
 # Find new version
-export SVN_REPO="https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk"
-export CUR_VER=$(curl "${SVN_REPO}/fem/configure" 2>&1 | sed -ne "s/^ VERSION=\(.\+\)$/\1/p")
-if [ -z "${CUR_VER}" ]; then
+export LAST_MOD=$(curl -I 'ftp://ftp.funet.fi/index/elmer/doc/ElmerDocumentation.tar.gz' 2>&1 | sed -ne "s/^.*Last-Modified: \(.*\) GMT.*$/\1/p")
+if [ -z "${LAST_MOD}" ]; then
     echo "Failed to define current version."
     exit 1
 fi
 if [ -z "${NEW_VER}" ]; then
-    export LAST_COMMIT=$(svn log "${SVN_REPO}" | head -n2 | sed -ne "s/^r\([0-9]\+\).*$/\1/p")
-    export NEW_VER="${CUR_VER}.svn.${LAST_COMMIT}+dfsg"
-else
-    export LAST_COMMIT=$(echo ${NEW_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
+    export NEW_VER=$(date -d "${LAST_MOD}" "+%Y.%m.%d")
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
-echo "https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk/"
-echo ;
 # Display versions
-DisplayVersionsUnstable
+DisplayVersions "ftp://ftp.funet.fi/index/elmer/doc/"
 
 
 # Print versions
@@ -53,26 +47,24 @@ PrintVersions "${@}"
 
 
 # Check versions
-CheckVersionsUnstable
+#CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source" || exit 1
 fi
 
 
-export UPDATE_STRING="New upstream revision."
+export UPDATE_STRING="New upstream release."
 
 export DESTINATION="elmerfem"
 
 export DIST_LIST="quantal
                   precise"
 
-export A_TYPE="xz"
-export D_ARGS="xJf"
-
-export CLEAN_BUILD="true"
+export A_TYPE="gz"
+export D_ARGS="xzf"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"

@@ -8,6 +8,8 @@ if [ -z "${MAIN_DIR}" ]; then
     fi
 fi
 
-export PACKAGE="eiskaltdcpp"
+export PACKAGE="elmerfem"
 
-source "${MAIN_DIR}/Launchpad/compare_with_unstable_package"
+export REMORE_BRANCH="alioth/master"
+
+source "${MAIN_DIR}/Launchpad/compare_with_package_in_Debian"

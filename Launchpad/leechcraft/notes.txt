@@ -1,0 +1,1 @@
+git remote add leechcraft-unstable git://github.com/tehnick/leechcraft-unstable-debian.git

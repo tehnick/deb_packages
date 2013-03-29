@@ -2,11 +2,11 @@
 
 set -e
 
-export PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
+export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
 export TEMP_DIR="${PKG_DIR}/TEMP"
 
 if [ -z "${REMORE_BRANCH}" ]; then
-    export REMORE_BRANCH="origin/launchpad"
+    export REMORE_BRANCH="origin/master"
 fi
 
 if [ -z "${TEST_DIR}" ]; then

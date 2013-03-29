@@ -1,0 +1,1 @@
+http://anonscm.debian.org/gitweb/?p=pkg-games/astromenace-data.git
