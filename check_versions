@@ -58,7 +58,7 @@ echo "<tbody>" >> "${HTML_FILE}"
 
 for PACKAGE in * ; do
     PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
-    if !([ -e "${PKG_DIR}/automatic_update_${PACKAGE}" ]); then continue; fi
+    if [ ! -e "${PKG_DIR}/automatic_update_${PACKAGE}" ]; then continue; fi
     if [ "${TR}" = "<tr>" ]; then
         TRC="<tr>"
         TR="<tr class=\"color-odd\">"
@@ -106,7 +106,7 @@ echo "<tbody>" >> "${HTML_FILE}"
 
 for PACKAGE in * ; do
     PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
-    if !([ -e "${PKG_DIR}/automatic_update_${PACKAGE}" ]); then continue; fi
+    if [ ! -e "${PKG_DIR}/automatic_update_${PACKAGE}" ]; then continue; fi
     if [ "${TR}" = "<tr>" ]; then
         TRC="<tr>"
         TR="<tr class=\"color-odd\">"
