@@ -63,8 +63,7 @@ export DESTINATION="psi-plus"
 
 export DIST_LIST="quantal
                   precise
-                  oneiric
-                  natty"
+                  oneiric"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
