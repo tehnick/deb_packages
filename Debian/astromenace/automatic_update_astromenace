@@ -10,7 +10,7 @@ export PACKAGE="astromenace"
 # Uncomment if necessary:
 #export SFX="-2"
 
-export RPKGD="+ds"
+export RPKGD="+repack"
 
 # experimental unstable
 export MAIN_DIST="unstable"
