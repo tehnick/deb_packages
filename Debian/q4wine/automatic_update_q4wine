@@ -12,10 +12,10 @@ fi
 export PACKAGE="q4wine"
 
 # Uncomment if necessary:
-#export SFX="-2"
+export SFX="-2"
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables

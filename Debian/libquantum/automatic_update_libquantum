@@ -12,12 +12,12 @@ fi
 export PACKAGE="libquantum"
 
 # Uncomment if necessary:
-export SFX="-2"
+export SFX="-3"
 
 #export NEW_VER=1.1.0
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -60,6 +60,8 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
+
+export DM_FLAG="true"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"

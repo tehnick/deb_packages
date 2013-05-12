@@ -12,16 +12,16 @@ fi
 export PACKAGE="psimedia"
 
 # Uncomment if necessary:
-#export SFX="-2"
+export SFX="-2"
 
-#export NEW_VER=1.0.3-git20120319-78a4c9e
+export NEW_VER=1.0.3-git20130306-c2b8446
 
 
 # Available branches: master
 export BRANCH=master
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
@@ -58,7 +58,7 @@ PrintVersionsUnstable "${@}"
 
 
 # Check versions
-CheckVersionsUnstable
+#CheckVersionsUnstable
 
 
 # Get the sources

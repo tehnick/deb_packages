@@ -12,13 +12,13 @@ fi
 export PACKAGE="uhub"
 
 # Uncomment if necessary:
-export SFX="-2"
+export SFX="-3"
 
 #export NEW_VER=0.4.0+git20121013-55-g7fae42a
 
 # experimental unstable
 #export MAIN_DIST="unstable"
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables

@@ -12,10 +12,10 @@ fi
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-#export SFX="-5"
+export SFX="-2"
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
@@ -57,6 +57,8 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
+
+export DM_FLAG="true"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"

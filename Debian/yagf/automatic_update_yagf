@@ -12,13 +12,13 @@ fi
 export PACKAGE="yagf"
 
 # Uncomment if necessary:
-#export SFX="-2"
+export SFX="-2"
 
 # Temporary:
 #export NEW_VER=0.9+svn247
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
@@ -64,6 +64,8 @@ export OLD_DIR_NAME="${PROJECT}-${OLD_VER}"
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
+
+export DM_FLAG="true"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
