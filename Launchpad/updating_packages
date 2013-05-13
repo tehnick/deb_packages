@@ -86,7 +86,8 @@ fi
 cp -f debian/changelog ../changelog # copy basic changelog
 
 if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="quantal
+    DIST_LIST="raring
+               quantal
                precise
                oneiric
                lucid"

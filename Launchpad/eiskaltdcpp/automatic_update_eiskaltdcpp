@@ -53,7 +53,8 @@ fi
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
-export DIST_LIST="quantal
+export DIST_LIST="raring
+                  quantal
                   precise
                   oneiric"
 

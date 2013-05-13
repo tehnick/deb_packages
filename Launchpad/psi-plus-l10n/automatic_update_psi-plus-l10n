@@ -61,7 +61,8 @@ export UPDATE_STRING="New upstream release."
 
 export DESTINATION="psi-plus"
 
-export DIST_LIST="quantal
+export DIST_LIST="raring
+                  quantal
                   precise
                   oneiric"
 

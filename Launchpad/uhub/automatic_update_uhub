@@ -64,7 +64,8 @@ export EDIT_CHANGELOG="true"
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
-export DIST_LIST="quantal
+export DIST_LIST="raring
+                  quantal
                   precise
                   oneiric"
 
