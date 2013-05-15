@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Common script for setting variables
+
+export TEMP_DIR="${PKG_DIR}/TEMP/BACKPORT"
+export TEST_DIR="${TEMP_DIR}/TEST"
+
+cd "${PKG_DIR}/${PACKAGE}-debian" || exit 1
+
+mkdir -p "${TEMP_DIR}"
+cd "${TEMP_DIR}" || exit 1
+
+# squeeze-backports-sloppy wheezy-backports
+export MAIN_DIST="wheezy-backports"
+
+if [ -z "${BPO_SFX}" ]; then
+    export BPO_SFX="~bpo70+1"
+fi
+
+export UPDATE_STRING="Rebuild for wheezy-backports."
+export DISTRIBUTION="wheezy"
+export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/backports"
+
+# Set versions
+SetVersions()
+{
+    export PKG_VER=${OLD_VER}
+    export PKG_VER_FULL=${EPOCH}${OLD_VER_FULL}
+    if [ -z "${BPO_VER}" ]; then
+        export BPO_VER=${PKG_VER_FULL}
+    fi
+    export BPO_VER_FULL=${BPO_VER}${BPO_SFX}
+}
+
+# Display versions
+DisplayVersions()
+{
+    echo "PKG_VER = ${PKG_VER}"
+    echo "BPO_VER = ${BPO_VER}"
+    echo "PKG_VER_FULL = ${EPOCH}${PKG_VER_FULL}"
+    echo "BPO_VER_FULL = ${EPOCH}${BPO_VER_FULL}"
+    echo ;
+}

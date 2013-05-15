@@ -41,8 +41,6 @@ fi
 
 echo "Updating is started."
 
-export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
-
 rm -rf "${DIR_NAME}" "${PACKAGE}_${NEW_VER}-"*
 
 tar "${D_ARGS}" "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}"
@@ -96,6 +94,8 @@ else
 
     cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER_FULL}.debian.tar."* "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER_FULL}.dsc" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
@@ -104,7 +104,7 @@ else
     cd "${TEST_DIR}/${DIR_NAME}"
     echo "Start building packages..."
     if [ "${CLEAN_BUILD}" = "true" ]; then
-        sudo time nice -n19 pdebuild --pbuilder cowbuilder --buildresult "${TEST_DIR}" > \
+        sudo time nice -n19 pdebuild --pbuilder cowbuilder --auto-debsign --buildresult "${TEST_DIR}" > \
                                      ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
     else
         time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1

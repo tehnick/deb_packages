@@ -1,0 +1,99 @@
+#!/bin/bash
+
+# This is the common script for preparing updated packages to backports
+
+
+if [ -z "${PACKAGE}" ]; then
+    echo "Error: PACKAGE variable is empty!";
+    exit 1;
+fi
+
+if [ -z "${A_TYPE}" ]; then
+    export A_TYPE="bz2"
+    export D_ARGS="xjf"
+fi
+
+if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE}" ]; then
+    echo "File ${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE} is not found.";
+    exit 0;
+fi
+
+if [ -z "${DIR_NAME}" ]; then
+    export DIR_NAME="${PACKAGE}-${PKG_VER}"
+fi
+
+echo "Updating is started."
+
+rm -rf "${DIR_NAME}" "${PACKAGE}_${PKG_VER}-"*
+
+tar "${D_ARGS}" "${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE}"
+rm -rf "${DIR_NAME}/debian"
+cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${DIR_NAME}/debian"
+
+cd "${TEMP_DIR}/${DIR_NAME}"
+
+export DIST="${MAIN_DIST}"
+{
+    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${BPO_VER_FULL}" \
+        "${UPDATE_STRING}"
+    kwrite debian/changelog
+    nice -n19 debuild -S -sa
+}
+
+
+if [ "${1}" = "fast" ]; then
+    echo ;
+    echo "Fast upload (without tests)."
+    echo ;
+else
+    echo ;
+    echo "Now will be tests."
+    echo ;
+
+    sudo rm -rf "${TEST_DIR}"/*
+    mkdir -p "${TEST_DIR}"
+    cd "${TEST_DIR}" || exit 1
+
+    cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${BPO_VER_FULL}.debian.tar."* "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${BPO_VER_FULL}.dsc" "${TEST_DIR}/"
+    
+    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${BPO_VER_FULL}.build.log"
+    export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${BPO_VER_FULL}.warnings.log"
+    echo ;
+
+    cd "${TEST_DIR}/${DIR_NAME}"
+    echo "Start building packages..."
+    # sudo cowbuilder --build ${TEST_DIR}/${PACKAGE}_${BPO_VER_FULL}.dsc
+    sudo time nice -n19 pdebuild --pbuilder cowbuilder --auto-debsign \
+                                 --buildresult "${TEST_DIR}" -- --basepath "${BPO_BASEPATH}" 
+                                 # > \
+                                 #${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
+    cat  ${WARNINGS_LOG_FILE}
+    echo "Finished building packages."
+    echo ;
+
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${BPO_VER_FULL}.lintian.log"
+    cd "${TEST_DIR}"
+    echo ;
+    echo "Now running lintian:"
+    time nice -n19 lintian -ivIE --pedantic ${PACKAGE}_${BPO_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    grep "E: " "${LINTIAN_LOG_FILE}"
+    grep "W: " "${LINTIAN_LOG_FILE}"
+    grep "I: " "${LINTIAN_LOG_FILE}"
+    grep "P: " "${LINTIAN_LOG_FILE}"
+    echo "Finished running lintian."
+    echo ;
+    kwrite ${LINTIAN_LOG_FILE}
+
+    cd "${TEMP_DIR}/${DIR_NAME}"
+fi
+
+
+cd "${TEMP_DIR}"
+cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
+
+
+echo "Update finished successfully"
+

@@ -3,9 +3,7 @@
 
 # Common script for setting variables
 
-if [ -z "${SFX}" ]; then
-    export SFX="-1"
-fi
+export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
 
 export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 
@@ -19,6 +17,10 @@ cd "${PKG_DIR}/${PACKAGE}-debian" || exit 1
 
 mkdir -p "${TEMP_DIR}"
 cd "${TEMP_DIR}" || exit 1
+
+if [ -z "${SFX}" ]; then
+    export SFX="-1"
+fi
 
 
 # Get old version
