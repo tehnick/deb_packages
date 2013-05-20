@@ -45,7 +45,7 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
     wget -4 -c "ftp://ftp.kde.org/pub/kde/stable/${PROJECT}/${NEW_VER}/src/${PROJECT}-${NEW_VER}.tar.xz"
     mv -f "${PROJECT}-${NEW_VER}.tar.xz" "${PACKAGE}_${NEW_VER}.orig.tar.xz"
 fi
@@ -58,8 +58,7 @@ export DESTINATION="kde-gtk-config"
 
 export DIST_LIST="raring
                   quantal
-                  precise
-                  oneiric"
+                  precise"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

@@ -16,12 +16,10 @@ export EPOCH="3:"
 # Uncomment if necessary:
 #export SFX="-3"
 #export SFX="-1~exp1"
-export SFX="-1"
 
 
 # experimental unstable quantal
-export MAIN_DIST="experimental"
-#export MAIN_DIST="quantal"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
@@ -52,7 +50,7 @@ PrintVersions "${@}"
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
     wget -4 -c "ftp://ftp.kde.org/pub/kde/stable/${PROJECT}/${NEW_VER}/src/${PROJECT}-${NEW_VER}.tar.xz"
     mv -f "${PROJECT}-${NEW_VER}.tar.xz" "${PACKAGE}_${NEW_VER}.orig.tar.xz"
 fi

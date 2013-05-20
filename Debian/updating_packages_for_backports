@@ -66,7 +66,7 @@ else
     cd "${TEST_DIR}/${DIR_NAME}"
     echo "Start building packages..."
     # sudo cowbuilder --build ${TEST_DIR}/${PACKAGE}_${BPO_VER_FULL}.dsc
-    sudo time nice -n19 pdebuild --pbuilder cowbuilder --auto-debsign \
+    sudo time nice -n19 pdebuild --pbuilder cowbuilder \
                                  --buildresult "${TEST_DIR}" -- --basepath "${BPO_BASEPATH}" 
                                  # > \
                                  #${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
