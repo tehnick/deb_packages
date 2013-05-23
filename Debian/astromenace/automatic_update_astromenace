@@ -8,7 +8,7 @@ fi
 export PACKAGE="astromenace"
 
 # Uncomment if necessary:
-#export SFX="-2"
+export SFX="-2"
 
 export RPKGD="+repack"
 
