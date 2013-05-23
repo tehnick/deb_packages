@@ -12,12 +12,12 @@ fi
 export PACKAGE="kde-style-qtcurve"
 
 # Uncomment if necessary:
-export SFX="-2"
+export SFX="-3"
 
 #export NEW_VER=1.8.12
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
