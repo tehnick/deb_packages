@@ -9,14 +9,14 @@ if [ -z "${MAIN_DIR}" ]; then
     fi
 fi
 
-export PACKAGE="qxmpp"
+export PACKAGE="plasma-widget-cwp"
 
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=0.7.6-1
+#export BPO_VER=1.7.3-2
 
-export BASIC_VER=0.4.92-1
+export BASIC_VER=1.6.11-1
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -36,13 +36,15 @@ DisplayVersions
 
 
 # Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.gz" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/q/qxmpp/qxmpp_${PKG_VER_FULL}.dsc
+if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.bz2" ]; then
+    dget -d http://ftp.de.debian.org/debian/pool/main/p/plasma-widget-cwp/plasma-widget-cwp_${PKG_VER_FULL}.dsc
 fi
 
 
-export A_TYPE="gz"
-export D_ARGS="xzf"
+#export A_TYPE="xz"
+#export D_ARGS="xJf"
+
+export DIR_NAME="cwp-${PKG_VER}"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages_for_backports"

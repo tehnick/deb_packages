@@ -9,14 +9,14 @@ if [ -z "${MAIN_DIR}" ]; then
     fi
 fi
 
-export PACKAGE="qxmpp"
+export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=0.7.6-1
+#export BPO_VER=2.2.7-3
 
-export BASIC_VER=0.4.92-1
+export BASIC_VER=2.2.6-4
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -36,13 +36,13 @@ DisplayVersions
 
 
 # Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.gz" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/q/qxmpp/qxmpp_${PKG_VER_FULL}.dsc
+if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.xz" ]; then
+    dget -d http://ftp.de.debian.org/debian/pool/main/e/eiskaltdcpp/eiskaltdcpp_${PKG_VER_FULL}.dsc
 fi
 
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
-export A_TYPE="gz"
-export D_ARGS="xzf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages_for_backports"

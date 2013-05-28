@@ -36,13 +36,13 @@ DisplayVersions
 
 
 # Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.gz" ]; then
+if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.bz2" ]; then
     dget -d http://ftp.de.debian.org/debian/pool/main/q/q4wine/q4wine_${PKG_VER_FULL}.dsc
 fi
 
+
 #export A_TYPE="gz"
 #export D_ARGS="xzf"
-
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages_for_backports"
