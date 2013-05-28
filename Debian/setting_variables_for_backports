@@ -25,6 +25,11 @@ export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/backports"
 SetVersions()
 {
     export PKG_VER=${OLD_VER}
+    if [ -z "${BASIC_VER}" ]; then
+        # BASIC_VER --- current package version in backports or in stable.
+        # It is used to fill in change log in binary packages for backports.
+        export BASIC_VER=${PKG_VER}
+    fi
     export PKG_VER_FULL=${EPOCH}${OLD_VER_FULL}
     if [ -z "${BPO_VER}" ]; then
         export BPO_VER=${PKG_VER_FULL}

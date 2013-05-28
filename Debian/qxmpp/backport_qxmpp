@@ -16,6 +16,8 @@ export PACKAGE="qxmpp"
 
 #export BPO_VER=0.7.6-1
 
+export BASIC_VER=0.4.92-1
+
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
 source "${MAIN_DIR}/Debian/setting_variables_for_backports"
