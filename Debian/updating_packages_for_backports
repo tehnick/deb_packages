@@ -37,7 +37,7 @@ export DIST="${MAIN_DIST}"
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${BPO_VER_FULL}" \
         "${UPDATE_STRING}"
     kwrite debian/changelog
-    nice -n19 debuild -S -sa
+    nice -n19 debuild -S -sa "-v${BASIC_VER}"
 }
 
 

@@ -12,12 +12,12 @@ fi
 export PACKAGE="gtk2-engines-qtcurve"
 
 # Uncomment if necessary:
-#export SFX="-4"
+export SFX="-2"
 
 #export NEW_VER=1.8.15
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
