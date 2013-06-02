@@ -50,7 +50,7 @@ CheckVersionsUnstable
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
     # Begin local updating
     export SVN_DIR="${HOME}/WorkDir/Devel/FreeDC++/freedcpp_trunk/"
     svn update "${SVN_DIR}"

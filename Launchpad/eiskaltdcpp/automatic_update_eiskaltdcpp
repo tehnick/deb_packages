@@ -55,8 +55,7 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DIST_LIST="raring
                   quantal
-                  precise
-                  oneiric"
+                  precise"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

@@ -66,8 +66,7 @@ export D_ARGS="xJf"
 
 export DIST_LIST="raring
                   quantal
-                  precise
-                  oneiric"
+                  precise"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"

@@ -42,7 +42,7 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "mediapack.${NEW_VER}.tar.bz2" ]); then
+if [ ! -e "mediapack.${NEW_VER}.tar.bz2" ]; then
     wget -4 "http://freedcpp.googlecode.com/files/mediapack.${NEW_VER}.tar.bz2"
     rm -rf "${PACKAGE}-${NEW_VER}"
     tar xjf "mediapack.${NEW_VER}.tar.bz2"

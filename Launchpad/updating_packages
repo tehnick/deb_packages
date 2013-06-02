@@ -89,7 +89,6 @@ if [ -z "${DIST_LIST}" ]; then
     DIST_LIST="raring
                quantal
                precise
-               oneiric
                lucid"
     export DIST_LIST;
 fi

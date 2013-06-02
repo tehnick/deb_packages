@@ -46,7 +46,7 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
     wget -4 -c "http://qxmpp.googlecode.com/files/qxmpp-${NEW_VER}.tar.gz"
     mv -f "${PACKAGE}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
 fi

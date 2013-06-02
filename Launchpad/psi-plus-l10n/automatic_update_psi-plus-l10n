@@ -46,7 +46,7 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
     rm -rf  "${NEW_VER}" "${PACKAGE}-${NEW_VER}"
     # sources
     wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${NEW_VER}"
@@ -63,8 +63,7 @@ export DESTINATION="psi-plus"
 
 export DIST_LIST="raring
                   quantal
-                  precise
-                  oneiric"
+                  precise"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
