@@ -49,7 +49,8 @@ CheckVersions
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
     rm -rf  "${NEW_VER}" "${PACKAGE}-${NEW_VER}"
     # sources
-    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${NEW_VER}"
+https://codeload.github.com/psi-plus/psi-plus-l10n/tar.gz/0.16.117.4
+    wget -4 -c "https://codeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${NEW_VER}"
     rm -rf ${PROJECT}-*
     tar xzf "${NEW_VER}"
     # tarball

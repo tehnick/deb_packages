@@ -54,7 +54,7 @@ CheckVersions
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
     rm -rf  "${NEW_VER}" "${PACKAGE}-${NEW_VER}"
     # sources
-    wget -4 -c "http://nodeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${NEW_VER}"
+    wget -4 -c "https://codeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${NEW_VER}"
     rm -rf ${PROJECT}-*
     tar xzf "${NEW_VER}"
     # tarball
