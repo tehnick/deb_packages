@@ -30,7 +30,7 @@ SetVersions()
         # It is used to fill in change log in binary packages for backports.
         export BASIC_VER=${PKG_VER}
     fi
-    export PKG_VER_FULL=${EPOCH}${OLD_VER_FULL}
+    export PKG_VER_FULL=${OLD_VER_FULL}
     if [ -z "${BPO_VER}" ]; then
         export BPO_VER=${PKG_VER_FULL}
     fi

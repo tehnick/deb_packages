@@ -1,0 +1,51 @@
+#!/bin/bash
+
+
+if [ -z "${MAIN_DIR}" ]; then
+    if [[ ${0} =~ ^/.+$ ]]; then
+        export MAIN_DIR="$(dirname ${0})/../.."
+    else
+        export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+    fi
+fi
+
+export PACKAGE="kde-gtk-config"
+
+export EPOCH="3:"
+
+# Uncomment if necessary:
+#export BPO_SFX="~bpo70+2"
+
+#export BPO_VER=2.2.1-1
+
+export BASIC_VER=3:2.1-1
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+source "${MAIN_DIR}/Debian/setting_variables_for_backports"
+
+
+# Get old version
+GetOldVersion
+
+
+# Set versions
+SetVersions
+
+
+# Display versions
+DisplayVersions
+
+
+# Get the sources
+if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.xz" ]; then
+    dget -d http://ftp.de.debian.org/debian/pool/main/k/kde-gtk-config/kde-gtk-config_${PKG_VER_FULL}.dsc
+fi
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
+
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages_for_backports"
+
