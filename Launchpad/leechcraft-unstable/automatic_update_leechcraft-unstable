@@ -12,7 +12,7 @@ fi
 export PACKAGE="leechcraft-unstable"
 
 # Uncomment if necessary:
-export SFX="-0ppa3"
+#export SFX="-0ppa3"
 
 export RPKGD="+dfsg"
 
