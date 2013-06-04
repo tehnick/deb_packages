@@ -37,7 +37,7 @@ DisplayVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.bz2" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/q/q4wine/q4wine_${PKG_VER_FULL}.dsc
+    dget -d http://ftp.de.debian.org/debian/pool/main/q/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
 fi
 
 

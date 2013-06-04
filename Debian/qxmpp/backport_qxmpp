@@ -37,7 +37,7 @@ DisplayVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.gz" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/q/qxmpp/qxmpp_${PKG_VER_FULL}.dsc
+    dget -d http://ftp.de.debian.org/debian/pool/main/q/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
 fi
 
 

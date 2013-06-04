@@ -37,7 +37,7 @@ DisplayVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.xz" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/p/psi-plus-l10n/psi-plus-l10n_${PKG_VER_FULL}.dsc
+    dget -d http://ftp.de.debian.org/debian/pool/main/p/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
 fi
 
 export A_TYPE="xz"
