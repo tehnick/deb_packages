@@ -3,7 +3,7 @@
 
 # Common script for setting variables
 
-export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+export DEBEMAIL="Boris Pek <tehnick@debian.org>"
 
 export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
 

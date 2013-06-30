@@ -34,7 +34,7 @@ export OLD_DIR_NAME="${PACKAGE}-${OLD_VER}"
 
 echo "Updating is started."
 
-export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+export DEBEMAIL="Boris Pek <tehnick@debian.org>"
 
 rm -rf "${PACKAGE}_${NEW_VER}.tar.${A_TYPE}"
 

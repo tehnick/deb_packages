@@ -41,7 +41,7 @@ fi
 
 echo "Updating is started."
 
-export DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+export DEBEMAIL="Boris Pek <tehnick@debian.org>"
 
 rm -rf "${DIR_NAME}" "${PACKAGE}_${NEW_VER}-"*
 

@@ -34,7 +34,7 @@ CCACHEDIR="/home/user/WorkDir/Devel/pbuilder/ccache"
 # make debconf not interact with user
 export DEBIAN_FRONTEND="noninteractive"
 
-DEBEMAIL="Boris Pek <tehnick-8@mail.ru>"
+DEBEMAIL="Boris Pek <tehnick@debian.org>"
 
 #for pbuilder debuild
 BUILDSOURCEROOTCMD="fakeroot"
