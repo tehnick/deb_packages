@@ -136,22 +136,6 @@ kwrite debian/changelog
 cd "${TEMP_DIR}"
 cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 
-if [ -z "${DESTINATION}" ]; then
-    export DESTINATION="mentors"
-fi
-
-if [ "${1}" = "debian" ]; then
-    echo "Command for testing build in clean and minimal environment:"
-    echo "sudo cowbuilder --build ${TEST_DIR}/${PACKAGE}_${NEW_VER_FULL}.dsc"
-    echo ;
-    echo "Command for upload the package directly into Debian repository:"
-    echo "dput -f ftp-eu ${TEST_DIR}/${PACKAGE}_${NEW_VER_FULL}_i386.changes";
-    echo ;
-elif [ "${DM_FLAG}" != "true" ]; then
-    dput -f ${DESTINATION} ${PACKAGE}_${NEW_VER_FULL}_source.changes || exit 1
-    echo "Package was uploaded successfully to: ${DESTINATION}"
-    echo ;
-fi
 
 echo "Update finished successfully"
 
