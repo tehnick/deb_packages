@@ -16,7 +16,7 @@ export PACKAGE="eiskaltdcpp"
 
 #export BPO_VER=2.2.7-3
 
-export BASIC_VER=2.2.6-4
+export BASIC_VER=2.2.7-2
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"

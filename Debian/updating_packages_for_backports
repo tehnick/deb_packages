@@ -65,11 +65,13 @@ else
 
     cd "${TEST_DIR}/${DIR_NAME}"
     echo "Start building packages..."
-    sudo time nice -n19 pdebuild --pbuilder cowbuilder \
+    sudo time nice -n19 pdebuild --auto-debsign \
+                                 --pbuilder cowbuilder \
                                  --buildresult "${TEST_DIR}" -- \
                                  --basepath "${BPO_BASEPATH}" \
                                  --debbuildopts "-v${BASIC_VER}" \
-                                 > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
+                                 > ${BUILD_LOG_FILE} \
+                                 2> ${WARNINGS_LOG_FILE} || exit 1
     cat  ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
     echo ;

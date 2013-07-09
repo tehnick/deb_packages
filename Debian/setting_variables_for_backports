@@ -19,7 +19,7 @@ fi
 
 export UPDATE_STRING="Rebuild for wheezy-backports."
 export DISTRIBUTION="wheezy"
-export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/backports"
+export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/wheezy-backports"
 
 # Set versions
 SetVersions()
