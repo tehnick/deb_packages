@@ -16,7 +16,7 @@ export PACKAGE="astromenace-data"
 
 #export BPO_VER=1.3.1+repack-2
 
-#export BASIC_VER=1.3.1+repack-2
+export BASIC_VER=1.3.1+repack-1
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"

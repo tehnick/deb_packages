@@ -22,7 +22,7 @@ if [ -z "${A_TYPE}" ]; then
     export D_ARGS="xjf"
 fi
 
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
     echo "File ${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE} is not found.";
     exit 0;
 fi
@@ -33,6 +33,10 @@ fi
 
 if [ -z "${OLD_DIR_NAME}" ]; then
     export OLD_DIR_NAME="${PACKAGE}-${OLD_VER}"
+fi
+
+if [ "${1}" = "clean" ]; then
+    export CLEAN_BUILD="true"
 fi
 
 echo "Updating is started."
@@ -81,8 +85,14 @@ else
     echo "Now will be tests."
     echo ;
 
-    rm -rf "${TEST_DIR}"
-    mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
+    if [ "${CLEAN_BUILD}" = "true" ]; then
+        sudo rm -rf "${TEST_DIR}"/*
+    else
+        rm -rf "${TEST_DIR}"/*
+    fi
+
+    mkdir -p "${TEST_DIR}"
+    cd "${TEST_DIR}" || exit 1
 
     cp -a "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${TEST_DIR}/"
@@ -92,7 +102,15 @@ else
     cd "${TEST_DIR}/${DIR_NAME}"
     echo ;
     echo "Start building packages..."
-    time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
+    if [ "${CLEAN_BUILD}" = "true" ]; then
+        sudo time nice -n19 pdebuild --auto-debsign \
+                                     --pbuilder cowbuilder \
+                                     --buildresult "${TEST_DIR}" > \
+                                     ${BUILD_LOG_FILE} \
+                                     2> ${WARNINGS_LOG_FILE} || exit 1
+    else
+        time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
+    fi
     cat  ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
     echo ;
