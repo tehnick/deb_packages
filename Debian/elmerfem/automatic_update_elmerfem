@@ -16,7 +16,9 @@ export SFX="-2"
 
 export NEW_VER=7.0.svn.6034+dfsg
 #export NEW_VER=6.1.0.svn.5396.dfsg2
+#export NEW_VER=6.1.0.svn.5396.dfsg2
 #export NEW_VER=5.5.0.svn.4499.dfsg2
+
 
 # experimental unstable
 export MAIN_DIST="experimental"
@@ -62,8 +64,8 @@ PrintVersions "${@}"
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-#if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+#if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
     "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
 fi
 
