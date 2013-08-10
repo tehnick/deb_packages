@@ -85,6 +85,7 @@ else
     grep "W: " "${LINTIAN_LOG_FILE}"
     grep "I: " "${LINTIAN_LOG_FILE}"
     grep "P: " "${LINTIAN_LOG_FILE}"
+    grep "X: " "${LINTIAN_LOG_FILE}"
     echo "Finished running lintian."
     echo ;
     kwrite ${LINTIAN_LOG_FILE}
