@@ -20,3 +20,6 @@ done
 cd "${PKG_DIR}/${PACKAGE}-debian"
 diff -urN debian debian-unstable > "${TEMP_DIR}/debian.diff"
 kwrite "${TEMP_DIR}/debian.diff" > /dev/null &
+
+
+rm -rf "${PKG_DIR}/${PACKAGE}-debian/debian-unstable"
