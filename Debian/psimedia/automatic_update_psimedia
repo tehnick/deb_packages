@@ -14,7 +14,7 @@ export PACKAGE="psimedia"
 # Uncomment if necessary:
 export SFX="-2"
 
-export NEW_VER=1.0.3-git20130306-c2b8446
+#export NEW_VER=1.0.3-git20130306-c2b8446
 
 
 # Available branches: master
@@ -58,7 +58,7 @@ PrintVersionsUnstable "${@}"
 
 
 # Check versions
-#CheckVersionsUnstable
+CheckVersionsUnstable
 
 
 # Get the sources
