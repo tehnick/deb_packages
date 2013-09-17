@@ -12,7 +12,7 @@ fi
 export PACKAGE="elmer-doc"
 
 # Uncomment if necessary:
-export SFX="-1ppa1"
+#export SFX="-1ppa1"
 
 #export NEW_VER=2013.02.01
 
