@@ -12,12 +12,12 @@ fi
 export PACKAGE="kde-style-qtcurve"
 
 # Uncomment if necessary:
-export SFX="-3"
+#export SFX="-3"
 
 #export NEW_VER=1.8.12
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
@@ -50,8 +50,8 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    wget -4 -c "http://craigd.wikispaces.com/file/view/QtCurve-KDE4-${NEW_VER}.tar.bz2"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]; then
+    wget -c4 "http://craigd.wikispaces.com/file/view/QtCurve-KDE4-${NEW_VER}.tar.bz2"
     mv -f "QtCurve-KDE4-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 fi
 
