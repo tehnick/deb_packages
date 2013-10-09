@@ -14,9 +14,9 @@ export PACKAGE="plasma-widget-cwp"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=1.8.0-1
+#export BPO_VER=1.8.2-1
 
-export BASIC_VER=1.8.0-1
+export BASIC_VER=1.8.1-1
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
