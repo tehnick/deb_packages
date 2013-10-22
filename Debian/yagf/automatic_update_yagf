@@ -51,9 +51,9 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
-    wget -4 -c "http://symmetrica.net/cuneiform-linux/${PROJECT}-${NEW_VER}.tar.gz"
-    mv -f "${PROJECT}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+    wget -c4 "http://symmetrica.net/cuneiform-linux/${PROJECT}-${NEW_VER}.tar.gz"
+    mv  "${PROJECT}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
 fi
 
 

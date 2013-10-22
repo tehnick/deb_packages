@@ -39,7 +39,6 @@ export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-#DisplayVersions "http://githubredir.debian.net/github/tehnick/psi-plus"
 DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
@@ -52,19 +51,17 @@ CheckVersions
 
 
 # Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
     "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
-
 export UPDATE_STRING="New upstream release."
 
-export DESTINATION="mentors_ftp"
+export A_TYPE="gz"
+export D_ARGS="xzf"
 
-export A_TYPE="xz"
-export D_ARGS="xJf"
-
-export DM_FLAG="true"
+export DIR_NAME="psi-plus-snapshots-${NEW_VER}"
+export OLD_DIR_NAME="psi-plus-snapshots-${OLD_VER}"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
