@@ -42,7 +42,7 @@ PrintVersions "${@}"
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
     wget -4 -c "http://sourceforge.net/projects/openastromenace/files/${CUR_VER}/astromenace-src-${CUR_VER}.tar.bz2"
     tar xjf "astromenace-src-${CUR_VER}.tar.bz2"
     rm -r "AstroMenace/RAW_VFS_DATA" "AstroMenace/MacOSX.zip"
