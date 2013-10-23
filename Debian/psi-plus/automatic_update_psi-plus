@@ -17,7 +17,7 @@ export PACKAGE="psi-plus"
 #export NEW_VER=0.15.5267
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
@@ -54,6 +54,7 @@ CheckVersions
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
     "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
+
 
 export UPDATE_STRING="New upstream release."
 

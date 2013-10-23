@@ -12,7 +12,7 @@ fi
 export PACKAGE="psimedia"
 
 # Uncomment if necessary:
-export SFX="-2"
+#export SFX="-2"
 
 #export NEW_VER=1.0.3-git20130306-c2b8446
 
@@ -62,22 +62,16 @@ CheckVersionsUnstable
 
 
 # Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-    rm -rf  "${PACKAGE}-${NEW_VER}"
-    # sources
-    mkdir "${PACKAGE}-${NEW_VER}" || exit 1
-    rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
-    # tarball
-    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
+exit 0
 
 
 export UPDATE_STRING="New Git snapshot."
 
-export A_TYPE="xz"
-export D_ARGS="xJf"
-
-export DM_FLAG="true"
+export A_TYPE="gz"
+export D_ARGS="xzf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"

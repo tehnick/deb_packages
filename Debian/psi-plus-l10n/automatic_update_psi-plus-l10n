@@ -51,23 +51,15 @@ CheckVersions
 
 
 # Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-    rm -rf  "${NEW_VER}" "${PACKAGE}-${NEW_VER}"
-    # sources
-    wget -4 -c "https://codeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${NEW_VER}"
-    rm -rf ${PROJECT}-*
-    tar xzf "${NEW_VER}"
-    # tarball
-    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
 export UPDATE_STRING="New upstream release."
 
-export A_TYPE="xz"
-export D_ARGS="xJf"
-
-export DM_FLAG="true"
+export A_TYPE="gz"
+export D_ARGS="xzf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
