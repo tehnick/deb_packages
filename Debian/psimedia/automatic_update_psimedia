@@ -37,9 +37,12 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-git[0-9]\{8,8\}-\(.*\)$/\1/"
 GIT_REPO_DIR="${HOME}/WorkDir/Devel/Psi+/psimedia_orig"
 if [ -d "${GIT_REPO_DIR}" ]; then
     cd "${GIT_REPO_DIR}" || exit 1
-    git pull --all || exit 1
+    git pull --all
+    export LAST_COMMIT=$(git show -s --pretty=format:%h)
+else
+    echo "Directory ${GIT_REPO_DIR} does not exist!"
+    exit 1
 fi
-export LAST_COMMIT=$(git show -s --pretty=format:%h)
 if [ -z "${NEW_VER}" ]; then
     export CUR_VER="1.0.3"
     export DATE=$(date "+%Y%m%d")
