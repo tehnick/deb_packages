@@ -58,20 +58,22 @@ PrintVersionsUnstable "${@}"
 
 
 # Check versions
-CheckVersionsUnstable
+#CheckVersionsUnstable
 
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
     "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
-exit 0
 
 
 export UPDATE_STRING="New Git snapshot."
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
+
+export DIR_NAME="psimedia-master"
+export OLD_DIR_NAME="psimedia-master"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
