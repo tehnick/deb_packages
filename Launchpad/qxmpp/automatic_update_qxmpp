@@ -56,7 +56,8 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DESTINATION="leechcraft-stable"
 
-export DIST_LIST="raring
+export DIST_LIST="saucy
+                  raring
                   quantal
                   precise"
 

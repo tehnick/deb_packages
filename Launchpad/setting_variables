@@ -3,7 +3,7 @@
 
 # Common script for setting variables
 
-export MAIN_DIST="saucy"
+export MAIN_DIST="trusty"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
 if [ -z "${SFX}" ]; then

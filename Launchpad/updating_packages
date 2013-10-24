@@ -49,7 +49,7 @@ tar "${D_ARGS}" "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}"
 rm -rf "${DIR_NAME}/debian"
 cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${DIR_NAME}/debian"
 
-if ([ -d "${OLD_DIR_NAME}" ]); then
+if [ -d "${OLD_DIR_NAME}" ]; then
     diff -urN "${OLD_DIR_NAME}" "${DIR_NAME}" > \
               "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
 fi
@@ -86,7 +86,8 @@ fi
 cp -f debian/changelog ../changelog # copy basic changelog
 
 if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="raring
+    DIST_LIST="saucy
+               raring
                quantal
                precise
                lucid"

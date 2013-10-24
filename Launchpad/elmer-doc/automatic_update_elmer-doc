@@ -60,7 +60,8 @@ export UPDATE_STRING="New upstream release."
 
 export DESTINATION="elmerfem"
 
-export DIST_LIST="raring
+export DIST_LIST="saucy
+                  raring
                   quantal
                   precise"
 
