@@ -79,8 +79,7 @@ export UPDATE_STRING="Minor update from Git ${BRANCH} branch."
 export DESTINATION="leechcraft-unstable"
 
 export DIST_LIST="saucy
-                  raring
-                  quantal"
+                  raring"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
