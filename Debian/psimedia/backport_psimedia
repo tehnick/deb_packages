@@ -14,9 +14,9 @@ export PACKAGE="psimedia"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=0.16.117-1
+#export BPO_VER=1.0.3-git20131023-ea487d3-1
 
-export BASIC_VER=1.0.3-git20120506-fb54b6e-1
+export BASIC_VER=1.0.3-git20130306-c2b8446-2
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -36,12 +36,14 @@ DisplayVersions
 
 
 # Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.xz" ]; then
+if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.gz" ]; then
     dget -d http://ftp.de.debian.org/debian/pool/main/p/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
 fi
 
-export A_TYPE="xz"
-export D_ARGS="xJf"
+export A_TYPE="gz"
+export D_ARGS="xzf"
+
+export DIR_NAME="psimedia-master"
 
 
 # Launch common script for updating packages and uploading them to mentors.debian.net

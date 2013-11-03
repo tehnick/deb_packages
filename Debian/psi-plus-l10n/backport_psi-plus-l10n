@@ -14,9 +14,9 @@ export PACKAGE="psi-plus-l10n"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=0.16.117-1
+#export BPO_VER=0.16.242-1
 
-#export BASIC_VER=0.15.5338-1
+#export BASIC_VER=0.16.117-1
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -36,12 +36,12 @@ DisplayVersions
 
 
 # Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.xz" ]; then
+if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.gz" ]; then
     dget -d http://ftp.de.debian.org/debian/pool/main/p/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
 fi
 
-export A_TYPE="xz"
-export D_ARGS="xJf"
+export A_TYPE="gz"
+export D_ARGS="xzf"
 
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
