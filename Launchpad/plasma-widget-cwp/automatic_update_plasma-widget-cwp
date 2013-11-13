@@ -12,7 +12,7 @@ fi
 export PACKAGE="plasma-widget-cwp"
 
 # Uncomment if necessary:
-#export SFX="-1ppa1"
+export SFX="-1ppa1"
 
 
 # Launch common script for setting variables
@@ -43,8 +43,7 @@ CheckVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]; then
-    wget -4 -c "http://kde-look.org/CONTENT/content-files/98925-cwp-${NEW_VER}.tar.bz2"
-    mv -f "98925-cwp-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
