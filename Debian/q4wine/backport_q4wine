@@ -14,9 +14,9 @@ export PACKAGE="q4wine"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=1.0-r3
+#export BPO_VER=1.1-1
 
-export BASIC_VER=0.121-4
+export BASIC_VER=1.0-r3-2
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
