@@ -12,7 +12,7 @@ fi
 export PACKAGE="yagf"
 
 # Uncomment if necessary:
-export SFX="-2"
+#export SFX="-2"
 
 # Temporary:
 #export NEW_VER=0.9+svn247
@@ -52,8 +52,7 @@ CheckVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
-    wget -c4 "http://symmetrica.net/cuneiform-linux/${PROJECT}-${NEW_VER}.tar.gz"
-    mv  "${PROJECT}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
