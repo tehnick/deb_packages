@@ -115,3 +115,10 @@ login = anonymous
 allow_dcut = 1
 progress_indicator = 2
 
+[debian-ssh]
+fqdn = ssh.upload.debian.org
+method = rsync
+incoming = /srv/upload.debian.org/UploadQueue/
+login=tehnick
+allow_dcut = 1
+progress_indicator = 2
