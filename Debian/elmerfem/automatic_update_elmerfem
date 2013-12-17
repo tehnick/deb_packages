@@ -12,10 +12,10 @@ fi
 export PACKAGE="elmerfem"
 
 # Uncomment if necessary:
-export SFX="-4"
+#export SFX="-3"
 
 #export NEW_VER=7.0.svn.6034+dfsg
-export NEW_VER=6.1.0.svn.5396.dfsg2
+#export NEW_VER=6.1.0.svn.5396.dfsg2
 #export NEW_VER=5.5.0.svn.4499.dfsg2
 
 
@@ -63,22 +63,22 @@ PrintVersions "${@}"
 
 
 # Get the sources
-#if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+#if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
     "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
 fi
 
 
 export UPDATE_STRING="New upstream revision."
 
-#export A_TYPE="xz"
-#export D_ARGS="xJf"
-export A_TYPE="gz"
-export D_ARGS="xzf"
+export A_TYPE="xz"
+export D_ARGS="xJf"
+#export A_TYPE="gz"
+#export D_ARGS="xzf"
 
 # temporary
-export DIR_NAME="elmerfem-${LAST_COMMIT}"
-export OLD_DIR_NAME="elmerfem-${OLD_COMMIT}"
+#export DIR_NAME="elmerfem-${LAST_COMMIT}"
+#export OLD_DIR_NAME="elmerfem-${OLD_COMMIT}"
 
 
 export CLEAN_BUILD="true"
