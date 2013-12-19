@@ -38,16 +38,12 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersions
+CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-    wget -4 -c "http://sourceforge.net/projects/openastromenace/files/${CUR_VER}/astromenace-src-${CUR_VER}.tar.bz2"
-    tar xjf "astromenace-src-${CUR_VER}.tar.bz2"
-    rm -r "AstroMenace/RAW_VFS_DATA/FONT" "AstroMenace/AstroMenaceSource"
-    rm "AstroMenace/MacOSX.zip" "AstroMenace/CMakeLists.txt" "AstroMenace/CodeBlocks.cbp"
-    tar -cJf "astromenace-data_${NEW_VER}.orig.tar.xz" "AstroMenace"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
@@ -56,8 +52,8 @@ export UPDATE_STRING="Update to stable release ${CUR_VER}."
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
-export DIR_NAME="AstroMenace"
-export OLD_DIR_NAME="AstroMenace"
+#export DIR_NAME="AstroMenace"
+#export OLD_DIR_NAME="AstroMenace"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
