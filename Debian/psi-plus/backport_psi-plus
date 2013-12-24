@@ -14,9 +14,9 @@ export PACKAGE="psi-plus"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=0.16.242-1
+#export BPO_VER=0.16.262-1
 
-export BASIC_VER=0.16.132-1
+export BASIC_VER=0.16.242-1
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
