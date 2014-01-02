@@ -47,24 +47,8 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]); then
-    rm -rf  "${CUR_VER}"/ "${PACKAGE}-${NEW_VER}"/
-    # main sources
-    wget -4 -c "https://codeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${CUR_VER}"
-    rm -rf ${PROJECT}-*
-    tar xzf "${CUR_VER}"
-    mv "${PROJECT}-${CUR_VER}" "${PACKAGE}-${NEW_VER}"
-    # deleting some files and directories
-    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/lcftp/
-    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
-    rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/advancednotifications/share/sounds/*
-    mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
-       "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png
-    rm "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/*
-    mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/unknown.png \
-       "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png
-    # tarball
-    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
@@ -73,9 +57,7 @@ export UPDATE_STRING="Update to stable release ${CUR_VER}."
 export DESTINATION="leechcraft-stable"
 
 export DIST_LIST="saucy
-                  raring
-                  quantal
-                  precise"
+                  raring"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
