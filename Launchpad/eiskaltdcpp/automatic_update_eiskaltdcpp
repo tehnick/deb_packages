@@ -11,7 +11,7 @@ fi
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-#export SFX="-0ppa2"
+export SFX="-2ppa1"
 
 #export NEW_VER=2.2.7+1
 
@@ -46,8 +46,7 @@ CheckVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-    wget -4 -c "http://eiskaltdc.googlecode.com/files/eiskaltdcpp-${NEW_VER}.tar.xz"
-    mv -f "${PACKAGE}-${NEW_VER}.tar.xz" "${PACKAGE}_${NEW_VER}.orig.tar.xz"
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
