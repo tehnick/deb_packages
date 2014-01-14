@@ -12,8 +12,7 @@ fi
 export PACKAGE="qconf"
 
 # Uncomment if necessary:
-#export SFX="-2"
-export SFX="-3"
+#export SFX="-3"
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -28,13 +27,17 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://delta.affinix.com/download/' 2>&1 | sed -ne "s/^.*qconf-\(.*\).tar.bz2.*$/\1/p")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+export PROJECT=qconf
+export DEVELOPER=psi-plus
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://delta.affinix.com/download/"
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
 # Print versions
@@ -46,13 +49,12 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
-    wget -4 -c "http://delta.affinix.com/download/qconf-${NEW_VER}.tar.bz2"
-    mv -f "${PACKAGE}-${NEW_VER}.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
+export UPDATE_STRING="New upstream release."
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
