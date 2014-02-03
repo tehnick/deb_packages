@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -z "${MAIN_DIR}" ]; then
+    if [[ ${0} =~ ^/.+$ ]]; then
+        export MAIN_DIR="$(dirname ${0})/../.."
+    else
+        export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+    fi
+fi
+
+export PACKAGE="bosixnet"
+
+source "${MAIN_DIR}/Debian/compare_with_package_on_Launchpad"

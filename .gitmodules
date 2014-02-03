@@ -118,3 +118,9 @@
 [submodule "Debian/astromenace-data/astromenace-data-debian"]
 	path = Debian/astromenace-data/astromenace-data-debian
 	url = git.debian.org/git/pkg-games/astromenace-data.git
+[submodule "Debian/bosixnet/bosixnet-debian"]
+	path = Debian/bosixnet/bosixnet-debian
+	url = git@github.com:tehnick/bosixnet-debian.git
+[submodule "Launchpad/bosixnet/bosixnet-debian"]
+	path = Launchpad/bosixnet/bosixnet-debian
+	url = git@github.com:tehnick/bosixnet-debian.git

@@ -87,7 +87,6 @@ cp -f debian/changelog ../changelog # copy basic changelog
 
 if [ -z "${DIST_LIST}" ]; then
     DIST_LIST="saucy
-               raring
                quantal
                precise
                lucid"

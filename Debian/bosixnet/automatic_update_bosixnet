@@ -9,14 +9,17 @@ if [ -z "${MAIN_DIR}" ]; then
     fi
 fi
 
-export PACKAGE="psi-plus-l10n"
+export PACKAGE="bosixnet"
 
 # Uncomment if necessary:
-#export SFX="-1ppa1"
+#export SFX="-2"
+
+# experimental unstable
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
-source "${MAIN_DIR}/Launchpad/setting_variables"
+source "${MAIN_DIR}/Debian/setting_variables"
 
 
 # Get old version
@@ -24,13 +27,13 @@ GetOldVersion
 
 
 # Find new version
-export DEVELOPER=psi-plus
-export PROJECT=psi-plus-l10n
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
+export DEVELOPER=tehnick
+export PROJECT=bosixnet
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/v\(.*\).tar.gz\" .*:\1:p")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
-export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
+export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
@@ -53,15 +56,9 @@ fi
 
 export UPDATE_STRING="New upstream release."
 
-export DESTINATION="psi-plus"
-
-export DIST_LIST="saucy
-                  quantal
-                  precise"
-
 export A_TYPE="gz"
 export D_ARGS="xzf"
 
-# Launch common script for updating packages and uploading them to Launchpad
-source "${MAIN_DIR}/Launchpad/updating_packages"
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
 

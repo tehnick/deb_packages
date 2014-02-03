@@ -67,7 +67,6 @@ export A_TYPE="xz"
 export D_ARGS="xJf"
 
 export DIST_LIST="saucy
-                  raring
                   quantal
                   precise"
 

@@ -71,7 +71,6 @@ fi
 export UPDATE_STRING="Minor update from Git ${BRANCH} branch."
 
 export DIST_LIST="saucy
-                  raring
                   quantal
                   precise"
 

@@ -53,7 +53,6 @@ fi
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DIST_LIST="saucy
-                  raring
                   quantal
                   precise"
 
