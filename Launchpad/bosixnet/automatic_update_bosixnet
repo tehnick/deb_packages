@@ -55,6 +55,10 @@ export UPDATE_STRING="New upstream release."
 
 export DESTINATION="bosixnet"
 
+export DIST_LIST="saucy
+                  quantal
+                  precise"
+
 export A_TYPE="gz"
 export D_ARGS="xzf"
 
