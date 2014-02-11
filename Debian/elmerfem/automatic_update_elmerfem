@@ -65,7 +65,8 @@ PrintVersions "${@}"
 # Get the sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
 #if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
+#    "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source" || exit 1
 fi
 
 
