@@ -9,14 +9,14 @@ if [ -z "${MAIN_DIR}" ]; then
     fi
 fi
 
-export PACKAGE="psi-plus-l10n"
+export PACKAGE="elmer-doc"
 
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=0.16.285-1
+#export BPO_VER=2014.02.06-1
 
-export BASIC_VER=0.16.268-1
+export BASIC_VER=2011.09.06-1
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -37,7 +37,7 @@ DisplayVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.gz" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/p/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
+    dget -d http://ftp.de.debian.org/debian/pool/non-free/e/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
 fi
 
 export A_TYPE="gz"
