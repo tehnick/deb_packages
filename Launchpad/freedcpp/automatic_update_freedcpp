@@ -11,45 +11,46 @@ fi
 
 export PACKAGE="freedcpp"
 
-export NEW_VER="0.0.5"
+#export NEW_VER="0.0.5"
 
 # Uncomment if necessary:
-#export SFX="-0ppa2"
+export SFX="-0ppa3"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
 # Get old version
-export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (\(.*\)) .*/\1/")
-export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]ppa.*$/\1/")
+GetOldVersion
+
+# Find new version
+export VER_LIST=$(curl "https://freedcpp.googlecode.com/svn/tags/" 2>&1 | sed -ne "s:^.*href=\"freedcpp-\(.*\)/\".*:\1:p")
+if [ -z "${NEW_VER}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
 export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
 
 
 # Display versions
-echo "OLD_VER_FULL = ${OLD_VER_FULL}"
-echo "NEW_VER_FULL = ${NEW_VER_FULL}"
-echo " "
+DisplayVersions "https://freedcpp.googlecode.com/svn/tags/"
+
+
+# Print versions
+PrintVersions "${@}"
 
 
 # Check versions
-if [ -z "${OLD_VER_FULL}" ]; then
-  echo "OLD_VER_FULL is empty!";
-  exit 0;
-elif [ "${NEW_VER_FULL}" = "${OLD_VER_FULL}" ]; then
-  echo "Upgrading is not required.";
-  exit 0;
-fi
+CheckVersions
 
 
 # Get the sources
-#if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]); then
+#if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
     echo "Start exporting from SVN..."
     export EXPORT_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.export.log"
     svn export "http://freedcpp.googlecode.com/svn/tags/freedcpp-${NEW_VER}/" "freedcpp-${NEW_VER}/"  > ${EXPORT_LOG_FILE}
     echo "Finished download from SVN."
-#    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+#    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
     tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
 fi
 
@@ -58,6 +59,13 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
+
+# export A_TYPE="xz"
+# export D_ARGS="xJf"
+
+export DIST_LIST="saucy
+                  quantal
+                  precise"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
