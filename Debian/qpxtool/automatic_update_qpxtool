@@ -1,0 +1,59 @@
+#!/bin/bash
+
+
+if [ -z "${MAIN_DIR}" ]; then
+    export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+fi
+
+export PACKAGE="qpxtool"
+
+# Uncomment if necessary:
+#export SFX="-6"
+
+#export NEW_VER=0.7.1.002
+
+# experimental unstable
+export MAIN_DIST="unstable"
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+
+# Get old version
+GetOldVersion
+
+
+# Find new version
+export VER_LIST=$(curl 'http://qpxtool.sourceforge.net/' 2>&1 | grep 'files/qpxtool/' | sed -ne "s:^.*/qpxtool-\(.*\).tar.bz2/download.*$:\1:p")
+if [ -z "${NEW_VER}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}
+
+
+# Display versions
+DisplayVersions "http://qpxtool.sourceforge.net/"
+
+
+# Print versions
+PrintVersions "${@}"
+
+
+# Check versions
+#CheckVersions
+
+
+# Get the sources
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
+fi
+
+
+export UPDATE_STRING="Update to stable release ${NEW_VER}."
+
+#export DIR_NAME="qpxtool-0.7.1_002"
+#export OLD_DIR_NAME="qpxtool-0.7.1_002"
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
+
