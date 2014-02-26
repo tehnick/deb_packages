@@ -44,24 +44,24 @@ CheckVersions
 
 
 # Get the sources
-#if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+# if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
     echo "Start exporting from SVN..."
     export EXPORT_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.export.log"
     svn export "http://freedcpp.googlecode.com/svn/tags/freedcpp-${NEW_VER}/" "freedcpp-${NEW_VER}/"  > ${EXPORT_LOG_FILE}
     echo "Finished download from SVN."
-#    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
-    tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
+#     tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
 fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
-export A_TYPE="gz"
-export D_ARGS="xzf"
+# export A_TYPE="gz"
+# export D_ARGS="xzf"
 
-# export A_TYPE="xz"
-# export D_ARGS="xJf"
+export A_TYPE="xz"
+export D_ARGS="xJf"
 
 export DIST_LIST="saucy
                   quantal

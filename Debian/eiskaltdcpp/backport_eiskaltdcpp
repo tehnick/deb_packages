@@ -14,9 +14,9 @@ export PACKAGE="eiskaltdcpp"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=2.2.9-2
+#export BPO_VER=2.2.9-3
 
-export BASIC_VER=2.2.9-1
+export BASIC_VER=2.2.9-2
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
