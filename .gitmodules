@@ -73,6 +73,9 @@
 [submodule "Launchpad/leechcraft/leechcraft-debian"]
 	path = Launchpad/leechcraft/leechcraft-debian
 	url = git@github.com:tehnick/leechcraft-debian.git
+[submodule "Debian/qtcurve/qtcurve-debian"]
+	path = Debian/qtcurve/qtcurve-debian
+	url = git.debian.org/git/pkg-kde/kde-extras/qtcurve.git
 [submodule "Debian/gtk2-engines-qtcurve/gtk2-engines-qtcurve-debian"]
 	path = Debian/gtk2-engines-qtcurve/gtk2-engines-qtcurve-debian
 	url = git@github.com:tehnick/gtk2-engines-qtcurve-debian.git

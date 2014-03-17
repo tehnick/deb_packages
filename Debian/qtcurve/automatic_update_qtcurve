@@ -1,0 +1,66 @@
+#!/bin/bash
+
+
+if [ -z "${MAIN_DIR}" ]; then
+    if [[ ${0} =~ ^/.+$ ]]; then
+        export MAIN_DIR="$(dirname ${0})/../.."
+    else
+        export MAIN_DIR="${PWD}/$(dirname ${0})/../.."
+    fi
+fi
+
+export PACKAGE="qtcurve"
+
+# Uncomment if necessary:
+#export SFX="-2"
+
+#export NEW_VER=1.8.18
+
+# experimental unstable
+export MAIN_DIST="experimental"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+
+
+# Get old version
+GetOldVersion
+
+
+# Find new version
+export DEVELOPER=QtCurve
+export PROJECT=qtcurve
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*[0-9]\).tar.gz\" .*:\1:p")
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}
+
+
+# Display versions
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
+
+
+# Print versions
+PrintVersions "${@}"
+
+
+# Check versions
+#CheckVersions
+
+
+# Get the sources
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
+fi
+
+
+export UPDATE_STRING="New upstream release."
+
+export A_TYPE="gz"
+export D_ARGS="xzf"
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages"
+
