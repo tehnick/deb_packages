@@ -62,6 +62,7 @@ if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
     mkdir "${PACKAGE}-${NEW_VER}" || exit 1
     rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
     # deleting some files and directories
+    rm -f "${PACKAGE}-${NEW_VER}"/src/plugins/lhtr/resources/scripts/jquery.js
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/cstp/resources/images/clients/*
     rm -r "${PACKAGE}-${NEW_VER}"/src/plugins/advancednotifications/share/sounds/*
     mv "${PACKAGE}-${NEW_VER}"/src/plugins/azoth/share/azoth/iconsets/clients/default/unknown.png \
