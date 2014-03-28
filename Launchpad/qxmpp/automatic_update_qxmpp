@@ -26,7 +26,7 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/qxmpp/downloads/list' 2>&1 | sed -ne "s:^.*qxmpp.googlecode.com/files/qxmpp-\(.*\).tar.gz\".*$:\1:p")
+export VER_LIST=$(curl 'http://download.qxmpp.org/' 2>&1 | sed -ne "s:^.*href=\"qxmpp-\(.*\).tar.gz\".*$:\1:p")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
@@ -47,8 +47,7 @@ CheckVersions
 
 # Get the sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
-    wget -4 -c "http://qxmpp.googlecode.com/files/qxmpp-${NEW_VER}.tar.gz"
-    mv -f "${PACKAGE}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
