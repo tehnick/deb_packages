@@ -12,7 +12,7 @@ fi
 export PACKAGE="qxmpp-unstable"
 
 # Uncomment if necessary:
-#export SFX="-0ppa2"
+export SFX="-0ppa2"
 
 #export NEW_VER=0.4.0~git20120405-390b63e
 
@@ -69,8 +69,7 @@ export UPDATE_STRING="Minor update from Git master branch."
 export DESTINATION="leechcraft-unstable"
 
 export DIST_LIST="saucy
-                  quantal
-                  precise"
+                  quantal"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

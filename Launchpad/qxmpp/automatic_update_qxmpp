@@ -56,8 +56,7 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 export DESTINATION="leechcraft-stable"
 
 export DIST_LIST="saucy
-                  quantal
-                  precise"
+                  quantal"
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
