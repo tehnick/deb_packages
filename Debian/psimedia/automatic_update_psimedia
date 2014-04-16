@@ -30,38 +30,28 @@ source "${MAIN_DIR}/Debian/setting_variables"
 
 # Get old version
 GetOldVersion
-export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-git[0-9]\{8,8\}-\(.*\)$/\1/")
 
 
 # Find new version
-GIT_REPO_DIR="${HOME}/WorkDir/Devel/Psi+/psimedia_orig"
-if [ -d "${GIT_REPO_DIR}" ]; then
-    cd "${GIT_REPO_DIR}" || exit 1
-    git pull --all
-    export LAST_COMMIT=$(git show -s --pretty=format:%h)
-else
-    echo "Directory ${GIT_REPO_DIR} does not exist!"
-    exit 1
+export DEVELOPER=psi-plus
+export PROJECT=psimedia
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/v\(.*\).tar.gz\" .*:\1:p")
+if [ -z "${NEW_VER=}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
-if [ -z "${NEW_VER}" ]; then
-    export CUR_VER="1.0.3"
-    export DATE=$(date "+%Y%m%d")
-    export NEW_VER="${CUR_VER}-git${DATE}-${LAST_COMMIT}"
-fi
-export NEW_VER_FULL="${NEW_VER}${SFX}"
-cd "${TEMP_DIR}" || exit 1
+export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersionsUnstable
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
 # Print versions
-PrintVersionsUnstable "${@}"
+PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersionsUnstable
+CheckVersions
 
 
 # Get the sources
@@ -70,13 +60,13 @@ if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
 fi
 
 
-export UPDATE_STRING="New Git snapshot."
+export UPDATE_STRING="New upstream release."
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
 
-export DIR_NAME="psimedia-master"
-export OLD_DIR_NAME="psimedia-master"
+export DIR_NAME="psimedia-${NEW_VER}"
+export OLD_DIR_NAME="psimedia-${OLD_VER}"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
