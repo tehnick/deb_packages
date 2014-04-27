@@ -68,7 +68,8 @@ export UPDATE_STRING="Minor update from Git master branch."
 
 export DESTINATION="leechcraft-unstable"
 
-export DIST_LIST="saucy
+export DIST_LIST="trusty
+                  saucy
                   quantal"
 
 export A_TYPE="xz"

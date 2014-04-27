@@ -52,10 +52,6 @@ fi
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
-export DIST_LIST="saucy
-                  quantal
-                  precise"
-
 export A_TYPE="xz"
 export D_ARGS="xJf"
 

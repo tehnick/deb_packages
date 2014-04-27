@@ -56,10 +56,6 @@ export EDIT_CHANGELOG="true"
 
 export DESTINATION="kde-gtk-config"
 
-export DIST_LIST="saucy
-                  quantal
-                  precise"
-
 export A_TYPE="xz"
 export D_ARGS="xJf"
 

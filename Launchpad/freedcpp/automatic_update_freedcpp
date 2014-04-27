@@ -63,10 +63,6 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
-export DIST_LIST="saucy
-                  quantal
-                  precise"
-
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 
