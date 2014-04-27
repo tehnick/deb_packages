@@ -14,9 +14,9 @@ export PACKAGE="qpxtool"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo70+2"
 
-#export BPO_VER=0.7.2-1
+#export BPO_VER=0.7.2-4
 
-export BASIC_VER=0.7.1.002-5
+export BASIC_VER=0.7.2-1
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
