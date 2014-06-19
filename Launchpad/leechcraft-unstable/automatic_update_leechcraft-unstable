@@ -89,7 +89,7 @@ source "${MAIN_DIR}/Launchpad/updating_packages"
 
 
 # Local repo
-cd "${TEST_DIR}" || exit 1
-apt-ftparchive packages . | gzip > Packages.gz
+cd "${TEMP_DIR}" || exit 1
+apt-ftparchive packages TEST | gzip > Packages.gz
 gpg --output Packages.gpg -ba Packages.gz
 
