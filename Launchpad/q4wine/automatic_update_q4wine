@@ -52,8 +52,6 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 export DESTINATION="q4wine"
 
 export DIST_LIST="trusty
-                  saucy
-                  quantal
                   precise
                   lucid"
 

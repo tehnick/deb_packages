@@ -69,8 +69,6 @@ export A_TYPE="xz"
 export D_ARGS="xJf"
 
 export DIST_LIST="trusty
-                  saucy
-                  quantal
                   precise
                   lucid"
 

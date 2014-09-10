@@ -55,8 +55,6 @@ export DIR_NAME="cwp-${NEW_VER}"
 export OLD_DIR_NAME="cwp-${OLD_VER}"
 
 export DIST_LIST="trusty
-                  saucy
-                  quantal
                   precise
                   lucid"
 
