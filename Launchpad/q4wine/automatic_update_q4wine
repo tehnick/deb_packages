@@ -12,7 +12,7 @@ fi
 export PACKAGE="q4wine"
 
 # Uncomment if necessary:
-#export SFX="-0ppa2"
+export SFX="-3ppa1"
 
 
 # Launch common script for setting variables
@@ -52,8 +52,7 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 export DESTINATION="q4wine"
 
 export DIST_LIST="trusty
-                  precise
-                  lucid"
+                  precise"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
