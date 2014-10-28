@@ -68,7 +68,8 @@ export UPDATE_STRING="Minor update from Git master branch."
 
 export DESTINATION="leechcraft-unstable"
 
-export DIST_LIST="trusty"
+export DIST_LIST="utopic
+                  trusty"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

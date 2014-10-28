@@ -86,7 +86,8 @@ fi
 cp -f debian/changelog ../changelog # copy basic changelog
 
 if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="trusty
+    DIST_LIST="utopic
+               trusty
                precise"
     export DIST_LIST;
 fi

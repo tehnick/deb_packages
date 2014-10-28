@@ -68,9 +68,6 @@ export DESTINATION="q4wine"
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
-export DIST_LIST="trusty
-                  precise"
-
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 

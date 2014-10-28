@@ -55,7 +55,8 @@ export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DESTINATION="leechcraft-stable"
 
-export DIST_LIST="trusty"
+export DIST_LIST="utopic
+                  trusty"
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
