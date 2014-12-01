@@ -12,7 +12,7 @@ fi
 export PACKAGE="uhub"
 
 # Uncomment if necessary:
-export SFX="-3"
+#export SFX="-3"
 
 #export NEW_VER=0.4.0+git20121013-55-g7fae42a
 
