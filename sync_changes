@@ -7,7 +7,7 @@ echo "MAIN_DIR = ${MAIN_DIR}"
 cd "${MAIN_DIR}"/Debian/
 for PACKAGE in * ; do
     PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}/${PACKAGE}-debian"
-    if !([ -d "${PKG_DIR}" ]); then continue; fi
+    if [ ! -d "${PKG_DIR}" ]; then continue; fi
     echo;
     echo "Begin ${PACKAGE}"
     cd "${PKG_DIR}"
@@ -21,7 +21,7 @@ done
 cd "${MAIN_DIR}"/Launchpad/
 for PACKAGE in * ; do
     PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}/${PACKAGE}-debian"
-    if !([ -d "${PKG_DIR}" ]); then continue; fi
+    if [ ! -d "${PKG_DIR}" ]; then continue; fi
     echo;
     echo "Begin ${PACKAGE}"
     cd "${PKG_DIR}"
