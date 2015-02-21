@@ -29,15 +29,17 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://download.qxmpp.org/' 2>&1 | sed -ne "s:^.*href=\"qxmpp-\(.*\).tar.gz\".*$:\1:p")
-if [ -z "${NEW_VER}" ]; then
+export DEVELOPER=qxmpp-project
+export PROJECT=qxmpp
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/v\(.*\).tar.gz\" .*:\1:p")
+if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://download.qxmpp.org/"
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
 # Print versions

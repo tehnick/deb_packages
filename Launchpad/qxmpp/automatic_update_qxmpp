@@ -12,7 +12,7 @@ fi
 export PACKAGE="qxmpp"
 
 # Uncomment if necessary:
-export SFX="-1ppa1"
+#export SFX="-1ppa1"
 
 #export NEW_VER=0.4.0~git20120405-390b63e
 
@@ -26,15 +26,17 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://download.qxmpp.org/' 2>&1 | sed -ne "s:^.*href=\"qxmpp-\(.*\).tar.gz\".*$:\1:p")
-if [ -z "${NEW_VER=}" ]; then
+export DEVELOPER=qxmpp-project
+export PROJECT=qxmpp
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/v\(.*\).tar.gz\" .*:\1:p")
+if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-DisplayVersions "http://code.google.com/p/qxmpp/downloads/list"
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
 # Print versions
