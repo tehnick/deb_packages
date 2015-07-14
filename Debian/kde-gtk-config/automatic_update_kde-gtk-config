@@ -5,7 +5,7 @@
 
 export PACKAGE="kde-gtk-config"
 
-export EPOCH="3:"
+export EPOCH="4:"
 
 # Uncomment if necessary:
 #export SFX="-3"
@@ -26,13 +26,13 @@ GetOldVersion
 
 # Find new version
 export PROJECT=kde-gtk-config
-export VER_LIST=$(curl "ftp://ftp.kde.org/pub/kde/stable/kde-gtk-config/" 2>&1 | grep "drwxr-xr-x" | sed -e "s:^.* \(.*\)$:\1:")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+export VER_LIST=$(curl "http://download.kde.org/stable/plasma/" 2>&1 | sed -ne "s:^.*<td><a href=\"\([0-9].*\)/\">[0-9].*</a>.*$:\1:p")
+export NEW_VER=$(echo "${VER_LIST}" | sort -V | tail -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "ftp://ftp.kde.org/pub/kde/stable/kde-gtk-config/"
+DisplayVersions "http://download.kde.org/stable/plasma/"
 
 
 # Print versions
@@ -44,9 +44,8 @@ PrintVersions "${@}"
 
 
 # Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-    wget -4 -c "ftp://ftp.kde.org/pub/kde/stable/${PROJECT}/${NEW_VER}/src/${PROJECT}-${NEW_VER}.tar.xz"
-    mv -f "${PROJECT}-${NEW_VER}.tar.xz" "${PACKAGE}_${NEW_VER}.orig.tar.xz"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
