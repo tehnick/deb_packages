@@ -30,8 +30,7 @@ GetOldVersion
 
 
 # Find new version
-export PROJECT=yagf
-export VER_LIST=$(curl "http://symmetrica.net/cuneiform-linux/yagf-en.html" 2>&1 | sed -ne "s:^.*${PROJECT}-\(.*\).tar.gz.*:\1:p")
+export VER_LIST=$(curl 'http://sourceforge.net/projects/yagf-ocr/files/' 2>&1 | sed -ne "s:^.*<tr title=\"yagf-\(.*\).tar.gz\" class=\"file \">.*$:\1:p")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
@@ -39,7 +38,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://symmetrica.net/cuneiform-linux/yagf-en.html"
+DisplayVersions "http://sourceforge.net/projects/yagf-ocr/files/"
 
 
 # Print versions
@@ -57,9 +56,6 @@ fi
 
 
 export UPDATE_STRING="Update to stable release ${NEW_VER}."
-
-export DIR_NAME="${PROJECT}-${NEW_VER}"
-export OLD_DIR_NAME="${PROJECT}-${OLD_VER}"
 
 export A_TYPE="gz"
 export D_ARGS="xzf"
