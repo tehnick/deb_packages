@@ -6,7 +6,7 @@ BASEPATH="/home/user/WorkDir/Devel/pbuilder/base.cow"
 #EXTRAPACKAGES=""
 #export DEBIAN_BUILDARCH=athlon
 BUILDPLACE=/home/user/WorkDir/Devel/pbuilder/build/
-MIRRORSITE=http://ftp.de.debian.org/debian
+MIRRORSITE=http://httpredir.debian.org/debian
 #OTHERMIRROR="deb http://www.home.com/updates/ ./"
 #export http_proxy=http://your-proxy:8080/
 USEPROC=yes
@@ -119,4 +119,6 @@ PKGNAME_LOGFILE_EXTENTION="_$(dpkg --print-architecture).build"
 
 #default COMPRESSPROG
 #COMPRESSPROG="gzip"
+
+USERUNSHM=no
 

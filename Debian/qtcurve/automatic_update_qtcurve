@@ -6,9 +6,9 @@
 export PACKAGE="qtcurve"
 
 # Uncomment if necessary:
-export SFX="-4"
+export SFX="-3"
 
-#export NEW_VER=1.8.18
+export NEW_VER=1.8.18+git20150711-a3fff13
 
 # experimental unstable
 export MAIN_DIST="experimental"
@@ -41,7 +41,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersions
+CheckVersions
 
 
 # Get the sources
