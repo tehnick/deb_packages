@@ -6,12 +6,12 @@
 export PACKAGE="qtcurve"
 
 # Uncomment if necessary:
-export SFX="-3"
+export SFX="-5"
 
 export NEW_VER=1.8.18+git20150711-a3fff13
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables

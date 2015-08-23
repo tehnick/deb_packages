@@ -50,7 +50,8 @@ export UPDATE_STRING="Update to stable release ${CUR_VER}."
 
 export DESTINATION="leechcraft-stable"
 
-export DIST_LIST="utopic
+export DIST_LIST="vivid
+                  utopic
                   trusty"
 
 export A_TYPE="xz"
