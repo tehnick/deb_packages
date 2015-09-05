@@ -39,6 +39,13 @@ if [ "${1}" = "clean" ]; then
     export CLEAN_BUILD="true"
 fi
 
+if [ -z "${DIST_LIST}" ]; then
+    DIST_LIST="vivid
+               trusty
+               precise"
+    export DIST_LIST;
+fi
+
 echo "Updating is started."
 
 export DEBEMAIL="Boris Pek <tehnick@debian.org>"
@@ -84,13 +91,6 @@ fi
 
 # begin update for other releases
 cp -f debian/changelog ../changelog # copy basic changelog
-
-if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="vivid
-               trusty
-               precise"
-    export DIST_LIST;
-fi
 
 for DIST in ${DIST_LIST} ; do
     cp -f ../changelog debian/changelog

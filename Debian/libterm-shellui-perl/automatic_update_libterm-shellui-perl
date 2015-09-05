@@ -6,7 +6,7 @@
 export PACKAGE="libterm-shellui-perl"
 
 # Uncomment if necessary:
-#export SFX="-2"
+export SFX="-2"
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -41,9 +41,8 @@ CheckVersions
 
 
 # Get the sources
-if !([ -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]); then
-    wget -4 -c "http://search.cpan.org/CPAN/authors/id/B/BR/${DEVELOPER}/${PROJECT}-${NEW_VER}.tar.gz"
-    mv -f "${PROJECT}-${NEW_VER}.tar.gz" "${PACKAGE}_${NEW_VER}.orig.tar.gz"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
+    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
 
 
