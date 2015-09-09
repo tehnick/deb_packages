@@ -24,8 +24,8 @@ case "${A_TYPE}" in
 "bz2")
     export D_ARGS="xjf"
 ;;
-"bz2")
-    export D_ARGS="xjf"
+"xz")
+    export D_ARGS="xJf"
 ;;
 *)
     echo "Tarball type is not defined!"
