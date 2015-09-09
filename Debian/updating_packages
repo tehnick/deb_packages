@@ -70,14 +70,13 @@ echo "Uscan:"
 uscan --report-status
 echo ;
 
-export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-1" ]; then
-    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
+    dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
         "${UPDATE_STRING}"
     kwrite debian/changelog
     nice -n19 debuild -S -sa
 else
-    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
+    dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
         "Some fixes in package."
     kwrite debian/changelog
     # debuild -S -sd

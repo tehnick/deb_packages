@@ -76,12 +76,6 @@
 [submodule "Debian/qtcurve/qtcurve-debian"]
 	path = Debian/qtcurve/qtcurve-debian
 	url = git.debian.org/git/pkg-kde/kde-extras/qtcurve.git
-[submodule "Debian/gtk2-engines-qtcurve/gtk2-engines-qtcurve-debian"]
-	path = Debian/gtk2-engines-qtcurve/gtk2-engines-qtcurve-debian
-	url = git@github.com:tehnick/gtk2-engines-qtcurve-debian.git
-[submodule "Debian/kde-style-qtcurve/kde-style-qtcurve-debian"]
-	path = Debian/kde-style-qtcurve/kde-style-qtcurve-debian
-	url = git@github.com:tehnick/kde-style-qtcurve-debian.git
 [submodule "Debian/qpxtool/qpxtool-debian"]
     path = Debian/qpxtool/qpxtool-debian
     url = git.debian.org/git/collab-maint/qpxtool.git

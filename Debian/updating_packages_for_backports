@@ -43,9 +43,8 @@ cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${DIR_NAME}/debian"
 
 cd "${TEMP_DIR}/${DIR_NAME}"
 
-export DIST="${MAIN_DIST}"
 {
-    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${BPO_VER_FULL}" \
+    dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${BPO_VER_FULL}" \
         "${UPDATE_STRING}"
     kwrite debian/changelog
     nice -n19 debuild -S -sa "-v${BASIC_VER}"

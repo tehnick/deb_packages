@@ -17,13 +17,8 @@ if [ -z "${BPO_SFX}" ]; then
     export BPO_SFX="~bpo8+1"
 fi
 
-if [ -z "${A_TYPE}" ]; then
-    export A_TYPE="bz2"
-fi
-
-export UPDATE_STRING="Rebuild for jessie-backports."
-export DISTRIBUTION="jessie"
-export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/jessie-backports"
+export UPDATE_STRING="Rebuild for ${MAIN_DIST}."
+export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/${MAIN_DIST}"
 
 
 # Set versions

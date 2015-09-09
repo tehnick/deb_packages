@@ -12,6 +12,9 @@ export PACKAGE="uhub"
 
 export BASIC_VER=0.3.2-1
 
+export A_TYPE="gz"
+
+
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
 source "${MAIN_DIR}/Debian/setting_variables_for_backports"
@@ -29,11 +32,8 @@ SetVersions
 DisplayVersions
 
 
-# Get the sources
-
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
+# Get source package
+GetSourcePackage
 
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
