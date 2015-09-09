@@ -24,12 +24,6 @@ case "${A_TYPE}" in
 ;;
 esac
 
-
-if [ -z  ]; then
-    export A_TYPE=
-    
-fi
-
 if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE}" ]; then
     echo "File ${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE} is not found.";
     exit 0;
