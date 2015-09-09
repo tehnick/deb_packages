@@ -17,10 +17,21 @@ elif [ -z "${NEW_VER}" ]; then
     exit 1;
 fi
 
-if [ -z "${A_TYPE}" ]; then
-    export A_TYPE="bz2"
+case "${A_TYPE}" in
+"gz")
+    export D_ARGS="xzf"
+;;
+"bz2")
     export D_ARGS="xjf"
-fi
+;;
+"bz2")
+    export D_ARGS="xjf"
+;;
+*)
+    echo "Tarball type is not defined!"
+    exit 1
+;;
+esac
 
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
     echo "File ${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE} is not found.";

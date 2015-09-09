@@ -22,6 +22,12 @@ if [ -z "${SFX}" ]; then
     export SFX="-1"
 fi
 
+if [ -z "${A_TYPE}" ]; then
+    export A_TYPE="bz2"
+fi
+
+export UPDATE_STRING="New upstream release."
+
 
 # Get old version
 GetOldVersion()
@@ -190,6 +196,15 @@ CheckVersionsUnstable()
                 exit 0;
             fi
         fi
+    fi
+}
+
+
+# Get sources
+GetSources()
+{
+    if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
+        "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
     fi
 }
 

@@ -8,9 +8,26 @@ if [ -z "${PACKAGE}" ]; then
     exit 1;
 fi
 
-if [ -z "${A_TYPE}" ]; then
-    export A_TYPE="bz2"
+case "${A_TYPE}" in
+"gz")
+    export D_ARGS="xzf"
+;;
+"bz2")
     export D_ARGS="xjf"
+;;
+"bz2")
+    export D_ARGS="xjf"
+;;
+*)
+    echo "Tarball type is not defined!"
+    exit 1
+;;
+esac
+
+
+if [ -z  ]; then
+    export A_TYPE=
+    
 fi
 
 if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE}" ]; then

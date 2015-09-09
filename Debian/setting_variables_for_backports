@@ -10,16 +10,21 @@ cd "${PKG_DIR}/${PACKAGE}-debian" || exit 1
 mkdir -p "${TEMP_DIR}"
 cd "${TEMP_DIR}" || exit 1
 
-# squeeze-backports-sloppy wheezy-backports
-export MAIN_DIST="wheezy-backports"
+# wheezy-backports-sloppy jessie-backports
+export MAIN_DIST="jessie-backports"
 
 if [ -z "${BPO_SFX}" ]; then
-    export BPO_SFX="~bpo70+1"
+    export BPO_SFX="~bpo8+1"
 fi
 
-export UPDATE_STRING="Rebuild for wheezy-backports."
-export DISTRIBUTION="wheezy"
-export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/wheezy-backports"
+if [ -z "${A_TYPE}" ]; then
+    export A_TYPE="bz2"
+fi
+
+export UPDATE_STRING="Rebuild for jessie-backports."
+export DISTRIBUTION="jessie"
+export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/jessie-backports"
+
 
 # Set versions
 SetVersions()
@@ -46,3 +51,12 @@ DisplayVersions()
     echo "BPO_VER_FULL = ${EPOCH}${BPO_VER_FULL}"
     echo ;
 }
+
+# Get source package
+GetSourcePackage()
+{
+    if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE}" ]; then
+        dget -d http://httpredir.debian.org/debian/pool/main/${PACKAGE:0:1}/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
+    fi
+}
+
