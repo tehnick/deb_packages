@@ -6,7 +6,7 @@
 export PACKAGE="psimedia"
 
 # Uncomment if necessary:
-export SFX="-3"
+export SFX="-2ppa1"
 
 #export NEW_VER=1.0.3-git20130306-c2b8446
 
@@ -14,7 +14,7 @@ export A_TYPE="gz"
 
 
 # Launch common script for setting variables
-source "${MAIN_DIR}/Debian/setting_variables"
+source "${MAIN_DIR}/Launchpad/setting_variables"
 
 
 # Get old version
@@ -28,7 +28,7 @@ export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | 
 if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
-export NEW_VER_FULL=${NEW_VER}${SFX}
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
@@ -47,6 +47,7 @@ CheckVersions
 GetSources
 
 
-# Launch common script for updating packages
-source "${MAIN_DIR}/Debian/updating_packages"
+export DESTINATION="psi-plus"
 
+# Launch common script for updating packages and uploading them to Launchpad
+source "${MAIN_DIR}/Launchpad/updating_packages"
