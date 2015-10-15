@@ -20,7 +20,7 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/eiskaltdc/downloads/list' 2>&1 | sed -ne "s:^.*eiskaltdc.googlecode.com/files/eiskaltdcpp-\(.*\).tar.xz\".*$:\1:p")
+export VER_LIST=$(curl 'http://sourceforge.net/projects/eiskaltdcpp/files/Sources/' 2>&1 | sed -ne "s:^.*Sources/eiskaltdcpp-\(.*\).tar.xz/download.*$:\1:p")
 if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi

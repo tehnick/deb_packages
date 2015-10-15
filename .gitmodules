@@ -97,6 +97,12 @@
 [submodule "Launchpad/kde-gtk-config/kde-gtk-config-debian"]
 	path = Launchpad/kde-gtk-config/kde-gtk-config-debian
 	url = git.debian.org/git/pkg-kde/kde-extras/kde-gtk-config.git
+[submodule "Debian/xembed-sni-proxy/xembed-sni-proxy-debian"]
+	path = Debian/xembed-sni-proxy/xembed-sni-proxy-debian
+	url = git.debian.org/git/pkg-kde/kde-extras/xembed-sni-proxy.git
+[submodule "Launchpad/xembed-sni-proxy/xembed-sni-proxy-debian"]
+	path = Launchpad/xembed-sni-proxy/xembed-sni-proxy-debian
+	url = git.debian.org/git/pkg-kde/kde-extras/xembed-sni-proxy.git
 [submodule "Debian/libquantum/libquantum-debian"]
 	path = Debian/libquantum/libquantum-debian
 	url = git.debian.org/git/debian-science/packages/libquantum.git

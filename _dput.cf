@@ -40,6 +40,16 @@ run_dinstall = 0
 progress_indicator = 2
 passive_ftp = 1
 
+[xembed-sni-proxy]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~tehnick/xembed-sni-proxy/ubuntu/
+login = anonymous
+allow_unsigned_uploads = 0
+run_dinstall = 0
+progress_indicator = 2
+passive_ftp = 1
+
 [leechcraft-stable]
 fqdn = ppa.launchpad.net
 method = ftp
@@ -132,3 +142,4 @@ incoming = /srv/upload.debian.org/UploadQueue/
 login=tehnick
 allow_dcut = 1
 progress_indicator = 2
+

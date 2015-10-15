@@ -82,11 +82,11 @@ else
     echo ;
     echo "Start building packages..."
     if [ "${CLEAN_BUILD}" = "true" ]; then
-        sudo time nice -n19 pdebuild --auto-debsign \
-                                     --pbuilder cowbuilder \
+        sudo time nice -n19 pdebuild --pbuilder cowbuilder \
                                      --buildresult "${TEST_DIR}" > \
                                      ${BUILD_LOG_FILE} \
                                      2> ${WARNINGS_LOG_FILE} || exit 1
+        sudo chown -R "${SUDO_USER}:${SUDO_USER}" "${TEST_DIR}"
     else
         time nice -n19 dpkg-buildpackage -rfakeroot > ${BUILD_LOG_FILE} 2> ${WARNINGS_LOG_FILE} || exit 1
     fi
@@ -120,4 +120,19 @@ cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 
 
 echo "Update finished successfully"
+
+
+if [ "${2}" = "new" ]; then
+    cd "${TEST_DIR}"
+    debsign "${PACKAGE}_${NEW_VER_FULL}_i386.changes"
+    echo "Package is targeted into NEW queue, so binary upload is required:"
+    echo "dput -f ftp-eu ${PACKAGE}_${NEW_VER_FULL}_i386.changes"
+else
+    cd "${TEMP_DIR}"
+    echo "Sorce-only upload:"
+    echo "dput -f ftp-eu ${PACKAGE}_${NEW_VER_FULL}_source.changes"
+fi
+
+
+konsole &> /dev/null &
 

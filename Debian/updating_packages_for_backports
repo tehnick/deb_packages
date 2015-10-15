@@ -75,13 +75,13 @@ else
 
     cd "${TEST_DIR}/${DIR_NAME}"
     echo "Start building packages..."
-    sudo time nice -n19 pdebuild --auto-debsign \
-                                 --pbuilder cowbuilder \
+    sudo time nice -n19 pdebuild --pbuilder cowbuilder \
                                  --buildresult "${TEST_DIR}" -- \
                                  --basepath "${BPO_BASEPATH}" \
                                  --debbuildopts "-v${BASIC_VER}" \
                                  > ${BUILD_LOG_FILE} \
                                  2> ${WARNINGS_LOG_FILE} || exit 1
+    sudo chown -R "${SUDO_USER}:${SUDO_USER}" "${TEST_DIR}"
     cat  ${WARNINGS_LOG_FILE}
     echo "Finished building packages."
     echo ;
@@ -109,4 +109,20 @@ cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 
 
 echo "Update finished successfully"
+
+
+if [ "${1}" = "new" ]; then
+    cd "${TEST_DIR}"
+    debsign "${PACKAGE}_${BPO_VER_FULL}_i386.changes"
+    echo ;
+    echo "Package is targeted into NEW queue, so binary upload is required:"
+    echo "dput -f ftp-eu ${PACKAGE}_${BPO_VER_FULL}_i386.changes"
+else
+    cd "${TEMP_DIR}"
+    echo "Sorce-only upload:"
+    echo "dput -f ftp-eu ${PACKAGE}_${BPO_VER_FULL}_source.changes"
+fi
+
+
+konsole &> /dev/null &
 

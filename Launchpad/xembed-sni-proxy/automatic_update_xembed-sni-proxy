@@ -3,10 +3,12 @@
 [ -z "${MAIN_DIR}" ] && export MAIN_DIR="$(realpath -s $(dirname ${0})/../..)"
 
 
-export PACKAGE="bosixnet"
+export PACKAGE="xembed-sni-proxy"
 
 # Uncomment if necessary:
 export SFX="-1ppa1"
+
+export NEW_VER=0~git20151005-77d78c3
 
 export A_TYPE="gz"
 
@@ -20,8 +22,8 @@ GetOldVersion
 
 
 # Find new version
-export DEVELOPER=tehnick
-export PROJECT=bosixnet
+export DEVELOPER=davidedmundson
+export PROJECT=xembed-sni-proxy
 export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/v\(.*\).tar.gz\" .*:\1:p")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
@@ -45,7 +47,9 @@ CheckVersions
 GetSources
 
 
-export DESTINATION="bosixnet"
+export EDIT_CHANGELOG="true"
+export DESTINATION="xembed-sni-proxy"
+export DIST_LIST="vivid"
 
 
 # Launch common script for updating packages and uploading them to Launchpad

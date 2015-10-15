@@ -1,1 +1,1 @@
-http://anonscm.debian.org/gitweb/?p=pkg-kde/kde-extras/kde-gtk-config.git
+http://anonscm.debian.org/gitweb/?p=pkg-kde/plasma/kde-gtk-config.git

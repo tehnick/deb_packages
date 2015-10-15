@@ -1,0 +1,1 @@
+http://anonscm.debian.org/gitweb/?p=pkg-kde/kde-extras/xembed-sni-proxy.git
