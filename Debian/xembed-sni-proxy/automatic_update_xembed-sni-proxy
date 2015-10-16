@@ -6,14 +6,14 @@
 export PACKAGE="xembed-sni-proxy"
 
 # Uncomment if necessary:
-#export SFX="-2"
+export SFX="-2"
 
 export NEW_VER=0~git20151005-77d78c3
 
 export A_TYPE="gz"
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
