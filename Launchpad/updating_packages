@@ -51,7 +51,8 @@ if [ "${1}" = "clean" ]; then
 fi
 
 if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="vivid
+    DIST_LIST="wily
+               vivid
                trusty
                precise"
     export DIST_LIST;

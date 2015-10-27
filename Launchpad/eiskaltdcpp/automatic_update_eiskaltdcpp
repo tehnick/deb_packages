@@ -45,7 +45,7 @@ if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
 fi
 
 
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
+export UPDATE_STRING="New stable release."
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

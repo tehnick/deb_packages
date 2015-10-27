@@ -6,9 +6,9 @@
 export PACKAGE="xembed-sni-proxy"
 
 # Uncomment if necessary:
-export SFX="-2ppa1"
+export SFX="-0ppa1"
 
-export NEW_VER=0~git20151005-77d78c3
+export NEW_VER=0~git20151027-8de0346
 
 export A_TYPE="gz"
 
@@ -47,9 +47,11 @@ CheckVersions
 GetSources
 
 
+export UPDATE_STRING="New Git snapshot."
 export EDIT_CHANGELOG="true"
 export DESTINATION="xembed-sni-proxy"
-export DIST_LIST="vivid"
+export DIST_LIST="wily
+                  vivid"
 
 
 # Launch common script for updating packages and uploading them to Launchpad

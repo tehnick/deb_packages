@@ -35,13 +35,9 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Get sources
+GetSources
 
-
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DESTINATION="q4wine"
 

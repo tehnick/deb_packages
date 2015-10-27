@@ -62,7 +62,7 @@ if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
 fi
 
 
-export UPDATE_STRING="Minor update from Git ${BRANCH} branch."
+export UPDATE_STRING="New Git snapshot."
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

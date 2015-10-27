@@ -2,7 +2,7 @@
 
 
 # Common script for setting variables
-export MAIN_DIST="wily"
+export MAIN_DIST="xenial"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
 if [ -z "${SFX}" ]; then
@@ -13,7 +13,7 @@ if [ -z "${A_TYPE}" ]; then
     export A_TYPE="bz2"
 fi
 
-export UPDATE_STRING="New upstream release."
+export UPDATE_STRING="New stable release."
 
 
 export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"

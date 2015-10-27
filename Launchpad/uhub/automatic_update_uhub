@@ -41,19 +41,10 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-    rm -rf  "${NEW_VER}" "${PACKAGE}-${NEW_VER}"
-    # sources
-    wget -4 -c "https://codeload.github.com/${DEVELOPER}/${PROJECT}/tar.gz/${NEW_VER}"
-    rm -rf ${PROJECT}-*
-    tar xzf "${NEW_VER}"
-    # tarball
-    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
-fi
+# Get sources
+GetSources
 
 
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
 export EDIT_CHANGELOG="true"
 
 export A_TYPE="xz"

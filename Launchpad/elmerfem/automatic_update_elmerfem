@@ -56,7 +56,7 @@ if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
 fi
 
 
-export UPDATE_STRING="New upstream revision."
+export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="elmerfem"
 

@@ -55,7 +55,7 @@ if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
 fi
 
 
-export UPDATE_STRING="Minor update from Git master branch."
+export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="q4wine"
 
