@@ -107,7 +107,7 @@ cp -f debian/changelog ../changelog # copy basic changelog
 for DIST in ${DIST_LIST} ; do
     cp -f ../changelog debian/changelog
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
-        "Automated backport upload; no source changes."
+        "Automatic backport; no changes required."
     nice -n19 debuild -S -sd || exit 1
 done
 

@@ -6,7 +6,7 @@
 export PACKAGE="qtcurve"
 
 # Uncomment if necessary:
-export SFX="-5"
+export SFX="-6"
 
 export NEW_VER=1.8.18+git20150711-a3fff13
 

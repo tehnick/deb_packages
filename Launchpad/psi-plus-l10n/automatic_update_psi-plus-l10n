@@ -44,6 +44,10 @@ CheckVersions
 CheckVersions
 
 
+# Get sources
+GetSources
+
+
 export DESTINATION="psi-plus"
 
 # Launch common script for updating packages and uploading them to Launchpad

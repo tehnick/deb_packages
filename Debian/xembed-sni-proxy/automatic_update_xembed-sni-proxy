@@ -8,12 +8,12 @@ export PACKAGE="xembed-sni-proxy"
 # Uncomment if necessary:
 export SFX="-1"
 
-export NEW_VER=0~git20151022-5157e6c
+export NEW_VER=0~git20151104-ded1538
 
 export A_TYPE="gz"
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
@@ -48,6 +48,9 @@ PrintVersions "${@}"
 
 # Get sources
 GetSources
+
+
+export UPDATE_STRING="New Git snapshot."
 
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
