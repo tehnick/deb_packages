@@ -118,7 +118,7 @@ for PACKAGE in ${PACKAGES_LIST} ; do
             echo "${PACKAGE}" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             echo "<td>" >> "${HTML_FILE}"
-            echo "<a href=\"http://packages.qa.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
+            echo "<a href=\"http://tracker.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
             echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
         else
             echo "<tr>" >> "${HTML_FILE}"

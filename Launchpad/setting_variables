@@ -100,7 +100,7 @@ if [ "${1}" = "print-versions" ]; then
         echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         echo "<td>" >> "${HTML_FILE}"
-        echo "<a href=\"http://packages.qa.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
+        echo "<a href=\"http://tracker.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
         echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         exit 0
@@ -132,7 +132,7 @@ if [ "${1}" = "print-versions" ]; then
         echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         echo "<td>" >> "${HTML_FILE}"
-        echo "<a href=\"http://packages.qa.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
+        echo "<a href=\"http://tracker.debian.org/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
         echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         exit 0
