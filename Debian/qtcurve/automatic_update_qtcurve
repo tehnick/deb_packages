@@ -8,7 +8,7 @@ export PACKAGE="qtcurve"
 # Uncomment if necessary:
 # export SFX="-6"
 
-export NEW_VER=1.8.18+git20150711-a3fff13
+export NEW_VER=1.8.18+git20160112-0cd6aae
 
 export A_TYPE="gz"
 
