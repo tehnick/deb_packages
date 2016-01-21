@@ -6,7 +6,7 @@
 export PACKAGE="qtcurve"
 
 # Uncomment if necessary:
-export SFX="-6"
+# export SFX="-6"
 
 export NEW_VER=1.8.18+git20150711-a3fff13
 
@@ -25,17 +25,18 @@ GetOldVersion
 
 
 # Find new version
-export DEVELOPER=QtCurve
 export PROJECT=qtcurve
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*[0-9]\).tar.gz\" .*:\1:p")
+export VER_LIST=$(curl "https://quickgit.kde.org/?p=${PROJECT}.git&a=tags" 2>&1 | sed -ne "s|^.*href=\"http://quickgit.kde.org/?p=${PROJECT}.git&amp;a=tag&amp;t=\(.*[0-9]\)\">tag.*|\1|p")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
+
 # Display versions
-DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
+DisplayVersions "https://quickgit.kde.org/?p=${PROJECT}.git"
+
 
 
 # Print versions
