@@ -40,9 +40,12 @@
 [submodule "Launchpad/uhub-unstable/uhub-unstable-debian"]
 	path = Launchpad/uhub-unstable/uhub-unstable-debian
 	url = git@github.com:tehnick/uhub-unstable-debian.git
-[submodule "Launchpad/q4wine-unstable/q4wine-unstable-debian"]
-	path = Launchpad/q4wine-unstable/q4wine-unstable-debian
-	url = git@github.com:tehnick/q4wine-unstable-debian.git
+[submodule "Launchpad/q4wine-devel/q4wine-devel-debian"]
+	path = Launchpad/q4wine-devel/q4wine-devel-debian
+	url = git@github.com:tehnick/q4wine-devel-debian.git
+[submodule "Launchpad/q4wine-qt4/q4wine-qt4-debian"]
+	path = Launchpad/q4wine-qt4/q4wine-qt4-debian
+	url = git@github.com:tehnick/q4wine-qt4-debian.git
 [submodule "Launchpad/freedcpp-unstable/freedcpp-unstable-debian"]
 	path = Launchpad/freedcpp-unstable/freedcpp-unstable-debian
 	url = git@github.com:tehnick/freedcpp-unstable-debian.git

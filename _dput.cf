@@ -20,6 +20,16 @@ run_dinstall = 0
 progress_indicator = 2
 passive_ftp = 1
 
+[q4wine-devel]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~tehnick/q4wine/ubuntu/
+login = anonymous
+allow_unsigned_uploads = 0
+run_dinstall = 0
+progress_indicator = 2
+passive_ftp = 1
+
 [plasma-widget-cwp]
 fqdn = ppa.launchpad.net
 method = ftp

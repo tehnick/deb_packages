@@ -3,14 +3,16 @@
 [ -z "${MAIN_DIR}" ] && export MAIN_DIR="$(realpath -s $(dirname ${0})/../..)"
 
 
-export PACKAGE="q4wine"
+export PACKAGE="q4wine-qt4"
 
 # Uncomment if necessary:
-export SFX="-1ppa2"
+export SFX="-1ppa1"
 
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
+export MAIN_DIST="wily"
+export UBUNTU_SFX="~${MAIN_DIST}1"
 
 
 # Get old version
@@ -37,11 +39,19 @@ CheckVersions
 
 # Get sources
 GetSources
+mv "q4wine_${NEW_VER}.orig.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
 
+
+export UPDATE_STRING="Backport to Ubuntu Wily."
 
 export DESTINATION="q4wine"
 
-export DIST_LIST=" "
+export DIST_LIST="vivid
+                  trusty
+                  precise"
+
+export DIR_NAME="q4wine-${NEW_VER}"
+export OLD_DIR_NAME="q4wine-${OLD_VER}"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
