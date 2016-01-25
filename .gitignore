@@ -1,3 +1,4 @@
 Debian/*/TEMP
 Launchpad/*/TEMP
-Popcon/*
+LocalRepo/
+Popcon/

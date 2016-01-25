@@ -170,3 +170,15 @@ fi
 
 konsole &> /dev/null &
 
+
+# Local repo
+if [ "${1}" != "fast" ]; then
+    export APT_DIR="${MAIN_DIR}/LocalRepo"
+    mkdir -p "${APT_DIR}"
+    cp -f "${TEST_DIR}"/*.deb "${APT_DIR}/"
+    cd "${APT_DIR}/" || exit 1
+    rm -f Packages*
+    apt-ftparchive packages . | gzip > Packages.gz
+    gpg --output Packages.gpg -ba Packages.gz
+fi
+
