@@ -6,7 +6,7 @@
 export PACKAGE="q4wine-devel"
 
 # Uncomment if necessary:
-#export SFX="-0ppa2"
+export SFX="-0ppa1"
 
 
 # Launch common script for setting variables
@@ -63,6 +63,8 @@ export DIST_LIST=" "
 
 export A_TYPE="xz"
 export D_ARGS="xJf"
+
+# export EDIT_CHANGELOG="true"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
