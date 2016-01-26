@@ -128,7 +128,7 @@ echo "</div>" >> "${HTML_FILE}"
 echo "<br>" >> "${HTML_FILE}"
 
 echo "<b>See also:</b>" >> "${HTML_FILE}"
-echo "<a href=\"http://qa.debian.org/developer.php?login=Boris%20Pek\">qa.debian.org</a>" >> "${HTML_FILE}"
+echo "<a href=\"https://qa.debian.org/developer.php?login=Boris%20Pek\">qa.debian.org</a>" >> "${HTML_FILE}"
 echo "<a href=\"./popcon-stat.html\">popcon-stat</a>" >> "${HTML_FILE}"
 echo "<br>" >> "${HTML_FILE}"
 echo "<br>" >> "${HTML_FILE}"
