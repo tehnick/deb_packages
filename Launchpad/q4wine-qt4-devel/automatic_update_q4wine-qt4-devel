@@ -1,0 +1,75 @@
+#!/bin/bash
+
+[ -z "${MAIN_DIR}" ] && export MAIN_DIR="$(realpath -s $(dirname ${0})/../..)"
+
+
+export PACKAGE="q4wine-qt4-devel"
+
+# Uncomment if necessary:
+export SFX="-0ppa2"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Launchpad/setting_variables"
+export MAIN_DIST="wily"
+export UBUNTU_SFX="~${MAIN_DIST}1"
+
+
+# Get old version
+GetOldVersion
+export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
+
+
+# Find new version
+GIT_REPO_DIR="${HOME}/WorkDir/Devel/Q4Wine/q4wine_orig"
+if [ -d "${GIT_REPO_DIR}" ]; then
+    cd "${GIT_REPO_DIR}" || exit 1
+    git pull --all || exit 1
+fi
+export LAST_COMMIT=$(git show -s --pretty=format:%h)
+if [ -z "${NEW_VER}" ]; then
+    export NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/")
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
+cd "${TEMP_DIR}" || exit 1
+
+
+# Display versions
+DisplayVersionsUnstable
+
+
+# Print versions
+PrintVersions "${@}"
+
+
+# Check versions
+CheckVersions
+
+
+# Get the sources
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+    rm -rf  "${PACKAGE}-${NEW_VER}"
+    # sources
+    mkdir "${PACKAGE}-${NEW_VER}" || exit 1
+    rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
+    # tarball
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
+fi
+
+
+export UPDATE_STRING="New upstream Git snapshot."
+
+export DESTINATION="q4wine-devel"
+
+export DIST_LIST=" "
+
+export A_TYPE="xz"
+export D_ARGS="xJf"
+
+export DIST_LIST="vivid
+                  trusty
+                  precise"
+
+# Launch common script for updating packages and uploading them to Launchpad
+source "${MAIN_DIR}/Launchpad/updating_packages"
+

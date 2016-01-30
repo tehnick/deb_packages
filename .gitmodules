@@ -43,6 +43,9 @@
 [submodule "Launchpad/q4wine-devel/q4wine-devel-debian"]
 	path = Launchpad/q4wine-devel/q4wine-devel-debian
 	url = git@github.com:tehnick/q4wine-devel-debian.git
+[submodule "Launchpad/q4wine-qt4-devel/q4wine-qt4-devel-debian"]
+	path = Launchpad/q4wine-qt4-devel/q4wine-qt4-devel-debian
+	url = git@github.com:tehnick/q4wine-qt4-devel-debian.git
 [submodule "Launchpad/q4wine-qt4/q4wine-qt4-debian"]
 	path = Launchpad/q4wine-qt4/q4wine-qt4-debian
 	url = git@github.com:tehnick/q4wine-qt4-debian.git
