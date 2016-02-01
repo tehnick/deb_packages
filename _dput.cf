@@ -60,6 +60,26 @@ run_dinstall = 0
 progress_indicator = 2
 passive_ftp = 1
 
+[qxmpp]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~tehnick/qxmpp/ubuntu/
+login = anonymous
+allow_unsigned_uploads = 0
+run_dinstall = 0
+progress_indicator = 2
+passive_ftp = 1
+
+[qxmpp-devel]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~tehnick/qxmpp-devel/ubuntu/
+login = anonymous
+allow_unsigned_uploads = 0
+run_dinstall = 0
+progress_indicator = 2
+passive_ftp = 1
+
 [leechcraft-stable]
 fqdn = ppa.launchpad.net
 method = ftp

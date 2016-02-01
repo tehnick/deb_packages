@@ -5,4 +5,4 @@
 
 export PACKAGE="freedcpp"
 
-source "${MAIN_DIR}/Launchpad/compare_with_unstable_package"
+source "${MAIN_DIR}/Launchpad/compare_with_devel_package"

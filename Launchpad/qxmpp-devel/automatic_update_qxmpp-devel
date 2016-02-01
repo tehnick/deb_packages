@@ -3,10 +3,10 @@
 [ -z "${MAIN_DIR}" ] && export MAIN_DIR="$(realpath -s $(dirname ${0})/../..)"
 
 
-export PACKAGE="qxmpp-unstable"
+export PACKAGE="qxmpp-devel"
 
 # Uncomment if necessary:
-#export SFX="-0ppa2"
+# export SFX="-0ppa1"
 
 #export NEW_VER=0.4.0~git20120405-390b63e
 
@@ -44,7 +44,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-CheckVersions
+# CheckVersions
 
 
 # Get the sources
@@ -60,7 +60,9 @@ fi
 
 export UPDATE_STRING="New Git snapshot."
 
-export DESTINATION="leechcraft-unstable"
+export DESTINATION="qxmpp-devel"
+
+export DIST_LIST=" "
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

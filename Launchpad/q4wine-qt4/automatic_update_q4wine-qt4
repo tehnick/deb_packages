@@ -39,7 +39,7 @@ CheckVersions
 
 # Get sources
 GetSources
-mv "q4wine_${NEW_VER}.orig.tar.bz2" "${PACKAGE}_${NEW_VER}.orig.tar.bz2"
+mv "q4wine_${NEW_VER}.orig.tar.${A_TYPE}" "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}"
 
 
 export UPDATE_STRING="Backport to Ubuntu Wily."
