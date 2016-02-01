@@ -100,6 +100,9 @@
 [submodule "Launchpad/qxmpp-devel/qxmpp-devel-debian"]
 	path = Launchpad/qxmpp-devel/qxmpp-devel-debian
 	url = git.debian.org/git/collab-maint/qxmpp-devel.git
+[submodule "Launchpad/qxmpp-qt4-devel/qxmpp-qt4-devel-debian"]
+	path = Launchpad/qxmpp-qt4-devel/qxmpp-qt4-devel-debian
+	url = git.debian.org/git/collab-maint/qxmpp-qt4-devel.git
 [submodule "Debian/libterm-shellui-perl/libterm-shellui-perl-debian"]
 	path = Debian/libterm-shellui-perl/libterm-shellui-perl-debian
 	url = git@github.com:tehnick/libterm-shellui-perl-debian.git
