@@ -40,13 +40,9 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Check versions
+CheckVersions
 
-
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

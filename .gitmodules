@@ -34,6 +34,9 @@
 [submodule "Launchpad/psi-plus-l10n/psi-plus-l10n-debian"]
 	path = Launchpad/psi-plus-l10n/psi-plus-l10n-debian
 	url = git@github.com:tehnick/psi-plus-l10n-debian.git
+[submodule "Launchpad/psi-plus-resources/psi-plus-resources-debian"]
+	path = Launchpad/psi-plus-resources/psi-plus-resources-debian
+	url = git@github.com:tehnick/psi-plus-resources-debian.git
 [submodule "Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian"]
 	path = Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian
 	url = git@github.com:tehnick/eiskaltdcpp-unstable-debian.git
