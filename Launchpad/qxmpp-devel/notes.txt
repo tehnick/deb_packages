@@ -1,5 +1,0 @@
-http://git.debian.org/?p=collab-maint/qxmpp.git
-https://github.com/tehnick/qxmpp-unstable-debian
-
-
-git remote add alioth git://anonscm.debian.org/collab-maint/qxmpp.git

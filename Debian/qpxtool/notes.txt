@@ -1,1 +1,0 @@
-http://anonscm.debian.org/gitweb/?p=collab-maint/qpxtool.git
