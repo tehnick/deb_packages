@@ -6,7 +6,7 @@
 export PACKAGE="xembed-sni-proxy"
 
 # Uncomment if necessary:
-export SFX="-1"
+export SFX="-2"
 
 export NEW_VER=0~git20151104-ded1538
 

@@ -8,6 +8,11 @@ export PACKAGE="eiskaltdcpp"
 # Uncomment if necessary:
 export SFX="-4"
 
+export NEW_VER=2.2.9
+
+export A_TYPE="xz"
+
+
 # experimental unstable
 export MAIN_DIST="unstable"
 
@@ -40,12 +45,9 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Check versions
-CheckVersions
+# Get sources
+GetSources
 
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"

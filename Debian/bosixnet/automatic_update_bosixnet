@@ -8,6 +8,9 @@ export PACKAGE="bosixnet"
 # Uncomment if necessary:
 #export SFX="-2"
 
+export A_TYPE="gz"
+
+
 # experimental unstable
 export MAIN_DIST="unstable"
 
@@ -42,15 +45,12 @@ PrintVersions "${@}"
 #CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Get sources
+GetSources
 
 
 export UPDATE_STRING="New upstream release."
 
-export A_TYPE="gz"
 export D_ARGS="xzf"
 
 # Launch common script for updating packages

@@ -10,6 +10,9 @@ export PACKAGE="astromenace-data"
 
 export RPKGD="+repack"
 
+export A_TYPE="xz"
+
+
 # experimental unstable
 export MAIN_DIST="unstable"
 
@@ -39,16 +42,11 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Get sources
+GetSources
 
 
 export UPDATE_STRING="Update to stable release ${CUR_VER}."
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
 
 #export DIR_NAME="AstroMenace"
 #export OLD_DIR_NAME="AstroMenace"
