@@ -191,11 +191,12 @@ echo "Update finished successfully"
 # Local repo
 if [ "${1}" != "fast" ]; then
     export APT_DIR="${MAIN_DIR}/LocalRepo"
-    mkdir -p "${APT_DIR}"
-    cp -f "${TEST_DIR}"/*.deb "${APT_DIR}/"
+    mkdir -p "${APT_DIR}/${PACKAGE}/"
+    cp -f "${TEST_DIR}"/*.deb "${APT_DIR}/${PACKAGE}/"
     cd "${APT_DIR}/" || exit 1
-    rm -f Packages*
-    apt-ftparchive packages . | gzip > Packages.gz
-    gpg --output Packages.gpg -ba Packages.gz
+    rm -f Packages* InRelease* Release*
+    apt-ftparchive packages . > Packages
+    gzip -c Packages > Packages.gz
+    gpg -abs -o Packages.gpg Packages.gz
 fi
 

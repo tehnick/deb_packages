@@ -50,6 +50,8 @@ export UPDATE_STRING="New stable release."
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
+export DESTINATION="direct-connect"
+
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 

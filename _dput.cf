@@ -30,6 +30,26 @@ run_dinstall = 0
 progress_indicator = 2
 passive_ftp = 1
 
+[direct-connect]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~tehnick/direct-connect/ubuntu/
+login = anonymous
+allow_unsigned_uploads = 0
+run_dinstall = 0
+progress_indicator = 2
+passive_ftp = 1
+
+[direct-connect-devel]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~tehnick/direct-connect-devel/ubuntu/
+login = anonymous
+allow_unsigned_uploads = 0
+run_dinstall = 0
+progress_indicator = 2
+passive_ftp = 1
+
 [plasma-widget-cwp]
 fqdn = ppa.launchpad.net
 method = ftp
