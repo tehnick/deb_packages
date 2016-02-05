@@ -8,7 +8,7 @@ export PACKAGE="eiskaltdcpp"
 # Uncomment if necessary:
 export SFX="-4"
 
-export NEW_VER=2.2.9
+#export NEW_VER=2.2.9
 
 export A_TYPE="xz"
 

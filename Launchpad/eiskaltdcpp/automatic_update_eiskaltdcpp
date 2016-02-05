@@ -6,9 +6,11 @@
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-export SFX="-2ppa1"
+export SFX="-4ppa1"
 
 #export NEW_VER=2.2.7+1
+
+export A_TYPE="xz"
 
 
 # Launch common script for setting variables
@@ -28,7 +30,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-DisplayVersions "http://code.google.com/p/eiskaltdc/downloads/list"
+DisplayVersions "http://sourceforge.net/projects/eiskaltdcpp/files/Sources/"
 
 
 # Print versions
@@ -39,16 +41,9 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Get sources
+GetSources
 
-
-export UPDATE_STRING="New stable release."
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
 
 export DESTINATION="direct-connect"
 
