@@ -5,10 +5,12 @@
 
 export PACKAGE="freedcpp"
 
+# Uncomment if necessary:
+export SFX="-0ppa4"
+
 #export NEW_VER="0.0.5"
 
-# Uncomment if necessary:
-export SFX="-0ppa3"
+export A_TYPE="gz"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
@@ -18,15 +20,17 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 GetOldVersion
 
 # Find new version
-export VER_LIST=$(curl "https://freedcpp.googlecode.com/svn/tags/" 2>&1 | sed -ne "s:^.*href=\"freedcpp-\(.*\)/\".*:\1:p")
+export DEVELOPER=eiskaltdcpp
+export PROJECT=freedcpp
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/freedcpp-\(.*\).tar.gz\" .*:\1:p")
 if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
-export NEW_VER_FULL="${NEW_VER}${SFX}${UBUNTU_SFX}"
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-DisplayVersions "https://freedcpp.googlecode.com/svn/tags/"
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
 # Print versions
@@ -37,25 +41,11 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-# if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
-    echo "Start exporting from SVN..."
-    export EXPORT_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.export.log"
-    svn export "http://freedcpp.googlecode.com/svn/tags/freedcpp-${NEW_VER}/" "freedcpp-${NEW_VER}/"  > ${EXPORT_LOG_FILE}
-    echo "Finished download from SVN."
-    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
-#     tar -czf "${PACKAGE}_${NEW_VER}.orig.tar.gz" "${PACKAGE}-${NEW_VER}"
-fi
+# Get sources
+GetSources
 
 
-export UPDATE_STRING="New stable release."
-
-# export A_TYPE="gz"
-# export D_ARGS="xzf"
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
+export DESTINATION="direct-connect"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"

@@ -47,7 +47,6 @@ GetSources
 
 export DESTINATION="bosixnet"
 
-
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 

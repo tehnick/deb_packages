@@ -79,9 +79,6 @@
 [submodule "Launchpad/freedcpp-mediapack/freedcpp-mediapack-debian"]
 	path = Launchpad/freedcpp-mediapack/freedcpp-mediapack-debian
 	url = git@github.com:tehnick/freedcpp-mediapack-debian.git
-[submodule "Launchpad/freedcpp-example-theme/freedcpp-example-theme-debian"]
-	path = Launchpad/freedcpp-example-theme/freedcpp-example-theme-debian
-	url = git@github.com:tehnick/freedcpp-example-theme-debian.git
 [submodule "Launchpad/leechcraft-unstable/leechcraft-unstable-debian"]
 	path = Launchpad/leechcraft-unstable/leechcraft-unstable-debian
 	url = git@github.com:tehnick/leechcraft-unstable-debian.git
