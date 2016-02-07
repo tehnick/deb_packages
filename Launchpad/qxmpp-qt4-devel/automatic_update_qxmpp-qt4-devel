@@ -49,14 +49,14 @@ PrintVersions "${@}"
 # CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+# Get sources
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
     rm -rf  "${PACKAGE}-${NEW_VER}"
     # sources
     mkdir "${PACKAGE}-${NEW_VER}" || exit 1
     rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
     # tarball
-    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${PACKAGE}-${NEW_VER}"
 fi
 
 

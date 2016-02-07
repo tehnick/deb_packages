@@ -12,6 +12,7 @@ export SFX="-0ppa4"
 
 export A_TYPE="gz"
 
+
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
 

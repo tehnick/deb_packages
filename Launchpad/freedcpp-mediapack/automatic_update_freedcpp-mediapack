@@ -6,7 +6,9 @@
 export PACKAGE="freedcpp-mediapack"
 
 # Uncomment if necessary:
-#export SFX="-0ppa2"
+export SFX="-0ppa2"
+
+export NEW_VER="0.0.3"
 
 
 # Launch common script for setting variables
@@ -18,8 +20,10 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/list' 2>&1 | sed -ne "s:^.*freedcpp.googlecode.com/files/mediapack.\(.*\).tar.bz2\".*$:\1:p")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+export VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/' 2>&1 | sed -ne "s:^.*code.google.com/freedcpp/mediapack.\(.*\).tar.bz2\".*$:\1:p")
+if [ -z "${NEW_VER}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
@@ -35,17 +39,16 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "mediapack.${NEW_VER}.tar.bz2" ]; then
-    wget -4 "http://freedcpp.googlecode.com/files/mediapack.${NEW_VER}.tar.bz2"
-    rm -rf "${PACKAGE}-${NEW_VER}"
-    tar xjf "mediapack.${NEW_VER}.tar.bz2"
-    mv mediapack "${PACKAGE}-${NEW_VER}"
-    tar -cjf "${PACKAGE}_${NEW_VER}.orig.tar.bz2" "${PACKAGE}-${NEW_VER}"
+# Get sources
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
+    echo "Fix me!"
 fi
 
 
-export UPDATE_STRING="New stable release."
+export DESTINATION="direct-connect"
+
+export DIR_NAME="mediapack"
+export OLD_DIR_NAME="mediapack"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
