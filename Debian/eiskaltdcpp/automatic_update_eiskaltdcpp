@@ -26,7 +26,7 @@ GetOldVersion
 
 
 # Find new version
-export VER_LIST=$(curl 'http://sourceforge.net/projects/eiskaltdcpp/files/Sources/' 2>&1 | sed -ne "s:^.*Sources/eiskaltdcpp-\(.*\).tar.xz/download.*$:\1:p")
+export VER_LIST=$(curl 'https://sourceforge.net/projects/eiskaltdcpp/files/Sources/' 2>&1 | sed -ne "s:^.*Sources/eiskaltdcpp-\(.*\).tar.xz/download.*$:\1:p")
 if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
@@ -34,7 +34,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://sourceforge.net/projects/eiskaltdcpp/files/Sources/"
+DisplayVersions "https://sourceforge.net/projects/eiskaltdcpp/files/Sources/"
 
 
 # Print versions

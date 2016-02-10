@@ -52,9 +52,9 @@
 [submodule "Launchpad/q4wine-qt4/q4wine-qt4-debian"]
 	path = Launchpad/q4wine-qt4/q4wine-qt4-debian
 	url = git@github.com:tehnick/q4wine-qt4-debian.git
-[submodule "Launchpad/freedcpp-unstable/freedcpp-unstable-debian"]
-	path = Launchpad/freedcpp-unstable/freedcpp-unstable-debian
-	url = git@github.com:tehnick/freedcpp-unstable-debian.git
+[submodule "Launchpad/freedcpp-devel/freedcpp-devel-debian"]
+	path = Launchpad/freedcpp-devel/freedcpp-devel-debian
+	url = git@github.com:tehnick/freedcpp-devel-debian.git
 [submodule "Debian/eiskaltdcpp/eiskaltdcpp-debian"]
 	path = Debian/eiskaltdcpp/eiskaltdcpp-debian
 	url = git@github.com:tehnick/eiskaltdcpp-debian.git
