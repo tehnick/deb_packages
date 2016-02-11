@@ -11,7 +11,9 @@ mkdir -p "${TEMP_DIR}"
 cd "${TEMP_DIR}" || exit 1
 
 # wheezy-backports-sloppy jessie-backports
-export MAIN_DIST="jessie-backports"
+if [ -z "${MAIN_DIST}" ]; then
+    export MAIN_DIST="jessie-backports"
+fi
 
 if [ -z "${BPO_SFX}" ]; then
     export BPO_SFX="~bpo8+1"
