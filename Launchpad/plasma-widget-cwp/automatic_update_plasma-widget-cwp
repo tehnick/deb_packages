@@ -35,13 +35,9 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Get sources
+GetSources
 
-
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DESTINATION="plasma-widget-cwp"
 
@@ -49,6 +45,8 @@ export DIR_NAME="cwp-${NEW_VER}"
 export OLD_DIR_NAME="cwp-${OLD_VER}"
 
 export QT_SELECT=qt4
+
+export EDIT_CHANGELOG="true"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
