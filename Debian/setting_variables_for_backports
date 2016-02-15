@@ -2,22 +2,23 @@
 
 # Common script for setting variables
 
-export TEMP_DIR="${PKG_DIR}/TEMP/BACKPORT"
-export TEST_DIR="${TEMP_DIR}/TEST"
-
-cd "${PKG_DIR}/${PACKAGE}-debian" || exit 1
-
-mkdir -p "${TEMP_DIR}"
-cd "${TEMP_DIR}" || exit 1
-
-# wheezy-backports-sloppy jessie-backports
 if [ -z "${MAIN_DIST}" ]; then
+    # wheezy-backports-sloppy jessie-backports
     export MAIN_DIST="jessie-backports"
 fi
 
 if [ -z "${BPO_SFX}" ]; then
     export BPO_SFX="~bpo8+1"
 fi
+
+
+export TEMP_DIR="${PKG_DIR}/TEMP/BACKPORT-${MAIN_DIST}"
+export TEST_DIR="${TEMP_DIR}/TEST"
+
+cd "${PKG_DIR}/${PACKAGE}-debian" || exit 1
+
+mkdir -p "${TEMP_DIR}"
+cd "${TEMP_DIR}" || exit 1
 
 export UPDATE_STRING="Rebuild for ${MAIN_DIST}."
 export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/${MAIN_DIST}"
