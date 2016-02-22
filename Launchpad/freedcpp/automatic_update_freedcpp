@@ -48,6 +48,8 @@ GetSources
 
 export DESTINATION="direct-connect"
 
+export EDIT_CHANGELOG="true"
+
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 
