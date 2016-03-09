@@ -6,7 +6,7 @@
 export PACKAGE="q4wine"
 
 # Uncomment if necessary:
-export SFX="-1ppa2"
+# export SFX="-1ppa2"
 
 
 # Launch common script for setting variables
