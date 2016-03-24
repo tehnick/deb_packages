@@ -70,7 +70,7 @@ cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${DIR_NAME}/debian"
 
 if [ -d "${OLD_DIR_NAME}" ]; then
     diff -urN "${OLD_DIR_NAME}" "${DIR_NAME}" > \
-              "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
+              "${TEMP_DIR}/__${PACKAGE}_${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
 fi
 
 cd "${TEMP_DIR}/${DIR_NAME}"
@@ -136,8 +136,8 @@ else
     cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${TEST_DIR}/"
 
-    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
-    export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
+    export BUILD_LOG_FILE="${TEMP_DIR}/__${PACKAGE}_${NEW_VER_FULL}.build.log"
+    export WARNINGS_LOG_FILE="${TEMP_DIR}/__${PACKAGE}_${NEW_VER_FULL}.warnings.log"
     echo ;
 
     cd "${TEST_DIR}/${DIR_NAME}"
@@ -157,7 +157,7 @@ else
     echo "Finished building packages."
     echo ;
 
-    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/__${PACKAGE}_${NEW_VER_FULL}.lintian.log"
     cd "${TEST_DIR}"
     echo ;
     echo "Now running lintian:"
