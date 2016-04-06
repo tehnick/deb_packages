@@ -3,7 +3,7 @@
 # Test Internet connection:
 host github.com > /dev/null || exit 1
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+export MAIN_DIR="$(dirname $(realpath -s ${0}))"
 
 export HTML_FILE="${MAIN_DIR}/deb-packages.html"
 
