@@ -115,12 +115,12 @@ else
     echo "Start building packages..."
     if [ "${CLEAN_BUILD}" = "true" ]; then
         sudo time nice -n19 pdebuild --pbuilder cowbuilder \
-                                     --buildresult "${TEST_DIR}" > \
-                                     ${BUILD_LOG_FILE} \
+                                     --buildresult "${TEST_DIR}" \
+                                     > ${BUILD_LOG_FILE} \
                                      2> ${WARNINGS_LOG_FILE} || exit 1
         sudo chown -R "${SUDO_USER}:${SUDO_USER}" "${TEST_DIR}"
     else
-        time nice -n19 dpkg-buildpackage -rfakeroot \
+        time nice -n19 dpkg-buildpackage -rfakeroot -uc -us \
                                          > ${BUILD_LOG_FILE} \
                                          2> ${WARNINGS_LOG_FILE} || exit 1
     fi
