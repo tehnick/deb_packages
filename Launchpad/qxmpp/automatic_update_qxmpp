@@ -47,7 +47,7 @@ GetSources
 
 export DESTINATION="qxmpp"
 
-export DIST_LIST=" "
+export DIST_LIST="xenial"
 
 export A_TYPE="gz"
 export D_ARGS="xzf"

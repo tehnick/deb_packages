@@ -51,7 +51,8 @@ if [ "${1}" = "clean" ]; then
 fi
 
 if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="wily
+    DIST_LIST="xenial
+               wily
                vivid
                trusty
                precise"

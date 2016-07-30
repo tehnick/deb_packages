@@ -62,7 +62,7 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="qxmpp-devel"
 
-export DIST_LIST=" "
+export DIST_LIST="xenial"
 
 export A_TYPE="xz"
 export D_ARGS="xJf"

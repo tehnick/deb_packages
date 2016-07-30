@@ -72,7 +72,8 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="leechcraft-unstable"
 
-export DIST_LIST="wily
+export DIST_LIST="xenial
+                  wily
                   vivid
                   trusty"
 
