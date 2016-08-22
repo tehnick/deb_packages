@@ -1,13 +1,13 @@
 My package rules and updating scripts for Debian and Ubuntu
 
 Related links:
-  http://qa.debian.org/developer.php?login=Boris%20Pek
+  https://qa.debian.org/developer.php?login=Boris%20Pek
   https://launchpad.net/~tehnick/+related-software
-  http://wiki.debian.org/BorisPek
-  http://tehnick-8.narod.ru/
+  https://wiki.debian.org/BorisPek
+  http://tehnick.github.io/
 
 Notes:
-  git clone --depth 1 git://github.com/tehnick/deb_packages.git
+  git clone https://github.com/tehnick/deb_packages.git
   git submodule init
   git submodule update
 
