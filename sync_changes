@@ -11,10 +11,7 @@ for PACKAGE in * ; do
     echo;
     echo "Begin ${PACKAGE}"
     cd "${PKG_DIR}"
-    git checkout master
     git pull --all
-    #git push origin master
-    #git push --tags
     echo "End ${PACKAGE}"
 done
 
@@ -25,9 +22,7 @@ for PACKAGE in * ; do
     echo;
     echo "Begin ${PACKAGE}"
     cd "${PKG_DIR}"
-    git checkout launchpad
     git pull --all
-    #git push origin launchpad
     echo "End ${PACKAGE}"
 done
 
