@@ -10,6 +10,8 @@ export PACKAGE="qxmpp-qt4-devel"
 
 #export NEW_VER=0.4.0~git20120405-390b63e
 
+export A_TYPE="xz"
+
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
@@ -66,9 +68,6 @@ export DESTINATION="qxmpp-devel"
 
 export DIST_LIST="vivid
                   trusty"
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"

@@ -10,6 +10,8 @@ export PACKAGE="qxmpp-devel"
 
 #export NEW_VER=0.4.0~git20120405-390b63e
 
+export A_TYPE="xz"
+
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
@@ -47,14 +49,14 @@ PrintVersions "${@}"
 # CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+# Get sources
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
     rm -rf  "${PACKAGE}-${NEW_VER}"
     # sources
     mkdir "${PACKAGE}-${NEW_VER}" || exit 1
     rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
     # tarball
-    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${PACKAGE}-${NEW_VER}"
 fi
 
 
@@ -63,9 +65,6 @@ export UPDATE_STRING="New Git snapshot."
 export DESTINATION="qxmpp-devel"
 
 export DIST_LIST="xenial"
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
