@@ -23,7 +23,7 @@ if [ "${1}" != "local" ]; then
     cd "${POPCON_DATA_DIR}/Debian"
     echo "${GZ_FILE}"
     curl -I "${GZ_FILE}" 2> /dev/null | grep "Last-Modified"
-    wget -4 -c "${GZ_FILE}"
+    wget -c "${GZ_FILE}"
     gzip -d by_inst.gz
     echo ;
     # Ubuntu
@@ -32,7 +32,7 @@ if [ "${1}" != "local" ]; then
     cd "${POPCON_DATA_DIR}/Ubuntu"
     echo "${GZ_FILE}"
     curl -I "${GZ_FILE}" 2> /dev/null | grep "Last-Modified"
-    wget -4 -c "${GZ_FILE}"
+    wget -c "${GZ_FILE}"
     gzip -d by_inst.gz
     echo ;
 fi
@@ -102,8 +102,16 @@ for PACKAGE in ${PACKAGES_LIST} ; do
     PKG_LIST=$(grep "Package: " "${MAIN_DIR}"/*/${PACKAGE}/${PACKAGE}-debian/debian/control | sed -e "s|^.*Package: \(.*\)$|\1|" | sort | uniq)
     FIRST_LINE=true
     for PKG in ${PKG_LIST} ; do
-        PKG_INST_DEBIAN=$(grep " ${PKG} " "${POPCON_DATA_DIR}/Debian/by_inst" | awk '{print $3}')
-        PKG_INST_UBUNTU=$(grep " ${PKG} " "${POPCON_DATA_DIR}/Ubuntu/by_inst" | awk '{print $3}')
+        PKG_INST_DEBIAN="&ndash;"
+        PKG_INST_UBUNTU="&ndash;"
+        PKG_INFO_DEBIAN=$(grep -a " ${PKG} " "${POPCON_DATA_DIR}/Debian/by_inst")
+        PKG_INFO_UBUNTU=$(grep -a " ${PKG} " "${POPCON_DATA_DIR}/Ubuntu/by_inst")
+        if [ ! -z "${PKG_INFO_DEBIAN}" ]; then
+            PKG_INST_DEBIAN=$(echo "${PKG_INFO_DEBIAN}" | awk '{print $3}')
+        fi
+        if [ ! -z "${PKG_INFO_UBUNTU}" ]; then
+            PKG_INST_UBUNTU=$(echo "${PKG_INFO_UBUNTU}" | awk '{print $3}')
+        fi  
         if [ "${TD}" = "<td>" ]; then
             TDC="<td>"
             TD="<td class=\"color-odd\">"
