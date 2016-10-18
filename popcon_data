@@ -9,7 +9,7 @@ export POPCON_DATA_DIR="${MAIN_DIR}/Popcon"
 
 echo "POPCON_DATA_DIR = ${POPCON_DATA_DIR}"
 
-export HTML_FILE="${MAIN_DIR}/popcon-stat.html"
+export HTML_FILE="${MAIN_DIR}/docs/popcon-stat.html"
 export TMP_FILE="${HTML_FILE}.tmp"
 
 echo "TMP_FILE = ${TMP_FILE}"
@@ -63,7 +63,7 @@ echo "<b>Page was generated:</b> ${PAGE_DATE_TIME}<br>" >> "${TMP_FILE}"
 echo "<br>" >> "${TMP_FILE}"
 
 
-PACKAGES_LIST=$(grep "Source: " "${MAIN_DIR}"/*/*/*-debian/debian/control | sed -e "s|^.*Source: \(.*\)$|\1|" | sort | uniq)
+PACKAGES_LIST=$(grep "Source: " "${MAIN_DIR}"/*/*/*-debian/debian/control | sed -e "s|^.*Source: \(.*\)$|\1|" | grep -v '\-devel' | grep -v '\-qt4' | sort | uniq)
 PACKAGES_NUMBER=$(echo "${PACKAGES_LIST}" | wc -l)
 echo "<b>There are ${PACKAGES_NUMBER} packages for Debian and Ubuntu:</b>" >> "${TMP_FILE}"
 
