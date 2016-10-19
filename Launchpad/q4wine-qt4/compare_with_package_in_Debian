@@ -1,8 +1,0 @@
-#!/bin/bash
-
-[ -z "${MAIN_DIR}" ] && export MAIN_DIR="$(realpath -s $(dirname ${0})/../..)"
-
-
-export PACKAGE="q4wine"
-
-source "${MAIN_DIR}/Launchpad/compare_with_package_in_Debian"
