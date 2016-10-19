@@ -12,6 +12,8 @@ echo "POPCON_DATA_DIR = ${POPCON_DATA_DIR}"
 export HTML_FILE="${MAIN_DIR}/docs/popcon-stat.html"
 export TMP_FILE="${HTML_FILE}.tmp"
 
+export PROJECT_YEARS="2012-$(date +%Y)"
+
 echo "TMP_FILE = ${TMP_FILE}"
 echo ;
 
@@ -44,7 +46,7 @@ echo "<html>" >> "${TMP_FILE}"
 echo "<head>" >> "${TMP_FILE}"
 echo "<meta content=\"text/html;\" http-equiv=\"content-type\">" >> "${TMP_FILE}"
 echo "<meta content=\"Boris Pek\" name=\"author\">" >> "${TMP_FILE}"
-echo "<meta content=\"Tehnick (c) 2012-2013\" name=\"copyright\">" >> "${TMP_FILE}"
+echo "<meta content=\"Tehnick (c) ${PROJECT_YEARS}\" name=\"copyright\">" >> "${TMP_FILE}"
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">" >> "${TMP_FILE}"
 echo "<title>Statistics of packages maintained by Boris Pek</title>" >> "${TMP_FILE}"
 echo "</head>" >> "${TMP_FILE}"
@@ -63,9 +65,9 @@ echo "<b>Page was generated:</b> ${PAGE_DATE_TIME}<br>" >> "${TMP_FILE}"
 echo "<br>" >> "${TMP_FILE}"
 
 
-PACKAGES_LIST=$(grep "Source: " "${MAIN_DIR}"/*/*/*-debian/debian/control | sed -e "s|^.*Source: \(.*\)$|\1|" | grep -v '\-devel' | grep -v '\-qt4' | sort | uniq)
+PACKAGES_LIST=$(grep "Source: " "${MAIN_DIR}"/*/*/*-debian/debian/control | sed -e "s|^.*Source: \(.*\)$|\1|" | grep -v '\-devel' | grep -v '\-unstable' | grep -v '\-qt4' | sort | uniq)
 PACKAGES_NUMBER=$(echo "${PACKAGES_LIST}" | wc -l)
-echo "<b>There are ${PACKAGES_NUMBER} packages for Debian and Ubuntu:</b>" >> "${TMP_FILE}"
+echo "<b>There are ${PACKAGES_NUMBER} packages for Debian and Ubuntu with available statistics:</b>" >> "${TMP_FILE}"
 
 
 echo "<div id=\"stat\">" >> "${TMP_FILE}"
@@ -175,7 +177,7 @@ echo "</div>" >> "${TMP_FILE}"
 echo "</div>" >> "${TMP_FILE}"
 
 echo "<div id=\"footer\">" >> "${TMP_FILE}"
-echo "Boris Pek &copy; 2012-2013" >> "${TMP_FILE}"
+echo "Boris Pek &copy; ${PROJECT_YEARS}" >> "${TMP_FILE}"
 echo "</div>" >> "${TMP_FILE}"
 
 echo "</body>" >> "${TMP_FILE}"
