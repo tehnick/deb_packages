@@ -1,16 +1,15 @@
 My package rules and updating scripts for Debian and Ubuntu
 
+License:
+  All scripts in this repository are in the public domain, see:
+  https://creativecommons.org/publicdomain/mark/1.0/
+
+Notes:
+  git clone --recursive https://github.com/tehnick/deb_packages.git
+
 Related links:
   https://qa.debian.org/developer.php?login=Boris%20Pek
   https://launchpad.net/~tehnick/+related-software
   https://wiki.debian.org/BorisPek
   http://tehnick.github.io/
 
-Notes:
-  git clone https://github.com/tehnick/deb_packages.git
-  git submodule init
-  git submodule update
-
-License:
-  All scripts in this repository are in the public domain, see:
-  https://creativecommons.org/publicdomain/mark/1.0/

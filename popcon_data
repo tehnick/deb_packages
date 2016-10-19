@@ -147,9 +147,8 @@ for PACKAGE in ${PACKAGES_LIST} ; do
         echo "<a href=\"http://ubuntu-popcon.43-1.org/cgi-bin/graph.pl?name=${PKG}\">${PKG_INST_UBUNTU}</a>" >> "${TMP_FILE}"
         echo "</td>" >> "${TMP_FILE}"
         echo "${TD}" >> "${TMP_FILE}"
-        echo "<a href=\"https://qa.debian.org/popcon-graph.php?packages=${PKG}&show_installed=on&want_legend=on&date_fmt=%25Y-%25m&beenhere=1\">q.d.o</a>" >> "${TMP_FILE}"
-        echo "<a href=\"http://popcon2.net/package/${PKG}.html#graph-1\">p2.n</a>" >> "${TMP_FILE}"
-        echo "<a href=\"http://lesbonscomptes.com/upopcon/makeimg.php?packages=${PKG}&columns=inst\">l.c/u</a>" >> "${TMP_FILE}"
+        echo "<a href=\"https://qa.debian.org/popcon-graph.php?packages=${PKG}&show_installed=on&want_legend=on&date_fmt=%25Y-%25m&beenhere=1\">q.d.o/p</a>" >> "${TMP_FILE}"
+        echo "<a href=\"https://lesbonscomptes.com/upopcon/display.php?packages=${PKG}&show_installed=on\">l.c/u</a>" >> "${TMP_FILE}"
         echo "</td>" >> "${TMP_FILE}"
         echo "</tr>" >> "${TMP_FILE}"
     done
