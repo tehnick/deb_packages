@@ -41,9 +41,9 @@ export DEBEMAIL="Boris Pek <tehnick@debian.org>"
 
 rm -rf "${PACKAGE}_${NEW_VER}.tar.${A_TYPE}"
 
-if ([ -d "${OLD_DIR_NAME}" ]); then
+if [ -d "${OLD_DIR_NAME}" ]; then
     diff -urN "${OLD_DIR_NAME}" "${DIR_NAME}" > \
-              "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
+              "${TEMP_DIR}/__${PACKAGE}_${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
 fi
 
 cd "${TEMP_DIR}/${DIR_NAME}"

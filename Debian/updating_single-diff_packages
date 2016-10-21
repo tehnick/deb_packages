@@ -49,9 +49,9 @@ tar "${D_ARGS}" "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}"
 rm -rf "${DIR_NAME}/debian"
 cp -af "${PKG_DIR}/${PACKAGE}-debian"/* "${DIR_NAME}"/
 
-if ([ -d "${OLD_DIR_NAME}" ]); then
+if [ -d "${OLD_DIR_NAME}" ]; then
     diff -urN "${OLD_DIR_NAME}" "${DIR_NAME}" > \
-              "${TEMP_DIR}/${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
+              "${TEMP_DIR}/__${PACKAGE}_${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
 fi
 
 cd "${TEMP_DIR}/${DIR_NAME}"
