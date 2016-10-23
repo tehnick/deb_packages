@@ -49,10 +49,6 @@ PrintVersions "${@}"
 GetSources
 
 
-export UPDATE_STRING="New upstream release."
-
-export D_ARGS="xzf"
-
 # Launch common script for updating packages
 source "${MAIN_DIR}/Debian/updating_packages"
 
