@@ -64,7 +64,8 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="qxmpp-devel"
 
-export DIST_LIST="xenial"
+export DIST_LIST="yakkety
+                  xenial"
 
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"

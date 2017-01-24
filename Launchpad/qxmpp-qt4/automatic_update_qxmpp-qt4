@@ -15,7 +15,7 @@ export A_TYPE="gz"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
-export MAIN_DIST="wily"
+export MAIN_DIST="vivid"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
 
@@ -54,8 +54,7 @@ export UPDATE_STRING="Backport to Ubuntu Wily."
 
 export DESTINATION="qxmpp"
 
-export DIST_LIST="vivid
-                  trusty"
+export DIST_LIST="trusty"
 
 export DIR_NAME="qxmpp-${NEW_VER}"
 export OLD_DIR_NAME="qxmpp-${OLD_VER}"

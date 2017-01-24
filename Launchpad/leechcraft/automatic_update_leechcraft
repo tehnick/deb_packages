@@ -50,8 +50,8 @@ export UPDATE_STRING="Update to stable release ${CUR_VER}."
 
 export DESTINATION="leechcraft-stable"
 
-export DIST_LIST="xenial
-                  wily
+export DIST_LIST="yakkety
+                  xenial
                   vivid
                   trusty"
 

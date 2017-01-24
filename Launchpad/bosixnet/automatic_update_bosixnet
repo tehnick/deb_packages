@@ -47,8 +47,8 @@ GetSources
 
 export DESTINATION="bosixnet"
 
-export DIST_LIST="xenial
-                  wily
+export DIST_LIST="yakkety
+                  xenial
                   vivid
                   trusty"
 

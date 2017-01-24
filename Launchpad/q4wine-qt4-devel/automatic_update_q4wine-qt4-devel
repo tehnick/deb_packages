@@ -11,7 +11,7 @@ export PACKAGE="q4wine-qt4-devel"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
-export MAIN_DIST="wily"
+export MAIN_DIST="vivid"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
 
@@ -61,8 +61,7 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="q4wine-devel"
 
-export DIST_LIST="vivid
-                  trusty
+export DIST_LIST="trusty
                   precise"
 
 export A_TYPE="xz"
