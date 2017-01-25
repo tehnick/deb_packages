@@ -92,13 +92,13 @@ if [ "${SFX}" = "-0ppa1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "${UPDATE_STRING}"
     if [ "${EDIT_CHANGELOG}" = "true" ]; then kwrite debian/changelog; fi
-    nice -n19 debuild -S -sa || exit 1
+    nice -n19 debuild -S -sa -d || exit 1
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
     # debuild -S -sd
-    nice -n19 debuild -S -sa || exit 1
+    nice -n19 debuild -S -sa -d || exit 1
 fi
 # end update for basic releases
 
@@ -179,10 +179,14 @@ fi
 cd "${TEMP_DIR}"
 cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 
+cd "${PKG_DIR}/${PACKAGE}-debian/"
+fakeroot debian/rules clean
+
 if [ -z "${DESTINATION}" ]; then
     export DESTINATION="tehnick"
 fi
 
+cd "${TEMP_DIR}"
 for DIST in ${MAIN_DIST} ${DIST_LIST} ; do
     dput -f ${DESTINATION} ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
 done
