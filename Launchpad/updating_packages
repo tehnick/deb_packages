@@ -86,19 +86,21 @@ cd "${TEMP_DIR}/${DIR_NAME}"
 # hardy intrepid jaunty karmic lucid maverick natty oneiric precise quantal
 # But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
 
+# About --buildinfo-option="-O" see at: https://bugs.debian.org/853795#10
+
 # begin update for basic releases
 export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "${UPDATE_STRING}"
     if [ "${EDIT_CHANGELOG}" = "true" ]; then kwrite debian/changelog; fi
-    nice -n19 debuild -S -sa -d || exit 1
+    nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
 else
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
     # debuild -S -sd
-    nice -n19 debuild -S -sa -d || exit 1
+    nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
 fi
 # end update for basic releases
 
@@ -109,7 +111,7 @@ for DIST in ${DIST_LIST} ; do
     cp -f ../changelog debian/changelog
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "Automatic backport; no changes required."
-    nice -n19 debuild -S -sd || exit 1
+    nice -n19 debuild -S -sd --buildinfo-option="-O" || exit 1
 done
 
 mv ../changelog debian/changelog # rollback basic changelog
@@ -148,7 +150,7 @@ else
                                      --buildresult "${TEST_DIR}" \
                                      > ${BUILD_LOG_FILE} \
                                      2> ${WARNINGS_LOG_FILE} || exit 1
-        sudo chown -R "${SUDO_USER}" "${TEST_DIR}"
+        sudo chown -R "${SUDO_USER}:${SUDO_USER}" "${TEST_DIR}"
     else
         time nice -n19 dpkg-buildpackage -rfakeroot -uc -us \
                                          > ${BUILD_LOG_FILE} \
