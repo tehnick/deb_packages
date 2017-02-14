@@ -6,12 +6,12 @@
 export PACKAGE="q4wine-qt4"
 
 # Uncomment if necessary:
-export SFX="-0ppa2"
+#export SFX="-0ppa2"
 
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
-export MAIN_DIST="vivid"
+export MAIN_DIST="trusty"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
 
@@ -46,8 +46,7 @@ export UPDATE_STRING="Backport to Ubuntu Wily."
 
 export DESTINATION="q4wine"
 
-export DIST_LIST="trusty
-                  precise"
+export DIST_LIST=" "
 
 export DIR_NAME="q4wine-${NEW_VER}"
 export OLD_DIR_NAME="q4wine-${OLD_VER}"

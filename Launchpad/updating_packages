@@ -53,9 +53,7 @@ fi
 if [ -z "${DIST_LIST}" ]; then
     DIST_LIST="yakkety
                xenial
-               vivid
-               trusty
-               precise"
+               trusty"
     export DIST_LIST;
 fi
 
@@ -82,9 +80,7 @@ cd "${TEMP_DIR}/${DIR_NAME}"
 
 # Note: I am using gnupg-agent for comfortable work
 
-# Full list of Ubuntu releases:
-# hardy intrepid jaunty karmic lucid maverick natty oneiric precise quantal
-# But not all of them are available, see: https://launchpad.net/ubuntu/+ppas
+# Supported Ubuntu releases: https://launchpad.net/ubuntu/+ppas
 
 # About --buildinfo-option="-O" see at: https://bugs.debian.org/853795#10
 
@@ -111,7 +107,7 @@ for DIST in ${DIST_LIST} ; do
     cp -f ../changelog debian/changelog
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "Automatic backport; no changes required."
-    nice -n19 debuild -S -sd --buildinfo-option="-O" || exit 1
+    nice -n19 debuild -S -sd -d --buildinfo-option="-O" || exit 1
 done
 
 mv ../changelog debian/changelog # rollback basic changelog

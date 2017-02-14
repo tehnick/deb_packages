@@ -6,7 +6,7 @@
 export PACKAGE="psimedia"
 
 # Uncomment if necessary:
-export SFX="-2ppa1"
+export SFX="-3ppa1"
 
 #export NEW_VER=1.0.3-git20130306-c2b8446
 

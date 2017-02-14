@@ -6,7 +6,7 @@
 export PACKAGE="qxmpp-qt4"
 
 # Uncomment if necessary:
-export SFX="-1ppa1"
+#export SFX="-1ppa1"
 
 #export NEW_VER=0.4.0~git20120405-390b63e
 
@@ -15,7 +15,7 @@ export A_TYPE="gz"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
-export MAIN_DIST="vivid"
+export MAIN_DIST="trusty"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
 
@@ -54,7 +54,7 @@ export UPDATE_STRING="Backport to Ubuntu Wily."
 
 export DESTINATION="qxmpp"
 
-export DIST_LIST="trusty"
+export DIST_LIST=" "
 
 export DIR_NAME="qxmpp-${NEW_VER}"
 export OLD_DIR_NAME="qxmpp-${OLD_VER}"
