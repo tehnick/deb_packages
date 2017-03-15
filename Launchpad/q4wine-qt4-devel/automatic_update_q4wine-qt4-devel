@@ -57,7 +57,7 @@ if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
 fi
 
 
-export UPDATE_STRING="New Git snapshot."
+export UPDATE_STRING="Backport to Ubuntu Trusty."
 
 export DESTINATION="q4wine-devel"
 

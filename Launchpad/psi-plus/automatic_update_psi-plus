@@ -51,6 +51,9 @@ export UPDATE_STRING="New release."
 
 export DESTINATION="psi-plus"
 
+export DIST_LIST="yakkety
+                  xenial"
+
 export DIR_NAME="psi-plus-snapshots-${NEW_VER}"
 export OLD_DIR_NAME="psi-plus-snapshots-${OLD_VER}"
 

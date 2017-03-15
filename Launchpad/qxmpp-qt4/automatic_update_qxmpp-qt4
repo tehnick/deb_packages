@@ -50,7 +50,7 @@ GetSources
 mv "qxmpp_${NEW_VER}.orig.tar.${A_TYPE}" "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}"
 
 
-export UPDATE_STRING="Backport to Ubuntu Wily."
+export UPDATE_STRING="Backport to Ubuntu Trusty."
 
 export DESTINATION="qxmpp"
 

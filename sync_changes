@@ -11,7 +11,7 @@ for PACKAGE in * ; do
     echo;
     echo "Begin ${PACKAGE}"
     cd "${PKG_DIR}"
-    git pull --all
+    git pull --all --prune
     echo "End ${PACKAGE}"
 done
 
@@ -22,7 +22,7 @@ for PACKAGE in * ; do
     echo;
     echo "Begin ${PACKAGE}"
     cd "${PKG_DIR}"
-    git pull --all
+    git pull --all --prune
     echo "End ${PACKAGE}"
 done
 
