@@ -51,7 +51,8 @@ if [ "${1}" = "clean" ]; then
 fi
 
 if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="yakkety
+    DIST_LIST="zesty
+               yakkety
                xenial
                trusty"
     export DIST_LIST;

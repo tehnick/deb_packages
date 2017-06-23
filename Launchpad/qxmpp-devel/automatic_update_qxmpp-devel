@@ -64,7 +64,8 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="qxmpp-devel"
 
-export DIST_LIST="yakkety
+export DIST_LIST="zesty
+                  yakkety
                   xenial"
 
 # Launch common script for updating packages and uploading them to Launchpad

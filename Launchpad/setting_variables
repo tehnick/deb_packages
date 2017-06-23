@@ -2,7 +2,7 @@
 
 
 # Common script for setting variables
-export MAIN_DIST="zesty"
+export MAIN_DIST="artful"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
 if [ -z "${SFX}" ]; then

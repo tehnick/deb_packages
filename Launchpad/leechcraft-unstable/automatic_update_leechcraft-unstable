@@ -72,11 +72,6 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="leechcraft-unstable"
 
-export DIST_LIST="yakkety
-                  xenial
-                  vivid
-                  trusty"
-
 export A_TYPE="xz"
 export D_ARGS="xJf"
 
