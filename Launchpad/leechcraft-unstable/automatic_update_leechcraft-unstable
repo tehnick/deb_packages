@@ -23,7 +23,7 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/" | sed 
 
 
 # Find new version
-GIT_REPO_DIR="${HOME}/WorkDir/Devel/LeechCraft/leechcraft_orig"
+GIT_REPO_DIR="${HOME}/Hobby/Devel/LeechCraft/leechcraft_orig"
 if [ -d "${GIT_REPO_DIR}" ]; then
     cd "${GIT_REPO_DIR}" || exit 1
     git pull --all || exit 1
