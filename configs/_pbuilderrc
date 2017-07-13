@@ -1,18 +1,18 @@
 # Files: /root/.pbuilderrc /etc/pbuilderrc
 # Documentation: pbuilderrc.5
 
-BASETGZ=/home/user/WorkDir/Devel/pbuilder/base.tgz
-BASEPATH="/home/user/WorkDir/Devel/pbuilder/base.cow"
+BASETGZ=/opt/pbuilder/base.tgz
+BASEPATH="/opt/pbuilder/base.cow"
 #EXTRAPACKAGES=""
 #export DEBIAN_BUILDARCH=athlon
-BUILDPLACE=/home/user/WorkDir/Devel/pbuilder/build/
+BUILDPLACE=/opt/pbuilder/build/
 MIRRORSITE=http://httpredir.debian.org/debian
 #OTHERMIRROR="deb http://www.home.com/updates/ ./"
 #export http_proxy=http://your-proxy:8080/
 USEPROC=yes
 USEDEVPTS=yes
 USEDEVFS=no
-BUILDRESULT=/home/user/WorkDir/Devel/pbuilder/result/
+BUILDRESULT=/opt/pbuilder/result/
 
 # specifying the distribution forces the distribution on "pbuilder update"
 DISTRIBUTION=sid
@@ -24,12 +24,12 @@ ARCHITECTURE=`dpkg --print-architecture`
 # restricted universe multiverse"
 COMPONENTS="main"
 #specify the cache for APT 
-APTCACHE="/home/user/WorkDir/Devel/pbuilder/aptcache/"
+APTCACHE="/opt/pbuilder/aptcache/"
 #APTCACHEHARDLINK="yes"
 REMOVEPACKAGES=""
 HOOKDIR=""
 # NB: this var is private to pbuilder; ccache uses "CCACHE_DIR" instead
-CCACHEDIR="/home/user/WorkDir/Devel/pbuilder/ccache"
+CCACHEDIR="/opt/pbuilder/ccache"
 
 # make debconf not interact with user
 export DEBIAN_FRONTEND="noninteractive"
