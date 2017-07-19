@@ -1,6 +1,9 @@
 #!/bin/sh
 
-export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
+# Test Internet connection:
+host github.com > /dev/null || exit 1
+
+export MAIN_DIR="$(dirname $(realpath -s ${0}))"
 
 echo "MAIN_DIR = ${MAIN_DIR}"
 
