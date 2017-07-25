@@ -42,7 +42,6 @@ GetSources
 export DESTINATION="q4wine"
 
 export DIST_LIST="zesty
-                  yakkety
                   xenial"
 
 # Launch common script for updating packages and uploading them to Launchpad

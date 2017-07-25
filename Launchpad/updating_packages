@@ -52,7 +52,6 @@ fi
 
 if [ -z "${DIST_LIST}" ]; then
     DIST_LIST="zesty
-               yakkety
                xenial
                trusty"
     export DIST_LIST;
@@ -96,7 +95,7 @@ else
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
-    # debuild -S -sd
+    # debuild -S -sd --buildinfo-option="-O" || exit 1
     nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
 fi
 # end update for basic releases

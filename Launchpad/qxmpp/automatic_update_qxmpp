@@ -48,7 +48,6 @@ GetSources
 export DESTINATION="qxmpp"
 
 export DIST_LIST="zesty
-                  yakkety
                   xenial"
 
 export A_TYPE="gz"

@@ -44,10 +44,11 @@ cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${DIR_NAME}/debian"
 cd "${TEMP_DIR}/${DIR_NAME}"
 
 {
+    # About --buildinfo-option="-O" see at: https://bugs.debian.org/853795#10
     dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${BPO_VER_FULL}" \
         "${UPDATE_STRING}"
     kwrite debian/changelog
-    nice -n19 debuild -S -sa -d "-v${BASIC_VER}"
+    nice -n19 debuild -S -sa --buildinfo-option="-O" "-v${BASIC_VER}"
 }
 
 
@@ -69,8 +70,8 @@ else
     cp -f "${TEMP_DIR}/${PACKAGE}_${BPO_VER_FULL}.debian.tar."* "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${BPO_VER_FULL}.dsc" "${TEST_DIR}/"
     
-    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${BPO_VER_FULL}.build.log"
-    export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${BPO_VER_FULL}.warnings.log"
+    export BUILD_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${BPO_VER_FULL}.build.log"
+    export WARNINGS_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${BPO_VER_FULL}.warnings.log"
     echo ;
 
     cd "${TEST_DIR}/${DIR_NAME}"
@@ -86,7 +87,7 @@ else
     echo "Finished building packages."
     echo ;
 
-    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${BPO_VER_FULL}.lintian.log"
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${BPO_VER_FULL}.lintian.log"
     cd "${TEST_DIR}"
     echo ;
     echo "Now running lintian:"

@@ -6,7 +6,7 @@
 export PACKAGE="qtcurve"
 
 # Uncomment if necessary:
-export SFX="-3"
+export SFX="-4"
 
 export NEW_VER=1.8.18+git20160320-3d8622c
 
@@ -26,7 +26,7 @@ GetOldVersion
 
 # Find new version
 export PROJECT=qtcurve
-export VER_LIST=$(curl "https://quickgit.kde.org/?p=${PROJECT}.git&a=tags" 2>&1 | sed -ne "s|^.*href=\"http://quickgit.kde.org/?p=${PROJECT}.git&amp;a=tag&amp;t=\(.*[0-9]\)\">tag.*|\1|p")
+export VER_LIST=$(curl "https://cgit.kde.org/${PROJECT}.git/refs/tags" 2>&1 | sed -ne "s|^.*'/${PROJECT}.git/tag/?h=\([0-9\.]*\)'>.*$|\1|p")
 if [ -z "${NEW_VER=}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
@@ -35,7 +35,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "https://quickgit.kde.org/?p=${PROJECT}.git"
+DisplayVersions "https://cgit.kde.org/${PROJECT}.git"
 
 
 
@@ -44,7 +44,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-CheckVersions
+#CheckVersions
 
 
 # Get sources

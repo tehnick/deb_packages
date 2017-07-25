@@ -70,17 +70,19 @@ echo "Uscan:"
 uscan --report-status
 echo ;
 
+# About --buildinfo-option="-O" see at: https://bugs.debian.org/853795#10
+
 if [ "${SFX}" = "-1" ]; then
     dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
         "${UPDATE_STRING}"
     kwrite debian/changelog
-    nice -n19 debuild -S -sa -d
+    nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
 else
     dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
         "Some fixes in package."
     kwrite debian/changelog
-    # debuild -S -sd
-    nice -n19 debuild -S -sa -d
+    # debuild -S -sd --buildinfo-option="-O" || exit 1
+    nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
 fi
 
 
@@ -107,8 +109,8 @@ else
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER_FULL}.debian.tar."* "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER_FULL}.dsc" "${TEST_DIR}/"
 
-    export BUILD_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.build.log"
-    export WARNINGS_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.warnings.log"
+    export BUILD_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${NEW_VER_FULL}.build.log"
+    export WARNINGS_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${NEW_VER_FULL}.warnings.log"
     echo ;
 
     cd "${TEST_DIR}/${DIR_NAME}"
@@ -128,7 +130,7 @@ else
     echo "Finished building packages."
     echo ;
 
-    export LINTIAN_LOG_FILE="${TEMP_DIR}/${PACKAGE}-${NEW_VER_FULL}.lintian.log"
+    export LINTIAN_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${NEW_VER_FULL}.lintian.log"
     cd "${TEST_DIR}"
     echo ;
     echo "Now running lintian:"
