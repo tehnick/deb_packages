@@ -26,13 +26,13 @@ GetOldVersion
 
 # Find new version
 export PROJECT=kde-gtk-config
-export VER_LIST=$(curl "http://download.kde.org/stable/plasma/" 2>&1 | sed -ne "s:^.*<td><a href=\"\([0-9].*\)/\">[0-9].*</a>.*$:\1:p")
+export VER_LIST=$(curl "https://download.kde.org/stable/plasma/" 2>&1 | sed -ne "s:^.*<td><a href=\"\([0-9].*\)/\">[0-9].*</a>.*$:\1:p")
 export NEW_VER=$(echo "${VER_LIST}" | sort -V | tail -n1)
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://download.kde.org/stable/plasma/"
+DisplayVersions "https://download.kde.org/stable/plasma/"
 
 
 # Print versions
@@ -40,10 +40,10 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersions
+CheckVersions
 
 
-# Get the sources
+# Get sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
     "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
 fi
