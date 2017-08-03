@@ -27,7 +27,7 @@ GetOldVersion
 # Find new version
 export PROJECT=qtcurve
 export VER_LIST=$(curl "https://cgit.kde.org/${PROJECT}.git/refs/tags" 2>&1 | sed -ne "s|^.*'/${PROJECT}.git/tag/?h=\([0-9\.]*\)'>.*$|\1|p")
-if [ -z "${NEW_VER=}" ]; then
+if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}

@@ -25,7 +25,7 @@ GetOldVersion
 
 # Find new version
 export VER_LIST=$(curl 'https://sourceforge.net/projects/yagf-ocr/files/' 2>&1 | sed -ne "s:^.*<tr title=\"yagf-\(.*\).tar.gz\" class=\"file \">.*$:\1:p")
-if [ -z "${NEW_VER=}" ]; then
+if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
