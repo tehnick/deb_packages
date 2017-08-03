@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Test Internet connection:
+host github.com > /dev/null || exit 1
+
+export MAIN_DIR="$(dirname $(realpath -s ${0}))"
+echo "MAIN_DIR = ${MAIN_DIR}"
+
+mkdir -p "${MAIN_DIR}/GitRepos"
+cd "${MAIN_DIR}"/GitRepos/ || exit 1
+
+echo;
+[ ! -d "eiskaltdcpp" ] && \
+    git clone https://github.com/eiskaltdcpp/eiskaltdcpp.git
+echo;
+[ ! -d "freedcpp" ] && \
+    git clone https://github.com/eiskaltdcpp/freedcpp.git
+echo;
+[ ! -d "q4wine" ] && \
+    git clone https://github.com/brezerk/q4wine.git
+echo;
+[ ! -d "qxmpp" ] && \
+    git clone https://github.com/qxmpp-project/qxmpp.git
+echo;
+[ ! -d "uhub" ] && \
+    git clone https://github.com/janvidar/uhub.git
+echo;
+[ ! -d "psi-plus-resources" ] && \
+    git clone https://github.com/psi-plus/resources.git psi-plus-resources
+echo;
+

@@ -21,7 +21,7 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
 
 
 # Find new version
-GIT_REPO_DIR="${HOME}/Hobby/Devel/Psi+/psi-plus.temp/resources"
+GIT_REPO_DIR="${MAIN_DIR}/GitRepos/psi-plus-resources"
 if [ -d "${GIT_REPO_DIR}" ]; then
     cd "${GIT_REPO_DIR}" || exit 1
     git pull --all || exit 1

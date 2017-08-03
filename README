@@ -6,6 +6,7 @@ License:
 
 Notes:
   git clone --recursive https://github.com/tehnick/deb_packages.git
+  ./deb_packages/clone_git_repos
 
 Related links:
   https://qa.debian.org/developer.php?login=Boris%20Pek

@@ -26,7 +26,7 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\{6,6\}-\(.*\)$/\1/")
 
 
 # Find new version
-GIT_REPO_DIR="${HOME}/Hobby/Devel/EiskaltDC++/eiskaltdcpp_orig"
+GIT_REPO_DIR="${MAIN_DIR}/GitRepos/eiskaltdcpp"
 if [ -d "${GIT_REPO_DIR}" ]; then
     cd "${GIT_REPO_DIR}" || exit 1
     git checkout ${BRANCH} || exit 1

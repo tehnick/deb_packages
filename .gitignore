@@ -1,4 +1,5 @@
 Debian/*/TEMP
 Launchpad/*/TEMP
 LocalRepo/
+GitRepos/
 Popcon/
