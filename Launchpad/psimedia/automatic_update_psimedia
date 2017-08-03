@@ -24,7 +24,7 @@ GetOldVersion
 
 
 # Find new version
-export DEVELOPER=psi-plus
+export DEVELOPER=psi-im
 export PROJECT=psimedia
 export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/v\(.*\).tar.gz\" .*:\1:p")
 if [ -z "${NEW_VER}" ]; then
