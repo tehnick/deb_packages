@@ -150,6 +150,7 @@ echo "Update finished successfully"
 if [ "${1}" != "fast" ]; then
     export APT_DIR="${MAIN_DIR}/LocalRepo"
     mkdir -p "${APT_DIR}/${PACKAGE}/"
+    rm -f "${APT_DIR}/${PACKAGE}"/*.deb
     cp -f "${TEST_DIR}"/*.deb "${APT_DIR}/${PACKAGE}/"
     cd "${APT_DIR}/" || exit 1
     rm -f Packages* InRelease* Release*
