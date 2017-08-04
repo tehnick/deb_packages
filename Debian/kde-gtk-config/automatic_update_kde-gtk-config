@@ -9,7 +9,10 @@ export EPOCH="4:"
 
 # Uncomment if necessary:
 #export SFX="-3"
-#export SFX="-1~exp1"
+
+# export NEW_VER=5.10.4
+
+export A_TYPE="xz"
 
 
 # experimental unstable quantal
@@ -27,7 +30,9 @@ GetOldVersion
 # Find new version
 export PROJECT=kde-gtk-config
 export VER_LIST=$(curl "https://download.kde.org/stable/plasma/" 2>&1 | sed -ne "s:^.*<td><a href=\"\([0-9].*\)/\">[0-9].*</a>.*$:\1:p")
-export NEW_VER=$(echo "${VER_LIST}" | sort -V | tail -n1)
+if [ -z "${NEW_VER}" ]; then
+    export NEW_VER=$(echo "${VER_LIST}" | sort -V | tail -n1)
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
@@ -44,15 +49,14 @@ CheckVersions
 
 
 # Get sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
+    set -e
+    cd "${PKG_DIR}/${PACKAGE}-debian"
+    uscan --download --verbose
+    mv "${PKG_DIR}"/*.tar.${A_TYPE} "${TEMP_DIR}/"
+    set +e
 fi
 
-
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
