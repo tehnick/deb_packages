@@ -21,17 +21,11 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/"
 
 
 # Find new version
-export SVN_REPO="https://elmerfem.svn.sourceforge.net/svnroot/elmerfem/trunk"
-export CUR_VER=$(curl "${SVN_REPO}/fem/configure" 2>&1 | sed -ne "s/^ VERSION=\(.\+\)$/\1/p")
-if [ -z "${CUR_VER}" ]; then
-    echo "Failed to define current version."
-    exit 1
-fi
+export DEVELOPER=ElmerCSC
+export PROJECT=elmerfem
+export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/release-\(.*\).tar.gz\" .*:\1:p")
 if [ -z "${NEW_VER}" ]; then
-    export LAST_COMMIT=$(svn log "${SVN_REPO}" | head -n2 | sed -ne "s/^r\([0-9]\+\).*$/\1/p")
-    export NEW_VER="${CUR_VER}.svn.${LAST_COMMIT}+dfsg"
-else
-    export LAST_COMMIT=$(echo ${NEW_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
+    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
