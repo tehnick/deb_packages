@@ -12,6 +12,9 @@ export PACKAGE="qconf"
 
 export BASIC_VER=1.4-3
 
+export A_TYPE="gz"
+
+
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
 source "${MAIN_DIR}/Debian/setting_variables_for_backports"
@@ -29,14 +32,9 @@ SetVersions
 DisplayVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.gz" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/q/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
-fi
+# Get source package
+GetSourcePackage
 
-
-export A_TYPE="gz"
-export D_ARGS="xzf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages_for_backports"

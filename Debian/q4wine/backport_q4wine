@@ -6,12 +6,12 @@
 export PACKAGE="q4wine"
 
 # Uncomment if necessary:
-# export BPO_SFX="~bpo8+2"
+# export BPO_SFX="~bpo9+2"
 
-# export BPO_VER=1.3.1-1
+# export BPO_VER=1.3.5-1
 
 if [ -z "${BASIC_VER}" ]; then
-    export BASIC_VER=1.3.1-1
+    export BASIC_VER=1.3.3-1
 fi
 
 
@@ -32,14 +32,9 @@ SetVersions
 DisplayVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.bz2" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/q/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
-fi
+# Get source package
+GetSourcePackage
 
-
-#export A_TYPE="gz"
-#export D_ARGS="xzf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages_for_backports"

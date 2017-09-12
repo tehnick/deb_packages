@@ -160,9 +160,9 @@ echo "Update finished successfully"
 
 if [ "${2}" = "new" ]; then
     cd "${TEST_DIR}"
-    debsign "${PACKAGE}_${NEW_VER_FULL}_i386.changes"
+    debsign "${PACKAGE}_${NEW_VER_FULL}_amd64.changes"
     echo "Package is targeted into NEW queue, so binary upload is required:"
-    echo "dput -f ftp-eu ${PACKAGE}_${NEW_VER_FULL}_i386.changes"
+    echo "dput -f ftp-eu ${PACKAGE}_${NEW_VER_FULL}_amd64.changes"
 else
     cd "${TEMP_DIR}"
     echo "Sorce-only upload:"

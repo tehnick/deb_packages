@@ -3,12 +3,12 @@
 # Common script for setting variables
 
 if [ -z "${MAIN_DIST}" ]; then
-    # wheezy-backports-sloppy jessie-backports
-    export MAIN_DIST="jessie-backports"
+    # jessie-backports-sloppy stretch-backports
+    export MAIN_DIST="stretch-backports"
 fi
 
 if [ -z "${BPO_SFX}" ]; then
-    export BPO_SFX="~bpo8+1"
+    export BPO_SFX="~bpo9+1"
 fi
 
 
@@ -21,7 +21,7 @@ mkdir -p "${TEMP_DIR}"
 cd "${TEMP_DIR}" || exit 1
 
 export UPDATE_STRING="Rebuild for ${MAIN_DIST}."
-export BPO_BASEPATH="${HOME}/WorkDir/Devel/pbuilder/${MAIN_DIST}"
+export BPO_BASEPATH="/opt/pbuilder/${MAIN_DIST}"
 
 
 # Set versions
@@ -54,7 +54,7 @@ DisplayVersions()
 GetSourcePackage()
 {
     if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE}" ]; then
-        dget -d http://httpredir.debian.org/debian/pool/main/${PACKAGE:0:1}/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
+        dget -d https://deb.debian.org/debian/pool/main/${PACKAGE:0:1}/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
     fi
 }
 

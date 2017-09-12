@@ -5,8 +5,6 @@
 
 export DEBEMAIL="Boris Pek <tehnick@debian.org>"
 
-#export MAIN_DIR="${HOME}/WorkDir/Devel/deb_packages"
-
 export PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
 export TEMP_DIR="${PKG_DIR}/TEMP"
 export TEST_DIR="${TEMP_DIR}/TEST"

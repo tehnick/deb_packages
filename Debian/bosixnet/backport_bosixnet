@@ -6,11 +6,14 @@
 export PACKAGE="bosixnet"
 
 # Uncomment if necessary:
-#export BPO_SFX="~bpo70+2"
+#export BPO_SFX="~bpo9+2"
 
-#export BPO_VER=1.8-1
+#export BPO_VER=1.9-1
 
-export BASIC_VER=1.7-1
+export BASIC_VER=1.8-1
+
+export A_TYPE="gz"
+
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -29,13 +32,8 @@ SetVersions
 DisplayVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.xz" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/b/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
-fi
-
-export A_TYPE="gz"
-export D_ARGS="xzf"
+# Get source package
+GetSourcePackage
 
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
