@@ -61,7 +61,8 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="q4wine-devel"
 
-export DIST_LIST="zesty
+export DIST_LIST="artful
+                  zesty
                   xenial"
 
 # export EDIT_CHANGELOG="true"

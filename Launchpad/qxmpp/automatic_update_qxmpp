@@ -47,7 +47,8 @@ GetSources
 
 export DESTINATION="qxmpp"
 
-export DIST_LIST="zesty
+export DIST_LIST="artful
+                  zesty
                   xenial"
 
 export A_TYPE="gz"
