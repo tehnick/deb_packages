@@ -41,10 +41,6 @@ GetSources
 
 export DESTINATION="q4wine"
 
-export DIST_LIST="artful
-                  zesty
-                  xenial"
-
 # Launch common script for updating packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 
