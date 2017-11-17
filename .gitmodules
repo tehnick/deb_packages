@@ -37,9 +37,6 @@
 [submodule "Launchpad/psi-plus-resources/psi-plus-resources-debian"]
 	path = Launchpad/psi-plus-resources/psi-plus-resources-debian
 	url = git@github.com:tehnick/psi-plus-resources-debian.git
-[submodule "Launchpad/psi-plus-qt4/psi-plus-qt4-debian"]
-	path = Launchpad/psi-plus-qt4/psi-plus-qt4-debian
-	url = git@github.com:tehnick/psi-plus-qt4-debian.git
 [submodule "Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian"]
 	path = Launchpad/eiskaltdcpp-unstable/eiskaltdcpp-unstable-debian
 	url = git@github.com:tehnick/eiskaltdcpp-unstable-debian.git
@@ -49,12 +46,6 @@
 [submodule "Launchpad/q4wine-devel/q4wine-devel-debian"]
 	path = Launchpad/q4wine-devel/q4wine-devel-debian
 	url = git@github.com:tehnick/q4wine-devel-debian.git
-[submodule "Launchpad/q4wine-qt4-devel/q4wine-qt4-devel-debian"]
-	path = Launchpad/q4wine-qt4-devel/q4wine-qt4-devel-debian
-	url = git@github.com:tehnick/q4wine-qt4-devel-debian.git
-[submodule "Launchpad/q4wine-qt4/q4wine-qt4-debian"]
-	path = Launchpad/q4wine-qt4/q4wine-qt4-debian
-	url = git@github.com:tehnick/q4wine-qt4-debian.git
 [submodule "Launchpad/freedcpp-devel/freedcpp-devel-debian"]
 	path = Launchpad/freedcpp-devel/freedcpp-devel-debian
 	url = git@github.com:tehnick/freedcpp-devel-debian.git
@@ -103,9 +94,6 @@
 [submodule "Launchpad/qxmpp-devel/qxmpp-devel-debian"]
 	path = Launchpad/qxmpp-devel/qxmpp-devel-debian
 	url = git.debian.org/git/collab-maint/qxmpp-devel.git
-[submodule "Launchpad/qxmpp-qt4-devel/qxmpp-qt4-devel-debian"]
-	path = Launchpad/qxmpp-qt4-devel/qxmpp-qt4-devel-debian
-	url = git.debian.org/git/collab-maint/qxmpp-qt4-devel.git
 [submodule "Debian/libterm-shellui-perl/libterm-shellui-perl-debian"]
 	path = Debian/libterm-shellui-perl/libterm-shellui-perl-debian
 	url = git@github.com:tehnick/libterm-shellui-perl-debian.git
