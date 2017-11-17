@@ -6,7 +6,7 @@
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-export SFX="-4ppa1"
+export SFX="-5ppa1"
 
 #export NEW_VER=2.2.7+1
 
