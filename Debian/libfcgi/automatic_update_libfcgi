@@ -3,30 +3,28 @@
 [ -z "${MAIN_DIR}" ] && export MAIN_DIR="$(realpath -s $(dirname ${0})/../..)"
 
 
-export PACKAGE="psi-plus"
+export PACKAGE="libfcgi"
 
 # Uncomment if necessary:
-#export SFX="-2"
+export SFX="-9"
 
-#export NEW_VER=0.15.5267
+# export NEW_VER=2.4.0
 
 export A_TYPE="gz"
 
 # experimental unstable
 export MAIN_DIST="unstable"
 
-
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
-
 
 # Get old version
 GetOldVersion
 
 
 # Find new version
-export DEVELOPER=psi-plus
-export PROJECT=psi-plus-snapshots
+export DEVELOPER=FastCGI-Archives
+export PROJECT=fcgi2
 export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
 if [ -z "${NEW_VER}" ]; then
     export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
@@ -35,7 +33,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
+DisplayVersions "https://github.com/FastCGI-Archives/fcgi2/tags"
 
 
 # Print versions
@@ -50,9 +48,10 @@ CheckVersions
 GetSources
 
 
-export DIR_NAME="psi-plus-snapshots-${NEW_VER}"
-export OLD_DIR_NAME="psi-plus-snapshots-${OLD_VER}"
+export DIR_NAME="libfcgi-${NEW_VER}.orig"
+export OLD_DIR_NAME="libfcgi-${OLD_VER}.orig"
 
-# Launch common script for updating packages
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
 

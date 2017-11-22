@@ -136,3 +136,6 @@
 [submodule "Launchpad/bosixnet/bosixnet-debian"]
 	path = Launchpad/bosixnet/bosixnet-debian
 	url = git@github.com:tehnick/bosixnet-debian.git
+[submodule "Debian/libfcgi/libfcgi-debian"]
+	path = Debian/libfcgi/libfcgi-debian
+	url = git@github.com:tehnick/libfcgi-debian.git
