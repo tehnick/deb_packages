@@ -52,7 +52,6 @@ fi
 
 if [ -z "${DIST_LIST}" ]; then
     DIST_LIST="artful
-               zesty
                xenial"
     export DIST_LIST;
 fi
