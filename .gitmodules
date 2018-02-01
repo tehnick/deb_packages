@@ -1,0 +1,18 @@
+[submodule "GitRepos/eiskaltdcpp"]
+	path = GitRepos/eiskaltdcpp
+	url = https://github.com/eiskaltdcpp/eiskaltdcpp.git
+[submodule "GitRepos/freedcpp"]
+	path = GitRepos/freedcpp
+	url = https://github.com/eiskaltdcpp/freedcpp.git
+[submodule "GitRepos/psi-plus-resources"]
+	path = GitRepos/psi-plus-resources
+	url = https://github.com/psi-plus/resources.git
+[submodule "GitRepos/q4wine"]
+	path = GitRepos/q4wine
+	url = https://github.com/brezerk/q4wine.git
+[submodule "GitRepos/qxmpp"]
+	path = GitRepos/qxmpp
+	url = https://github.com/qxmpp-project/qxmpp.git
+[submodule "GitRepos/uhub"]
+	path = GitRepos/uhub
+	url = https://github.com/janvidar/uhub.git
