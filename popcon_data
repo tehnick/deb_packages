@@ -9,7 +9,7 @@ export POPCON_DATA_DIR="${MAIN_DIR}/Popcon"
 
 echo "POPCON_DATA_DIR = ${POPCON_DATA_DIR}"
 
-export HTML_FILE="${MAIN_DIR}/docs/popcon-stat.html"
+export HTML_FILE="${MAIN_DIR}/Docs/popcon-stat.html"
 export TMP_FILE="${HTML_FILE}.tmp"
 
 export PROJECT_YEARS="2012-$(date +%Y)"

@@ -1,4 +1,1 @@
-https://anonscm.debian.org/git/debian-science/packages/elmerfem.git
-https://github.com/tehnick/elmerfem-debian
-
-git remote add github https://github.com/tehnick/elmerfem-debian.git
+https://salsa.debian.org/science-team/elmerfem.git

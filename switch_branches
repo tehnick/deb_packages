@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Test Internet connection:
-host github.com > /dev/null || exit 1
-
 export MAIN_DIR="$(dirname $(realpath -s ${0}))"
 
 echo "MAIN_DIR = ${MAIN_DIR}"
@@ -17,7 +14,8 @@ for PACKAGE in * ; do
     echo;
     echo "Begin ${PACKAGE}"
     cd "${PKG_DIR}"
-    git pull --all --prune
+    git checkout master
+    git branch -a
     echo "End ${PACKAGE}"
 done
 
@@ -31,7 +29,9 @@ for PACKAGE in * ; do
     echo;
     echo "Begin ${PACKAGE}"
     cd "${PKG_DIR}"
-    git pull --all --prune
+    git checkout launchpad
+    git branch -D master
+    git branch -a
     echo "End ${PACKAGE}"
 done
 

@@ -16,3 +16,117 @@
 [submodule "GitRepos/uhub"]
 	path = GitRepos/uhub
 	url = https://github.com/janvidar/uhub.git
+[submodule "Debian/astromenace/astromenace-debian"]
+	path = Debian/astromenace/astromenace-debian
+	url = https://anonscm.debian.org/git/pkg-games/astromenace.git
+[submodule "Debian/astromenace-data/astromenace-data-debian"]
+	path = Debian/astromenace-data/astromenace-data-debian
+	url = https://anonscm.debian.org/git/pkg-games/astromenace-data.git
+[submodule "Debian/bosixnet/bosixnet-debian"]
+	path = Debian/bosixnet/bosixnet-debian
+	url = https://github.com/tehnick/bosixnet-debian.git
+[submodule "Debian/eiskaltdcpp/eiskaltdcpp-debian"]
+	path = Debian/eiskaltdcpp/eiskaltdcpp-debian
+	url = https://github.com/tehnick/eiskaltdcpp-debian.git
+[submodule "Debian/elmer-doc/elmer-doc-debian"]
+	path = Debian/elmer-doc/elmer-doc-debian
+	url = https://salsa.debian.org/science-team/elmer-doc.git
+[submodule "Debian/elmerfem/elmerfem-debian"]
+	path = Debian/elmerfem/elmerfem-debian
+	url = https://salsa.debian.org/science-team/elmerfem.git
+[submodule "Debian/kde-gtk-config/kde-gtk-config-debian"]
+	path = Debian/kde-gtk-config/kde-gtk-config-debian
+	url = https://anonscm.debian.org/git/pkg-kde/plasma/kde-gtk-config.git
+[submodule "Debian/libfcgi/libfcgi-debian"]
+	path = Debian/libfcgi/libfcgi-debian
+	url = https://github.com/tehnick/libfcgi-debian.git
+[submodule "Debian/libquantum/libquantum-debian"]
+	path = Debian/libquantum/libquantum-debian
+	url = https://salsa.debian.org/science-team/libquantum.git
+[submodule "Debian/libterm-shellui-perl/libterm-shellui-perl-debian"]
+	path = Debian/libterm-shellui-perl/libterm-shellui-perl-debian
+	url = https://github.com/tehnick/libterm-shellui-perl-debian.git
+[submodule "Debian/psi-plus/psi-plus-debian"]
+	path = Debian/psi-plus/psi-plus-debian
+	url = https://github.com/tehnick/psi-plus-debian.git
+[submodule "Debian/psi-plus-l10n/psi-plus-l10n-debian"]
+	path = Debian/psi-plus-l10n/psi-plus-l10n-debian
+	url = https://github.com/tehnick/psi-plus-l10n-debian.git
+[submodule "Debian/psimedia/psimedia-debian"]
+	path = Debian/psimedia/psimedia-debian
+	url = https://github.com/tehnick/psimedia-debian.git
+[submodule "Debian/q4wine/q4wine-debian"]
+	path = Debian/q4wine/q4wine-debian
+	url = https://github.com/tehnick/q4wine-debian.git
+[submodule "Debian/qconf/qconf-debian"]
+	path = Debian/qconf/qconf-debian
+	url = https://github.com/tehnick/qconf-debian.git
+[submodule "Debian/qpxtool/qpxtool-debian"]
+	path = Debian/qpxtool/qpxtool-debian
+	url = https://anonscm.debian.org/git/collab-maint/qpxtool.git
+[submodule "Debian/qtcurve/qtcurve-debian"]
+	path = Debian/qtcurve/qtcurve-debian
+	url = https://anonscm.debian.org/git/pkg-kde/kde-extras/qtcurve.git
+[submodule "Debian/qxmpp/qxmpp-debian"]
+	path = Debian/qxmpp/qxmpp-debian
+	url = https://salsa.debian.org/xmpp-team/qxmpp.git
+[submodule "Debian/uhub/uhub-debian"]
+	path = Debian/uhub/uhub-debian
+	url = https://github.com/tehnick/uhub-debian.git
+[submodule "Debian/yagf/yagf-debian"]
+	path = Debian/yagf/yagf-debian
+	url = https://github.com/tehnick/yagf-debian.git
+[submodule "Launchpad/bosixnet/bosixnet-debian"]
+	path = Launchpad/bosixnet/bosixnet-debian
+	url = https://github.com/tehnick/bosixnet-debian.git
+[submodule "Launchpad/eiskaltdcpp/eiskaltdcpp-debian"]
+	path = Launchpad/eiskaltdcpp/eiskaltdcpp-debian
+	url = https://github.com/tehnick/eiskaltdcpp-debian.git
+[submodule "Launchpad/eiskaltdcpp-devel/eiskaltdcpp-devel-debian"]
+	path = Launchpad/eiskaltdcpp-devel/eiskaltdcpp-devel-debian
+	url = https://github.com/tehnick/eiskaltdcpp-devel-debian.git
+[submodule "Launchpad/elmer-doc/elmer-doc-debian"]
+	path = Launchpad/elmer-doc/elmer-doc-debian
+	url = https://salsa.debian.org/science-team/elmer-doc.git
+[submodule "Launchpad/elmerfem/elmerfem-debian"]
+	path = Launchpad/elmerfem/elmerfem-debian
+	url = https://github.com/tehnick/elmerfem-debian.git
+[submodule "Launchpad/freedcpp/freedcpp-debian"]
+	path = Launchpad/freedcpp/freedcpp-debian
+	url = https://github.com/tehnick/freedcpp-debian.git
+[submodule "Launchpad/freedcpp-devel/freedcpp-devel-debian"]
+	path = Launchpad/freedcpp-devel/freedcpp-devel-debian
+	url = https://github.com/tehnick/freedcpp-devel-debian.git
+[submodule "Launchpad/freedcpp-mediapack/freedcpp-mediapack-debian"]
+	path = Launchpad/freedcpp-mediapack/freedcpp-mediapack-debian
+	url = https://github.com/tehnick/freedcpp-mediapack-debian.git
+[submodule "Launchpad/psi-plus/psi-plus-debian"]
+	path = Launchpad/psi-plus/psi-plus-debian
+	url = https://github.com/tehnick/psi-plus-debian.git
+[submodule "Launchpad/psi-plus-l10n/psi-plus-l10n-debian"]
+	path = Launchpad/psi-plus-l10n/psi-plus-l10n-debian
+	url = https://github.com/tehnick/psi-plus-l10n-debian.git
+[submodule "Launchpad/psi-plus-resources/psi-plus-resources-debian"]
+	path = Launchpad/psi-plus-resources/psi-plus-resources-debian
+	url = https://github.com/tehnick/psi-plus-resources-debian.git
+[submodule "Launchpad/psimedia/psimedia-debian"]
+	path = Launchpad/psimedia/psimedia-debian
+	url = https://github.com/tehnick/psimedia-debian.git
+[submodule "Launchpad/q4wine/q4wine-debian"]
+	path = Launchpad/q4wine/q4wine-debian
+	url = https://github.com/tehnick/q4wine-debian.git
+[submodule "Launchpad/q4wine-devel/q4wine-devel-debian"]
+	path = Launchpad/q4wine-devel/q4wine-devel-debian
+	url = https://github.com/tehnick/q4wine-devel-debian.git
+[submodule "Launchpad/qxmpp/qxmpp-debian"]
+	path = Launchpad/qxmpp/qxmpp-debian
+	url = https://salsa.debian.org/xmpp-team/qxmpp.git
+[submodule "Launchpad/qxmpp-devel/qxmpp-devel-debian"]
+	path = Launchpad/qxmpp-devel/qxmpp-devel-debian
+	url = https://github.com/tehnick/qxmpp-devel-debian.git
+[submodule "Launchpad/uhub/uhub-debian"]
+	path = Launchpad/uhub/uhub-debian
+	url = https://github.com/tehnick/uhub-debian.git
+[submodule "Launchpad/uhub-devel/uhub-devel-debian"]
+	path = Launchpad/uhub-devel/uhub-devel-debian
+	url = https://github.com/tehnick/uhub-devel-debian.git

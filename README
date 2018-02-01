@@ -11,11 +11,15 @@ Notes:
   cd deb_packages/
   git submodule init
   git submodule update --jobs=8
+  #
+  cd deb_packages/
+  ./switch_branches
+  ./sync_changes
 
 Links:
-  https://tehnick.github.io/
-  https://wiki.debian.org/BorisPek
-  https://salsa.debian.org/tehnick
+  https://qa.debian.org/developer.php?login=Boris%20Pek-
   https://launchpad.net/~tehnick/+related-packages
-  https://qa.debian.org/developer.php?login=Boris%20Pek
+  https://salsa.debian.org/tehnick
+  https://wiki.debian.org/BorisPek
+  https://tehnick.github.io/
  
