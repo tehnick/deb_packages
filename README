@@ -5,12 +5,12 @@ License:
   https://creativecommons.org/publicdomain/mark/1.0/
 
 Notes:
-  git clone --recursive --jobs=16 https://github.com/tehnick/deb_packages.git
+  git clone --recursive --jobs=8 https://github.com/tehnick/deb_packages.git
   #
   git clone https://github.com/tehnick/deb_packages.git
   cd deb_packages/
   git submodule init
-  git submodule update --jobs=16
+  git submodule update --jobs=8
   #
   cd deb_packages/
   ./switch_branches
