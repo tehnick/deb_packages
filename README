@@ -6,15 +6,17 @@ License:
 
 Notes:
   git clone --recursive --jobs=8 https://github.com/tehnick/deb_packages.git
-  #
+  cd deb_packages/
+  # or
   git clone https://github.com/tehnick/deb_packages.git
   cd deb_packages/
   git submodule init
   git submodule update --jobs=8
-  #
-  cd deb_packages/
+  # and then
   ./switch_branches
   ./sync_changes
+  ./popcon_data
+  ./check_versions
 
 Links:
   https://qa.debian.org/developer.php?login=Boris%20Pek
