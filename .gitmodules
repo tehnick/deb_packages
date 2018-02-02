@@ -18,10 +18,10 @@
 	url = https://github.com/janvidar/uhub.git
 [submodule "Debian/astromenace/astromenace-debian"]
 	path = Debian/astromenace/astromenace-debian
-	url = https://anonscm.debian.org/git/pkg-games/astromenace.git
+	url = https://salsa.debian.org/games-team/astromenace.git
 [submodule "Debian/astromenace-data/astromenace-data-debian"]
 	path = Debian/astromenace-data/astromenace-data-debian
-	url = https://anonscm.debian.org/git/pkg-games/astromenace-data.git
+	url = https://salsa.debian.org/games-team/astromenace-data.git
 [submodule "Debian/bosixnet/bosixnet-debian"]
 	path = Debian/bosixnet/bosixnet-debian
 	url = https://github.com/tehnick/bosixnet-debian.git
