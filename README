@@ -5,19 +5,19 @@ License:
   https://creativecommons.org/publicdomain/mark/1.0/
 
 Notes:
-  git clone --recursive --jobs=8 https://github.com/tehnick/deb_packages.git
+  git clone --recursive --jobs=16 https://github.com/tehnick/deb_packages.git
   #
   git clone https://github.com/tehnick/deb_packages.git
   cd deb_packages/
   git submodule init
-  git submodule update --jobs=8
+  git submodule update --jobs=16
   #
   cd deb_packages/
   ./switch_branches
   ./sync_changes
 
 Links:
-  https://qa.debian.org/developer.php?login=Boris%20Pek-
+  https://qa.debian.org/developer.php?login=Boris%20Pek
   https://launchpad.net/~tehnick/+related-packages
   https://salsa.debian.org/tehnick
   https://wiki.debian.org/BorisPek
