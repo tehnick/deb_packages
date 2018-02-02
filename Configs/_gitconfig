@@ -1,0 +1,29 @@
+# ~/.gitconfig
+
+[user]
+    name = Boris Pek
+    email = tehnick-8@yandex.ru
+
+[alias]
+    up = pull --all --prune
+    br = branch
+    st = status
+    co = checkout
+    cm = commit
+    pom = push origin master
+
+[push]
+    default = matching
+
+[color]
+    ui = auto
+
+[url "ssh://git.debian.org"]
+    pushInsteadOf = https://anonscm.debian.org
+
+[url "git@salsa.debian.org:"]
+    pushInsteadOf = https://salsa.debian.org/
+
+[url "git@github.com:"]
+    pushInsteadOf = https://github.com/
+
