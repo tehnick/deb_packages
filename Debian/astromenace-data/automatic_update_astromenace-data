@@ -6,7 +6,7 @@
 export PACKAGE="astromenace-data"
 
 # Uncomment if necessary:
-export SFX="-2"
+export SFX="-3"
 
 export RPKGD="+repack"
 
@@ -46,10 +46,9 @@ CheckVersions
 GetSources
 
 
-export UPDATE_STRING="Update to stable release ${CUR_VER}."
-
 #export DIR_NAME="AstroMenace"
 #export OLD_DIR_NAME="AstroMenace"
+export TARGETED_TO_NEW_QUEUE="true"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"

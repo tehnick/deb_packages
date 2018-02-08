@@ -1,7 +1,6 @@
 #!/bin/bash
-
-# This is the common script for preparing updated packages to backports
-
+#
+# Common script for updating packages for backports
 
 if [ -z "${PACKAGE}" ]; then
     echo "Error: PACKAGE variable is empty!";
@@ -33,7 +32,14 @@ if [ -z "${DIR_NAME}" ]; then
     export DIR_NAME="${PACKAGE}-${PKG_VER}"
 fi
 
+if [ "${1}" = "fast" ]; then
+    export FAST_UPLOAD="true"
+elif [ "${1}" = "new" ]; then
+    export TARGETED_TO_NEW_QUEUE="true"
+fi
+
 echo "Updating is started."
+
 
 rm -rf "${DIR_NAME}" "${PACKAGE}_${PKG_VER}-"*
 
@@ -52,7 +58,7 @@ cd "${TEMP_DIR}/${DIR_NAME}"
 }
 
 
-if [ "${1}" = "fast" ]; then
+if [ "${FAST_UPLOAD}" = "true" ]; then
     echo ;
     echo "Fast upload (without tests)."
     echo ;
@@ -112,12 +118,13 @@ cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 echo "Update finished successfully"
 
 
-if [ "${1}" = "new" ]; then
+if [ "${TARGETED_TO_NEW_QUEUE}" = "true" ]; then
     cd "${TEST_DIR}"
-    debsign "${PACKAGE}_${BPO_VER_FULL}_amd64.changes"
+    ARCHITECTURE="$(dpkg --print-architecture)"
+    debsign "${PACKAGE}_${BPO_VER_FULL}_${ARCHITECTURE}.changes"
     echo ;
     echo "Package is targeted into NEW queue, so binary upload is required:"
-    echo "dput -f ftp-eu ${PACKAGE}_${BPO_VER_FULL}_amd64.changes"
+    echo "dput -f ftp-eu ${PACKAGE}_${BPO_VER_FULL}_${ARCHITECTURE}.changes"
 else
     cd "${TEMP_DIR}"
     echo "Sorce-only upload:"

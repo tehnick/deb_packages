@@ -14,5 +14,6 @@ if [ -z "${TEST_DIR}" ]; then
 fi
 
 cd "${PKG_DIR}/${PACKAGE}-debian"
-git diff "${REMORE_BRANCH}" ${TEST_DIR} > "${TEMP_DIR}/debian.diff"
-kwrite "${TEMP_DIR}/debian.diff" > /dev/null &
+git diff "${REMORE_BRANCH}" "${TEST_DIR}" > "${TEMP_DIR}/debian.diff"
+kwrite "${TEMP_DIR}/debian.diff" &> /dev/null &
+

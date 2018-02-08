@@ -12,6 +12,9 @@ export PACKAGE="astromenace-data"
 
 export BASIC_VER=1.3.1+repack-1
 
+export A_TYPE="xz"
+
+
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
 source "${MAIN_DIR}/Debian/setting_variables_for_backports"
@@ -29,16 +32,13 @@ SetVersions
 DisplayVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.xz" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/non-free/a/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
-fi
+# Get source package
+GetSourcePackage
 
 
-export A_TYPE="xz"
-export D_ARGS="xJf"
 
 #export DIR_NAME="AstroMenace"
+export TARGETED_TO_NEW_QUEUE="true"
 
 
 # Launch common script for updating packages and uploading them to mentors.debian.net

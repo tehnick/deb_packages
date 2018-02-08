@@ -1,13 +1,6 @@
 #!/bin/bash
-
-# This is the common script for updating packages and uploading them to mentors.debian.net
 #
-# It make such actions:
-# 1) Update changelog.
-# 2) Prepare sources to upload.
-#    Build the package and check it using lintian (optional)
-# 3) Upload sources to mentors.debian.net
-
+# Common script for updating packages
 
 if [ -z "${PACKAGE}" ]; then
     echo "Error: PACKAGE variable is empty!";
@@ -48,6 +41,12 @@ fi
 
 if [ "${1}" = "clean" ]; then
     export CLEAN_BUILD="true"
+elif [ "${1}" = "fast" ]; then
+    export FAST_UPLOAD="true"
+fi
+
+if [ "${2}" = "new" ]; then
+    export TARGETED_TO_NEW_QUEUE="true"
 fi
 
 echo "Updating is started."
@@ -75,18 +74,18 @@ echo ;
 if [ "${SFX}" = "-1" ]; then
     dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
         "${UPDATE_STRING}"
-    kwrite debian/changelog
+    kwrite debian/changelog &> /dev/null
     nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
 else
     dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
         "Some fixes in package."
-    kwrite debian/changelog
+    kwrite debian/changelog &> /dev/null
     # debuild -S -sd --buildinfo-option="-O" || exit 1
     nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
 fi
 
 
-if [ "${1}" = "fast" ]; then
+if [ "${FAST_UPLOAD}" = "true" ]; then
     echo ;
     echo "Fast upload (without tests)."
     echo ;
@@ -104,7 +103,7 @@ else
     mkdir -p "${TEST_DIR}"
     cd "${TEST_DIR}" || exit 1
 
-    cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
+    cp -a "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER_FULL}.debian.tar."* "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER_FULL}.dsc" "${TEST_DIR}/"
@@ -142,27 +141,28 @@ else
     grep "X: " "${LINTIAN_LOG_FILE}"
     echo "Finished running lintian."
     echo ;
-    kwrite ${LINTIAN_LOG_FILE}
+    kwrite ${LINTIAN_LOG_FILE} &> /dev/null
 
     cd "${TEMP_DIR}/${DIR_NAME}"
 fi
 
 
-kwrite debian/changelog
+kwrite debian/changelog &> /dev/null
 
 
 cd "${TEMP_DIR}"
 cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 
 
-echo "Update finished successfully"
+echo "Update finished successfully!"
 
 
-if [ "${2}" = "new" ]; then
+if [ "${TARGETED_TO_NEW_QUEUE}" = "true" ]; then
     cd "${TEST_DIR}"
-    debsign "${PACKAGE}_${NEW_VER_FULL}_amd64.changes"
+    ARCHITECTURE="$(dpkg --print-architecture)"
+    debsign "${PACKAGE}_${NEW_VER_FULL}_${ARCHITECTURE}.changes"
     echo "Package is targeted into NEW queue, so binary upload is required:"
-    echo "dput -f ftp-eu ${PACKAGE}_${NEW_VER_FULL}_amd64.changes"
+    echo "dput -f ftp-eu ${PACKAGE}_${NEW_VER_FULL}_${ARCHITECTURE}.changes"
 else
     cd "${TEMP_DIR}"
     echo "Sorce-only upload:"
@@ -174,7 +174,7 @@ konsole &> /dev/null &
 
 
 # Local repo
-if [ "${1}" != "fast" ]; then
+if [ "${FAST_UPLOAD}" != "true" ]; then
     export APT_DIR="${MAIN_DIR}/LocalRepo"
     mkdir -p "${APT_DIR}/${PACKAGE}/"
     rm -f "${APT_DIR}/${PACKAGE}"/*.deb

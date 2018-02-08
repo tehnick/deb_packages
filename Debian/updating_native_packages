@@ -1,13 +1,6 @@
 #!/bin/bash
-
-# This is the common script for updating packages and uploading them to mentors.debian.net
 #
-# It make such actions:
-# 1) Update changelog.
-# 2) Prepare sources to upload.
-#    Build the package and check it using lintian (optional)
-# 3) Upload sources to mentors.debian.net
-
+# Common script for updating of native packages
 
 if [ -z "${PACKAGE}" ]; then
     echo "Error: PACKAGE variable is empty!";
@@ -17,27 +10,46 @@ elif [ -z "${NEW_VER}" ]; then
     exit 1;
 fi
 
-if [ -z "${A_TYPE}" ]; then
-    export A_TYPE="bz2"
+case "${A_TYPE}" in
+"gz")
+    export D_ARGS="xzf"
+;;
+"bz2")
     export D_ARGS="xjf"
-fi
+;;
+"xz")
+    export D_ARGS="xJf"
+;;
+*)
+    echo "Tarball type is not defined!"
+    exit 1
+;;
+esac
 
 if [ ! -e "${PACKAGE}_${NEW_VER}.tar.${A_TYPE}" ]; then
     echo "File ${PACKAGE}_${NEW_VER}.tar.${A_TYPE} is not found.";
     exit 0;
 fi
 
-if [ "${1}" = "clean" ]; then
-    export CLEAN_BUILD="true"
+if [ -z "${DIR_NAME}" ]; then
+    export DIR_NAME="${PACKAGE}-${NEW_VER}"
 fi
 
-export DIR_NAME="${PACKAGE}-${NEW_VER}"
-export OLD_DIR_NAME="${PACKAGE}-${OLD_VER}"
+if [ -z "${OLD_DIR_NAME}" ]; then
+    export OLD_DIR_NAME="${PACKAGE}-${OLD_VER}"
+fi
 
+if [ "${1}" = "clean" ]; then
+    export CLEAN_BUILD="true"
+elif [ "${1}" = "fast" ]; then
+    export FAST_UPLOAD="true"
+fi
+
+if [ "${2}" = "new" ]; then
+    export TARGETED_TO_NEW_QUEUE="true"
+fi
 
 echo "Updating is started."
-
-export DEBEMAIL="Boris Pek <tehnick@debian.org>"
 
 rm -rf "${PACKAGE}_${NEW_VER}.tar.${A_TYPE}"
 
@@ -57,7 +69,7 @@ kwrite debian/changelog
 nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
 
 
-if [ "${1}" = "fast" ]; then
+if [ "${FAST_UPLOAD}" = "true" ]; then
     echo ;
     echo "Fast upload (without tests)."
     echo ;
@@ -75,13 +87,14 @@ else
     mkdir -p "${TEST_DIR}"
     cd "${TEST_DIR}" || exit 1
 
-    cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
+    cp -a "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.tar.${A_TYPE}" "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${NEW_VER_FULL}.warnings.log"
-    cd "${TEST_DIR}/${DIR_NAME}"
     echo ;
+
+    cd "${TEST_DIR}/${DIR_NAME}"
     echo "Start building packages..."
     if [ "${CLEAN_BUILD}" = "true" ]; then
         sudo time nice -n19 pdebuild --pbuilder cowbuilder \
@@ -110,27 +123,28 @@ else
     grep "X: " "${LINTIAN_LOG_FILE}"
     echo "Finished running lintian."
     echo ;
-    kwrite ${LINTIAN_LOG_FILE}
+    kwrite ${LINTIAN_LOG_FILE} &> /dev/null
 
     cd "${TEMP_DIR}/${DIR_NAME}"
 fi
 
 
-kwrite debian/changelog
+kwrite debian/changelog &> /dev/null
 
 
 cd "${TEMP_DIR}"
 cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
 
 
-echo "Update finished successfully"
+echo "Update finished successfully!"
 
 
-if [ "${2}" = "new" ]; then
+if [ "${TARGETED_TO_NEW_QUEUE}" = "true" ]; then
     cd "${TEST_DIR}"
-    debsign "${PACKAGE}_${NEW_VER_FULL}_amd64.changes"
+    ARCHITECTURE="$(dpkg --print-architecture)"
+    debsign "${PACKAGE}_${NEW_VER_FULL}_${ARCHITECTURE}.changes"
     echo "Package is targeted into NEW queue, so binary upload is required:"
-    echo "dput -f ftp-eu ${PACKAGE}_${NEW_VER_FULL}_amd64.changes"
+    echo "dput -f ftp-eu ${PACKAGE}_${NEW_VER_FULL}_${ARCHITECTURE}.changes"
 else
     cd "${TEMP_DIR}"
     echo "Sorce-only upload:"
@@ -142,7 +156,7 @@ konsole &> /dev/null &
 
 
 # Local repo
-if [ "${1}" != "fast" ]; then
+if [ "${FAST_UPLOAD}" != "true" ]; then
     export APT_DIR="${MAIN_DIR}/LocalRepo"
     mkdir -p "${APT_DIR}/${PACKAGE}/"
     rm -f "${APT_DIR}/${PACKAGE}"/*.deb
