@@ -6,12 +6,15 @@
 export PACKAGE="libquantum"
 
 # Uncomment if necessary:
-export SFX="-5"
+export SFX="-6"
 
 #export NEW_VER=1.1.0
 
+export A_TYPE="gz"
+
 # experimental unstable
 export MAIN_DIST="unstable"
+
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -37,19 +40,12 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersions
+CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Get sources
+GetSources
 
-
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
-
-export A_TYPE="gz"
-export D_ARGS="xzf"
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
 source "${MAIN_DIR}/Debian/updating_packages"
