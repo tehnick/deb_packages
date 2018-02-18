@@ -36,7 +36,7 @@
 	url = https://salsa.debian.org/science-team/elmerfem.git
 [submodule "Debian/kde-gtk-config/kde-gtk-config-debian"]
 	path = Debian/kde-gtk-config/kde-gtk-config-debian
-	url = https://anonscm.debian.org/git/pkg-kde/plasma/kde-gtk-config.git
+	url = https://salsa.debian.org/qt-kde-team/kde/kde-gtk-config.git
 [submodule "Debian/libfcgi/libfcgi-debian"]
 	path = Debian/libfcgi/libfcgi-debian
 	url = https://github.com/tehnick/libfcgi-debian.git
