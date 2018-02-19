@@ -48,7 +48,7 @@
 	url = https://github.com/tehnick/libterm-shellui-perl-debian.git
 [submodule "Debian/psi-plus/psi-plus-debian"]
 	path = Debian/psi-plus/psi-plus-debian
-	url = https://github.com/tehnick/psi-plus-debian.git
+	url = https://salsa.debian.org/xmpp-team/psi-plus.git
 [submodule "Debian/psi-plus-l10n/psi-plus-l10n-debian"]
 	path = Debian/psi-plus-l10n/psi-plus-l10n-debian
 	url = https://github.com/tehnick/psi-plus-l10n-debian.git
@@ -102,7 +102,7 @@
 	url = https://github.com/tehnick/freedcpp-mediapack-debian.git
 [submodule "Launchpad/psi-plus/psi-plus-debian"]
 	path = Launchpad/psi-plus/psi-plus-debian
-	url = https://github.com/tehnick/psi-plus-debian.git
+	url = https://salsa.debian.org/xmpp-team/psi-plus.git
 [submodule "Launchpad/psi-plus-l10n/psi-plus-l10n-debian"]
 	path = Launchpad/psi-plus-l10n/psi-plus-l10n-debian
 	url = https://github.com/tehnick/psi-plus-l10n-debian.git
