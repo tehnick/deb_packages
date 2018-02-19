@@ -1,0 +1,50 @@
+#!/bin/sh
+
+export MAIN_DIR="$(dirname $(realpath -s ${0}))"
+
+cd "${MAIN_DIR}" || exit 1
+
+./switch_branches
+./sync_changes
+./check_versions
+
+echo;
+git status
+echo;
+
+COMMIT_MESSAGE=""
+STATUS_MESSAGE="$(LC_ALL=C git status)"
+
+if [ "$(echo ${STATUS_MESSAGE} | grep ' Debian/.*/.*-debian ' | wc -l)" != "0" ]; then
+    COMMIT_MESSAGE="${COMMIT_MESSAGE}
+
+Update Debian packages:"
+    for PKG in $(echo "${STATUS_MESSAGE}" | sed -ne "s:^.* Debian/.*/\(.*\)-debian .*:\1:p"); do
+        COMMIT_MESSAGE="${COMMIT_MESSAGE} ${PKG},"
+    done
+fi
+
+if [ "$(echo ${STATUS_MESSAGE} | grep ' Launchpad/.*/.*-debian ' | wc -l)" != "0" ]; then
+    COMMIT_MESSAGE="${COMMIT_MESSAGE}
+
+Update Launchpad packages: "
+    for PKG in $(echo "${STATUS_MESSAGE}" | sed -ne "s:^.* Launchpad/.*/\(.*\)-debian .*:\1:p"); do
+        COMMIT_MESSAGE="${COMMIT_MESSAGE} ${PKG},"
+    done
+fi
+
+if [ "$(echo ${STATUS_MESSAGE} | grep ' GitRepos/.* (' | wc -l)" != "0" ]; then
+    COMMIT_MESSAGE="${COMMIT_MESSAGE}
+
+Update git submodules: "
+    for REPO in $(echo "${STATUS_MESSAGE}" | sed -ne "s:^.* GitRepos/\(.*\) (.*:\1:p"); do
+        COMMIT_MESSAGE="${COMMIT_MESSAGE} ${REPO},"
+    done
+fi
+
+if [ ! -z "${COMMIT_MESSAGE}" ]; then
+    #echo git commit -a -m "${COMMIT_MESSAGE}"
+    #echo git commit -a --amend
+    echo "${COMMIT_MESSAGE}"
+fi
+
