@@ -22,12 +22,12 @@ source "${MAIN_DIR}/Debian/setting_variables"
 GetOldVersion
 
 
-# Find new version
-export DEVELOPER=FastCGI-Archives
-export PROJECT=fcgi2
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    DEVELOPER=FastCGI-Archives
+    PROJECT=fcgi2
+    VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -52,6 +52,6 @@ export DIR_NAME="libfcgi-${NEW_VER}.orig"
 export OLD_DIR_NAME="libfcgi-${OLD_VER}.orig"
 
 
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 

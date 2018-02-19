@@ -1,6 +1,5 @@
 #!/bin/bash
-
-
+#
 # Common script for setting variables
 
 export DEBEMAIL="Boris Pek <tehnick@debian.org>"
@@ -24,6 +23,7 @@ if [ -z "${A_TYPE}" ]; then
     export A_TYPE="bz2"
 fi
 
+
 export UPDATE_STRING="New upstream release."
 
 
@@ -42,6 +42,16 @@ GetOldVersion()
         export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]*\~exp.*$/\1/")
         export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]*\~exp.*\)$/\1/")
     fi
+}
+
+
+# Get new version
+GetNewVersion()
+{
+    if [ ! -z "${NEW_VER}" ] && [ "${1}" != "print-versions" ]; then
+        return 1
+    fi
+    return 0
 }
 
 
@@ -100,8 +110,9 @@ PrintVersions()
             echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             echo "<td>" >> "${HTML_FILE}"
-            echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
+            echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DPT</a>" >> "${HTML_FILE}"
             echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
+            echo "<a href=\"$(cat ${PKG_DIR}/README 2>/dev/null | grep \.git | head -n1 )\">GIT</a>" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             exit 0
         fi
@@ -132,8 +143,9 @@ if [ "${1}" = "print-versions" ]; then
         echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         echo "<td>" >> "${HTML_FILE}"
-        echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">PTS</a>" >> "${HTML_FILE}"
+        echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DPT</a>" >> "${HTML_FILE}"
         echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
+        echo "<a href=\"$(cat ${PKG_DIR}/README 2>/dev/null | grep \.git | head -n1 )\">GIT</a>" >> "${HTML_FILE}"
         echo "</td>" >> "${HTML_FILE}"
         exit 0
     fi

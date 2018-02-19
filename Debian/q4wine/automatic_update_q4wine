@@ -20,10 +20,10 @@ source "${MAIN_DIR}/Debian/setting_variables"
 GetOldVersion
 
 
-# Find new version
-export VER_LIST=$(curl 'https://sourceforge.net/projects/q4wine/files/q4wine/' 2>&1 | sed -ne "s:^.*<tr title=\"q4wine \(.*\)\" class=\"folder \">.*$:\1:p")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    VER_LIST=$(curl 'https://sourceforge.net/projects/q4wine/files/q4wine/' 2>&1 | sed -ne "s:^.*<tr title=\"q4wine \(.*\)\" class=\"folder \">.*$:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -44,6 +44,6 @@ CheckVersions
 GetSources
 
 
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 

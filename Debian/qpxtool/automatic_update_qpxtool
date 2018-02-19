@@ -21,10 +21,10 @@ source "${MAIN_DIR}/Debian/setting_variables"
 GetOldVersion
 
 
-# Find new version
-export VER_LIST=$(curl 'http://qpxtool.sourceforge.net/' 2>&1 | grep 'files/qpxtool/' | sed -ne "s:^.*/qpxtool-\(.*\).tar.bz2/download.*$:\1:p")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    VER_LIST=$(curl 'http://qpxtool.sourceforge.net/' 2>&1 | grep 'files/qpxtool/' | sed -ne "s:^.*/qpxtool-\(.*\).tar.bz2/download.*$:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -41,17 +41,13 @@ PrintVersions "${@}"
 #CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.bz2" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Get sources
+GetSources
 
-
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 #export DIR_NAME="qpxtool-0.7.1_002"
 #export OLD_DIR_NAME="qpxtool-0.7.1_002"
 
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 

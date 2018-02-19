@@ -24,12 +24,12 @@ source "${MAIN_DIR}/Debian/setting_variables"
 GetOldVersion
 
 
-# Find new version
-export DEVELOPER=janvidar
-export PROJECT=uhub
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+DEVELOPER=janvidar
+PROJECT=uhub
+if GetNewVersion "${@}"; then
+    VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -50,6 +50,6 @@ CheckVersions
 GetSources
 
 
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 

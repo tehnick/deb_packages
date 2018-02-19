@@ -23,10 +23,10 @@ source "${MAIN_DIR}/Debian/setting_variables"
 GetOldVersion
 
 
-# Find new version
-export VER_LIST=$(curl 'http://www.libquantum.de/downloads' 2>&1 | sed "s/<a /\n/g" | grep '/files/libquantum-' | sed -e "s:^.*/files/libquantum-\(.*\).tar.gz\".*$:\1:")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    VER_LIST=$(curl 'http://www.libquantum.de/downloads' 2>&1 | sed "s/<a /\n/g" | grep '/files/libquantum-' | sed -e "s:^.*/files/libquantum-\(.*\).tar.gz\".*$:\1:")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -47,6 +47,6 @@ CheckVersions
 GetSources
 
 
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 

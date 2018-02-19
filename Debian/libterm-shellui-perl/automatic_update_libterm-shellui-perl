@@ -8,6 +8,8 @@ export PACKAGE="libterm-shellui-perl"
 # Uncomment if necessary:
 export SFX="-2"
 
+export A_TYPE="gz"
+
 # experimental unstable
 export MAIN_DIST="unstable"
 
@@ -20,16 +22,18 @@ source "${MAIN_DIR}/Debian/setting_variables"
 GetOldVersion
 
 
-# Find new version
-export DEVELOPER=BRONSON
-export PROJECT=Term-ShellUI
-export VER_LIST=$(curl "http://search.cpan.org/dist/${PROJECT}/" 2>&1 | sed -ne "s:^.*/${DEVELOPER}/${PROJECT}-\(.*\).tar.gz.*:\1:p")
-export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    DEVELOPER=BRONSON
+    PROJECT=Term-ShellUI
+    VER_LIST=$(curl "http://search.cpan.org/dist/${PROJECT}/" 2>&1 | sed -ne "s:^.*/${DEVELOPER}/${PROJECT}-\(.*\).tar.gz.*:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://search.cpan.org/dist/${PROJECT}/"
+DisplayVersions "http://search.cpan.org/dist/Term-ShellUI/"
 
 
 # Print versions
@@ -40,20 +44,14 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Get sources
+GetSources
 
-
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
 
 export DIR_NAME="${PROJECT}-${NEW_VER}"
 export OLD_DIR_NAME="${PROJECT}-${OLD_VER}"
 
-export A_TYPE="gz"
-export D_ARGS="xzf"
 
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 

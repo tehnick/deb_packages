@@ -11,6 +11,8 @@ export PACKAGE="yagf"
 # Temporary:
 #export NEW_VER=0.9+svn247
 
+export A_TYPE="gz"
+
 # experimental unstable
 export MAIN_DIST="unstable"
 
@@ -23,10 +25,10 @@ source "${MAIN_DIR}/Debian/setting_variables"
 GetOldVersion
 
 
-# Find new version
-export VER_LIST=$(curl 'https://sourceforge.net/projects/yagf-ocr/files/' 2>&1 | sed -ne "s:^.*<tr title=\"yagf-\(.*\).tar.gz\" class=\"file \">.*$:\1:p")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    VER_LIST=$(curl 'https://sourceforge.net/projects/yagf-ocr/files/' 2>&1 | sed -ne "s:^.*<tr title=\"yagf-\(.*\).tar.gz\" class=\"file \">.*$:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -43,19 +45,10 @@ PrintVersions "${@}"
 CheckVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source"
-fi
+# Get sources
+GetSources
 
 
-export UPDATE_STRING="Update to stable release ${NEW_VER}."
-
-export A_TYPE="gz"
-export D_ARGS="xzf"
-
-export DM_FLAG="true"
-
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 

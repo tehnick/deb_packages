@@ -10,6 +10,7 @@ export SFX="-0ppa2"
 
 #export NEW_VER=6.1.0.svn.5396.dfsg2
 
+export A_TYPE="xz"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
@@ -20,12 +21,12 @@ GetOldVersion
 export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
 
 
-# Find new version
-export DEVELOPER=ElmerCSC
-export PROJECT=elmerfem
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/release-\(.*\).tar.gz\" .*:\1:p")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    DEVELOPER=ElmerCSC
+    PROJECT=elmerfem
+    VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/release-\(.*\).tar.gz\" .*:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
@@ -44,21 +45,16 @@ PrintVersions "${@}"
 CheckVersionsUnstable
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-    "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
-fi
+# Get sources
+GetSources
 
 
 export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="elmerfem"
 
-export A_TYPE="xz"
-export D_ARGS="xJf"
-
 export CLEAN_BUILD="true"
 
-# Launch common script for updating packages and uploading them to Launchpad
+# Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 

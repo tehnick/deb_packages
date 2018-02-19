@@ -12,6 +12,8 @@ export PACKAGE="elmerfem"
 #export NEW_VER=6.1.0.svn.5396.dfsg2
 #export NEW_VER=5.5.0.svn.4499.dfsg2
 
+export A_TYPE="xz"
+
 
 # experimental unstable
 export MAIN_DIST="experimental"
@@ -26,12 +28,12 @@ GetOldVersion
 export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/")
 
 
-# Find new version
-export DEVELOPER=ElmerCSC
-export PROJECT=elmerfem
-export VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/release-\(.*\).tar.gz\" .*:\1:p")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    DEVELOPER=ElmerCSC
+    PROJECT=elmerfem
+    VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/release-\(.*\).tar.gz\" .*:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -47,23 +49,14 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersionsUnstable
+CheckVersionsUnstable
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
-#if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.gz" ]; then
-#    "${PKG_DIR}/${PACKAGE}-debian/debian/elmerfem_get-orig-source.sh" "${NEW_VER}" || exit 1
-    "${PKG_DIR}/${PACKAGE}-debian/debian/rules" "get-orig-source" || exit 1
-fi
+# Get sources
+GetSources
 
 
 export UPDATE_STRING="New upstream revision."
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
-#export A_TYPE="gz"
-#export D_ARGS="xzf"
 
 # temporary
 #export DIR_NAME="elmerfem-${LAST_COMMIT}"
@@ -72,6 +65,6 @@ export D_ARGS="xJf"
 
 export CLEAN_BUILD="true"
 
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 

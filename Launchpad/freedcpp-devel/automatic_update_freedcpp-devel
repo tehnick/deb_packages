@@ -18,18 +18,18 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 # Get old version
 GetOldVersion
-export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
+OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
 
 
-# Find new version
+# Get new version
 GIT_REPO_DIR="${MAIN_DIR}/GitRepos/freedcpp"
 if [ -d "${GIT_REPO_DIR}" ]; then
     cd "${GIT_REPO_DIR}" || exit 1
     git pull --all || exit 1
 fi
-export LAST_COMMIT=$(git show -s --pretty=format:%h)
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(git describe --tags | sed -e "s/^freedcpp-\(.*\)$/\1/")
+LAST_COMMIT=$(git show -s --pretty=format:%h)
+if GetNewVersion "${@}"; then
+    NEW_VER=$(git describe --tags | sed -e "s/^freedcpp-\(.*\)$/\1/")
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 cd "${TEMP_DIR}" || exit 1
@@ -64,6 +64,6 @@ export DESTINATION="direct-connect-devel"
 
 export EDIT_CHANGELOG="true"
 
-# Launch common script for updating packages and uploading them to Launchpad
+# Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 

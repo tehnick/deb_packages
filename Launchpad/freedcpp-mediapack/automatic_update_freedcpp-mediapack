@@ -19,10 +19,10 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 GetOldVersion
 
 
-# Find new version
-export VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/' 2>&1 | sed -ne "s:^.*code.google.com/freedcpp/mediapack.\(.*\).tar.bz2\".*$:\1:p")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/' 2>&1 | sed -ne "s:^.*code.google.com/freedcpp/mediapack.\(.*\).tar.bz2\".*$:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
@@ -50,6 +50,6 @@ export DESTINATION="direct-connect"
 export DIR_NAME="mediapack"
 export OLD_DIR_NAME="mediapack"
 
-# Launch common script for updating packages and uploading them to Launchpad
+# Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 

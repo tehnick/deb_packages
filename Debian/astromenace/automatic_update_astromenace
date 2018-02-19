@@ -23,10 +23,13 @@ source "${MAIN_DIR}/Debian/setting_variables"
 # Get old version
 GetOldVersion
 
-# Find new version
-export VER_LIST=$(curl 'https://sourceforge.net/projects/openastromenace/files/' 2>&1 | sed -ne "s:^.*href=\"/projects/openastromenace/files/\(.*\)/\".*$:\1:p")
-export CUR_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
-export NEW_VER=${CUR_VER}${RPKGD}
+
+# Get new version
+if GetNewVersion "${@}"; then
+    VER_LIST=$(curl 'https://sourceforge.net/projects/openastromenace/files/' 2>&1 | sed -ne "s:^.*href=\"/projects/openastromenace/files/\(.*\)/\".*$:\1:p")
+    CUR_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+    NEW_VER=${CUR_VER}${RPKGD}
+fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
@@ -46,11 +49,9 @@ CheckVersions
 GetSources
 
 
-export UPDATE_STRING="Update to stable release ${CUR_VER}."
-
 #export DIR_NAME="AstroMenace"
 #export OLD_DIR_NAME="AstroMenace"
 
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 

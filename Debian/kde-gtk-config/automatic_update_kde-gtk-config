@@ -27,11 +27,11 @@ source "${MAIN_DIR}/Debian/setting_variables"
 GetOldVersion
 
 
-# Find new version
-export PROJECT=kde-gtk-config
-export VER_LIST=$(curl "https://download.kde.org/stable/plasma/" 2>&1 | sed -ne "s:^.*<td><a href=\"\([0-9].*\)/\">[0-9].*</a>.*$:\1:p")
-if [ -z "${NEW_VER}" ]; then
-    export NEW_VER=$(echo "${VER_LIST}" | sort -V | tail -n1)
+# Get new version
+if GetNewVersion "${@}"; then
+    PROJECT=kde-gtk-config
+    VER_LIST=$(curl "https://download.kde.org/stable/plasma/" 2>&1 | sed -ne "s:^.*<td><a href=\"\([0-9].*\)/\">[0-9].*</a>.*$:\1:p")
+    NEW_VER=$(echo "${VER_LIST}" | sort -V | tail -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
@@ -58,6 +58,6 @@ if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
 fi
 
 
-# Launch common script for updating packages and uploading them to mentors.debian.net
+# Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 
