@@ -43,8 +43,7 @@ Update git submodules: "
 fi
 
 if [ ! -z "${COMMIT_MESSAGE}" ]; then
-    #echo git commit -a -m "${COMMIT_MESSAGE}"
-    #echo git commit -a --amend
-    echo "${COMMIT_MESSAGE}"
+    echo git commit -a -m "${COMMIT_MESSAGE}"
+    echo git commit -a --amend
 fi
 
