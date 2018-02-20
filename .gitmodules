@@ -60,13 +60,13 @@
 	url = https://github.com/tehnick/q4wine-debian.git
 [submodule "Debian/qconf/qconf-debian"]
 	path = Debian/qconf/qconf-debian
-	url = https://github.com/tehnick/qconf-debian.git
+	url = https://salsa.debian.org/qt-kde-team/qt-extras/qconf.git
 [submodule "Debian/qpxtool/qpxtool-debian"]
 	path = Debian/qpxtool/qpxtool-debian
 	url = https://anonscm.debian.org/git/collab-maint/qpxtool.git
 [submodule "Debian/qtcurve/qtcurve-debian"]
 	path = Debian/qtcurve/qtcurve-debian
-	url = https://anonscm.debian.org/git/pkg-kde/kde-extras/qtcurve.git
+	url = https://salsa.debian.org/qt-kde-team/kde-extras/qtcurve.git
 [submodule "Debian/qxmpp/qxmpp-debian"]
 	path = Debian/qxmpp/qxmpp-debian
 	url = https://salsa.debian.org/xmpp-team/qxmpp.git
