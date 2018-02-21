@@ -63,7 +63,7 @@
 	url = https://salsa.debian.org/qt-kde-team/qt-extras/qconf.git
 [submodule "Debian/qpxtool/qpxtool-debian"]
 	path = Debian/qpxtool/qpxtool-debian
-	url = https://anonscm.debian.org/git/collab-maint/qpxtool.git
+	url = https://salsa.debian.org/debian/qpxtool.git
 [submodule "Debian/qtcurve/qtcurve-debian"]
 	path = Debian/qtcurve/qtcurve-debian
 	url = https://salsa.debian.org/qt-kde-team/kde-extras/qtcurve.git
