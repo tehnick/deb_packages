@@ -6,13 +6,16 @@
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-#export BPO_SFX="~bpo70+2"
+#export BPO_SFX="~bpo9+2"
 
-#export BPO_VER=2.2.9-4
+#export BPO_VER=2.2.9-7
 
 if [ -z "${BASIC_VER}" ]; then
-    export BASIC_VER=2.2.9-3
+    export BASIC_VER=2.2.9-4.1
 fi
+
+export A_TYPE="xz"
+
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
@@ -31,13 +34,8 @@ SetVersions
 DisplayVersions
 
 
-# Get the sources
-if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.xz" ]; then
-    dget -d http://ftp.de.debian.org/debian/pool/main/e/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
-fi
-
-export A_TYPE="xz"
-export D_ARGS="xJf"
+# Get source package
+GetSourcePackage
 
 
 # Launch common script for updating packages and uploading them to mentors.debian.net
