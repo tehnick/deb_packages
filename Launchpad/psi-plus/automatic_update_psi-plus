@@ -6,7 +6,7 @@
 export PACKAGE="psi-plus"
 
 # Uncomment if necessary:
-export SFX="-0ppa2"
+#export SFX="-0ppa2"
 
 #export NEW_VER=0.15.5267
 
