@@ -51,7 +51,8 @@ if [ "${1}" = "clean" ]; then
 fi
 
 if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="artful
+    DIST_LIST="bionic
+               artful
                xenial"
     export DIST_LIST;
 fi

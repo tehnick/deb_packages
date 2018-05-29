@@ -15,8 +15,6 @@ export A_TYPE="gz"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Launchpad/setting_variables"
-export MAIN_DIST="trusty"
-export UBUNTU_SFX="~${MAIN_DIST}1"
 
 
 # Get old version
@@ -51,7 +49,6 @@ GetSources
 
 export DESTINATION="psi-plus"
 
-export DIST_LIST=" "
-
 # Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
+
