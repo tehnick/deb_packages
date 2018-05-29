@@ -2,24 +2,15 @@
 
 export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
 export TEMP_DIR="${PKG_DIR}/TEMP"
-
-
-rm -rf "${PKG_DIR}/${PACKAGE}-debian/debian-unstable"
-cp -rfa "${PKG_DIR}-unstable/${PACKAGE}-unstable-debian/debian" \
-       "${PKG_DIR}/${PACKAGE}-debian/debian-unstable"
-
-
-cd "${PKG_DIR}/${PACKAGE}-debian/debian-unstable"
-for FILE_FROM in *-unstable* ; do
-    FILE_TO=$(echo ${FILE_FROM} | sed -e "s/-unstable//")
-    echo "Moving '${FILE_FROM}' to '${FILE_TO}'"
-    mv -f "${FILE_FROM}" "${FILE_TO}"
-done
-
+export DEV_PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}-devel"
 
 cd "${PKG_DIR}/${PACKAGE}-debian"
-diff -urN debian debian-unstable > "${TEMP_DIR}/debian.diff"
+diff -urN -x ".git" \
+            "${PKG_DIR}/${PACKAGE}-debian" \
+            "${DEV_PKG_DIR}/${PACKAGE}-devel-debian" > \
+            "${TEMP_DIR}/debian.diff"
+sed "s|${PKG_DIR}/${PACKAGE}-debian|a|g" -i "${TEMP_DIR}/debian.diff"
+sed "s|${DEV_PKG_DIR}/${PACKAGE}-devel-debian|b|g" -i "${TEMP_DIR}/debian.diff"
+
 kwrite "${TEMP_DIR}/debian.diff" > /dev/null &
 
-
-rm -rf "${PKG_DIR}/${PACKAGE}-debian/debian-unstable"
