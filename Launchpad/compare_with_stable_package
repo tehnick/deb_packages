@@ -1,13 +1,15 @@
 #!/bin/bash
 
+export PACKAGE=$(echo "${PACKAGE}" | sed -e 's/-devel//')
+
 export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
-export TEMP_DIR="${PKG_DIR}/TEMP"
 export DEV_PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}-devel"
+export TEMP_DIR="${DEV_PKG_DIR}/TEMP"
 
 cd "${TEMP_DIR}"
 diff -urN -x ".git" \
-            "${PKG_DIR}/${PACKAGE}-debian" \
-            "${DEV_PKG_DIR}/${PACKAGE}-devel-debian" > \
+            "${DEV_PKG_DIR}/${PACKAGE}-devel-debian" \
+            "${PKG_DIR}/${PACKAGE}-debian" > \
             "${TEMP_DIR}/debian.diff"
 sed "s|${PKG_DIR}/${PACKAGE}-debian|a|g" -i "${TEMP_DIR}/debian.diff"
 sed "s|${DEV_PKG_DIR}/${PACKAGE}-devel-debian|b|g" -i "${TEMP_DIR}/debian.diff"
