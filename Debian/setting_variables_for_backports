@@ -54,7 +54,11 @@ DisplayVersions()
 GetSourcePackage()
 {
     if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE}" ]; then
-        dget -d https://deb.debian.org/debian/pool/main/${PACKAGE:0:1}/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
+        if [ "${PACKAGE:0:3}" = "lib" ]; then
+            dget -d "https://deb.debian.org/debian/pool/main/${PACKAGE:0:4}/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc"
+        else
+            dget -d "https://deb.debian.org/debian/pool/main/${PACKAGE:0:1}/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc"
+        fi
     fi
 }
 
