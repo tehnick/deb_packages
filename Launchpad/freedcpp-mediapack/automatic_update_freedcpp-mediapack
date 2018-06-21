@@ -21,8 +21,9 @@ GetOldVersion
 
 # Get new version
 if GetNewVersion "${@}"; then
-    VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/' 2>&1 | sed -ne "s:^.*code.google.com/freedcpp/mediapack.\(.*\).tar.bz2\".*$:\1:p")
-    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+    #VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/' 2>&1 | sed -ne "s:^.*code.google.com/freedcpp/mediapack.\(.*\).tar.bz2\".*$:\1:p")
+    #NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+    NEW_VER="0.0.3"
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
