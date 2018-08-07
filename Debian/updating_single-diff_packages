@@ -75,13 +75,13 @@ if [ "${SFX}" = "-1" ]; then
     dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
         "${UPDATE_STRING}"
     kwrite debian/changelog &> /dev/null
-    nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
+    debuild -S -sa -d --buildinfo-option="-O" || exit 1
 else
     dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
         "Some fixes in package."
     kwrite debian/changelog &> /dev/null
     # debuild -S -sd --buildinfo-option="-O" || exit 1
-    nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
+    debuild -S -sa -d --buildinfo-option="-O" || exit 1
 fi
 
 

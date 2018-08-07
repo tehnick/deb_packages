@@ -54,7 +54,7 @@ cd "${TEMP_DIR}/${DIR_NAME}"
     dch -b --force-distribution --distribution "${MAIN_DIST}" -v "${EPOCH}${BPO_VER_FULL}" \
         "${UPDATE_STRING}"
     kwrite debian/changelog
-    nice -n19 debuild -S -sa --buildinfo-option="-O" "-v${BASIC_VER}"
+    debuild -S -sa -d --buildinfo-option="-O" "-v${BASIC_VER}" || exit 1
 }
 
 

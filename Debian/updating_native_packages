@@ -66,7 +66,7 @@ export DIST="${MAIN_DIST}"
 dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER_FULL}" \
     "${UPDATE_STRING}"
 kwrite debian/changelog
-nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
+debuild -S -sa -d --buildinfo-option="-O" || exit 1
 
 
 if [ "${FAST_UPLOAD}" = "true" ]; then
