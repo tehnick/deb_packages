@@ -43,6 +43,7 @@ CheckVersions
 # Get sources
 if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
     echo "Fix me!"
+    exit 1
 fi
 
 

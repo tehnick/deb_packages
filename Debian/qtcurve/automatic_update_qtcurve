@@ -48,7 +48,10 @@ CheckVersions
 
 
 # Get sources
-GetSources
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
+    echo "Fix me!"
+    exit 1
+fi
 
 
 # Launch common script for updating of packages

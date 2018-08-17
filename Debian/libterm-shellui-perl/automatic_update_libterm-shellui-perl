@@ -26,14 +26,14 @@ GetOldVersion
 if GetNewVersion "${@}"; then
     DEVELOPER=BRONSON
     PROJECT=Term-ShellUI
-    VER_LIST=$(curl "http://search.cpan.org/dist/${PROJECT}/" 2>&1 | sed -ne "s:^.*/${DEVELOPER}/${PROJECT}-\(.*\).tar.gz.*:\1:p")
+    VER_LIST=$(curl "https://metacpan.org/release/${PROJECT}" 2>&1 | sed -ne "s:^.*/${DEVELOPER}/${PROJECT}-\(.*\).tar.gz.*:\1:p")
     NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://search.cpan.org/dist/Term-ShellUI/"
+DisplayVersions "https://metacpan.org/release/${PROJECT}"
 
 
 # Print versions

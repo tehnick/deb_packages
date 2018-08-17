@@ -22,14 +22,14 @@ GetOldVersion
 DEVELOPER=psi-plus
 PROJECT=psi-plus-l10n
 if GetNewVersion "${@}"; then
-    VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
+    VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/releases" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
     NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/releases"
 
 
 # Print versions
