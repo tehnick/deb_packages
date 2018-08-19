@@ -6,7 +6,7 @@
 export PACKAGE="freedcpp-mediapack"
 
 # Uncomment if necessary:
-export SFX="-0ppa2"
+export SFX="-0ppa3"
 
 export NEW_VER="0.0.3"
 
@@ -21,7 +21,7 @@ GetOldVersion
 
 # Get new version
 if GetNewVersion "${@}"; then
-    #VER_LIST=$(curl 'http://code.google.com/p/freedcpp/downloads/' 2>&1 | sed -ne "s:^.*code.google.com/freedcpp/mediapack.\(.*\).tar.bz2\".*$:\1:p")
+    #VER_LIST=$(curl 'https://code.google.com/p/freedcpp/downloads/' 2>&1 | sed -ne "s:^.*code.google.com/freedcpp/mediapack.\(.*\).tar.bz2\".*$:\1:p")
     #NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
     NEW_VER="0.0.3"
 fi
@@ -29,7 +29,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 
 
 # Display versions
-DisplayVersions "http://code.google.com/p/freedcpp/downloads/list"
+DisplayVersions "https://code.google.com/p/freedcpp/downloads/list"
 
 
 # Print versions

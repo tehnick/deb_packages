@@ -44,7 +44,6 @@ fi
 
 if [ ! -z "${COMMIT_MESSAGE}" ]; then
     COMMIT_MESSAGE="$(echo \"${COMMIT_MESSAGE}\" | sed -ne 's:^\(.*\),$:\1\.:p')"
-    git commit -a -m "${COMMIT_MESSAGE}"
-    git commit -a --amend
+    git commit -a -m "${COMMIT_MESSAGE}" && git commit -a --amend
 fi
 
