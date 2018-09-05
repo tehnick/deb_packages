@@ -21,8 +21,7 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 # Get old version
 GetOldVersion
-OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\{6,6\}-\(.*\)$/\1/")
-# export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
+OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
 
 
 # Get new version
