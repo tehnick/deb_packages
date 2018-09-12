@@ -218,3 +218,11 @@ GetSources()
     fi
 }
 
+# Get sources using uscan
+GetSourcesUsingUscan()
+{
+    if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
+        uscan --download-version="${NEW_VER}" --rename --destdir "${TEMP_DIR}" || true
+    fi
+}
+
