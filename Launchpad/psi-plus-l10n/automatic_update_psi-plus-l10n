@@ -45,7 +45,7 @@ CheckVersions
 
 
 # Get sources
-GetSources
+GetSourcesUsingUscan
 
 
 export DESTINATION="psi-plus"

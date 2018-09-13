@@ -44,7 +44,7 @@ CheckVersions
 
 
 # Get sources
-GetSources
+GetSourcesUsingUscan
 
 
 export UPDATE_STRING="New release."
