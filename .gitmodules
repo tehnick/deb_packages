@@ -7,6 +7,9 @@
 [submodule "GitRepos/psi-plus-resources"]
 	path = GitRepos/psi-plus-resources
 	url = https://github.com/psi-plus/resources.git
+[submodule "GitRepos/psimedia"]
+	path = GitRepos/psimedia
+	url = https://github.com/psi-im/psimedia.git
 [submodule "GitRepos/q4wine"]
 	path = GitRepos/q4wine
 	url = https://github.com/brezerk/q4wine.git

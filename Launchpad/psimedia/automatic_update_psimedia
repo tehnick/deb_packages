@@ -22,13 +22,17 @@ GetOldVersion
 
 
 # Get new version
-DEVELOPER=psi-im
-PROJECT=psimedia
+GIT_REPO_DIR="${MAIN_DIR}/GitRepos/psimedia"
+if [ -d "${GIT_REPO_DIR}" ]; then
+    cd "${GIT_REPO_DIR}" || exit 1
+    git pull --all || exit 1
+fi
+LAST_COMMIT=$(git show -s --pretty=format:%h)
 if GetNewVersion "${@}"; then
-    VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/v\(.*\).tar.gz\" .*:\1:p")
-    NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+    NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/")
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
+cd "${TEMP_DIR}" || exit 1
 
 
 # Display versions
@@ -44,8 +48,17 @@ CheckVersions
 
 
 # Get sources
-GetSources
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.xz" ]; then
+    rm -rf  "${PACKAGE}-${NEW_VER}"
+    # sources
+    mkdir "${PACKAGE}-${NEW_VER}" || exit 1
+    rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
+    # tarball
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.xz" "${PACKAGE}-${NEW_VER}"
+fi
 
+
+export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="psi-plus"
 
