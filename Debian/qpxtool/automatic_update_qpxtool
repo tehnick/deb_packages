@@ -38,11 +38,11 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersions
+CheckVersions
 
 
 # Get sources
-GetSources
+GetSourcesUsingUscan
 
 
 #export DIR_NAME="qpxtool-0.7.1_002"

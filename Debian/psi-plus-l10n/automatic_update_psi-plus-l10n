@@ -48,7 +48,7 @@ CheckVersions
 
 
 # Get sources
-GetSources
+GetSourcesUsingUscan
 
 
 # Launch common script for updating of packages

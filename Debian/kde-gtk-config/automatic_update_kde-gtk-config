@@ -49,13 +49,7 @@ CheckVersions
 
 
 # Get sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
-    set -e
-    cd "${PKG_DIR}/${PACKAGE}-debian"
-    uscan --download --verbose
-    mv "${PKG_DIR}"/*.tar.${A_TYPE} "${TEMP_DIR}/"
-    set +e
-fi
+GetSourcesUsingUscan
 
 
 # Launch common script for updating of packages

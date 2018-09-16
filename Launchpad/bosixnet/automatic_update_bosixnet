@@ -42,7 +42,7 @@ CheckVersions
 
 
 # Get sources
-GetSources
+GetSourcesUsingUscan
 
 
 export DESTINATION="bosixnet"

@@ -47,7 +47,7 @@ CheckVersions
 
 
 # Get sources
-GetSources
+GetSourcesUsingUscan
 
 
 export DIR_NAME="psi-plus-snapshots-${NEW_VER}"
