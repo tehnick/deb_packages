@@ -10,7 +10,7 @@ export PACKAGE="psimedia"
 
 #export NEW_VER=1.0.3-git20130306-c2b8446
 
-export A_TYPE="gz"
+export A_TYPE="xz"
 
 
 # Launch common script for setting variables
@@ -36,7 +36,7 @@ cd "${TEMP_DIR}" || exit 1
 
 
 # Display versions
-DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
+DisplayVersionsUnstable
 
 
 # Print versions
