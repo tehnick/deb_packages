@@ -88,7 +88,7 @@ else
     cd "${TEST_DIR}" || exit 1
 
     cp -a "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
-    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.tar.${A_TYPE}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.tar."* "${TEST_DIR}/"
 
     export BUILD_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${NEW_VER_FULL}.build.log"
     export WARNINGS_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${NEW_VER_FULL}.warnings.log"

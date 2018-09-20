@@ -2,18 +2,17 @@
 
 [ -z "${MAIN_DIR}" ] && export MAIN_DIR="$(realpath -s $(dirname ${0})/../..)"
 
-
 export PACKAGE="qtcurve"
 
 # Uncomment if necessary:
-export SFX="-6"
+#export SFX="-6"
 
-export NEW_VER=1.8.18+git20160320-3d8622c
+#export NEW_VER=1.9
 
-export A_TYPE="gz"
+export A_TYPE="xz"
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
@@ -26,8 +25,8 @@ GetOldVersion
 
 # Get new version
 if GetNewVersion "${@}"; then
-    PROJECT=qtcurve
-    VER_LIST=$(curl "https://cgit.kde.org/${PROJECT}.git/refs/tags" 2>&1 | sed -ne "s|^.*'/${PROJECT}.git/tag/?h=\([0-9\.]*\)'>.*$|\1|p")
+    # VER_LIST=$(curl "https://cgit.kde.org/qtcurve.git/refs/tags" 2>&1 | sed -ne "s|^.*'/qtcurve.git/tag/?h=\([0-9\.]*\)'>.*$|\1|p")
+    VER_LIST=$(curl "https://download.kde.org/stable/qtcurve/" 2>&1 | sed -ne "s|^.*<a href=\"qtcurve-\([0-9\.]*\)\.tar\.xz\">.*$|\1|p")
     NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
@@ -35,7 +34,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "https://cgit.kde.org/qtcurve.git"
+DisplayVersions "https://download.kde.org/stable/qtcurve/"
 
 
 
@@ -48,10 +47,7 @@ CheckVersions
 
 
 # Get sources
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
-    echo "Fix me!"
-    exit 1
-fi
+GetSourcesUsingUscan
 
 
 # Launch common script for updating of packages

@@ -72,7 +72,7 @@ else
     cd "${TEST_DIR}" || exit 1
 
     cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
-    cp -f "${TEMP_DIR}/${PACKAGE}_${PKG_VER}.orig.tar.${A_TYPE}" "${TEST_DIR}/"
+    cp -f "${TEMP_DIR}/${PACKAGE}_${PKG_VER}.orig.tar."* "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${BPO_VER_FULL}.debian.tar."* "${TEST_DIR}/"
     cp -f "${TEMP_DIR}/${PACKAGE}_${BPO_VER_FULL}.dsc" "${TEST_DIR}/"
     
