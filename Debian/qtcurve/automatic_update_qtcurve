@@ -5,14 +5,14 @@
 export PACKAGE="qtcurve"
 
 # Uncomment if necessary:
-#export SFX="-6"
+export SFX="-2"
 
 #export NEW_VER=1.9
 
 export A_TYPE="xz"
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
