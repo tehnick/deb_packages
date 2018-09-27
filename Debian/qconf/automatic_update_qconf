@@ -6,7 +6,7 @@
 export PACKAGE="qconf"
 
 # Uncomment if necessary:
-export SFX="-3"
+export SFX="-4"
 
 export A_TYPE="gz"
 
