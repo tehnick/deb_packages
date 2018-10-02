@@ -6,7 +6,7 @@
 export PACKAGE="psi-plus-l10n"
 
 # Uncomment if necessary:
-#export SFX="-1ppa1"
+export SFX="-0ppa2"
 
 export A_TYPE="gz"
 
