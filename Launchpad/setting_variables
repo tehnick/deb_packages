@@ -224,7 +224,7 @@ GetSourcesUsingUscan()
     if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
         uscan "${PKG_DIR}/${PACKAGE}-debian" \
               --download-version="${NEW_VER}" \
-              --destdir "${TEMP_DIR}"
+              --destdir "${TEMP_DIR}" \
               --rename || true
     fi
 }
