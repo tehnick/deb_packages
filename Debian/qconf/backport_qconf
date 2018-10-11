@@ -8,9 +8,9 @@ export PACKAGE="qconf"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo9+2"
 
-#export BPO_VER=2.4-3
+#export BPO_VER=2.4-4
 
-export BASIC_VER=2.4-1
+export BASIC_VER=2.4-3
 
 export A_TYPE="gz"
 
