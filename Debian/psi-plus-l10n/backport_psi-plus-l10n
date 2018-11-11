@@ -8,9 +8,9 @@ export PACKAGE="psi-plus-l10n"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo9+2"
 
-#export BPO_VER=1.3.400-1
+#export BPO_VER=1.3.421-1
 
-export BASIC_VER=1.3.375-1
+export BASIC_VER=1.3.400-1
 
 export A_TYPE="gz"
 
