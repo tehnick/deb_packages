@@ -226,6 +226,8 @@ GetSourcesUsingUscan()
               --download-version="${NEW_VER}" \
               --destdir "${TEMP_DIR}" \
               --rename || true
+        rm -rf "${PKG_DIR}"/${PACKAGE}?${NEW_VER}* \
+               "${PKG_DIR}"/${PACKAGE}_${OLD_VER_FULL}*
     fi
 }
 
