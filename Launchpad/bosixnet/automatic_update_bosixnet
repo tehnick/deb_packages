@@ -6,7 +6,7 @@
 export PACKAGE="bosixnet"
 
 # Uncomment if necessary:
-#export SFX="-1ppa1"
+export SFX="-0ppa3"
 
 export A_TYPE="gz"
 
