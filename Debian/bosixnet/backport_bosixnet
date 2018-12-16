@@ -8,9 +8,9 @@ export PACKAGE="bosixnet"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo9+2"
 
-#export BPO_VER=1.9-1
+#export BPO_VER=2.0-1
 
-export BASIC_VER=1.8-1
+export BASIC_VER=1.9-1
 
 export A_TYPE="gz"
 
