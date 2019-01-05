@@ -5,8 +5,8 @@ set -e
 export PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
 export TEMP_DIR="${PKG_DIR}/TEMP"
 
-if [ -z "${REMORE_BRANCH}" ]; then
-    export REMORE_BRANCH="origin/launchpad"
+if [ -z "${REMOTE_BRANCH}" ]; then
+    export REMOTE_BRANCH="origin/launchpad"
 fi
 
 if [ -z "${TEST_DIR}" ]; then
@@ -14,6 +14,6 @@ if [ -z "${TEST_DIR}" ]; then
 fi
 
 cd "${PKG_DIR}/${PACKAGE}-debian"
-git diff "${REMORE_BRANCH}" "${TEST_DIR}" > "${TEMP_DIR}/debian.diff"
+git diff "${REMOTE_BRANCH}" "${TEST_DIR}" > "${TEMP_DIR}/debian.diff"
 kwrite "${TEMP_DIR}/debian.diff" &> /dev/null &
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Common script for setting variables
+# Common script for setting variables for backports
 
 if [ -z "${MAIN_DIST}" ]; then
     # jessie-backports-sloppy stretch-backports
