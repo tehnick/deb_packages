@@ -5,8 +5,8 @@
 # It make such actions:
 # 1) Update changelog.
 # 2) Prepare sources to upload.
-#    Build the package and check it using lintian (optional)
-# 3) Upload sources to Launchpad
+#    Build the package and check it using lintian. (Optional)
+# 3) Upload sources to Launchpad.
 
 
 if [ -z "${PACKAGE}" ]; then
