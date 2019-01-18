@@ -2,8 +2,12 @@
 
 
 # Common script for setting variables
-export MAIN_DIST="cosmic"
+export MAIN_DIST="disco"
 export UBUNTU_SFX="~${MAIN_DIST}1"
+
+export DIST_LIST="cosmic
+                  bionic
+                  xenial"
 
 if [ -z "${SFX}" ]; then
     export SFX="-0ppa1"

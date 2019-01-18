@@ -51,9 +51,8 @@ if [ "${1}" = "clean" ]; then
 fi
 
 if [ -z "${DIST_LIST}" ]; then
-    DIST_LIST="bionic
-               xenial"
-    export DIST_LIST;
+    echo "DIST_LIST is empty!"
+    exit 1
 fi
 
 echo "Updating is started."
