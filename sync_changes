@@ -7,31 +7,20 @@ export MAIN_DIR="$(dirname $(realpath -s ${0}))"
 
 echo "MAIN_DIR = ${MAIN_DIR}"
 
-echo
-echo "cd ${MAIN_DIR}/Debian/"
-cd "${MAIN_DIR}/Debian/"
-for PACKAGE in * ; do
-    PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}/${PACKAGE}-debian"
-    if [ ! -d "${PKG_DIR}" ]; then continue; fi
-    if [ ! -e "${PKG_DIR}/.git" ]; then continue; fi
+for ARCHIVE in Debian Launchpad ; do
     echo;
-    echo "Begin ${PACKAGE}"
-    cd "${PKG_DIR}"
-    git pull --all --prune
-    echo "End ${PACKAGE}"
-done
-
-echo
-echo "cd ${MAIN_DIR}/Launchpad/"
-cd "${MAIN_DIR}/Launchpad/"
-for PACKAGE in * ; do
-    PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}/${PACKAGE}-debian"
-    if [ ! -d "${PKG_DIR}" ]; then continue; fi
-    if [ ! -e "${PKG_DIR}/.git" ]; then continue; fi
-    echo;
-    echo "Begin ${PACKAGE}"
-    cd "${PKG_DIR}"
-    git pull --all --prune
-    echo "End ${PACKAGE}"
+    echo "cd ${MAIN_DIR}/${ARCHIVE}/"
+    cd "${MAIN_DIR}/${ARCHIVE}/"
+    for PACKAGE in * ; do
+        PKG_DIR="${MAIN_DIR}/${ARCHIVE}/${PACKAGE}/${PACKAGE}-debian"
+        if [ ! -d "${PKG_DIR}" ]; then continue; fi
+        if [ ! -e "${PKG_DIR}/.git" ]; then continue; fi
+        echo;
+        echo "Begin ${PACKAGE}"
+        cd "${PKG_DIR}"
+        git pull --all --prune
+        git status
+        echo "End ${PACKAGE}"
+    done
 done
 
