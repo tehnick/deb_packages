@@ -85,16 +85,20 @@ cd "${TEMP_DIR}/${DIR_NAME}"
 # begin update for basic releases
 export DIST="${MAIN_DIST}"
 if [ "${SFX}" = "-0ppa1" ]; then
-    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
+    dch -b --force-distribution --distribution "${DIST}" \
+        -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "${UPDATE_STRING}"
     if [ "${EDIT_CHANGELOG}" = "true" ]; then kwrite debian/changelog; fi
-    nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
+    debuild -S -sa -d --buildinfo-option="-O" \
+            --changes-option=-DBinary=dummy || exit 1
 else
-    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
+    dch -b --force-distribution --distribution "${DIST}" \
+        -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "Some fixes in package."
     kwrite debian/changelog
     # debuild -S -sd --buildinfo-option="-O" || exit 1
-    nice -n19 debuild -S -sa -d --buildinfo-option="-O" || exit 1
+    debuild -S -sa -d --buildinfo-option="-O" \
+            --changes-option=-DBinary=dummy || exit 1
 fi
 # end update for basic releases
 
@@ -105,7 +109,8 @@ for DIST in ${DIST_LIST} ; do
     cp -f ../changelog debian/changelog
     dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         "Automatic backport; no changes required."
-    nice -n19 debuild -S -sd -d --buildinfo-option="-O" || exit 1
+    nice -n19 debuild -S -sd -d --buildinfo-option="-O" \
+                      --changes-option=-DBinary=dummy || exit 1
 done
 
 mv ../changelog debian/changelog # rollback basic changelog
