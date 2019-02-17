@@ -19,8 +19,8 @@ for ARCHIVE in Debian Launchpad ; do
         echo "cd \"${PKG_DIR}\""
         cd "${PKG_DIR}"
 
-        git pull --all --prune
-        git status | grep -v '^$'
+        git push
+        git push --tags
     done
 done
 
