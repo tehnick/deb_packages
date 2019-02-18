@@ -20,7 +20,7 @@ for ARCHIVE in Debian Launchpad ; do
         cd "${PKG_DIR}"
 
         git push
-        git push --tags
+        [ "${ARCHIVE}" = "Debian" ] && git push --tags
     done
 done
 

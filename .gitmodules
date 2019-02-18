@@ -133,3 +133,6 @@
 [submodule "Launchpad/uhub-devel/uhub-devel-debian"]
 	path = Launchpad/uhub-devel/uhub-devel-debian
 	url = https://github.com/tehnick/uhub-devel-debian.git
+[submodule "Debian/libsignal-protocol-c/libsignal-protocol-c-debian"]
+	path = Debian/libsignal-protocol-c/libsignal-protocol-c-debian
+	url = https://salsa.debian.org/xmpp-team/libsignal-protocol-c.git
