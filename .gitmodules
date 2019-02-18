@@ -136,3 +136,9 @@
 [submodule "Debian/libsignal-protocol-c/libsignal-protocol-c-debian"]
 	path = Debian/libsignal-protocol-c/libsignal-protocol-c-debian
 	url = https://salsa.debian.org/xmpp-team/libsignal-protocol-c.git
+[submodule "Debian/psi-translations/psi-translations-debian"]
+	path = Debian/psi-translations/psi-translations-debian
+	url = https://salsa.debian.org/xmpp-team/psi-translations.git
+[submodule "Debian/psi/psi-debian"]
+	path = Debian/psi/psi-debian
+	url = https://salsa.debian.org/xmpp-team/psi.git
