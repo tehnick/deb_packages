@@ -13,7 +13,7 @@ export SFX="-10"
 export A_TYPE="gz"
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 # Launch common script for setting variables
 source "${MAIN_DIR}/Debian/setting_variables"
