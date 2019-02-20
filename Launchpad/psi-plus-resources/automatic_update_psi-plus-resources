@@ -17,7 +17,7 @@ source "${MAIN_DIR}/Launchpad/setting_variables"
 
 # Get old version
 GetOldVersion
-OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
+OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s|+|-|g" | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
 
 
 # Get new version
@@ -29,7 +29,7 @@ fi
 LAST_COMMIT=$(git show -s --pretty=format:%h)
 if GetNewVersion "${@}"; then
     # | sed -e "s|-|+|g"
-    NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/")
+    NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/" | sed -e "s|-|+|g")
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 cd "${TEMP_DIR}" || exit 1
