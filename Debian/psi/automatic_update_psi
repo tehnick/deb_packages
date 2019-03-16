@@ -10,7 +10,7 @@ export PACKAGE="psi"
 
 #export NEW_VER=0.4.0~git20120405-390b63e
 
-export A_TYPE="gz"
+export A_TYPE="xz"
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -25,10 +25,8 @@ GetOldVersion
 
 
 # Get new version
-DEVELOPER=psi-im
-PROJECT=psi
 if GetNewVersion "${@}"; then
-    VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/\(.*\).tar.gz\" .*:\1:p")
+    VER_LIST=$(curl 'https://sourceforge.net/projects/psi/files/Psi/' 2>&1 |sed -ne "s:^.*<tr title=\"\(.*\)\" class=\"folder \">.*$:\1:p")
     NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
