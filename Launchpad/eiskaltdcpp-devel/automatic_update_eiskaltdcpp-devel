@@ -33,6 +33,7 @@ if [ -d "${GIT_REPO_DIR}" ]; then
 fi
 LAST_COMMIT=$(git show -s --pretty=format:%h)
 if GetNewVersion "${@}"; then
+    # | sed -e "s|-|+|g"
     NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/")
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}

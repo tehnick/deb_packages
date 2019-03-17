@@ -6,7 +6,7 @@
 export PACKAGE="freedcpp-mediapack"
 
 # Uncomment if necessary:
-export SFX="-0ppa3"
+export SFX="-0ppa4"
 
 export NEW_VER="0.0.3"
 
