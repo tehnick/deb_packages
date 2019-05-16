@@ -87,7 +87,7 @@
 	url = https://github.com/tehnick/eiskaltdcpp-debian.git
 [submodule "Launchpad/eiskaltdcpp-devel/eiskaltdcpp-devel-debian"]
 	path = Launchpad/eiskaltdcpp-devel/eiskaltdcpp-devel-debian
-	url = https://github.com/tehnick/eiskaltdcpp-devel-debian.git
+	url = https://github.com/eiskaltdcpp/eiskaltdcpp-devel-debian.git
 [submodule "Launchpad/elmer-doc/elmer-doc-debian"]
 	path = Launchpad/elmer-doc/elmer-doc-debian
 	url = https://salsa.debian.org/science-team/elmer-doc.git
