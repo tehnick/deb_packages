@@ -3,12 +3,12 @@
 # Common script for setting variables for backports
 
 if [ -z "${MAIN_DIST}" ]; then
-    # jessie-backports-sloppy stretch-backports
-    export MAIN_DIST="stretch-backports"
+    # stretch-backports-sloppy buster-backports
+    export MAIN_DIST="buster-backports"
 fi
 
 if [ -z "${BPO_SFX}" ]; then
-    export BPO_SFX="~bpo9+1"
+    export BPO_SFX="~bpo10+1"
 fi
 
 

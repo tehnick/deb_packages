@@ -6,12 +6,12 @@
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-#export BPO_SFX="~bpo9+2"
+#export BPO_SFX="~bpo10+2"
 
-#export BPO_VER=2.2.10+340+g44d8aea4-1
+#export BPO_VER=2.2.10+583+g17a6b034-2
 
 if [ -z "${BASIC_VER}" ]; then
-    export BASIC_VER=2.2.10+188+g1e72256a-2
+    export BASIC_VER=2.2.10+340+g44d8aea4-1
 fi
 
 export A_TYPE="xz"
