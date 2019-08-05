@@ -6,7 +6,7 @@
 export PACKAGE="astromenace-data"
 
 # Uncomment if necessary:
-export SFX="-3"
+export SFX="-4"
 
 export RPKGD="+repack"
 
@@ -24,8 +24,10 @@ source "${MAIN_DIR}/Debian/setting_variables"
 GetOldVersion
 
 # Get new version
+DEVELOPER=viewizard
+PROJECT=astromenace
 if GetNewVersion "${@}"; then
-    VER_LIST=$(curl 'https://sourceforge.net/projects/openastromenace/files/' 2>&1 | sed -ne "s:^.*href=\"/projects/openastromenace/files/\(.*\)/\".*$:\1:p")
+    VER_LIST=$(curl "https://github.com/${DEVELOPER}/${PROJECT}/tags" 2>&1 | sed -ne "s:^.*\"/${DEVELOPER}/${PROJECT}/archive/v\(.*\).tar.gz\" .*:\1:p")
     CUR_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
     NEW_VER=${CUR_VER}${RPKGD}
 fi
@@ -33,7 +35,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "https://sourceforge.net/projects/openastromenace/files/"
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
 # Print versions
