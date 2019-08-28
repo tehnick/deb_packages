@@ -6,7 +6,7 @@
 export PACKAGE="qpxtool"
 
 # Uncomment if necessary:
-export SFX="-4"
+export SFX="-5"
 
 #export NEW_VER=0.7.1.002
 
@@ -38,7 +38,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-CheckVersions
+#CheckVersions
 
 
 # Get sources
