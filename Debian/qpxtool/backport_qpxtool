@@ -8,7 +8,7 @@ export PACKAGE="qpxtool"
 # Uncomment if necessary:
 # export BPO_SFX="~bpo10+2"
 
-#export BPO_VER=0.7.2-5
+#export BPO_VER=0.7.2-6
 
 export BASIC_VER=0.7.2-4.1
 
