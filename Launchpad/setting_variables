@@ -5,6 +5,7 @@
 export MAIN_DIST="eoan"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
+# focal
 export DIST_LIST="disco
                   bionic
                   xenial"

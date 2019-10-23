@@ -30,8 +30,7 @@ if [ -d "${GIT_REPO_DIR}" ]; then
 fi
 LAST_COMMIT=$(git show -s --pretty=format:%h)
 if GetNewVersion "${@}"; then
-    # | sed -e "s|-|+|g"
-    NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/")
+    NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/" | sed -e "s|-|+|g")
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
 cd "${TEMP_DIR}" || exit 1
@@ -63,6 +62,9 @@ fi
 export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="qxmpp-devel"
+
+export DIST_LIST="disco
+                  bionic"
 
 # Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
