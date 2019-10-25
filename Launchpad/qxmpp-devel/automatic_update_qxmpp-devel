@@ -63,7 +63,8 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="qxmpp-devel"
 
-export DIST_LIST="disco
+export DIST_LIST="eoan
+                  disco
                   bionic"
 
 # Launch common script for updating of packages and uploading them to Launchpad
