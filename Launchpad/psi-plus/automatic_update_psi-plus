@@ -54,10 +54,6 @@ export DESTINATION="psi-plus"
 export DIR_NAME="psi-plus-snapshots-${NEW_VER}"
 export OLD_DIR_NAME="psi-plus-snapshots-${OLD_VER}"
 
-export DIST_LIST="eoan
-                  disco
-                  bionic"
-
 # Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 

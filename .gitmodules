@@ -6,7 +6,7 @@
 	url = https://github.com/eiskaltdcpp/freedcpp.git
 [submodule "GitRepos/psi-plus-resources"]
 	path = GitRepos/psi-plus-resources
-	url = https://github.com/psi-plus/resources.git
+	url = https://github.com/psi-im/resources.git
 [submodule "GitRepos/psimedia"]
 	path = GitRepos/psimedia
 	url = https://github.com/psi-im/psimedia.git
