@@ -35,3 +35,18 @@ for PACKAGE in * ; do
     echo "End ${PACKAGE}"
 done
 
+echo
+echo "cd ${MAIN_DIR}/GitRepos/"
+cd "${MAIN_DIR}/GitRepos/"
+for SUBMODULE in * ; do
+    SUBMODULE_DIR="${MAIN_DIR}/GitRepos/${SUBMODULE}"
+    if [ ! -d "${SUBMODULE_DIR}" ]; then continue; fi
+    if [ ! -e "${SUBMODULE_DIR}/.git" ]; then continue; fi
+    echo;
+    echo "Begin ${SUBMODULE}"
+    cd "${SUBMODULE_DIR}"
+    git checkout master
+    git branch -a
+    echo "End ${SUBMODULE}"
+done
+
