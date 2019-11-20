@@ -6,9 +6,9 @@
 export PACKAGE="qxmpp"
 
 # Uncomment if necessary:
-export SFX="-4"
+#export SFX="-5"
 
-#export NEW_VER=0.4.0~git20120405-390b63e
+#export NEW_VER=1.0.0
 
 export A_TYPE="gz"
 

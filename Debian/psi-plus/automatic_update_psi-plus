@@ -6,14 +6,14 @@
 export PACKAGE="psi-plus"
 
 # Uncomment if necessary:
-export SFX="-3"
+#export SFX="-3"
 
-export NEW_VER=1.4.554
+#export NEW_VER=1.4.554
 
 export A_TYPE="gz"
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
