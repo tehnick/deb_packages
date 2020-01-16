@@ -6,9 +6,9 @@
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-export SFX="-1ppa2"
+export SFX="-2ppa1"
 
-export NEW_VER=2.2.10+340+g44d8aea4
+export NEW_VER=2.2.10+583+g17a6b034
 
 export A_TYPE="xz"
 
