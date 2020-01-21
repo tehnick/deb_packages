@@ -142,3 +142,9 @@
 [submodule "Debian/psi/psi-debian"]
 	path = Debian/psi/psi-debian
 	url = https://salsa.debian.org/xmpp-team/psi.git
+[submodule "GitRepos/eiskaltdcpp-web"]
+	path = GitRepos/eiskaltdcpp-web
+	url = https://github.com/eiskaltdcpp/eiskaltdcpp-web.git
+[submodule "Launchpad/eiskaltdcpp-web-devel/eiskaltdcpp-web-devel-debian"]
+	path = Launchpad/eiskaltdcpp-web-devel/eiskaltdcpp-web-devel-debian
+	url = https://github.com/eiskaltdcpp/eiskaltdcpp-web-devel-debian.git
