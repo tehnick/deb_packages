@@ -148,3 +148,6 @@
 [submodule "Launchpad/eiskaltdcpp-web-devel/eiskaltdcpp-web-devel-debian"]
 	path = Launchpad/eiskaltdcpp-web-devel/eiskaltdcpp-web-devel-debian
 	url = https://github.com/eiskaltdcpp/eiskaltdcpp-web-devel-debian.git
+[submodule "Launchpad/eiskaltdcpp-web-devel/eiskaltdcpp-web-debian"]
+	path = Launchpad/eiskaltdcpp-web-devel/eiskaltdcpp-web-debian
+	url = https://github.com/eiskaltdcpp/eiskaltdcpp-web-debian.git
