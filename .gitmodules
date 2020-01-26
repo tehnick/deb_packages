@@ -55,9 +55,6 @@
 [submodule "Debian/psi-plus-l10n/psi-plus-l10n-debian"]
 	path = Debian/psi-plus-l10n/psi-plus-l10n-debian
 	url = https://salsa.debian.org/xmpp-team/psi-plus-l10n.git
-[submodule "Debian/psimedia/psimedia-debian"]
-	path = Debian/psimedia/psimedia-debian
-	url = https://github.com/tehnick/psimedia-debian.git
 [submodule "Debian/q4wine/q4wine-debian"]
 	path = Debian/q4wine/q4wine-debian
 	url = https://github.com/tehnick/q4wine-debian.git
