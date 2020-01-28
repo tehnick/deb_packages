@@ -6,9 +6,9 @@
 export PACKAGE="qpxtool"
 
 # Uncomment if necessary:
-export SFX="-6"
+#export SFX="-6"
 
-#export NEW_VER=0.7.1.002
+#export NEW_VER=0.8.0
 
 # experimental unstable
 export MAIN_DIST="unstable"
@@ -23,14 +23,14 @@ GetOldVersion
 
 # Get new version
 if GetNewVersion "${@}"; then
-    VER_LIST=$(curl 'http://qpxtool.sourceforge.net/' 2>&1 | grep 'files/qpxtool/' | sed -ne "s:^.*/qpxtool-\(.*\).tar.bz2/download.*$:\1:p")
+    VER_LIST=$(curl 'https://sourceforge.net/projects/qpxtool/files/qpxtool/0.8.x/' 2>&1 | sed -ne "s:^.*<tr title=\"\(.*\)\" class=\"folder \">.*$:\1:p")
     NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "http://qpxtool.sourceforge.net/"
+DisplayVersions "https://sourceforge.net/projects/qpxtool/files/qpxtool/0.8.x/"
 
 
 # Print versions
@@ -38,7 +38,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersions
+CheckVersions
 
 
 # Get sources
