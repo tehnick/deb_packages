@@ -49,6 +49,10 @@ GetSourcesUsingUscan
 
 export DESTINATION="qxmpp"
 
+export DIST_LIST="eoan
+                  disco
+                  bionic"
+
 # Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 
