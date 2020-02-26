@@ -5,7 +5,7 @@
 export PACKAGE="qtcurve"
 
 # Uncomment if necessary:
-export SFX="-4"
+export SFX="-5"
 
 #export NEW_VER=1.9
 
