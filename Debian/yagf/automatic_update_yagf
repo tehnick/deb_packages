@@ -9,7 +9,7 @@ export PACKAGE="yagf"
 #export SFX="-2"
 
 # Temporary:
-#export NEW_VER=0.9+svn247
+export NEW_VER=0.9.5+repack1
 
 export A_TYPE="gz"
 
