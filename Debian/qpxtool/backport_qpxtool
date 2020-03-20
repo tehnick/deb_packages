@@ -29,7 +29,7 @@ SetVersions
 DisplayVersions
 
 
-# Get the sources
+# Get sources from Debian repo
 if [ ! -e "${PACKAGE}_${PKG_VER}.orig.tar.bz2" ]; then
     dget -d http://ftp.de.debian.org/debian/pool/main/q/${PACKAGE}/${PACKAGE}_${PKG_VER_FULL}.dsc
 fi
