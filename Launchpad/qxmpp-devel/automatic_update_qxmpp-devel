@@ -26,7 +26,7 @@ OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/" | sed 's/\+df
 GIT_REPO_DIR="${MAIN_DIR}/GitRepos/qxmpp"
 if [ -d "${GIT_REPO_DIR}" ]; then
     cd "${GIT_REPO_DIR}" || exit 1
-    git pull --all || exit 1
+    git pull --all --prune || exit 1
 fi
 LAST_COMMIT=$(git show -s --pretty=format:%h)
 if GetNewVersion "${@}"; then

@@ -29,7 +29,7 @@ GIT_REPO_DIR="${MAIN_DIR}/GitRepos/eiskaltdcpp"
 if [ -d "${GIT_REPO_DIR}" ]; then
     cd "${GIT_REPO_DIR}" || exit 1
     git checkout ${BRANCH} || exit 1
-    git pull --all || exit 1
+    git pull --all --prune || exit 1
 fi
 LAST_COMMIT=$(git show -s --pretty=format:%h)
 if GetNewVersion "${@}"; then
