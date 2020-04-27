@@ -2,11 +2,12 @@
 
 
 # Common script for setting variables
-export MAIN_DIST="focal"
+export MAIN_DIST="groovy"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 
-# focal
-export DIST_LIST="eoan
+# groovy
+export DIST_LIST="focal
+                  eoan
                   bionic
                   xenial"
 
