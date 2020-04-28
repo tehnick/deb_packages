@@ -2,9 +2,11 @@
 #
 # Common script for setting variables
 
+export DEFAULT_SFX="-1"
+
 export PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
 
-[ -z "${SFX}" ] && export SFX="-1"
+[ -z "${SFX}" ] && export SFX="${DEFAULT_SFX}"
 
 source "${MAIN_DIR}/Tools/common_variables.sh" || exit 1
 source "${MAIN_DIR}/Tools/common_functions.sh" || exit 1

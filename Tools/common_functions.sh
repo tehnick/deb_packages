@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Common functions
+# Library of common functions
 
 
 GetOldVersion()
@@ -10,12 +10,19 @@ GetOldVersion()
     else
         export OLD_VER_FULL=$(head -n 1 "${PKG_DIR}/${PACKAGE}-debian/debian/changelog" | sed -e "s/.* (${EPOCH}\(.*\)) .*/\1/")
     fi
-    if [ "$(echo ${OLD_VER_FULL} | grep '~exp' | wc -l)" = "0" ]; then
+    if [ -z "$(echo ${OLD_VER_FULL} | grep '~exp')" ]; then
         export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9].*$/\1/")
         export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9].*\)$/\1/")
     else
         export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]*\~exp.*$/\1/")
         export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]*\~exp.*\)$/\1/")
+    fi
+    if [ -z "$(echo ${OLD_VER_FULL} | grep 'ppa')" ]; then
+        export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]*$/\1/")
+        export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]*\)$/\1/")
+    else
+        export OLD_VER=$(echo ${OLD_VER_FULL} | sed -e "s/^\(.*\)-[0-9]*ppa.*$/\1/")
+        export OLD_SFX=$(echo ${OLD_VER_FULL} | sed -e "s/^.*\(-[0-9]*ppa[0-9]*\).*$/\1/")
     fi
 }
 
@@ -94,33 +101,33 @@ PrintVersions()
 # Print versions for unstable packages
 PrintVersionsUnstable()
 {
-if [ "${1}" = "print-versions" ]; then
-    if [ -z "${2}" ]; then
-        echo "File name must be not empty!"
-        exit 1
-    else
-        HTML_FILE="${2}"
-        echo "<td style=\"font-weight: bold;\">" >> "${HTML_FILE}"
-        echo "${PACKAGE}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "<td>" >> "${HTML_FILE}"
-        echo "${EPOCH}${OLD_VER_FULL}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        if [ "${LAST_COMMIT}" != "${OLD_COMMIT}" ]; then
-            echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+    if [ "${1}" = "print-versions" ]; then
+        if [ -z "${2}" ]; then
+            echo "File name must be not empty!"
+            exit 1
         else
-            echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
+            HTML_FILE="${2}"
+            echo "<td style=\"font-weight: bold;\">" >> "${HTML_FILE}"
+            echo "${PACKAGE}" >> "${HTML_FILE}"
+            echo "</td>" >> "${HTML_FILE}"
+            echo "<td>" >> "${HTML_FILE}"
+            echo "${EPOCH}${OLD_VER_FULL}" >> "${HTML_FILE}"
+            echo "</td>" >> "${HTML_FILE}"
+            if [ "${LAST_COMMIT}" != "${OLD_COMMIT}" ]; then
+                echo "<td class=\"color-outdated\">" >> "${HTML_FILE}"
+            else
+                echo "<td class=\"color-actual\">" >> "${HTML_FILE}"
+            fi
+            echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
+            echo "</td>" >> "${HTML_FILE}"
+            echo "<td>" >> "${HTML_FILE}"
+            echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DPT</a>" >> "${HTML_FILE}"
+            echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
+            echo "<a href=\"$(cat ${PKG_DIR}/README 2>/dev/null | grep \.git | head -n1 )\">GIT</a>" >> "${HTML_FILE}"
+            echo "</td>" >> "${HTML_FILE}"
+            exit 0
         fi
-        echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        echo "<td>" >> "${HTML_FILE}"
-        echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DPT</a>" >> "${HTML_FILE}"
-        echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
-        echo "<a href=\"$(cat ${PKG_DIR}/README 2>/dev/null | grep \.git | head -n1 )\">GIT</a>" >> "${HTML_FILE}"
-        echo "</td>" >> "${HTML_FILE}"
-        exit 0
     fi
-fi
 }
 
 
@@ -138,12 +145,12 @@ CheckVersions()
         exit 0;
     else
         if [ "${NEW_VER}" != "${OLD_VER}" ]; then
-            if [ "${SFX}" != "-1" ]; then
-                echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+            if [ "${SFX}" != "${DEFAULT_SFX}" ]; then
+                echo "Now SFX = ${SFX} but must be '${DEFAULT_SFX}' for a new release!";
                 exit 0;
             fi
         else
-            if [ "${SFX}" = "-1" ]; then
+            if [ "${SFX}" = "${DEFAULT_SFX}" ]; then
                 echo "Now SFX = ${SFX} but OLD_SFX = ${OLD_SFX}.";
                 echo "Upgrading is not required.";
                 exit 0;
@@ -167,12 +174,12 @@ CheckVersionsUnstable()
         exit 1;
     else
         if [ "${LAST_COMMIT}" != "${OLD_COMMIT}" ]; then
-            if [ "${SFX}" != "-1" ]; then
-                echo "Now SFX = ${SFX} but must be '-1' for a new release!";
+            if [ "${SFX}" != "${DEFAULT_SFX}" ]; then
+                echo "Now SFX = ${SFX} but must be '${DEFAULT_SFX}' for a new release!";
                 exit 0;
             fi
         else
-            if [ "${SFX}" = "-1" ]; then
+            if [ "${SFX}" = "${DEFAULT_SFX}" ]; then
                 echo "Upgrading is not required.";
                 exit 0;
             fi
@@ -258,11 +265,20 @@ DefineAdditionalVariables()
     if [ "${2}" = "new" ]; then
         export TARGETED_TO_NEW_QUEUE="true"
     fi
+    
+    if [ -z "${DESTINATION}" ]; then
+        export DESTINATION="tehnick"
+    fi
 }
 
 OpenChangeLog()
 {
     kwrite debian/changelog &> /dev/null
+}
+
+OpenTerminal()
+{
+    konsole &> /dev/null &
 }
 
 CopyUpdatedChangelogToGit()
@@ -315,7 +331,8 @@ MakeSourcePackage()
 
     # --buildinfo-option="-O" is temporary workaround.
     # See: https://bugs.debian.org/853795#10
-    debuild -S -sa -d --buildinfo-option="-O" || exit 1
+    # debuild -S -sa -d --buildinfo-option="-O" || exit 1
+    debuild -S -sa -d || exit 1
 }
 
 UpdateSourcePackage()
@@ -339,6 +356,47 @@ UpdateSourcePackage()
         # debuild -S -sd --buildinfo-option="-O" || exit 1
         MakeSourcePackage
     fi
+}
+
+UpdateSourcePackagesForLaunchpad()
+{
+    cd "${TEMP_DIR}/${DIR_NAME}" || exit 1
+
+    # begin update for main verion of Ubuntu
+    export DIST="${MAIN_DIST}"
+    if [ "${SFX}" = "${DEFAULT_SFX}" ]; then
+        dch -b --force-distribution --distribution "${DIST}" \
+            -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
+            "${UPDATE_STRING}"
+
+        [ "${EDIT_CHANGELOG}" = "true" ] && OpenChangeLog
+        debuild -S -sa -d --buildinfo-option="-O" || exit 1
+    else
+        export UPDATE_STRING="Small improvements in the package."
+        dch -b --force-distribution --distribution "${DIST}" \
+            -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
+            "${UPDATE_STRING}"
+
+        OpenChangeLog
+        debuild -S -sa -d --buildinfo-option="-O" || exit 1
+    fi
+    # end update for main verion of Ubuntu
+
+    # begin update for older releases of Ubuntu
+    cp -f debian/changelog ../changelog # copy basic changelog
+
+    for DIST in ${DIST_LIST} ; do
+        cp -f ../changelog debian/changelog
+        export UPDATE_STRING="Automatic backport to ${DIST}; no changes required."
+        dch -b --force-distribution --distribution "${DIST}" \
+            -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
+            "${UPDATE_STRING}"
+
+        debuild -S -sd -d --buildinfo-option="-O" || exit 1
+    done
+
+    mv ../changelog debian/changelog # rollback basic changelog
+    # end update for older releases of Ubuntu
 }
 
 CheckPackageBuild()
@@ -386,6 +444,7 @@ CheckPackageUsingLintian()
     export LINTIAN_LOG_FILE="${TEMP_DIR}/__${PACKAGE}-${NEW_VER_FULL}.lintian.log"
     echo ;
     echo "Now running lintian:"
+    # --profile ubuntu
     time nice -n19 lintian -ivIE --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
     grep "E: " "${LINTIAN_LOG_FILE}"
     grep "W: " "${LINTIAN_LOG_FILE}"
@@ -435,9 +494,12 @@ ShowPromptForPackageUpload()
     fi
 }
 
-OpenTerminal()
+UploadPackagesToLaunchpad()
 {
-    konsole &> /dev/null &
+    cd "${TEMP_DIR}"
+    for DIST in ${MAIN_DIST} ${DIST_LIST} ; do
+        dput -f ${DESTINATION} ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
+    done
 }
 
 UpdateLocalRepo()

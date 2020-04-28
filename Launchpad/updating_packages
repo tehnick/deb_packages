@@ -1,206 +1,21 @@
 #!/bin/bash
 
 # This is the common script for updating packages and uploading them to Launchpad
-#
-# It make such actions:
-# 1) Update changelog.
-# 2) Prepare sources to upload.
-#    Build the package and check it using lintian. (Optional)
-# 3) Upload sources to Launchpad.
 
 
-if [ -z "${PACKAGE}" ]; then
-    echo "Error: PACKAGE variable is empty!";
-    exit 1;
-elif [ -z "${NEW_VER}" ]; then
-    echo "Error: NEW_VER variable is empty!";
-    exit 1;
-fi
+CheckBasicVariables || exit 1
+CheckTarballAvailability || exit 1
+DefineTarOptions || exit 1
+DefineAdditionalVariables ${@}
 
-case "${A_TYPE}" in
-"gz")
-    export D_ARGS="xzf"
-;;
-"bz2")
-    export D_ARGS="xjf"
-;;
-"xz")
-    export D_ARGS="xJf"
-;;
-*)
-    echo "Tarball type is not defined!"
-    exit 1
-;;
-esac
+ReportStartOfUpdate
+PrepareSourcePackage
+PrepareDiff
+UpdateSourcePackagesForLaunchpad
+DoMainChecks
 
-if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
-    echo "File ${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE} is not found.";
-    exit 0;
-fi
-
-if [ -z "${DIR_NAME}" ]; then
-    export DIR_NAME="${PACKAGE}-${NEW_VER}"
-fi
-
-if [ -z "${OLD_DIR_NAME}" ]; then
-    export OLD_DIR_NAME="${PACKAGE}-${OLD_VER}"
-fi
-
-if [ "${1}" = "clean" ]; then
-    export CLEAN_BUILD="true"
-fi
-
-if [ -z "${DIST_LIST}" ]; then
-    echo "DIST_LIST is empty!"
-    exit 1
-fi
-
-echo "Updating is started."
-
-export DEBEMAIL="Boris Pek <tehnick@debian.org>"
-
-rm -rf "${DIR_NAME}" "${PACKAGE}_${NEW_VER}-"*
-
-tar "${D_ARGS}" "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}"
-rm -rf "${DIR_NAME}/debian"
-cp -rf "${PKG_DIR}/${PACKAGE}-debian/debian" "${DIR_NAME}/debian"
-
-if [ -d "${OLD_DIR_NAME}" ]; then
-    diff -urN "${OLD_DIR_NAME}" "${DIR_NAME}" > \
-              "${TEMP_DIR}/__${PACKAGE}_${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
-fi
-
-cd "${TEMP_DIR}/${DIR_NAME}"
-
-# If you want to build package on your system uncomment this:
-# dch -v "$NEW_VER-mybuild1" "Minor update."
-# dpkg-buildpackage -rfakeroot
-
-# Note: I am using gnupg-agent for comfortable work
-
-# Supported Ubuntu releases: https://launchpad.net/ubuntu/+ppas
-
-# About --buildinfo-option="-O" see at: https://bugs.debian.org/853795#10
-
-# begin update for basic releases
-export DIST="${MAIN_DIST}"
-if [ "${SFX}" = "-0ppa1" ]; then
-    dch -b --force-distribution --distribution "${DIST}" \
-        -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
-        "${UPDATE_STRING}"
-    if [ "${EDIT_CHANGELOG}" = "true" ]; then kwrite debian/changelog; fi
-    debuild -S -sa -d --buildinfo-option="-O" || exit 1
-else
-    dch -b --force-distribution --distribution "${DIST}" \
-        -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
-        "Small improvements in the package."
-    kwrite debian/changelog
-    # debuild -S -sd --buildinfo-option="-O" || exit 1
-    debuild -S -sa -d --buildinfo-option="-O" || exit 1
-fi
-# end update for basic releases
-
-# begin update for other releases
-cp -f debian/changelog ../changelog # copy basic changelog
-
-for DIST in ${DIST_LIST} ; do
-    cp -f ../changelog debian/changelog
-    dch -b --force-distribution --distribution "${DIST}" -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
-        "Automatic backport; no changes required."
-    nice -n19 debuild -S -sd -d --buildinfo-option="-O" || exit 1
-done
-
-mv ../changelog debian/changelog # rollback basic changelog
-# end update for other releases
-
-
-if [ "${1}" = "fast" ]; then
-    echo ;
-    echo "Fast upload (without tests)."
-    echo ;
-else
-    echo ;
-    echo "Now will be tests."
-    echo ;
-
-    if [ "${CLEAN_BUILD}" = "true" ]; then
-        sudo rm -rf "${TEST_DIR}"/*
-    else
-        rm -rf "${TEST_DIR}"/*
-    fi
-
-    mkdir -p "${TEST_DIR}"
-    cd "${TEST_DIR}" || exit 1
-
-    cp -r "${TEMP_DIR}/${DIR_NAME}" "${TEST_DIR}/"
-    cp -f "${TEMP_DIR}/${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${TEST_DIR}/"
-
-    export BUILD_LOG_FILE="${TEMP_DIR}/__${PACKAGE}_${NEW_VER_FULL}.build.log"
-    export WARNINGS_LOG_FILE="${TEMP_DIR}/__${PACKAGE}_${NEW_VER_FULL}.warnings.log"
-    echo ;
-
-    cd "${TEST_DIR}/${DIR_NAME}"
-    echo "Start building packages..."
-    if [ "${CLEAN_BUILD}" = "true" ]; then
-        sudo time nice -n19 pdebuild --pbuilder cowbuilder \
-                                     --buildresult "${TEST_DIR}" \
-                                     > ${BUILD_LOG_FILE} \
-                                     2> ${WARNINGS_LOG_FILE} || exit 1
-        sudo chown -R "${SUDO_USER}:${SUDO_USER}" "${TEST_DIR}"
-    else
-        time nice -n19 dpkg-buildpackage -rfakeroot -uc -us \
-                                         > ${BUILD_LOG_FILE} \
-                                         2> ${WARNINGS_LOG_FILE} || exit 1
-    fi
-    cat  ${WARNINGS_LOG_FILE}
-    echo "Finished building packages."
-    echo ;
-
-    export LINTIAN_LOG_FILE="${TEMP_DIR}/__${PACKAGE}_${NEW_VER_FULL}.lintian.log"
-    cd "${TEST_DIR}"
-    echo ;
-    echo "Now running lintian:"
-    time nice -n19 lintian -ivIE --pedantic --profile ubuntu ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
-    grep "E: " "${LINTIAN_LOG_FILE}"
-    grep "W: " "${LINTIAN_LOG_FILE}"
-    grep "I: " "${LINTIAN_LOG_FILE}"
-    grep "P: " "${LINTIAN_LOG_FILE}"
-    grep "X: " "${LINTIAN_LOG_FILE}"
-    echo "Finished running lintian."
-    echo ;
-    kwrite ${LINTIAN_LOG_FILE}
-
-    cd "${TEMP_DIR}/${DIR_NAME}"
-fi
-
-
-cd "${TEMP_DIR}"
-cp -fr "${DIR_NAME}/debian" "${PKG_DIR}/${PACKAGE}-debian/"
-
-cd "${PKG_DIR}/${PACKAGE}-debian/"
-fakeroot debian/rules clean
-
-if [ -z "${DESTINATION}" ]; then
-    export DESTINATION="tehnick"
-fi
-
-cd "${TEMP_DIR}"
-for DIST in ${MAIN_DIST} ${DIST_LIST} ; do
-    dput -f ${DESTINATION} ${PACKAGE}_${NEW_VER}${SFX}~${DIST}1_source.changes
-done
-
-echo "Update finished successfully"
-
-# Local repo
-if [ "${1}" != "fast" ]; then
-    export APT_DIR="${MAIN_DIR}/LocalRepo"
-    mkdir -p "${APT_DIR}/${PACKAGE}/"
-    rm -f "${APT_DIR}/${PACKAGE}"/*.deb
-    cp -f "${TEST_DIR}"/*.deb "${APT_DIR}/${PACKAGE}/"
-    cd "${APT_DIR}/" || exit 1
-    rm -f Packages* InRelease* Release*
-    apt-ftparchive packages . > Packages
-    gzip -c Packages > Packages.gz
-    gpg -abs -o Packages.gpg Packages.gz
-fi
+CopyUpdatedChangelogToGit
+UploadPackagesToLaunchpad
+ReportBuildSuccess
+UpdateLocalRepo
 

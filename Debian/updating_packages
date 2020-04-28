@@ -6,7 +6,7 @@
 CheckBasicVariables || exit 1
 CheckTarballAvailability || exit 1
 DefineTarOptions || exit 1
-DefineAdditionalVariables
+DefineAdditionalVariables ${@}
 
 ReportStartOfUpdate
 PrepareSourcePackage
