@@ -309,7 +309,7 @@ PrepareDiff()
 {
     cd "${TEMP_DIR}" || exit 1
 
-    if [ -d "${OLD_DIR_NAME}" ] && [ "${SFX}" = "-1" ]; then
+    if [ -d "${OLD_DIR_NAME}" ] && [ "${SFX}" = "${DEFAULT_SFX}" ]; then
         diff -urN "${OLD_DIR_NAME}" "${DIR_NAME}" > \
                   "${TEMP_DIR}/__${PACKAGE}_${OLD_VER_FULL}::${NEW_VER_FULL}.diff"
     fi
@@ -339,7 +339,7 @@ UpdateSourcePackage()
 {
     cd "${TEMP_DIR}/${DIR_NAME}" || exit 1
 
-    if [ "${SFX}" = "-1" ]; then
+    if [ "${SFX}" = "${DEFAULT_SFX}" ]; then
         dch -b --force-distribution --distribution "${MAIN_DIST}" \
             -v "${EPOCH}${NEW_VER_FULL}" \
             "${UPDATE_STRING}"
