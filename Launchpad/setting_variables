@@ -2,6 +2,7 @@
 #
 # Common script for setting variables
 
+# https://en.wikipedia.org/wiki/Ubuntu_version_history#Table_of_versions
 export MAIN_DIST="groovy"
 export DIST_LIST="focal eoan bionic xenial"
 
