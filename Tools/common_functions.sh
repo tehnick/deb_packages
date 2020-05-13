@@ -284,7 +284,7 @@ OpenTerminal()
 CopyUpdatedChangelogToGit()
 {
     cd "${TEMP_DIR}"
-    cp -fr "${DIR_NAME}/debian/changelog" "${PKG_DIR}/${PACKAGE}-debian/"
+    cp -fr "${DIR_NAME}/debian/changelog" "${PKG_DIR}/${PACKAGE}-debian/debian/"
 }
 
 ReportStartOfUpdate()
