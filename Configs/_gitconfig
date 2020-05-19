@@ -4,13 +4,19 @@
     name = Boris Pek
     email = tehnick-8@yandex.ru
 
+[core]
+    editor = nano
+
 [alias]
     up = pull --all --prune
     br = branch
     st = status
     co = checkout
     cm = commit
-    pom = push origin master
+    pom = push -u origin master
+
+[pull]
+    rebase = false
 
 [push]
     default = matching
@@ -18,12 +24,15 @@
 [color]
     ui = auto
 
-[url "ssh://git.debian.org"]
-    pushInsteadOf = https://anonscm.debian.org
+[url "git@github.com:"]
+    pushInsteadOf = https://github.com/
 
 [url "git@salsa.debian.org:"]
     pushInsteadOf = https://salsa.debian.org/
 
-[url "git@github.com:"]
-    pushInsteadOf = https://github.com/
+[url "ssh://git.debian.org"]
+    pushInsteadOf = https://anonscm.debian.org
+
+[url "ssh://tehnick@git.code.sf.net"]
+    pushInsteadOf = https://tehnick@git.code.sf.net
 
