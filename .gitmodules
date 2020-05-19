@@ -109,9 +109,6 @@
 [submodule "Launchpad/psi-plus-resources/psi-plus-resources-debian"]
 	path = Launchpad/psi-plus-resources/psi-plus-resources-debian
 	url = https://github.com/tehnick/psi-plus-resources-debian.git
-[submodule "Launchpad/psimedia/psimedia-debian"]
-	path = Launchpad/psimedia/psimedia-debian
-	url = https://github.com/tehnick/psimedia-debian.git
 [submodule "Launchpad/q4wine/q4wine-debian"]
 	path = Launchpad/q4wine/q4wine-debian
 	url = https://github.com/tehnick/q4wine-debian.git
