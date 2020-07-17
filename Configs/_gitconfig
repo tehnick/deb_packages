@@ -24,6 +24,13 @@
 [color]
     ui = auto
 
+[core]
+    quotepath = false
+
+[i18n]
+    commitencoding = utf8
+    logoutputencoding = utf8
+
 [url "git@github.com:"]
     pushInsteadOf = https://github.com/
 
@@ -35,4 +42,8 @@
 
 [url "ssh://tehnick@git.code.sf.net"]
     pushInsteadOf = https://tehnick@git.code.sf.net
+
+[remote-hg]
+    track-branches = false
+    insecure = true
 
