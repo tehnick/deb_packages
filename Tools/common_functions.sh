@@ -445,7 +445,7 @@ CheckPackageUsingLintian()
     echo ;
     echo "Now running lintian:"
     # --profile ubuntu
-    time nice -n19 lintian -ivIE --pedantic ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
+    time nice -n19 lintian -ivIE --pedantic ${LINTIAN_EXTRA_OPTIONS} ${PACKAGE}_${NEW_VER_FULL}_*.changes > ${LINTIAN_LOG_FILE}
     grep "E: " "${LINTIAN_LOG_FILE}"
     grep "W: " "${LINTIAN_LOG_FILE}"
     grep "I: " "${LINTIAN_LOG_FILE}"

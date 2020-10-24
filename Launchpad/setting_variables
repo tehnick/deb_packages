@@ -9,6 +9,8 @@ export DIST_LIST="focal bionic xenial"
 export UBUNTU_SFX="~${MAIN_DIST}1"
 export DEFAULT_SFX="-0ppa1"
 
+export LINTIAN_EXTRA_OPTIONS="--profile ubuntu"
+
 export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
 
 [ -z "${SFX}" ] && export SFX="${DEFAULT_SFX}"
