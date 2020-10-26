@@ -1,0 +1,57 @@
+# -*- conf -*-
+# FIXME: the list of checks should probably be moved to
+# t/scripts/critic.pl. Line continuations are not supported here
+
+verbose = 1
+# Severity is actually ignored for our main purposes, see below
+severity = 1
+# Work based on a whitelist
+only = 1
+# Our whitelist (ignores severity):
+include = ExplicitReturnUndef GlobFunction NegativeIndices PrivateVars UselessInitialization NumberSeparators NullStatements LongChainsOfMethodCalls UseStrict UseWarnings EndWithOne ConditionalUseStatements PackageMatchesPodName JoinedReadline UnreachableCode TrailingWhitespace InterpolationOfLiterals ImplicitNewlines CommaSeparatedStatements UnusedVariables UnusedCapture TwoArgOpen ProhibitHardTabs MismatchedOperators IndirectSyntax Modules:: BuiltinFunctions:: ClassHierarchies:: CommaSeparatedStatements QuotesAsQuotelikeOperatorDelimiters MixedBooleanOperators ProhibitBarewordFileHandles ConditionalUseStatements Modules::ProhibitAutomaticExportation ProhibitBarewordFileHandles ConditionalDeclarations Tidy
+#include = MixedBooleanOperators InteractiveTest UpperCaseHeredoc ReusedNames PackageVars ConditionalDeclarations SingleCharAlternation FixedStringMatches ConditionalUseStatements QuotedWordLists
+
+exclude = RequireFilenameMatchesPackage RequireVersionVar ProhibitExcessMainComplexity ProhibitStringySplit ComplexMappings StringyEval Documentation::PodSpell BuiltinFunctions::ProhibitUselessTopic MatchVars
+
+# If you want to try some other stuff, uncomment the following
+# (exclude is an incomplete list of things we probably won't change)
+# theme = security || bugs || complexity || maintenance
+# exclude = ExtendedFormat LineBoundaryMatch DotMatchAnything BuiltinHomonyms InitializationForLocalVars UnusualDelimiters
+# even more stuff if theme is empty
+
+# Would be nice to fix at some point:
+# include = ProhibitBarewordFileHandles
+
+criticism-fatal = 1
+color = 1
+allow-unsafe = 1
+
+[BuiltinFunctions::ProhibitBooleanGrep]
+
+[InputOutput::RequireCheckedSyscalls]
+functions = open opendir chdir read readdir readline closedir sysopen sysread sysclose mkdir link pipe readlink unlink rename symlink fork
+# possible TODO close
+
+# Checks and collections blow up
+[-Modules::RequireFilenameMatchesPackage]
+# We don't use package versions atm and even if we did, it probably
+# won't have full coverage anyway.
+[-Modules::RequireVersionVar]
+# Maybe some day...
+[-Modules::ProhibitExcessMainComplexity]
+
+[Subroutines::RequireFinalReturn]
+terminal_funcs = CORE::exec fatal_error internal_error Lintian::Util::internal_error Die error
+
+[ValuesAndExpressions::ProhibitInterpolationOfLiterals]
+
+[ValuesAndExpressions::ProhibitCommaSeparatedStatements]
+allow_last_statement_to_be_comma_separated_in_map_and_grep = 1
+
+[-ValuesAndExpressions::ProhibitConstantPragma]
+
+# Requires "use English" and our style is against that.
+[-Variables::ProhibitPunctuationVars]
+
+[Variables::RequireLocalizedPunctuationVars]
+allow = %ENV %SIG $! $? $0
