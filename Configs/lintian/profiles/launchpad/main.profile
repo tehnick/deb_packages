@@ -11,5 +11,6 @@ Disable-Tags: no-nmu-in-changelog,
  upstart-job-in-etc-init.d-not-registered-via-update-rc.d,
  no-human-maintainers, bugs-field-does-not-refer-to-debian-infrastructure,
  package-uses-deprecated-debhelper-compat-version,
+ package-uses-old-debhelper-compat-version,
  debian-rules-uses-as-needed-linker-flag,
  debian-watch-does-not-check-gpg-signature
