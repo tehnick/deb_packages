@@ -5,6 +5,8 @@ License:
   https://creativecommons.org/publicdomain/mark/1.0/
 
 Notes:
+  # step 0
+  sudo apt install build-essential lintian git cmake pkg-config sed curl rsync
   # step 1
   git clone --recursive --jobs=8 https://github.com/tehnick/deb_packages.git
   cd deb_packages/
