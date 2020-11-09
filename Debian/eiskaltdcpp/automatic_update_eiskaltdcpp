@@ -6,15 +6,15 @@
 export PACKAGE="eiskaltdcpp"
 
 # Uncomment if necessary:
-export SFX="-2"
+#export SFX="-2"
 
-export NEW_VER=2.2.10+583+g17a6b034
+export NEW_VER=2.2.10+723+gfa5e73be
 
 export A_TYPE="xz"
 
 
 # experimental unstable
-export MAIN_DIST="unstable"
+export MAIN_DIST="experimental"
 
 
 # Launch common script for setting variables
