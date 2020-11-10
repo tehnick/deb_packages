@@ -428,6 +428,7 @@ CheckPackageBuild()
                                      2> ${WARNINGS_LOG_FILE} || exit 1
         sudo chown -R "${SUDO_USER}:${SUDO_USER}" "${TEST_DIR}"
     else
+        export PATH="/usr/lib/ccache:${PATH}"
         time nice -n19 dpkg-buildpackage -rfakeroot -uc -us \
                                          > ${BUILD_LOG_FILE} \
                                          2> ${WARNINGS_LOG_FILE} || exit 1

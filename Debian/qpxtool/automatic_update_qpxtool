@@ -6,7 +6,7 @@
 export PACKAGE="qpxtool"
 
 # Uncomment if necessary:
-#export SFX="-6"
+#export SFX="-2"
 
 #export NEW_VER=0.8.0
 
