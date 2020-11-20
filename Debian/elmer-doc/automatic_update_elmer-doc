@@ -29,7 +29,7 @@ export OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*.svn.\([0-9]\+\).dfsg.*$/\1/"
 
 # Get new version
 if GetNewVersion "${@}"; then
-    LAST_MOD=$(curl -I 'ftp://ftp.funet.fi/index/elmer/doc/ElmerDocumentation.tar.gz' 2>&1 | sed -ne "s/^.*Last-Modified: \(.*\) GMT.*$/\1/p")
+    LAST_MOD=$(curl -I 'ftp://ftp.funet.fi/index/elmer/doc/ElmerDocumentation.zip' 2>&1 | sed -ne "s/^.*Last-Modified: \(.*\) GMT.*$/\1/p")
     if [ -z "${LAST_MOD}" ]; then
         echo "Failed to define current version."
         exit 1
