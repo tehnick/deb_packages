@@ -14,7 +14,7 @@ export A_TYPE="xz"
 
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
