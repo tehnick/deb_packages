@@ -428,13 +428,17 @@ CheckPackageBuild()
                                      2> ${WARNINGS_LOG_FILE} || exit 1
         sudo chown -R "${SUDO_USER}:${SUDO_USER}" "${TEST_DIR}"
     else
-        # export PATH="/usr/lib/ccache:${PATH}"
-        # time nice -n19 dpkg-buildpackage -rfakeroot -uc -us \
-        #                                  > ${BUILD_LOG_FILE} \
-        #                                  2> ${WARNINGS_LOG_FILE} || exit 1
-        time nice -n19 debuild --prepend-path=/usr/lib/ccache -uc -us \
-                               > ${BUILD_LOG_FILE} \
-                               2> ${WARNINGS_LOG_FILE} || exit 1
+        export PATH="/usr/lib/ccache:${PATH}"
+        # export DEB_BUILD_OPTIONS="ccache"
+        # export CCACHE_BASEDIR="${TEST_DIR}"
+        time nice -n19 dpkg-buildpackage -rfakeroot -uc -us \
+                                         > ${BUILD_LOG_FILE} \
+                                         2> ${WARNINGS_LOG_FILE} || exit 1
+        #
+        # time nice -n19 debuild --prepend-path=/usr/lib/ccache -uc -us \
+        #                        > ${BUILD_LOG_FILE} \
+        #                        2> ${WARNINGS_LOG_FILE} || exit 1
+        #
         # http://frungy.org/debian/ccache-building-packages
         # debuild --preserve-envvar=CCACHE_DIR \
         #         --prepend-path=/usr/lib/ccache \

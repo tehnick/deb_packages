@@ -4,6 +4,7 @@
 
 export DEBEMAIL="Boris Pek <tehnick@debian.org>"
 export UPDATE_STRING="New upstream release."
+export SOURCE_DATE_EPOCH="1577836801"
 
 [ -z "${PKG_DIR}" ] && export PKG_DIR="${MAIN_DIR}/Debian/${PACKAGE}"
 
