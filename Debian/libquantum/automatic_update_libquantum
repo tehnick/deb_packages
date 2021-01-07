@@ -6,7 +6,7 @@
 export PACKAGE="libquantum"
 
 # Uncomment if necessary:
-export SFX="-8"
+export SFX="-9"
 
 #export NEW_VER=1.1.0
 
