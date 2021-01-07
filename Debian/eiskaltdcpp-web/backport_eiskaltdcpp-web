@@ -1,0 +1,43 @@
+#!/bin/bash
+
+[ -z "${MAIN_DIR}" ] && export MAIN_DIR="$(realpath -s $(dirname ${0})/../..)"
+
+
+export PACKAGE="eiskaltdcpp-web"
+
+# Uncomment if necessary:
+#export BPO_SFX="~bpo10+2"
+
+#export BPO_VER=1.0.1-1
+
+if [ -z "${BASIC_VER}" ]; then
+    export BASIC_VER=1.0.1-1
+fi
+
+export A_TYPE="gz"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Debian/setting_variables"
+source "${MAIN_DIR}/Debian/setting_variables_for_backports"
+
+
+# Get old version
+GetOldVersion
+
+
+# Set versions
+SetVersions
+
+
+# Display versions
+DisplayVersions
+
+
+# Get source package
+GetSourcePackage
+
+
+# Launch common script for updating packages and uploading them to mentors.debian.net
+source "${MAIN_DIR}/Debian/updating_packages_for_backports"
+
