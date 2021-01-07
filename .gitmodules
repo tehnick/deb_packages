@@ -45,7 +45,7 @@
 	url = https://salsa.debian.org/science-team/libquantum.git
 [submodule "Debian/libterm-shellui-perl/libterm-shellui-perl-debian"]
 	path = Debian/libterm-shellui-perl/libterm-shellui-perl-debian
-	url = https://github.com/tehnick/libterm-shellui-perl-debian.git
+	url = https://salsa.debian.org/perl-team/modules/packages/libterm-shellui-perl.git
 [submodule "Debian/psi-plus/psi-plus-debian"]
 	path = Debian/psi-plus/psi-plus-debian
 	url = https://salsa.debian.org/xmpp-team/psi-plus.git

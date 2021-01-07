@@ -6,7 +6,7 @@
 export PACKAGE="astromenace-data"
 
 # Uncomment if necessary:
-export SFX="-4"
+# export SFX="-4"
 
 export RPKGD="+repack"
 

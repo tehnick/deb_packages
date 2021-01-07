@@ -6,7 +6,7 @@
 export PACKAGE="libterm-shellui-perl"
 
 # Uncomment if necessary:
-export SFX="-2"
+export SFX="-3"
 
 export A_TYPE="gz"
 
@@ -41,7 +41,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-CheckVersions
+#CheckVersions
 
 
 # Get sources
