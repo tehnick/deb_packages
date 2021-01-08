@@ -57,7 +57,7 @@
 	url = https://github.com/tehnick/q4wine-debian.git
 [submodule "Debian/qconf/qconf-debian"]
 	path = Debian/qconf/qconf-debian
-	url = https://salsa.debian.org/qt-kde-team/qt-extras/qconf.git
+	url = https://salsa.debian.org/qt-kde-team/extras/qconf.git
 [submodule "Debian/qpxtool/qpxtool-debian"]
 	path = Debian/qpxtool/qpxtool-debian
 	url = https://salsa.debian.org/debian/qpxtool.git
