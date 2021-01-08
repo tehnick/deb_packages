@@ -6,7 +6,7 @@
 export PACKAGE="libfcgi"
 
 # Uncomment if necessary:
-export SFX="-10"
+#export SFX="-10"
 
 #export NEW_VER=2.4.0
 
@@ -33,7 +33,7 @@ export NEW_VER_FULL=${NEW_VER}${SFX}
 
 
 # Display versions
-DisplayVersions "https://github.com/FastCGI-Archives/fcgi2/tags"
+DisplayVersions "https://github.com/${DEVELOPER}/${PROJECT}/tags"
 
 
 # Print versions
@@ -48,7 +48,7 @@ CheckVersions
 GetSourcesUsingUscan
 
 
-export DIR_NAME="libfcgi-${NEW_VER}.orig"
+export DIR_NAME="${PROJECT}-${NEW_VER}"
 export OLD_DIR_NAME="libfcgi-${OLD_VER}.orig"
 
 
