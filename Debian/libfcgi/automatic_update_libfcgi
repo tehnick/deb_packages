@@ -6,7 +6,7 @@
 export PACKAGE="libfcgi"
 
 # Uncomment if necessary:
-#export SFX="-10"
+export SFX="-2"
 
 #export NEW_VER=2.4.0
 
