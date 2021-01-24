@@ -6,7 +6,7 @@
 export PACKAGE="eiskaltdcpp-web"
 
 # Uncomment if necessary:
-# export SFX="-2"
+export SFX="-2"
 
 # export NEW_VER=1.0.1
 
@@ -14,7 +14,7 @@ export A_TYPE="gz"
 
 
 # experimental unstable
-export MAIN_DIST="experimental"
+export MAIN_DIST="unstable"
 
 
 # Launch common script for setting variables
