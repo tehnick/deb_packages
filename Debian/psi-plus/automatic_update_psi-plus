@@ -6,9 +6,9 @@
 export PACKAGE="psi-plus"
 
 # Uncomment if necessary:
-# export SFX="-4"
+export SFX="-2"
 
-# export NEW_VER=1.4.554
+export NEW_VER=1.4.1456
 
 export A_TYPE="gz"
 
