@@ -8,7 +8,7 @@ export PACKAGE="eiskaltdcpp-web"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo10+2"
 
-#export BPO_VER=1.0.1-1
+#export BPO_VER=1.0.1-2
 
 if [ -z "${BASIC_VER}" ]; then
     export BASIC_VER=1.0.1-1
