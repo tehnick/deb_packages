@@ -8,7 +8,7 @@ export PACKAGE="psi"
 # Uncomment if necessary:
 #export SFX="-2"
 
-#export NEW_VER=0.4.0~git20120405-390b63e
+export NEW_VER=1.5+dfsg1
 
 export A_TYPE="xz"
 
@@ -41,12 +41,14 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersions
+CheckVersions
 
 
 # Get sources
 GetSourcesUsingUscan
 
+
+export DIR_NAME="psi-1.5"
 
 # Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"

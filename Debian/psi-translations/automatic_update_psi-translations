@@ -6,7 +6,7 @@
 export PACKAGE="psi-translations"
 
 # Uncomment if necessary:
-#export SFX="-2"
+export SFX="-3"
 
 export NEW_VER=1.12+real1.5
 
@@ -43,7 +43,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-#CheckVersions
+CheckVersions
 
 
 # Get sources
