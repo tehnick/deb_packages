@@ -8,7 +8,7 @@ export PACKAGE="psi-translations"
 # Uncomment if necessary:
 #export SFX="-2"
 
-#export NEW_VER=0.4.0~git20120405-390b63e
+export NEW_VER=1.12+real1.5
 
 export A_TYPE="gz"
 
@@ -43,12 +43,15 @@ PrintVersions "${@}"
 
 
 # Check versions
-CheckVersions
+#CheckVersions
 
 
 # Get sources
 GetSourcesUsingUscan
 
+
+export DIR_NAME="psi-l10n-1.5"
+export OLD_DIR_NAME="psi-translations-1.12"
 
 # Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"

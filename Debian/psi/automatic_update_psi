@@ -41,7 +41,7 @@ PrintVersions "${@}"
 
 
 # Check versions
-CheckVersions
+#CheckVersions
 
 
 # Get sources
