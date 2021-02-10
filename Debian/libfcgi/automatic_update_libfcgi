@@ -51,7 +51,6 @@ GetSourcesUsingUscan
 export DIR_NAME="${PROJECT}-${NEW_VER}"
 export OLD_DIR_NAME="libfcgi-${OLD_VER}.orig"
 
-
 # Launch common script for updating of packages
 source "${MAIN_DIR}/Debian/updating_packages"
 
