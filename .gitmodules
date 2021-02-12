@@ -148,3 +148,6 @@
 [submodule "Debian/psi-plugins/psi-plugins-debian"]
 	path = Debian/psi-plugins/psi-plugins-debian
 	url = https://salsa.debian.org/xmpp-team/psi-plugins.git
+[submodule "GitRepos/ncdc"]
+	path = GitRepos/ncdc
+	url = https://g.blicky.net/ncdc.git
