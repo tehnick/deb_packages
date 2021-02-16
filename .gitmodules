@@ -154,3 +154,9 @@
 [submodule "Debian/ncdc/ncdc-debian"]
 	path = Debian/ncdc/ncdc-debian
 	url = https://salsa.debian.org/debian/ncdc.git
+[submodule "Launchpad/ncdc/ncdc-debian"]
+	path = Launchpad/ncdc/ncdc-debian
+	url = https://salsa.debian.org/debian/ncdc.git
+[submodule "Launchpad/ncdc-devel/ncdc-devel-debian"]
+	path = Launchpad/ncdc-devel/ncdc-devel-debian
+	url = https://github.com/tehnick/ncdc-devel-debian.git

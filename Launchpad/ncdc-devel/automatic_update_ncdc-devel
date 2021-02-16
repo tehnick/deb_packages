@@ -1,0 +1,68 @@
+#!/bin/bash
+
+[ -z "${MAIN_DIR}" ] && export MAIN_DIR="$(realpath -s $(dirname ${0})/../..)"
+
+
+export PACKAGE="ncdc-devel"
+
+# Uncomment if necessary:
+# export SFX="-0ppa2"
+
+export A_TYPE="xz"
+
+
+# Launch common script for setting variables
+source "${MAIN_DIR}/Launchpad/setting_variables"
+
+
+# Get old version
+GetOldVersion
+OLD_COMMIT=$(echo ${OLD_VER} | sed -e "s/^.*-[0-9]\+-g\(.*\)$/\1/")
+
+
+# Get new version
+GIT_REPO_DIR="${MAIN_DIR}/GitRepos/ncdc"
+if [ -d "${GIT_REPO_DIR}" ]; then
+    cd "${GIT_REPO_DIR}" || exit 1
+    git pull --all --prune || exit 1
+fi
+LAST_COMMIT=$(git show -s --pretty=format:%h)
+if GetNewVersion "${@}"; then
+    NEW_VER=$(git describe --tags | sed -e "s/^v\(.*\)$/\1/" | sed -e "s|-|+|g")
+fi
+export NEW_VER_FULL=${NEW_VER}${SFX}${UBUNTU_SFX}
+cd "${TEMP_DIR}" || exit 1
+
+
+# Display versions
+DisplayVersionsUnstable
+
+
+# Print versions
+PrintVersions "${@}"
+
+
+# Check versions
+CheckVersions
+
+
+# Get sources
+if [ ! -e "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" ]; then
+    rm -rf  "${PACKAGE}-${NEW_VER}"
+    # sources
+    mkdir "${PACKAGE}-${NEW_VER}" || exit 1
+    rsync -a "${GIT_REPO_DIR}/" "${PACKAGE}-${NEW_VER}/" --exclude=".git*" || exit 1
+    # tarball
+    tar -cJf "${PACKAGE}_${NEW_VER}.orig.tar.${A_TYPE}" "${PACKAGE}-${NEW_VER}"
+fi
+
+
+export UPDATE_STRING="New Git snapshot."
+
+export DESTINATION="direct-connect-devel"
+
+export EDIT_CHANGELOG="true"
+
+# Launch common script for updating of packages and uploading them to Launchpad
+source "${MAIN_DIR}/Launchpad/updating_packages"
+
