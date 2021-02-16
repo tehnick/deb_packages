@@ -151,3 +151,6 @@
 [submodule "GitRepos/ncdc"]
 	path = GitRepos/ncdc
 	url = https://g.blicky.net/ncdc.git
+[submodule "Debian/ncdc/ncdc-debian"]
+	path = Debian/ncdc/ncdc-debian
+	url = https://salsa.debian.org/debian/ncdc.git

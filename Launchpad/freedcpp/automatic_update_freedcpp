@@ -6,9 +6,9 @@
 export PACKAGE="freedcpp"
 
 # Uncomment if necessary:
-# export SFX="-0ppa2"
+ export SFX="-0ppa2"
 
-#export NEW_VER="0.0.5"
+#export NEW_VER="0.1.2"
 
 export A_TYPE="gz"
 
