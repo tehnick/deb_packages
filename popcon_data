@@ -128,8 +128,9 @@ for PACKAGE in ${PACKAGES_LIST} ; do
             echo "${PACKAGE}" >> "${TMP_FILE}"
             echo "</td>" >> "${TMP_FILE}"
             echo "<td>" >> "${TMP_FILE}"
-            echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DPT</a>" >> "${TMP_FILE}"
+            echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DEB</a>" >> "${TMP_FILE}"
             echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${TMP_FILE}"
+            echo "<a href=\"https://repology.org/project/${PACKAGE}\">REP</a>" >> "${TMP_FILE}"
             echo "<a href=\"$(cat ${MAIN_DIR}/*/${PACKAGE}/README 2>/dev/null | grep \.git | head -n1 )\">GIT</a>" >> "${TMP_FILE}"
         else
             echo "<tr>" >> "${TMP_FILE}"

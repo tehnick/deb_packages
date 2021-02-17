@@ -88,8 +88,9 @@ PrintVersions()
             echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             echo "<td>" >> "${HTML_FILE}"
-            echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DPT</a>" >> "${HTML_FILE}"
+            echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DEB</a>" >> "${HTML_FILE}"
             echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
+            echo "<a href=\"https://repology.org/project/${PACKAGE}\">REP</a>" >> "${HTML_FILE}"
             echo "<a href=\"$(cat ${PKG_DIR}/README 2>/dev/null | grep \.git | head -n1 )\">GIT</a>" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             exit 0
@@ -121,8 +122,9 @@ PrintVersionsUnstable()
             echo "${EPOCH}${NEW_VER_FULL}" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             echo "<td>" >> "${HTML_FILE}"
-            echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DPT</a>" >> "${HTML_FILE}"
+            echo "<a href=\"https://tracker.debian.org/pkg/${PACKAGE}\">DEB</a>" >> "${HTML_FILE}"
             echo "<a href=\"https://launchpad.net/ubuntu/+source/${PACKAGE}\">LP</a>" >> "${HTML_FILE}"
+            echo "<a href=\"https://repology.org/project/${PACKAGE}\">REP</a>" >> "${HTML_FILE}"
             echo "<a href=\"$(cat ${PKG_DIR}/README 2>/dev/null | grep \.git | head -n1 )\">GIT</a>" >> "${HTML_FILE}"
             echo "</td>" >> "${HTML_FILE}"
             exit 0
