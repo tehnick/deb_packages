@@ -267,10 +267,27 @@ DefineAdditionalVariables()
     if [ "${2}" = "new" ]; then
         export TARGETED_TO_NEW_QUEUE="true"
     fi
-    
+
     if [ -z "${DESTINATION}" ]; then
         export DESTINATION="tehnick"
     fi
+}
+
+UpdateChangeLog()
+{
+    dch --force-bad-version --force-distribution \
+        --newversion "${EPOCH}${NEW_VER_FULL}" \
+        --distribution "${MAIN_DIST}" \
+        --package "${PACKAGE}" \
+        "${UPDATE_STRING}"
+}
+
+UpdateChangeLogForLaunchpad()
+{
+    dch --force-bad-version --force-distribution \
+        --newversion "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
+        --distribution "${DIST}" \
+        "${UPDATE_STRING}"
 }
 
 OpenChangeLog()
@@ -334,55 +351,47 @@ MakeSourcePackage()
     # --buildinfo-option="-O" is temporary workaround.
     # See: https://bugs.debian.org/853795#10
     # debuild -S -sa -d --buildinfo-option="-O" || exit 1
-    debuild -S -sa -d || exit 1
+
+    if [ "${SFX}" = "${DEFAULT_SFX}" ]; then
+        debuild -S -sa -d || exit 1
+    else
+        # debuild -S -sd || exit 1
+        debuild -S -sa -d || exit 1
+    fi
 }
 
 UpdateSourcePackage()
 {
     cd "${TEMP_DIR}/${DIR_NAME}" || exit 1
 
-    if [ "${SFX}" = "${DEFAULT_SFX}" ]; then
-        dch -b --force-distribution --distribution "${MAIN_DIST}" \
-            -v "${EPOCH}${NEW_VER_FULL}" \
-            "${UPDATE_STRING}"
-
-        OpenChangeLog
-        MakeSourcePackage
-    else
+    if [ "${SFX}" != "${DEFAULT_SFX}" ]; then
         export UPDATE_STRING="Some fixes in package."
-        dch -b --force-distribution --distribution "${MAIN_DIST}" \
-            -v "${EPOCH}${NEW_VER_FULL}" \
-            "${UPDATE_STRING}"
-
-        OpenChangeLog
-        # debuild -S -sd --buildinfo-option="-O" || exit 1
-        MakeSourcePackage
     fi
+
+    UpdateChangeLog
+    OpenChangeLog
+    MakeSourcePackage
 }
 
 UpdateSourcePackagesForLaunchpad()
 {
     cd "${TEMP_DIR}/${DIR_NAME}" || exit 1
 
-    # begin update for main verion of Ubuntu
+    # begin update for current version of Ubuntu
     export DIST="${MAIN_DIST}"
     if [ "${SFX}" = "${DEFAULT_SFX}" ]; then
-        dch -b --force-distribution --distribution "${DIST}" \
-            -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
-            "${UPDATE_STRING}"
+        UpdateChangeLogForLaunchpad
 
         [ "${EDIT_CHANGELOG}" = "true" ] && OpenChangeLog
         debuild -S -sa -d --buildinfo-option="-O" || exit 1
     else
         export UPDATE_STRING="Small improvements in the package."
-        dch -b --force-distribution --distribution "${DIST}" \
-            -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
-            "${UPDATE_STRING}"
+        UpdateChangeLogForLaunchpad
 
         OpenChangeLog
         debuild -S -sa -d --buildinfo-option="-O" || exit 1
     fi
-    # end update for main verion of Ubuntu
+    # end update for current verion of Ubuntu
 
     # begin update for older releases of Ubuntu
     cp -f debian/changelog ../changelog # copy basic changelog
@@ -390,9 +399,7 @@ UpdateSourcePackagesForLaunchpad()
     for DIST in ${DIST_LIST} ; do
         cp -f ../changelog debian/changelog
         export UPDATE_STRING="Automatic backport to ${DIST}; no changes required."
-        dch -b --force-distribution --distribution "${DIST}" \
-            -v "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
-            "${UPDATE_STRING}"
+        UpdateChangeLogForLaunchpad
 
         debuild -S -sd -d --buildinfo-option="-O" || exit 1
     done
