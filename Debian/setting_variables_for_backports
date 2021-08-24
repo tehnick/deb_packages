@@ -3,12 +3,12 @@
 # Common script for setting variables for backports
 
 if [ -z "${MAIN_DIST}" ]; then
-    # stretch-backports-sloppy buster-backports
-    export MAIN_DIST="buster-backports"
+    # buster-backports-sloppy bullseye-backports
+    export MAIN_DIST="bullseye-backports"
 fi
 
 if [ -z "${BPO_SFX}" ]; then
-    export BPO_SFX="~bpo10+1"
+    export BPO_SFX="~bpo11+1"
 fi
 
 
