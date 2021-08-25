@@ -4,7 +4,7 @@
 
 # https://en.wikipedia.org/wiki/Ubuntu_version_history#Table_of_versions
 export MAIN_DIST="impish"
-export DIST_LIST="hirsute groovy focal bionic"
+export DIST_LIST="hirsute focal bionic"
 
 export UBUNTU_SFX="~${MAIN_DIST}1"
 export DEFAULT_SFX="-0ppa1"
