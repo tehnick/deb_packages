@@ -6,7 +6,7 @@
 export PACKAGE="ncdc"
 
 # Uncomment if necessary:
-export SFX="-2"
+export SFX="-3"
 
 #export NEW_VER=1.22.1
 
