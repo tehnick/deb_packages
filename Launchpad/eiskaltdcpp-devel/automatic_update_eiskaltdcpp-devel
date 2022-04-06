@@ -6,7 +6,7 @@
 export PACKAGE="eiskaltdcpp-devel"
 
 # Uncomment if necessary:
-# export SFX="-0ppa3"
+export SFX="-0ppa2"
 
 export A_TYPE="xz"
 
