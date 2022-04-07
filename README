@@ -19,7 +19,10 @@ Notes:
   ./popcon_data
   ./check_versions
 
-Links:
+HTML pages from Docs/ subdirectory are hosted at:
+  https://tehnick.net/deb-packages/
+
+Other links:
   https://qa.debian.org/developer.php?login=Boris%20Pek
   https://launchpad.net/~tehnick/+related-packages
   https://salsa.debian.org/tehnick
