@@ -21,6 +21,7 @@ for ARCHIVE in Debian Launchpad ; do
 
         git pull --all --prune
         git status | grep -v '^$'
+        # git branch -a
     done
 done
 

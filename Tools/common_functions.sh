@@ -533,7 +533,9 @@ UpdateLocalRepo()
         cd "${APT_DIR}/" || exit 1
         rm -f Packages* InRelease* Release*
         apt-ftparchive packages . > Packages
+        apt-ftparchive release . > Release
         gzip -c Packages > Packages.gz
+        gzip -c Release > Release.gz
         gpg -abs -o Packages.gpg Packages.gz
     fi
 }

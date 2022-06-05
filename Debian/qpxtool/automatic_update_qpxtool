@@ -25,6 +25,7 @@ GetOldVersion
 if GetNewVersion "${@}"; then
     VER_LIST=$(curl 'https://sourceforge.net/projects/qpxtool/files/qpxtool/0.8.x/' 2>&1 | sed -ne "s:^.*<tr title=\"\(.*\)\" class=\"folder \">.*$:\1:p")
     NEW_VER=$(echo "${VER_LIST}" | sort -r -V | head -n1)
+    [ -z "${NEW_VER}" ] && NEW_VER = OLD_VER
 fi
 export NEW_VER_FULL=${NEW_VER}${SFX}
 
