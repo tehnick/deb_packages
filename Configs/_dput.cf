@@ -1,4 +1,4 @@
-# ~/.dput.cf
+# ${HOME}/.config/dput/dput.cf
 
 [tehnick]
 fqdn = ppa.launchpad.net
