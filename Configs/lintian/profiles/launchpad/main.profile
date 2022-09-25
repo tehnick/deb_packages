@@ -15,4 +15,4 @@ Disable-Tags: no-nmu-in-changelog
  package-uses-deprecated-debhelper-compat-version
  package-uses-old-debhelper-compat-version
  debian-rules-uses-as-needed-linker-flag
- debian-watch-does-not-check-gpg-signature
+ debian-watch-does-not-check-openpgp-signature
