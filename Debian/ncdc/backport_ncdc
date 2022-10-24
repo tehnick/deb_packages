@@ -8,7 +8,7 @@ export PACKAGE="ncdc"
 # Uncomment if necessary:
 #export BPO_SFX="~bpo11+2"
 
-#export BPO_VER=1.22.1-2
+#export BPO_VER=1.23.1-1
 
 if [ -z "${BASIC_VER}" ]; then
     export BASIC_VER=1.22.1-2
