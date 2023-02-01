@@ -3,8 +3,8 @@
 # Common script for setting variables
 
 # https://en.wikipedia.org/wiki/Ubuntu_version_history#Table_of_versions
-export MAIN_DIST="kinetic"
-export DIST_LIST="jammy focal bionic"
+export MAIN_DIST="lunar"
+export DIST_LIST="kinetic jammy focal bionic"
 
 export UBUNTU_SFX="~${MAIN_DIST}1"
 export DEFAULT_SFX="-0ppa1"
@@ -17,4 +17,3 @@ export PKG_DIR="${MAIN_DIR}/Launchpad/${PACKAGE}"
 
 source "${MAIN_DIR}/Tools/common_variables.sh" || exit 1
 source "${MAIN_DIR}/Tools/common_functions.sh" || exit 1
-
