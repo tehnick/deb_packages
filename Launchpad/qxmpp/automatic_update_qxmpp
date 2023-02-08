@@ -49,7 +49,7 @@ GetSourcesUsingUscan
 
 export DESTINATION="qxmpp"
 
-# export DIST_LIST="groovy focal bionic"
+export DIST_LIST="kinetic jammy"
 
 # Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
