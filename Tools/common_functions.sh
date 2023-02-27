@@ -287,6 +287,7 @@ UpdateChangeLogForLaunchpad()
     dch --force-bad-version --force-distribution \
         --newversion "${EPOCH}${NEW_VER}${SFX}~${DIST}1" \
         --distribution "${DIST}" \
+        --package "${PACKAGE}" \
         "${UPDATE_STRING}"
 }
 
