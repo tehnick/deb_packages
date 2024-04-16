@@ -9,6 +9,7 @@
 
 [alias]
     up = pull --all --prune
+    fe = fetch --all --prune
     br = branch
     st = status
     co = checkout
