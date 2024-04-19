@@ -61,7 +61,7 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="direct-connect-devel"
 
-# export DIST_LIST="kinetic jammy focal"
+export DIST_LIST="mantic jammy focal"
 
 export EDIT_CHANGELOG="true"
 

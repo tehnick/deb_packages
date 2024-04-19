@@ -45,6 +45,8 @@ GetSourcesUsingUscan
 
 export DESTINATION="direct-connect"
 
+export DIST_LIST="mantic jammy focal"
+
 # Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
 
