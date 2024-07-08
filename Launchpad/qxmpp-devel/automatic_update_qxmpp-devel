@@ -63,7 +63,7 @@ export UPDATE_STRING="New Git snapshot."
 
 export DESTINATION="qxmpp-devel"
 
-export DIST_LIST="lunar kinetic jammy"
+export DIST_LIST="noble mantic jammy"
 
 # Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"

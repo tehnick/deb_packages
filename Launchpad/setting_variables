@@ -3,8 +3,8 @@
 # Common script for setting variables
 
 # https://en.wikipedia.org/wiki/Ubuntu_version_history#Table_of_versions
-export MAIN_DIST="noble"
-export DIST_LIST="mantic jammy focal bionic"
+export MAIN_DIST="oracular"
+export DIST_LIST="noble mantic jammy focal bionic"
 
 export UBUNTU_SFX="~${MAIN_DIST}1"
 export DEFAULT_SFX="-0ppa1"

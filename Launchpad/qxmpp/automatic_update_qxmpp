@@ -49,7 +49,7 @@ GetSourcesUsingUscan
 
 export DESTINATION="qxmpp"
 
-export DIST_LIST="lunar kinetic jammy"
+export DIST_LIST="noble mantic jammy"
 
 # Launch common script for updating of packages and uploading them to Launchpad
 source "${MAIN_DIR}/Launchpad/updating_packages"
